@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <rect width="600" height="600" fill="#FFFFFF"/>
+
+  <!-- Mark only: Three converging wedge shapes -->
+  <!-- Centered, vertex at (300, 470) -->
+  <g fill="#1A1A1A">
+    <!-- Left arm -->
+    <polygon points="68,90 108,90 301,468 299,468"/>
+    <!-- Right arm -->
+    <polygon points="492,90 532,90 301,468 299,468"/>
+    <!-- Inner line with curve -->
+    <path d="M 328,100 L 340,100 C 330,250 312,380 301,468 L 299,468 C 308,380 320,250 328,100 Z"/>
+  </g>
+</svg>

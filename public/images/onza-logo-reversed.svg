@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <rect width="800" height="800" fill="#0C0C0C"/>
+
+  <g fill="#FFFFFF">
+    <polygon points="128,130 168,130 401,553 399,553"/>
+    <polygon points="632,130 672,130 401,553 399,553"/>
+    <path d="M 438,145 L 450,145 C 440,300 415,440 401,553 L 399,553 C 413,440 428,300 438,145 Z"/>
+  </g>
+
+  <text x="400" y="635"
+        font-family="Futura"
+        font-weight="300"
+        font-size="48"
+        letter-spacing="24"
+        text-anchor="middle"
+        fill="#FFFFFF">ONZA</text>
+</svg>
