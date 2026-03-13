@@ -3,6 +3,7 @@ import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -51,9 +52,11 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} ${montserrat.variable}`}>
       <body className="font-sans antialiased">
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <SmoothScrollProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </SmoothScrollProvider>
       </body>
     </html>
   );

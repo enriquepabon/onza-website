@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui/section";
-import { FadeIn } from "@/components/ui/fade-in";
-import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
+import { TextReveal } from "@/components/ui/text-reveal";
+import { MagneticButton } from "@/components/ui/magnetic-button";
+import { LineReveal } from "@/components/ui/line-reveal";
 
 export const metadata: Metadata = {
   title: "Servicios — Onza",
@@ -93,23 +95,29 @@ export default function ServiciosPage() {
     <>
       {/* Header */}
       <Section dark className="pt-32 pb-16">
-        <FadeIn>
-          <p className="text-sm tracking-widest uppercase text-gray-400 mb-4">
-            Servicios
-          </p>
-          <h1 className="text-hero-mobile md:text-hero font-light max-w-4xl">
-            Cuatro formas de transformar tu operación con IA
-          </h1>
-        </FadeIn>
+        <Reveal>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-8 bg-brand-red" />
+            <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
+              Servicios
+            </span>
+          </div>
+        </Reveal>
+        <TextReveal
+          as="h1"
+          className="text-hero-mobile md:text-hero font-light max-w-4xl"
+        >
+          Cuatro formas de transformar tu operación con IA
+        </TextReveal>
       </Section>
 
       {/* Service Details */}
       {SERVICES_DETAIL.map((service, i) => (
         <Section key={service.id} id={service.id} cream={i % 2 === 1}>
-          <FadeIn>
+          <Reveal>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
               <div>
-                <span className="text-xs text-brand-gray tracking-widest">
+                <span className="text-xs text-brand-red tracking-[0.3em] font-display">
                   {service.number}
                 </span>
                 <h2 className="text-3xl md:text-4xl font-light mt-3 mb-4">
@@ -125,7 +133,7 @@ export default function ServiciosPage() {
 
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-xs tracking-widest uppercase text-brand-gray mb-4">
+                  <h3 className="text-xs tracking-[0.15em] uppercase text-brand-gray mb-4">
                     Qué incluye
                   </h3>
                   <ul className="space-y-3">
@@ -144,7 +152,7 @@ export default function ServiciosPage() {
                 </div>
 
                 <div>
-                  <h3 className="text-xs tracking-widest uppercase text-brand-gray mb-4">
+                  <h3 className="text-xs tracking-[0.15em] uppercase text-brand-gray mb-4">
                     Resultados esperados
                   </h3>
                   <ul className="space-y-3">
@@ -163,24 +171,36 @@ export default function ServiciosPage() {
                 </div>
               </div>
             </div>
-          </FadeIn>
+          </Reveal>
+          <LineReveal color={i % 2 === 1 ? "bg-gray-300/30" : "bg-gray-200"} />
         </Section>
       ))}
 
       {/* CTA */}
-      <Section dark className="text-center">
-        <FadeIn>
-          <h2 className="text-section-mobile md:text-section font-light mb-6 max-w-2xl mx-auto">
+      <Section dark className="text-center relative overflow-hidden">
+        <div className="noise-overlay" />
+        <div className="relative z-10">
+          <TextReveal
+            as="h2"
+            className="text-section-mobile md:text-section font-light mb-6 max-w-2xl mx-auto"
+          >
             ¿No sabes por dónde empezar?
-          </h2>
-          <p className="text-gray-400 mb-10 max-w-xl mx-auto leading-relaxed">
-            Un diagnóstico rápido nos da la claridad. En una conversación
-            identificamos las oportunidades de mayor impacto para tu operación.
-          </p>
-          <Button href="/contacto" size="lg">
-            Agenda tu diagnóstico
-          </Button>
-        </FadeIn>
+          </TextReveal>
+          <Reveal delay={0.2}>
+            <p className="text-[#777] mb-10 max-w-xl mx-auto leading-relaxed">
+              Un diagnóstico rápido nos da la claridad. En una conversación
+              identificamos las oportunidades de mayor impacto para tu operación.
+            </p>
+          </Reveal>
+          <Reveal delay={0.3}>
+            <MagneticButton
+              href="/contacto"
+              className="px-10 py-4 text-sm bg-brand-red text-white hover:bg-red-600"
+            >
+              Agenda tu diagnóstico
+            </MagneticButton>
+          </Reveal>
+        </div>
       </Section>
     </>
   );

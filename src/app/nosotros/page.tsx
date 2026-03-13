@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/ui/section";
-import { FadeIn } from "@/components/ui/fade-in";
-import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
+import { TextReveal } from "@/components/ui/text-reveal";
+import { MagneticButton } from "@/components/ui/magnetic-button";
+import { LineReveal } from "@/components/ui/line-reveal";
 
 export const metadata: Metadata = {
   title: "Nosotros — Onza",
@@ -42,19 +44,25 @@ export default function NosotrosPage() {
     <>
       {/* Header */}
       <Section dark className="pt-32 pb-16">
-        <FadeIn>
-          <p className="text-sm tracking-widest uppercase text-gray-400 mb-4">
-            Nosotros
-          </p>
-          <h1 className="text-hero-mobile md:text-hero font-light max-w-4xl">
-            Construimos soluciones de IA con mentalidad de operador
-          </h1>
-        </FadeIn>
+        <Reveal>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-8 bg-brand-red" />
+            <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
+              Nosotros
+            </span>
+          </div>
+        </Reveal>
+        <TextReveal
+          as="h1"
+          className="text-hero-mobile md:text-hero font-light max-w-4xl"
+        >
+          Construimos soluciones de IA con mentalidad de operador
+        </TextReveal>
       </Section>
 
       {/* Story */}
       <Section narrow>
-        <FadeIn>
+        <Reveal>
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
             <div className="lg:col-span-3">
               <h2 className="text-3xl font-light mb-8">
@@ -85,7 +93,7 @@ export default function NosotrosPage() {
             </div>
             <div className="lg:col-span-2">
               <div className="bg-brand-cream p-8 space-y-2">
-                <p className="text-xs tracking-widest uppercase text-brand-gray mb-4">
+                <p className="text-xs tracking-[0.15em] uppercase text-brand-gray mb-4">
                   Credenciales
                 </p>
                 <p className="text-sm text-brand-dark">
@@ -106,24 +114,30 @@ export default function NosotrosPage() {
               </div>
             </div>
           </div>
-        </FadeIn>
+        </Reveal>
       </Section>
 
       {/* Experience */}
       <Section cream>
-        <FadeIn>
-          <p className="text-sm tracking-widest uppercase text-brand-gray mb-4">
-            Trayectoria
-          </p>
-          <h2 className="text-section-mobile md:text-section font-light mb-12 max-w-3xl">
-            Experiencia real en sectores complejos
-          </h2>
-        </FadeIn>
+        <Reveal>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-8 bg-brand-red" />
+            <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
+              Trayectoria
+            </span>
+          </div>
+        </Reveal>
+        <TextReveal
+          as="h2"
+          className="text-section-mobile md:text-section font-light mb-12 max-w-3xl"
+        >
+          Experiencia real en sectores complejos
+        </TextReveal>
 
-        <div className="space-y-6">
+        <div className="space-y-0">
           {EXPERIENCE.map((exp, i) => (
-            <FadeIn key={exp.company} delay={i * 0.08}>
-              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 border-b border-gray-300/50 pb-6">
+            <Reveal key={exp.company} delay={i * 0.08}>
+              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 py-6">
                 <h3 className="text-lg font-medium md:w-48 shrink-0">
                   {exp.company}
                 </h3>
@@ -132,59 +146,68 @@ export default function NosotrosPage() {
                   {exp.highlight}
                 </p>
               </div>
-            </FadeIn>
+              <LineReveal color="bg-gray-300/30" />
+            </Reveal>
           ))}
         </div>
       </Section>
 
       {/* Values */}
       <Section narrow>
-        <FadeIn>
-          <h2 className="text-section-mobile md:text-section font-light mb-12 max-w-3xl">
-            Cómo pensamos
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            <div>
-              <h3 className="text-lg font-medium mb-3">
-                Impacto sobre tecnología
-              </h3>
-              <p className="text-brand-gray leading-relaxed text-sm">
-                La IA es un medio, no un fin. Cada decisión se mide por su
-                impacto en la operación y las finanzas del cliente.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-medium mb-3">
-                Claridad sobre complejidad
-              </h3>
-              <p className="text-brand-gray leading-relaxed text-sm">
-                Simplificamos lo complejo. Nuestros clientes entienden
-                exactamente qué estamos construyendo y por qué.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-medium mb-3">
-                Resultados sobre promesas
-              </h3>
-              <p className="text-brand-gray leading-relaxed text-sm">
-                Entregamos sistemas funcionando, no presentaciones con
-                recomendaciones. El equipo usa la solución desde el día 1.
-              </p>
-            </div>
-          </div>
-        </FadeIn>
+        <TextReveal
+          as="h2"
+          className="text-section-mobile md:text-section font-light mb-12 max-w-3xl"
+        >
+          Cómo pensamos
+        </TextReveal>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {[
+            {
+              title: "Impacto sobre tecnología",
+              text: "La IA es un medio, no un fin. Cada decisión se mide por su impacto en la operación y las finanzas del cliente.",
+            },
+            {
+              title: "Claridad sobre complejidad",
+              text: "Simplificamos lo complejo. Nuestros clientes entienden exactamente qué estamos construyendo y por qué.",
+            },
+            {
+              title: "Resultados sobre promesas",
+              text: "Entregamos sistemas funcionando, no presentaciones con recomendaciones. El equipo usa la solución desde el día 1.",
+            },
+          ].map((value, i) => (
+            <Reveal key={value.title} delay={i * 0.1}>
+              <div className="group bg-white p-8 hover:bg-brand-dark transition-colors duration-700 cursor-default border border-gray-100">
+                <h3 className="text-lg font-medium mb-3 group-hover:text-white transition-colors duration-700">
+                  {value.title}
+                </h3>
+                <p className="text-brand-gray leading-relaxed text-sm group-hover:text-[#969696] transition-colors duration-700">
+                  {value.text}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </Section>
 
       {/* CTA */}
-      <Section dark className="text-center">
-        <FadeIn>
-          <h2 className="text-section-mobile md:text-section font-light mb-6 max-w-2xl mx-auto">
+      <Section dark className="text-center relative overflow-hidden">
+        <div className="noise-overlay" />
+        <div className="relative z-10">
+          <TextReveal
+            as="h2"
+            className="text-section-mobile md:text-section font-light mb-6 max-w-2xl mx-auto"
+          >
             ¿Quieres saber cómo aplicamos esto en tu empresa?
-          </h2>
-          <Button href="/contacto" size="lg">
-            Conversemos
-          </Button>
-        </FadeIn>
+          </TextReveal>
+          <Reveal delay={0.2}>
+            <MagneticButton
+              href="/contacto"
+              className="px-10 py-4 text-sm bg-brand-red text-white hover:bg-red-600"
+            >
+              Conversemos
+            </MagneticButton>
+          </Reveal>
+        </div>
       </Section>
     </>
   );

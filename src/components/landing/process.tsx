@@ -1,67 +1,82 @@
-import { Section } from "@/components/ui/section";
-import { FadeIn } from "@/components/ui/fade-in";
+"use client";
+
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Reveal } from "@/components/ui/reveal";
+import { TextReveal } from "@/components/ui/text-reveal";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const STEPS = [
-  {
-    number: "01",
-    title: "Descubrimiento",
-    description:
-      "Entendemos tu dolor, mapeamos procesos, definimos alcance.",
-  },
-  {
-    number: "02",
-    title: "Diseño",
-    description:
-      "Arquitectura de la solución con blueprint visual claro.",
-  },
-  {
-    number: "03",
-    title: "Construcción",
-    description:
-      "Desarrollo e implementación con las mejores herramientas de IA.",
-  },
-  {
-    number: "04",
-    title: "Entrega + Adopción",
-    description:
-      "Deploy, capacitación a tu equipo, documentación completa.",
-  },
-  {
-    number: "05",
-    title: "Soporte",
-    description: "Ajustes post-launch y acompañamiento continuo.",
-  },
+  { number: "01", title: "Descubrimiento", description: "Entendemos tu dolor, mapeamos procesos, definimos alcance y expectativas." },
+  { number: "02", title: "Diseño", description: "Arquitectura de la solución. Blueprint visual claro que todos entienden." },
+  { number: "03", title: "Construcción", description: "Desarrollo e implementación con herramientas de IA de frontera." },
+  { number: "04", title: "Entrega + Adopción", description: "Deploy, capacitación a tu equipo, documentación. Funciona desde el día 1." },
+  { number: "05", title: "Soporte", description: "Ajustes post-launch. Acompañamiento hasta que el equipo vuele solo." },
 ];
 
 export function Process() {
-  return (
-    <Section>
-      <FadeIn>
-        <p className="text-sm tracking-widest uppercase text-brand-gray mb-4">
-          Cómo trabajamos
-        </p>
-        <h2 className="text-section-mobile md:text-section font-light mb-16 max-w-3xl">
-          De la idea al impacto en 3 a 8 semanas
-        </h2>
-      </FadeIn>
+  const lineRef = useRef<HTMLDivElement>(null);
 
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
-        {STEPS.map((step, i) => (
-          <FadeIn key={step.number} delay={i * 0.1}>
-            <div className="relative">
-              <span className="text-6xl font-light text-gray-100 absolute -top-4 -left-2">
-                {step.number}
-              </span>
-              <div className="relative pt-10">
-                <h3 className="text-lg font-medium mb-2">{step.title}</h3>
-                <p className="text-sm text-brand-gray leading-relaxed">
-                  {step.description}
-                </p>
+  useEffect(() => {
+    const el = lineRef.current;
+    if (!el) return;
+
+    const anim = gsap.fromTo(
+      el,
+      { scaleY: 0, transformOrigin: "top center" },
+      {
+        scaleY: 1,
+        ease: "none",
+        scrollTrigger: { trigger: el.parentElement, start: "top 60%", end: "bottom 40%", scrub: 1 },
+      }
+    );
+
+    return () => { anim.kill(); };
+  }, []);
+
+  return (
+    <section className="bg-white py-24 md:py-32 lg:py-40">
+      <div className="container-wide">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
+          <div className="lg:col-span-5 lg:col-start-7">
+            <Reveal>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="h-px w-8 bg-brand-red" />
+                <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">Cómo trabajamos</span>
               </div>
-            </div>
-          </FadeIn>
-        ))}
+            </Reveal>
+            <TextReveal as="h2" className="text-section-mobile md:text-section font-light text-brand-dark">
+              De la idea al impacto en 3 a 8 semanas
+            </TextReveal>
+          </div>
+        </div>
+
+        <div className="relative max-w-3xl mx-auto">
+          <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px">
+            <div ref={lineRef} className="w-full h-full bg-brand-red" />
+          </div>
+
+          <div className="space-y-16 md:space-y-20">
+            {STEPS.map((step, i) => (
+              <Reveal key={step.number} delay={i * 0.1}>
+                <div className="grid grid-cols-[40px_1fr] md:grid-cols-[80px_1fr] gap-6 md:gap-10">
+                  <div className="flex justify-center">
+                    <div className="w-10 h-10 rounded-full border border-brand-red flex items-center justify-center bg-white relative z-10">
+                      <span className="text-xs text-brand-red font-display tracking-wider">{step.number}</span>
+                    </div>
+                  </div>
+                  <div className="pt-1">
+                    <h3 className="text-2xl font-light mb-3 text-brand-dark">{step.title}</h3>
+                    <p className="text-sm text-brand-gray leading-relaxed max-w-md">{step.description}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }

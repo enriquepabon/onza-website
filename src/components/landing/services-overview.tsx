@@ -1,88 +1,105 @@
-import { Section } from "@/components/ui/section";
-import { FadeIn } from "@/components/ui/fade-in";
+"use client";
+
 import Link from "next/link";
+import { Reveal } from "@/components/ui/reveal";
+import { TextReveal } from "@/components/ui/text-reveal";
+import { LineReveal } from "@/components/ui/line-reveal";
 
 const SERVICES = [
   {
     number: "01",
-    title: "Formaciones IA",
-    subtitle: "Empresariales",
+    title: "Formaciones IA Empresariales",
     description:
-      "Tu equipo domina IA en semanas, no meses. Sesiones prácticas adaptadas a tu industria y nivel de madurez digital.",
+      "Tu equipo domina IA en semanas, no meses. Sesiones prácticas adaptadas a tu industria.",
     impact: "Equipos 3x más productivos con herramientas IA",
+    href: "/servicios#formaciones",
   },
   {
     number: "02",
-    title: "Automatización",
-    subtitle: "de Procesos",
+    title: "Automatización de Procesos",
     description:
-      "Identificamos los procesos que más tiempo y dinero consumen. Diseñamos flujos automatizados que se integran con tus sistemas actuales.",
-    impact: "Hasta 80% de reducción en tiempo de procesos repetitivos",
+      "Identificamos los procesos que más tiempo y dinero consumen. Flujos automatizados que se integran con tus sistemas.",
+    impact: "Hasta 80% de reducción en tiempo de procesos",
+    href: "/servicios#automatizacion",
   },
   {
     number: "03",
-    title: "Soluciones IA",
-    subtitle: "a Medida",
+    title: "Soluciones IA a Medida",
     description:
-      "Desde webs inteligentes hasta agentes de IA y plataformas de aprendizaje. Sistemas que tu equipo puede usar desde el día 1.",
-    impact: "Soluciones funcionando en 3-8 semanas",
+      "Webs inteligentes, agentes de IA, plataformas de aprendizaje. Sistemas que tu equipo usa desde el día 1.",
+    impact: "Funcionando en 3-8 semanas",
+    href: "/servicios#soluciones",
   },
   {
     number: "04",
-    title: "Diagnóstico",
-    subtitle: "Estratégico IA",
+    title: "Diagnóstico Estratégico IA",
     description:
-      "Descubre exactamente dónde la IA genera más impacto en tu operación. Diagnóstico de procesos con roadmap priorizado.",
-    impact: "Claridad antes de invertir — ROI desde la primera decisión",
+      "Descubre exactamente dónde la IA genera más impacto en tu operación. Roadmap priorizado.",
+    impact: "Claridad antes de invertir",
+    href: "/servicios#diagnostico",
   },
 ];
 
 export function ServicesOverview() {
   return (
-    <Section>
-      <FadeIn>
-        <p className="text-sm tracking-widest uppercase text-brand-gray mb-4">
-          Servicios
-        </p>
-        <h2 className="text-section-mobile md:text-section font-light mb-16 max-w-3xl">
-          Cuatro formas de transformar tu operación con inteligencia artificial
-        </h2>
-      </FadeIn>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-gray-200">
-        {SERVICES.map((service, i) => (
-          <FadeIn key={service.number} delay={i * 0.1}>
-            <div className="bg-white p-8 md:p-12 group">
-              <span className="text-xs text-brand-gray tracking-widest">
-                {service.number}
-              </span>
-              <h3 className="text-2xl font-light mt-3 mb-1">
-                {service.title}
-              </h3>
-              <p className="text-lg text-brand-gray font-light mb-4">
-                {service.subtitle}
-              </p>
-              <p className="text-brand-gray leading-relaxed mb-6">
-                {service.description}
-              </p>
-              <p className="text-sm text-brand-red font-medium">
-                {service.impact}
-              </p>
-            </div>
-          </FadeIn>
-        ))}
-      </div>
-
-      <FadeIn delay={0.4}>
-        <div className="mt-12 text-center">
-          <Link
-            href="/servicios"
-            className="text-sm tracking-wide uppercase text-brand-dark hover:text-brand-red transition-colors border-b border-brand-dark hover:border-brand-red pb-1"
-          >
-            Ver detalle de servicios →
-          </Link>
+    <section className="bg-white py-24 md:py-32 lg:py-40">
+      <div className="container-wide">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
+          <div className="lg:col-span-4">
+            <Reveal>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="h-px w-8 bg-brand-red" />
+                <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
+                  Servicios
+                </span>
+              </div>
+            </Reveal>
+          </div>
+          <div className="lg:col-span-8">
+            <TextReveal
+              as="h2"
+              className="text-section-mobile md:text-section font-light text-brand-dark"
+            >
+              Cuatro formas de transformar tu operación con inteligencia artificial
+            </TextReveal>
+          </div>
         </div>
-      </FadeIn>
-    </Section>
+
+        <div className="space-y-0">
+          {SERVICES.map((service, i) => (
+            <Reveal key={service.number} delay={i * 0.1}>
+              <Link href={service.href} className="group block">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 py-10 md:py-14 items-start">
+                  <div className="md:col-span-1">
+                    <span className="text-xs text-brand-red tracking-widest font-display">
+                      {service.number}
+                    </span>
+                  </div>
+                  <div className="md:col-span-4">
+                    <h3 className="text-2xl md:text-3xl font-light group-hover:text-brand-red transition-colors duration-500">
+                      {service.title}
+                    </h3>
+                  </div>
+                  <div className="md:col-span-4">
+                    <p className="text-brand-gray leading-relaxed text-sm">
+                      {service.description}
+                    </p>
+                  </div>
+                  <div className="md:col-span-3 md:text-right">
+                    <p className="text-xs text-brand-gold tracking-wide uppercase">
+                      {service.impact}
+                    </p>
+                    <span className="inline-block mt-3 text-xs text-brand-gray group-hover:text-brand-red group-hover:translate-x-2 transition-all duration-500">
+                      →
+                    </span>
+                  </div>
+                </div>
+                <LineReveal color="bg-gray-200" />
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

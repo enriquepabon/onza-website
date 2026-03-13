@@ -1,29 +1,36 @@
-import { Section } from "@/components/ui/section";
-import { FadeIn } from "@/components/ui/fade-in";
+"use client";
+
+import { Reveal } from "@/components/ui/reveal";
+import { TextReveal } from "@/components/ui/text-reveal";
 
 const DIFFERENTIATORS = [
   {
+    number: "01",
     title: "Perfil híbrido negocio + tecnología",
     description:
-      "Ingeniero Industrial con MBA y 15 años liderando operaciones en multinacionales. Diseñamos soluciones de IA que resuelven problemas reales de negocio, no demos bonitas.",
+      "Ingeniero Industrial con MBA y 15 años liderando operaciones en multinacionales. Soluciones de IA que resuelven problemas reales.",
   },
   {
+    number: "02",
     title: "Hablamos el idioma del negocio",
     description:
-      "No llegamos con jerga técnica. Llegamos con: cuántas horas pierdes en esto, cuánto te cuesta este error, en cuánto tiempo ves retorno. El CFO entiende, el COO entiende.",
+      "Cuántas horas pierdes en esto. Cuánto te cuesta este error. En cuánto tiempo ves retorno. El CFO entiende, el COO entiende.",
   },
   {
+    number: "03",
     title: "Delivery rápido y eficiente",
     description:
-      "Usamos las herramientas de IA más avanzadas del mercado para entregar soluciones en semanas, no meses. Resultados rápidos, sin burocracia.",
+      "Herramientas de IA avanzadas para entregar soluciones en semanas, no meses. Resultados rápidos, sin burocracia.",
   },
   {
+    number: "04",
     title: "Experiencia real en sectores complejos",
     description:
-      "Manufactura, supply chain, farmacéutica. Hemos estado en planta, hemos negociado con sindicatos, hemos abierto mercados desde cero.",
+      "Manufactura, supply chain, farmacéutica. En planta, negociando convenciones, abriendo mercados desde cero.",
   },
   {
-    title: "Entregamos soluciones funcionando",
+    number: "05",
+    title: "Soluciones funcionando, no presentaciones",
     description:
       "Cada proyecto termina con algo que tu equipo puede usar desde el día 1. No con un PDF de recomendaciones.",
   },
@@ -31,33 +38,56 @@ const DIFFERENTIATORS = [
 
 export function Differentiators() {
   return (
-    <Section cream>
-      <FadeIn>
-        <p className="text-sm tracking-widest uppercase text-brand-gray mb-4">
-          Por qué Onza
-        </p>
-        <h2 className="text-section-mobile md:text-section font-light mb-16 max-w-3xl">
-          No somos una agencia. Somos tu socio estratégico en IA.
-        </h2>
-      </FadeIn>
+    <section className="bg-brand-cream py-24 md:py-32 lg:py-40 relative overflow-hidden">
+      <div
+        className="absolute inset-0 opacity-[0.015] pointer-events-none"
+        style={{
+          backgroundImage: `repeating-linear-gradient(-45deg, transparent, transparent 40px, #1A1A1A 40px, #1A1A1A 41px)`,
+        }}
+      />
 
-      <div className="space-y-8">
-        {DIFFERENTIATORS.map((item, i) => (
-          <FadeIn key={i} delay={i * 0.08}>
-            <div className="flex gap-6 md:gap-10 items-start border-b border-gray-300/50 pb-8">
-              <span className="text-xs text-brand-gray tracking-widest mt-1 shrink-0 w-8">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <h3 className="text-xl font-light mb-2">{item.title}</h3>
-                <p className="text-brand-gray leading-relaxed max-w-2xl">
+      <div className="container-wide relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
+          <div className="lg:col-span-5 lg:col-start-2">
+            <Reveal>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="h-px w-8 bg-brand-red" />
+                <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
+                  Por qué Onza
+                </span>
+              </div>
+            </Reveal>
+            <TextReveal
+              as="h2"
+              className="text-section-mobile md:text-section font-light text-brand-dark"
+            >
+              No somos una agencia. Somos tu socio estratégico en IA.
+            </TextReveal>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {DIFFERENTIATORS.map((item, i) => (
+            <Reveal
+              key={item.number}
+              delay={i * 0.08}
+              className={i === 4 ? "md:col-span-2 md:max-w-[50%]" : ""}
+            >
+              <div className="group bg-white p-8 md:p-10 hover:bg-brand-dark transition-colors duration-700 cursor-default">
+                <span className="text-brand-red text-xs tracking-[0.3em] font-display">
+                  {item.number}
+                </span>
+                <h3 className="text-xl font-light mt-4 mb-3 text-brand-dark group-hover:text-white transition-colors duration-700">
+                  {item.title}
+                </h3>
+                <p className="text-sm text-brand-gray leading-relaxed group-hover:text-[#969696] transition-colors duration-700">
                   {item.description}
                 </p>
               </div>
-            </div>
-          </FadeIn>
-        ))}
+            </Reveal>
+          ))}
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }

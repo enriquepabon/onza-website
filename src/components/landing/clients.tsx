@@ -1,6 +1,7 @@
-import { Section } from "@/components/ui/section";
-import { FadeIn } from "@/components/ui/fade-in";
+"use client";
+
 import Image from "next/image";
+import { Reveal } from "@/components/ui/reveal";
 
 const CLIENT_LOGOS = [
   { name: "Grupo México", file: "white-grupomexico.png" },
@@ -10,28 +11,35 @@ const CLIENT_LOGOS = [
   { name: "Success Drivers", file: "white-successdrivers.png" },
 ];
 
+const MARQUEE_LOGOS = [...CLIENT_LOGOS, ...CLIENT_LOGOS];
+
 export function Clients() {
   return (
-    <Section dark className="py-16">
-      <FadeIn>
-        <p className="text-sm tracking-widest uppercase text-gray-500 text-center mb-12">
+    <section className="bg-brand-black py-16 overflow-hidden border-t border-[#1A1A1A]">
+      <Reveal>
+        <p className="text-[10px] tracking-[0.4em] uppercase text-[#555] text-center mb-10 font-display">
           Empresas que confían en nosotros
         </p>
-      </FadeIn>
-      <FadeIn delay={0.1}>
-        <div className="flex flex-wrap items-center justify-center gap-12 md:gap-16 opacity-60">
-          {CLIENT_LOGOS.map((logo) => (
-            <Image
-              key={logo.name}
-              src={`/images/client-logos/${logo.file}`}
-              alt={logo.name}
-              width={120}
-              height={40}
-              className="h-8 md:h-10 w-auto object-contain"
-            />
+      </Reveal>
+
+      <div className="relative">
+        <div className="flex animate-marquee">
+          {MARQUEE_LOGOS.map((logo, i) => (
+            <div
+              key={`${logo.name}-${i}`}
+              className="flex-shrink-0 mx-12 md:mx-16"
+            >
+              <Image
+                src={`/images/client-logos/${logo.file}`}
+                alt={logo.name}
+                width={120}
+                height={40}
+                className="h-7 md:h-9 w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-500 grayscale"
+              />
+            </div>
           ))}
         </div>
-      </FadeIn>
-    </Section>
+      </div>
+    </section>
   );
 }

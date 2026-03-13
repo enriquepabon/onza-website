@@ -1,48 +1,159 @@
-import { Section } from "@/components/ui/section";
-import { Button } from "@/components/ui/button";
-import { FadeIn } from "@/components/ui/fade-in";
+"use client";
+
+import { useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 export function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const subtextRef = useRef<HTMLParagraphElement>(null);
+  const labelRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const markRef = useRef<SVGSVGElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.3 });
+
+      tl.fromTo(
+        markRef.current,
+        { opacity: 0, scale: 0.8 },
+        { opacity: 0.06, scale: 1, duration: 1.5, ease: "power2.out" },
+        0
+      );
+
+      tl.fromTo(
+        labelRef.current,
+        { opacity: 0, x: -30 },
+        { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" },
+        0.2
+      );
+
+      tl.fromTo(
+        lineRef.current,
+        { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 1, ease: "power3.inOut" },
+        0.4
+      );
+
+      if (headlineRef.current) {
+        const words = headlineRef.current.querySelectorAll(".word");
+        tl.fromTo(
+          words,
+          { y: "110%", rotateX: -40 },
+          {
+            y: "0%",
+            rotateX: 0,
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.04,
+          },
+          0.5
+        );
+      }
+
+      tl.fromTo(
+        subtextRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
+        1.2
+      );
+
+      tl.fromTo(
+        ctaRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        1.5
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const headlineText = "Tu operación pierde tiempo y dinero cada día.";
+  const accentText = "Nosotros lo resolvemos con IA.";
+  const allWords = [...headlineText.split(" "), ...accentText.split(" ")];
+  const accentStartIndex = headlineText.split(" ").length;
+
   return (
-    <Section dark className="min-h-screen flex items-center pt-20">
-      <div className="max-w-4xl">
-        <FadeIn>
-          <p className="text-sm tracking-widest uppercase text-gray-400 mb-6">
-            Consultoría en Arquitectura de Soluciones IA
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <h1 className="text-hero-mobile md:text-hero font-light mb-8 leading-tight">
-            Tu operación pierde tiempo y dinero cada día.
-            <span className="text-brand-red">
-              {" "}
-              Nosotros lo resolvemos con IA.
-            </span>
+    <section
+      ref={containerRef}
+      className="relative min-h-screen flex items-center bg-brand-black overflow-hidden"
+    >
+      <svg
+        ref={markRef}
+        viewBox="0 0 600 600"
+        className="absolute right-[-5%] top-1/2 -translate-y-1/2 w-[60vh] h-[60vh] text-white opacity-0 pointer-events-none"
+        aria-hidden="true"
+      >
+        <g fill="currentColor">
+          <polygon points="68,90 108,90 301,468 299,468" />
+          <polygon points="492,90 532,90 301,468 299,468" />
+          <path d="M 328,100 L 340,100 C 330,250 312,380 301,468 L 299,468 C 308,380 320,250 328,100 Z" />
+        </g>
+      </svg>
+
+      <div className="noise-overlay" />
+
+      <div className="container-wide relative z-20 pt-32 pb-20">
+        <div className="max-w-5xl">
+          <div className="flex items-center gap-4 mb-10">
+            <div ref={lineRef} className="h-px w-12 bg-brand-red" />
+            <p
+              ref={labelRef}
+              className="text-xs tracking-[0.3em] uppercase text-brand-gray font-display"
+            >
+              Arquitectura de Soluciones IA
+            </p>
+          </div>
+
+          <h1
+            ref={headlineRef}
+            className="text-[2.5rem] md:text-[3.5rem] lg:text-[4.5rem] xl:text-[5.5rem] font-light leading-[1.05] mb-10"
+            style={{ perspective: "1000px" }}
+          >
+            {allWords.map((word, i) => (
+              <span key={i} className="inline-block overflow-hidden mr-[0.25em]">
+                <span
+                  className={`word inline-block ${
+                    i >= accentStartIndex ? "text-brand-red" : "text-white"
+                  }`}
+                >
+                  {word}
+                </span>
+              </span>
+            ))}
           </h1>
-        </FadeIn>
-        <FadeIn delay={0.2}>
-          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed">
+
+          <p
+            ref={subtextRef}
+            className="text-lg md:text-xl text-[#969696] max-w-xl leading-relaxed mb-12 font-light"
+          >
             Diseñamos soluciones de inteligencia artificial que transforman
             operaciones — reduciendo costos, eliminando errores y acelerando
             procesos con impacto financiero medible.
           </p>
-        </FadeIn>
-        <FadeIn delay={0.3}>
-          <div className="flex flex-wrap gap-4">
-            <Button href="/contacto" size="lg">
+
+          <div ref={ctaRef} className="flex flex-wrap gap-5">
+            <MagneticButton
+              href="/contacto"
+              className="px-10 py-4 bg-brand-red text-white hover:bg-red-600 text-sm"
+            >
               Agenda una conversación
-            </Button>
-            <Button
+            </MagneticButton>
+            <MagneticButton
               href="/servicios"
-              variant="outline"
-              size="lg"
-              className="border-gray-600 text-white hover:bg-white hover:text-brand-dark"
+              className="px-10 py-4 border border-[#333] text-[#999] hover:border-white hover:text-white text-sm"
             >
               Conoce nuestros servicios
-            </Button>
+            </MagneticButton>
           </div>
-        </FadeIn>
+        </div>
       </div>
-    </Section>
+
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-black to-transparent z-10" />
+    </section>
   );
 }
