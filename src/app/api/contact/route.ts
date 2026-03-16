@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getResend } from "@/lib/resend";
+import { createPipelineLead } from "@/lib/notion";
 
 export const dynamic = "force-dynamic";
 
@@ -49,6 +50,9 @@ export async function POST(request: Request) {
         </div>
       `,
     });
+
+    // Create lead in Notion Pipeline (non-blocking)
+    createPipelineLead({ name, email, company, message }).catch(() => {});
 
     return NextResponse.json({ success: true });
   } catch {
