@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     }
 
     const contactEmail = process.env.CONTACT_EMAIL || "hola@onzaai.com";
-    const fromAddress = process.env.FROM_EMAIL || "Onza Website <onboarding@resend.dev>";
+    const fromAddress = process.env.FROM_EMAIL || "Onza <web@onzaai.com>";
 
     // Email to Enrique (notification)
     await getResend().emails.send({
