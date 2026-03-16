@@ -4,12 +4,12 @@ import Image from "next/image";
 import { Reveal } from "@/components/ui/reveal";
 
 const CLIENT_LOGOS = [
-  { name: "Grupo México", file: "white-grupomexico.png" },
-  { name: "Ticket Master", file: "white-ticketmaster.png" },
-  { name: "Oleoflores", file: "white-oleoflores.png" },
-  { name: "Avicanna", file: "white-avicanna.png" },
-  { name: "Medcann", file: "white-medcann.png" },
-  { name: "Success Drivers", file: "white-successdrivers.png" },
+  { name: "Grupo México", file: "white-grupomexico.png", tall: true },
+  { name: "Ticket Master", file: "white-ticketmaster.png", tall: true },
+  { name: "Oleoflores", file: "white-oleoflores.png", tall: false },
+  { name: "Avicanna", file: "white-avicanna.png", tall: true },
+  { name: "Medcann", file: "white-medcann.png", tall: false },
+  { name: "Success Drivers", file: "white-successdrivers.png", tall: false },
 ];
 
 const MARQUEE_LOGOS = [...CLIENT_LOGOS, ...CLIENT_LOGOS];
@@ -35,7 +35,7 @@ export function Clients() {
                 alt={logo.name}
                 width={180}
                 height={60}
-                className="h-10 md:h-12 w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-500 grayscale"
+                className={`${logo.tall ? "h-16 md:h-20" : "h-10 md:h-12"} w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-500 grayscale`}
               />
             </div>
           ))}
