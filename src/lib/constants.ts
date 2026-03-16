@@ -3,7 +3,7 @@ export const COMPANY = {
   tagline: "Arquitectura de Soluciones IA",
   description:
     "Diseñamos arquitectura de soluciones IA que transforma operaciones con impacto financiero medible.",
-  email: "hola@onzaai.com",
+  email: "enriquepabonramirez@gmail.com",
   url: "https://onzaai.com",
   linkedin: "https://linkedin.com/company/onzaai",
   founder: {

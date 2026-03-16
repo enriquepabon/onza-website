@@ -28,7 +28,7 @@ export function CTA() {
 
         <Reveal delay={0.3}>
           <p className="text-lg text-[#8899AA] max-w-xl mx-auto mb-12 leading-relaxed font-light">
-            Conversemos sobre tu operación. Sin compromiso, sin jerga — solo claridad sobre dónde la IA puede generar impacto real.
+            Conversemos. Sin compromiso, sin jerga — solo claridad sobre dónde la IA puede generar impacto real.
           </p>
         </Reveal>
 

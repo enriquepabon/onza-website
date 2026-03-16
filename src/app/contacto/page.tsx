@@ -61,7 +61,7 @@ export default function ContactoPage() {
           as="h1"
           className="text-hero-mobile md:text-hero font-light max-w-4xl"
         >
-          Conversemos sobre tu operación
+          Conversemos
         </TextReveal>
       </Section>
 

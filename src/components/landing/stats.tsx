@@ -9,7 +9,7 @@ import { TextReveal } from "@/components/ui/text-reveal";
 gsap.registerPlugin(ScrollTrigger);
 
 const STATS = [
-  { value: "$40,500M", numericPart: "40500", prefix: "$", suffix: "M", label: "Mercado IA en LATAM 2026", sublabel: "CAGR 37% hasta 2034" },
+  { value: "$45.5B", numericPart: "45.5", prefix: "$", suffix: "B", label: "Mercado IA en LATAM 2026", sublabel: "USD · CAGR 37% hasta 2034" },
   { value: "95%", numericPart: "95", prefix: "", suffix: "%", label: "de pilotos de IA no generan resultados medibles", sublabel: "El problema es integración, no tecnología" },
   { value: "54%", numericPart: "54", prefix: "", suffix: "%", label: "de empresas colombianas aumentará inversión en IA", sublabel: "La pregunta no es si, sino cómo" },
   { value: "33%", numericPart: "33", prefix: "", suffix: "%", label: "no sabe cómo integrar IA en sus procesos", sublabel: "Ahí es donde entramos nosotros" },
@@ -22,9 +22,10 @@ function StatCard({ stat, index }: { stat: (typeof STATS)[0]; index: number }) {
     const el = numberRef.current;
     if (!el) return;
 
-    const numericValue = parseInt(stat.numericPart.replace(/,/g, ""));
+    const numericValue = parseFloat(stat.numericPart.replace(/,/g, ""));
     if (isNaN(numericValue)) return;
 
+    const hasDecimal = stat.numericPart.includes(".");
     const obj = { val: 0 };
     const anim = gsap.to(obj, {
       val: numericValue,
@@ -32,7 +33,9 @@ function StatCard({ stat, index }: { stat: (typeof STATS)[0]; index: number }) {
       ease: "power2.out",
       scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
       onUpdate: () => {
-        const formatted = numericValue > 999 ? Math.round(obj.val).toLocaleString() : Math.round(obj.val).toString();
+        const formatted = hasDecimal
+          ? obj.val.toFixed(1)
+          : numericValue > 999 ? Math.round(obj.val).toLocaleString() : Math.round(obj.val).toString();
         el.textContent = `${stat.prefix}${formatted}${stat.suffix}`;
       },
     });
