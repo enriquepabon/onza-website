@@ -17,12 +17,59 @@ export function Hero() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.3 });
 
-      tl.fromTo(
-        markRef.current,
-        { opacity: 0, scale: 0.8 },
-        { opacity: 0.06, scale: 1, duration: 1.5, ease: "power2.out" },
-        0
-      );
+      // Phase 1: Stroke-draw animation for the logo mark
+      if (markRef.current) {
+        const paths = markRef.current.querySelectorAll(".mark-path");
+        // Set initial state: stroked, not filled
+        paths.forEach((el) => {
+          const geom = el as unknown as SVGGeometryElement;
+          const len = geom.getTotalLength?.() || 800;
+          gsap.set(el, {
+            strokeDashoffset: len,
+            strokeDasharray: len,
+            fill: "transparent",
+            stroke: "rgba(255,255,255,0.15)",
+            strokeWidth: 1.5,
+          });
+        });
+        gsap.set(markRef.current, { opacity: 1 });
+
+        // Draw the strokes
+        tl.to(
+          paths,
+          {
+            strokeDashoffset: 0,
+            duration: 1.8,
+            ease: "power2.inOut",
+            stagger: 0.2,
+          },
+          0
+        );
+
+        // Fade stroke to fill
+        tl.to(
+          paths,
+          {
+            fill: "rgba(255,255,255,0.08)",
+            stroke: "rgba(255,255,255,0.03)",
+            duration: 1.2,
+            ease: "power2.out",
+          },
+          1.4
+        );
+
+        // Continuous breathing glow
+        tl.call(() => {
+          gsap.to(paths, {
+            fill: "rgba(255,255,255,0.12)",
+            duration: 3,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            stagger: 0.3,
+          });
+        }, [], 3);
+      }
 
       tl.fromTo(
         labelRef.current,
@@ -85,20 +132,18 @@ export function Hero() {
       <svg
         ref={markRef}
         viewBox="0 0 600 600"
-        className="absolute right-[-5%] top-1/2 -translate-y-1/2 w-[60vh] h-[60vh] text-white opacity-0 pointer-events-none"
+        className="absolute right-[2%] md:right-[5%] lg:right-[8%] top-1/2 -translate-y-1/2 w-[50vh] h-[50vh] lg:w-[60vh] lg:h-[60vh] opacity-0 pointer-events-none"
         aria-hidden="true"
       >
-        <g fill="currentColor">
-          <polygon points="68,90 108,90 301,468 299,468" />
-          <polygon points="492,90 532,90 301,468 299,468" />
-          <path d="M 328,100 L 340,100 C 330,250 312,380 301,468 L 299,468 C 308,380 320,250 328,100 Z" />
-        </g>
+        <polygon className="mark-path" points="68,90 108,90 301,468 299,468" />
+        <polygon className="mark-path" points="492,90 532,90 301,468 299,468" />
+        <path className="mark-path" d="M 328,100 L 340,100 C 330,250 312,380 301,468 L 299,468 C 308,380 320,250 328,100 Z" />
       </svg>
 
       <div className="noise-overlay" />
 
       <div className="container-wide relative z-20 pt-32 pb-20">
-        <div className="max-w-5xl">
+        <div className="max-w-5xl mx-auto lg:mx-0 lg:ml-[5%] xl:ml-[8%]">
           <div className="flex items-center gap-4 mb-10">
             <div ref={lineRef} className="h-px w-12 bg-brand-red" />
             <p
