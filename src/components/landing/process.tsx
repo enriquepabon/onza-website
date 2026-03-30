@@ -39,8 +39,8 @@ export function Process() {
   return (
     <section className="bg-white py-24 md:py-32 lg:py-40">
       <div className="container-wide">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
-          <div className="lg:col-span-5 lg:col-start-7">
+        <div className="max-w-3xl mx-auto mb-20">
+          <div>
             <Reveal>
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-px w-8 bg-brand-red" />

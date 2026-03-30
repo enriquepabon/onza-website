@@ -132,18 +132,18 @@ export function Hero() {
       <svg
         ref={markRef}
         viewBox="0 0 600 600"
-        className="absolute right-[2%] md:right-[5%] lg:right-[8%] top-1/2 -translate-y-1/2 w-[50vh] h-[50vh] lg:w-[60vh] lg:h-[60vh] opacity-0 pointer-events-none"
+        className="absolute right-[-8%] lg:right-[-3%] top-1/2 -translate-y-1/2 w-[55vh] h-[55vh] lg:w-[65vh] lg:h-[65vh] opacity-0 pointer-events-none"
         aria-hidden="true"
       >
-        <polygon className="mark-path" points="68,90 108,90 301,468 299,468" />
-        <polygon className="mark-path" points="492,90 532,90 301,468 299,468" />
+        <path className="mark-path" d="M 68,90 L 108,90 L 301,468 L 299,468 Z" />
+        <path className="mark-path" d="M 492,90 L 532,90 L 301,468 L 299,468 Z" />
         <path className="mark-path" d="M 328,100 L 340,100 C 330,250 312,380 301,468 L 299,468 C 308,380 320,250 328,100 Z" />
       </svg>
 
       <div className="noise-overlay" />
 
       <div className="container-wide relative z-20 pt-32 pb-20">
-        <div className="max-w-5xl mx-auto lg:mx-0 lg:ml-[5%] xl:ml-[8%]">
+        <div className="max-w-5xl">
           <div className="flex items-center gap-4 mb-10">
             <div ref={lineRef} className="h-px w-12 bg-brand-red" />
             <p
