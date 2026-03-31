@@ -44,6 +44,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: "https://onzaai.com/recursos",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: "https://onzaai.com/recursos/guia-ia",
       lastModified: new Date(),
       changeFrequency: "monthly",

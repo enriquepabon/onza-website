@@ -58,14 +58,14 @@ const organizationSchema = {
   name: "Onza",
   url: "https://onzaai.com",
   logo: "https://onzaai.com/favicon.svg",
-  email: "hola@onzaai.com",
+  email: "enriquepabonramirez@gmail.com",
   description:
     "Consultoría boutique de soluciones IA para empresas en LATAM. Automatización de procesos, diagnóstico estratégico y soluciones a medida.",
   areaServed: ["CO", "MX", "PE", "CL", "AR", "UY"],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
-    email: "hola@onzaai.com",
+    email: "enriquepabonramirez@gmail.com",
     availableLanguage: ["Spanish", "English"],
   },
   sameAs: [

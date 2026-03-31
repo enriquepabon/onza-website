@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     const reportSummary = generateReportSummary(result);
 
     const fromAddress = process.env.FROM_EMAIL || "Onza <web@onzaai.com>";
-    const contactEmail = process.env.CONTACT_EMAIL || "hola@onzaai.com";
+    const contactEmail = process.env.CONTACT_EMAIL || "enriquepabonramirez@gmail.com";
 
     // Send report to user
     await getResend().emails.send({

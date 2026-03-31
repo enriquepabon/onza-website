@@ -35,7 +35,7 @@ const PROJECTS = [
     category: "Transformación Digital",
     metric: "100+",
     metricLabel: "colaboradores certificados",
-    description: "Programa intensivo de adopción de herramientas IA para personal operativo del sector agroindustrial.",
+    description: "Programa intensivo de adopción de herramientas IA para personal operativo en planta y administración.",
     country: "Colombia",
     flag: "🇨🇴",
   },

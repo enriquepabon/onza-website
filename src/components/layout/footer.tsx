@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { COMPANY, NAV_LINKS } from "@/lib/constants";
+import { COMPANY } from "@/lib/constants";
 
 export function Footer() {
   return (
     <footer className="bg-brand-black text-white py-16">
       <div className="container-wide">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
@@ -29,21 +29,30 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Links */}
+          {/* Servicios */}
           <div>
             <h4 className="text-xs tracking-widest uppercase text-gray-500 mb-4">
-              Navegación
+              Servicios
             </h4>
             <div className="flex flex-col gap-3">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              <Link href="/servicios#formaciones" className="text-sm text-gray-400 hover:text-white transition-colors">Formaciones IA</Link>
+              <Link href="/servicios#automatizacion" className="text-sm text-gray-400 hover:text-white transition-colors">Automatización</Link>
+              <Link href="/servicios#soluciones" className="text-sm text-gray-400 hover:text-white transition-colors">Soluciones a Medida</Link>
+              <Link href="/servicios/chatbot-ia" className="text-sm text-gray-400 hover:text-white transition-colors">Chatbot IA</Link>
+              <Link href="/servicios#diagnostico" className="text-sm text-gray-400 hover:text-white transition-colors">Diagnóstico Estratégico</Link>
+            </div>
+          </div>
+
+          {/* Recursos */}
+          <div>
+            <h4 className="text-xs tracking-widest uppercase text-gray-500 mb-4">
+              Recursos
+            </h4>
+            <div className="flex flex-col gap-3">
+              <Link href="/recursos/diagnostico-ia" className="text-sm text-gray-400 hover:text-white transition-colors">Diagnóstico de madurez IA</Link>
+              <Link href="/recursos/guia-ia" className="text-sm text-gray-400 hover:text-white transition-colors">Guía de implementación</Link>
+              <Link href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors">Blog</Link>
+              <Link href="/nosotros" className="text-sm text-gray-400 hover:text-white transition-colors">Nosotros</Link>
             </div>
           </div>
 
@@ -53,6 +62,14 @@ export function Footer() {
               Contacto
             </h4>
             <div className="flex flex-col gap-3 text-sm text-gray-400">
+              <a
+                href={COMPANY.calendar}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                Agendar conversación
+              </a>
               <a
                 href={`mailto:${COMPANY.email}`}
                 className="hover:text-white transition-colors"
