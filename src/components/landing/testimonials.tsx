@@ -6,7 +6,7 @@ import { TextReveal } from "@/components/ui/text-reveal";
 const TESTIMONIALS = [
   {
     quote:
-      "Enrique construyó toda nuestra plataforma web en semanas — incluyendo el test de nivel de inglés, el sistema de registro de estudiantes y la integración con nuestros procesos internos. Lo que más me sorprendió fue que en ningún momento tuve que explicarle dos veces qué necesitaba. Entendió el negocio desde el primer día.",
+      "Enrique construyó toda la plataforma en semanas: el test de nivel de inglés, el registro de estudiantes, las integraciones con nuestros procesos. Nunca tuve que explicarle nada dos veces. Llegó, entendió el negocio, y lo que entregó fue exactamente lo que teníamos en la cabeza.",
     name: "Samuel Avila",
     role: "Fundador",
     company: "Language for Living",
@@ -14,7 +14,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Tenemos siete hoteles en tres países y cada uno operaba de una forma diferente. Enrique nos ayudó a estandarizar toda la operación con IA — desde los SOPs hasta un agente que cualquier colaborador puede consultar en cualquier momento. En cuatro sesiones construimos lo que nos habría tomado un año solo.",
+      "Tenemos siete hoteles en tres países y cada uno funcionaba distinto. Enrique tomó ese caos y lo convirtió en algo estandarizado: SOPs unificados, procesos por sede, y un agente que cualquier colaborador puede consultar cuando lo necesita. En cuatro sesiones hicimos lo que nos habría tomado un año.",
     name: "Javier Parra",
     role: "Gerente de Operaciones Global",
     company: "LaTroupe",
@@ -22,8 +22,8 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Sabíamos que la IA era importante pero no teníamos claridad de por dónde empezar. Onza nos ayudó a identificar dónde estaba el impacto real y a ejecutarlo. Sin presentaciones genéricas, sin rodeos — directo al problema.",
-    name: "César Escobar",
+      "Sabíamos que la IA importaba pero no teníamos claro por dónde entrar. Onza llegó, identificó dónde estaba el impacto y nos ayudó a ejecutarlo. Sin presentaciones, sin vueltas, directo al grano.",
+    name: "César Suárez",
     role: "Co-Fundador",
     company: "Success Drivers",
     sector: "Consultoría · Colombia",
