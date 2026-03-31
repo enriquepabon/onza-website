@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,6 +79,16 @@ export function Stats() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {STATS.map((stat, i) => (<StatCard key={i} stat={stat} index={i} />))}
         </div>
+        <Reveal delay={0.4}>
+          <div className="mt-16 flex justify-start">
+            <MagneticButton
+              href="/contacto?utm_source=homepage&utm_medium=cta&utm_content=stats"
+              className="px-8 py-3 border border-[#333] text-[#777] hover:border-white hover:text-white text-sm"
+            >
+              Hablemos de tu operación
+            </MagneticButton>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

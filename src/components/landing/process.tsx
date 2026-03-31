@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
+import { MagneticButton } from "@/components/ui/magnetic-button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,6 +77,17 @@ export function Process() {
             ))}
           </div>
         </div>
+
+        <Reveal delay={0.3}>
+          <div className="max-w-3xl mx-auto mt-16">
+            <MagneticButton
+              href="/contacto?utm_source=homepage&utm_medium=cta&utm_content=proceso"
+              className="px-8 py-3 bg-brand-red text-white hover:bg-red-600 text-sm"
+            >
+              Agenda una conversación
+            </MagneticButton>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

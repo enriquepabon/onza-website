@@ -243,7 +243,7 @@ export default function ServiciosPage() {
           </Reveal>
           <Reveal delay={0.3}>
             <MagneticButton
-              href="/contacto"
+              href="/contacto?utm_source=servicios&utm_medium=cta&utm_content=cta-final"
               className="px-10 py-4 text-sm bg-brand-red text-white hover:bg-red-600"
             >
               Agenda tu diagnóstico

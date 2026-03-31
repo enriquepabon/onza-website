@@ -257,13 +257,13 @@ export function HeroGeometric() {
             className="flex flex-wrap gap-5"
           >
             <MagneticButton
-              href="/contacto"
+              href="/contacto?utm_source=homepage&utm_medium=cta&utm_content=hero-primary"
               className="px-10 py-4 bg-brand-red text-white hover:bg-red-600 text-sm"
             >
               Agenda una conversación
             </MagneticButton>
             <MagneticButton
-              href="/servicios"
+              href="/servicios?utm_source=homepage&utm_medium=cta&utm_content=hero-secondary"
               className="px-10 py-4 border border-[#333] text-[#999] hover:border-white hover:text-white text-sm"
             >
               Conoce nuestros servicios

@@ -39,7 +39,7 @@ export function CTA() {
 
         <Reveal delay={0.5}>
           <MagneticButton
-            href="/contacto"
+            href="/contacto?utm_source=homepage&utm_medium=cta&utm_content=cta-final"
             className="px-12 py-5 bg-brand-red text-white hover:bg-red-600 text-sm"
             strength={0.4}
           >
