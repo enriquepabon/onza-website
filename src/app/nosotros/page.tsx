@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
@@ -10,6 +11,49 @@ export const metadata: Metadata = {
   description:
     "Firma boutique de consultoría en arquitectura de soluciones IA. 15+ años de experiencia transformando operaciones en LATAM.",
 };
+
+const PROJECTS = [
+  {
+    name: "grupo-mexico.jpg",
+    client: "Grupo México",
+    category: "Formación en IA",
+    metric: "500+",
+    metricLabel: "personas formadas",
+    description: "Programa de formación en IA y Microsoft Copilot para equipos operativos y directivos a escala nacional.",
+    country: "México",
+    flag: "🇲🇽",
+  },
+  {
+    name: "oleoflores-formacion.jpg",
+    client: "Oleoflores",
+    category: "Transformación Digital",
+    metric: "100+",
+    metricLabel: "colaboradores certificados",
+    description: "Programa intensivo de adopción de herramientas IA para personal operativo del sector agroindustrial.",
+    country: "Colombia",
+    flag: "🇨🇴",
+  },
+  {
+    name: "oleoflores-apps.jpg",
+    client: "Oleoflores",
+    category: "Desarrollo de Aplicativos",
+    metric: "8+",
+    metricLabel: "aplicativos desplegados",
+    description: "Suite de aplicaciones web y mobile para supply chain, trazabilidad y control operacional integrado.",
+    country: "Colombia",
+    flag: "🇨🇴",
+  },
+  {
+    name: "latroupe.jpg",
+    client: "La Troupe",
+    category: "IA Operacional",
+    metric: "3",
+    metricLabel: "países, un estándar",
+    description: "Formación, SOPs, agente IA conversacional y automatizaciones para red de hoteles boutique en Europa.",
+    country: "Europa",
+    flag: "🇪🇺",
+  },
+];
 
 const EXPERIENCE = [
   {
@@ -151,6 +195,72 @@ export default function NosotrosPage() {
           ))}
         </div>
       </Section>
+
+      {/* Projects */}
+      <section className="bg-brand-black py-24 md:py-32 lg:py-40">
+        <div className="container-wide">
+          <div className="mb-16">
+            <Reveal>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="h-px w-8 bg-brand-red" />
+                <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
+                  Proyectos
+                </span>
+              </div>
+            </Reveal>
+            <TextReveal
+              as="h2"
+              className="text-section-mobile md:text-section font-light text-white max-w-3xl"
+            >
+              Soluciones que ya están operando
+            </TextReveal>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+            {PROJECTS.map((project, i) => (
+              <Reveal key={project.client + project.category} delay={i * 0.1}>
+                <div className="group relative overflow-hidden bg-[#111111] aspect-[4/3]">
+                  <Image
+                    src={`/images/proyectos/${project.name}`}
+                    alt={project.client}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                  />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+
+                  {/* Content */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-10">
+                    {/* Top badge */}
+                    <div className="absolute top-6 right-6 flex items-center gap-2">
+                      <span className="text-xs text-white/60 tracking-[0.2em] uppercase font-display">
+                        {project.flag} {project.country}
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className="text-[10px] tracking-[0.25em] uppercase text-brand-red font-display mb-3 block">
+                        {project.category}
+                      </span>
+                      <h3 className="text-2xl md:text-3xl font-light text-white mb-2">
+                        {project.client}
+                      </h3>
+                      <p className="text-sm text-white/60 leading-relaxed mb-5 max-w-sm">
+                        {project.description}
+                      </p>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-4xl font-light text-brand-gold">{project.metric}</span>
+                        <span className="text-xs text-white/50 tracking-[0.15em] uppercase">{project.metricLabel}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Values */}
       <Section narrow>

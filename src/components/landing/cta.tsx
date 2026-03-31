@@ -1,12 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { Reveal } from "@/components/ui/reveal";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 
 export function CTA() {
   return (
-    <section className="relative bg-brand-navy py-24 md:py-32 lg:py-40 overflow-hidden">
+    <section className="relative bg-brand-black py-24 md:py-32 lg:py-40 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Image src="/images/sections/abstract-d.jpg" alt="" fill className="object-cover object-right opacity-25" sizes="100vw" />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-black/90 via-brand-black/70 to-brand-black/50" />
+      </div>
       <div className="noise-overlay" />
 
       <svg

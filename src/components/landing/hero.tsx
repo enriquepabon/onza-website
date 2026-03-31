@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
+import Image from "next/image";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 
 export function Hero() {
@@ -17,10 +18,11 @@ export function Hero() {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.3 });
 
-      // Phase 1: Stroke-draw animation for the logo mark
+      // Stroke-draw animation for the logo mark
       if (markRef.current) {
         const paths = markRef.current.querySelectorAll(".mark-path");
-        // Set initial state: stroked, not filled
+
+        // Initial state: hidden stroke, no fill
         paths.forEach((el) => {
           const geom = el as unknown as SVGGeometryElement;
           const len = geom.getTotalLength?.() || 800;
@@ -28,47 +30,58 @@ export function Hero() {
             strokeDashoffset: len,
             strokeDasharray: len,
             fill: "transparent",
-            stroke: "rgba(255,255,255,0.15)",
-            strokeWidth: 1.5,
+            stroke: "rgba(255,255,255,0.6)",
+            strokeWidth: 2,
           });
         });
         gsap.set(markRef.current, { opacity: 1 });
 
-        // Draw the strokes
+        // Phase 1: Draw strokes one by one
         tl.to(
           paths,
           {
             strokeDashoffset: 0,
-            duration: 1.8,
+            duration: 2,
             ease: "power2.inOut",
-            stagger: 0.2,
+            stagger: 0.3,
           },
           0
         );
 
-        // Fade stroke to fill
+        // Phase 2: Flash bright then settle — stroke fades, fill appears
         tl.to(
           paths,
           {
-            fill: "rgba(255,255,255,0.08)",
-            stroke: "rgba(255,255,255,0.03)",
-            duration: 1.2,
-            ease: "power2.out",
+            stroke: "rgba(255,255,255,0.8)",
+            strokeWidth: 3,
+            duration: 0.3,
+            ease: "power2.in",
           },
-          1.4
+          2.2
+        );
+        tl.to(
+          paths,
+          {
+            fill: "rgba(255,255,255,0.04)",
+            stroke: "rgba(255,255,255,0)",
+            strokeWidth: 0,
+            duration: 1.5,
+            ease: "power3.out",
+          },
+          2.5
         );
 
-        // Continuous breathing glow
+        // Phase 3: Continuous breathing glow
         tl.call(() => {
           gsap.to(paths, {
-            fill: "rgba(255,255,255,0.12)",
+            fill: "rgba(255,255,255,0.05)",
             duration: 3,
             ease: "sine.inOut",
             yoyo: true,
             repeat: -1,
-            stagger: 0.3,
+            stagger: 0.4,
           });
-        }, [], 3);
+        }, [], 4.2);
       }
 
       tl.fromTo(
@@ -129,10 +142,23 @@ export function Hero() {
       ref={containerRef}
       className="relative min-h-screen flex items-center bg-brand-black overflow-hidden"
     >
+      {/* Background photo */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/hero/hero-bg-v3.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover opacity-60"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/75 to-brand-black/20" />
+      </div>
+
       <svg
         ref={markRef}
         viewBox="0 0 600 600"
-        className="absolute right-[-8%] lg:right-[-3%] top-1/2 -translate-y-1/2 w-[55vh] h-[55vh] lg:w-[65vh] lg:h-[65vh] opacity-0 pointer-events-none"
+        className="absolute right-[-5%] lg:right-[2%] top-1/2 -translate-y-1/2 w-[38vh] h-[38vh] lg:w-[44vh] lg:h-[44vh] opacity-0 pointer-events-none"
         aria-hidden="true"
       >
         <path className="mark-path" d="M 68,90 L 108,90 L 301,468 L 299,468 Z" />

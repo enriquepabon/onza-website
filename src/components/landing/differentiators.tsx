@@ -34,6 +34,12 @@ const DIFFERENTIATORS = [
     description:
       "Cada proyecto termina con algo que tu equipo puede usar desde el día 1. No con un PDF de recomendaciones.",
   },
+  {
+    number: "06",
+    title: "Confidencialidad y rigor profesional",
+    description:
+      "Tus datos, procesos y ventajas competitivas son tuyos. Trabajamos con NDAs sólidos y estándares de seguridad enterprise.",
+  },
 ];
 
 export function Differentiators() {
@@ -71,7 +77,7 @@ export function Differentiators() {
             <Reveal
               key={item.number}
               delay={i * 0.08}
-              className={i === 4 ? "md:col-span-2 md:max-w-[50%]" : ""}
+              className=""
             >
               <div className="group bg-white p-8 md:p-10 hover:bg-brand-dark transition-colors duration-700 cursor-default">
                 <span className="text-brand-red text-xs tracking-[0.3em] font-display">
