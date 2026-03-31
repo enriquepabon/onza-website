@@ -54,6 +54,13 @@ export function Navbar() {
             </Link>
           ))}
           <MagneticButton
+            href="/recursos/diagnostico-ia"
+            className="px-5 py-2.5 text-xs border border-brand-gold/40 text-brand-gold hover:border-brand-gold hover:text-white"
+            strength={0.2}
+          >
+            Diagnóstico gratis
+          </MagneticButton>
+          <MagneticButton
             href="/contacto"
             className="px-5 py-2.5 text-xs bg-brand-red text-white hover:bg-red-600"
             strength={0.2}
@@ -88,6 +95,13 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/recursos/diagnostico-ia"
+              className="text-lg text-brand-gold hover:text-white transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              Diagnóstico gratis
+            </Link>
             <MagneticButton
               href="/contacto"
               className="mt-2 w-fit px-6 py-3 bg-brand-red text-white text-sm"

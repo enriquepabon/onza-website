@@ -80,7 +80,13 @@ export function Stats() {
           {STATS.map((stat, i) => (<StatCard key={i} stat={stat} index={i} />))}
         </div>
         <Reveal delay={0.4}>
-          <div className="mt-16 flex justify-start">
+          <div className="mt-16 flex flex-wrap gap-4 justify-start">
+            <MagneticButton
+              href="/recursos/diagnostico-ia?utm_source=homepage&utm_medium=cta&utm_content=stats-diagnostico"
+              className="px-8 py-3 bg-brand-red text-white hover:bg-red-600 text-sm"
+            >
+              ¿Dónde está tu empresa? Haz el test
+            </MagneticButton>
             <MagneticButton
               href="/contacto?utm_source=homepage&utm_medium=cta&utm_content=stats"
               className="px-8 py-3 border border-[#333] text-[#777] hover:border-white hover:text-white text-sm"

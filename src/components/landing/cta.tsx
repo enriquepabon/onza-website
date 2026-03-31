@@ -38,13 +38,22 @@ export function CTA() {
         </Reveal>
 
         <Reveal delay={0.5}>
-          <MagneticButton
-            href="/contacto?utm_source=homepage&utm_medium=cta&utm_content=cta-final"
-            className="px-12 py-5 bg-brand-red text-white hover:bg-red-600 text-sm"
-            strength={0.4}
-          >
-            Agenda una conversación
-          </MagneticButton>
+          <div className="flex flex-wrap gap-5 justify-center">
+            <MagneticButton
+              href="/contacto?utm_source=homepage&utm_medium=cta&utm_content=cta-final"
+              className="px-12 py-5 bg-brand-red text-white hover:bg-red-600 text-sm"
+              strength={0.4}
+            >
+              Agenda una conversación
+            </MagneticButton>
+            <MagneticButton
+              href="/recursos/diagnostico-ia?utm_source=homepage&utm_medium=cta&utm_content=cta-diagnostico"
+              className="px-10 py-5 border border-[#333] text-[#999] hover:border-white hover:text-white text-sm"
+              strength={0.3}
+            >
+              Haz el diagnóstico gratis
+            </MagneticButton>
+          </div>
         </Reveal>
       </div>
     </section>
