@@ -5,11 +5,13 @@ import { Reveal } from "@/components/ui/reveal";
 
 const CLIENT_LOGOS = [
   { name: "Grupo México", file: "white-grupomexico.png", tall: true },
-  { name: "Ticket Master", file: "white-ticketmaster.png", tall: true },
   { name: "Oleoflores", file: "white-oleoflores.png", tall: false },
+  { name: "LaTroupe", file: "white-latroupe.svg", tall: false },
+  { name: "Language for Living", file: "white-languageforliving.svg", tall: false },
   { name: "Avicanna", file: "white-avicanna.png", tall: true },
   { name: "Medcann", file: "white-medcann.png", tall: false },
   { name: "Success Drivers", file: "white-successdrivers.png", tall: false },
+  { name: "Ticketmaster", file: "white-ticketmaster.png", tall: true },
 ];
 
 const MARQUEE_LOGOS = [...CLIENT_LOGOS, ...CLIENT_LOGOS];

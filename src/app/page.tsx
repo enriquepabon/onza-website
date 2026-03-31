@@ -4,6 +4,7 @@ import { ServicesOverview } from "@/components/landing/services-overview";
 import { Differentiators } from "@/components/landing/differentiators";
 import { Stats } from "@/components/landing/stats";
 import { Process } from "@/components/landing/process";
+import { Testimonials } from "@/components/landing/testimonials";
 import { CTA } from "@/components/landing/cta";
 import { PhotoBreak } from "@/components/landing/photo-break";
 
@@ -32,6 +33,8 @@ export default function Home() {
       <PhotoBreak src="/images/sections/abstract-f.jpg" height="38vh" position="center" />
 
       <Process />
+
+      <Testimonials />
 
       {/* Líquido oscuro — pausa meditativa antes del CTA */}
       <PhotoBreak src="/images/sections/abstract-b.jpg" height="45vh" position="center 30%" />
