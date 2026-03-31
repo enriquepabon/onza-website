@@ -6,6 +6,7 @@ export const COMPANY = {
   email: "enriquepabonramirez@gmail.com",
   url: "https://onzaai.com",
   linkedin: "https://linkedin.com/company/onzaai",
+  calendar: "https://calendar.app.google/ebqvMY41sfw9865f8",
   founder: {
     name: "Enrique Pabón",
     linkedin: "https://linkedin.com/in/enriquepabon",

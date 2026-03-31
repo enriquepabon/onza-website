@@ -4,6 +4,7 @@ import Image from "next/image";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { Reveal } from "@/components/ui/reveal";
 import { MagneticButton } from "@/components/ui/magnetic-button";
+import { COMPANY } from "@/lib/constants";
 
 export function CTA() {
   return (
@@ -40,7 +41,7 @@ export function CTA() {
         <Reveal delay={0.5}>
           <div className="flex flex-wrap gap-5 justify-center">
             <MagneticButton
-              href="/contacto?utm_source=homepage&utm_medium=cta&utm_content=cta-final"
+              href={COMPANY.calendar}
               className="px-12 py-5 bg-brand-red text-white hover:bg-red-600 text-sm"
               strength={0.4}
             >

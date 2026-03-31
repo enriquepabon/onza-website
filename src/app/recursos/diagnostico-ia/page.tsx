@@ -8,6 +8,7 @@ import {
   calculateResult,
   type QuizResult,
 } from "@/lib/quiz";
+import { COMPANY } from "@/lib/constants";
 
 // ── Progress Bar ───────────────────────────────────────────────────────────
 
@@ -302,7 +303,7 @@ export default function DiagnosticoIAPage() {
                         : "Recibir reporte completo"}
                     </button>
                     <MagneticButton
-                      href="/contacto?utm_source=diagnostico&utm_medium=cta&utm_content=results"
+                      href={COMPANY.calendar}
                       className="px-8 py-4 border border-[#333] text-[#777] hover:border-white hover:text-white text-sm"
                     >
                       Agendar conversación
@@ -336,7 +337,7 @@ export default function DiagnosticoIAPage() {
                 principal, revisa spam.
               </p>
               <MagneticButton
-                href="/contacto?utm_source=diagnostico&utm_medium=cta&utm_content=done"
+                href={COMPANY.calendar}
                 className="px-10 py-4 bg-brand-red text-white hover:bg-red-600 text-sm"
               >
                 Agendar una conversación

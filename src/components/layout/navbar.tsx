@@ -5,6 +5,8 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { COMPANY, NAV_LINKS } from "@/lib/constants";
+
+const CALENDAR = COMPANY.calendar;
 import { MagneticButton } from "@/components/ui/magnetic-button";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -61,7 +63,7 @@ export function Navbar() {
             Diagnóstico gratis
           </MagneticButton>
           <MagneticButton
-            href="/contacto"
+            href={CALENDAR}
             className="px-5 py-2.5 text-xs bg-brand-red text-white hover:bg-red-600"
             strength={0.2}
           >

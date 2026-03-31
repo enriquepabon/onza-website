@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MagneticButton } from "@/components/ui/magnetic-button";
+import { COMPANY } from "@/lib/constants";
 
 // The 3 paths that form the Onza V-mark
 const MARK_PATHS = [
@@ -257,7 +258,7 @@ export function HeroGeometric() {
             className="flex flex-wrap gap-5"
           >
             <MagneticButton
-              href="/contacto?utm_source=homepage&utm_medium=cta&utm_content=hero-primary"
+              href={COMPANY.calendar}
               className="px-10 py-4 bg-brand-red text-white hover:bg-red-600 text-sm"
             >
               Agenda una conversación
