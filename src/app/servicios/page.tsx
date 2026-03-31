@@ -6,9 +6,15 @@ import { MagneticButton } from "@/components/ui/magnetic-button";
 import { LineReveal } from "@/components/ui/line-reveal";
 
 export const metadata: Metadata = {
-  title: "Servicios — Onza",
+  title: "Servicios de Consultoría IA para Empresas — Onza",
   description:
-    "Formaciones IA, automatización de procesos, soluciones a medida y consultoría estratégica. Transformamos operaciones con impacto medible.",
+    "Automatización de procesos, diagnóstico IA, formaciones corporativas y soluciones a medida. Resultados medibles en 2 a 8 semanas para empresas en LATAM.",
+  openGraph: {
+    title: "Servicios de Consultoría IA para Empresas — Onza",
+    description:
+      "Automatización de procesos, diagnóstico IA, formaciones corporativas y soluciones a medida. Resultados en 2 a 8 semanas.",
+    url: "https://onzaai.com/servicios",
+  },
 };
 
 const SERVICES_DETAIL = [
@@ -17,8 +23,9 @@ const SERVICES_DETAIL = [
     number: "01",
     title: "Formaciones IA Empresariales",
     tagline: "Tu equipo domina IA en semanas, no meses",
+    duration: "2–4 semanas",
     description:
-      "Capacitaciones prácticas adaptadas a tu industria y nivel de madurez digital. Desde directivos que necesitan visión estratégica hasta equipos operativos que necesitan herramientas concretas.",
+      "Capacitaciones prácticas adaptadas a tu industria. Directivos que necesitan saber qué pedirle a la IA y qué no. Equipos operativos que necesitan herramientas concretas para su trabajo del día a día.",
     formats: [
       "Sesiones mensuales de acompañamiento",
       "Workshops intensivos de un día",
@@ -26,9 +33,9 @@ const SERVICES_DETAIL = [
       "Talleres prácticos con herramientas IA",
     ],
     results: [
-      "Equipos usando IA en su día a día desde la primera sesión",
-      "Identificación de quick wins específicos para tu operación",
-      "Reducción de curva de aprendizaje de meses a semanas",
+      "Equipos usando IA en su trabajo desde la primera sesión",
+      "Lista concreta de dónde aplicar IA en tu operación específica",
+      "Lo que tomaba meses de ensayo y error, resuelto en semanas",
     ],
   },
   {
@@ -36,6 +43,7 @@ const SERVICES_DETAIL = [
     number: "02",
     title: "Automatización de Procesos con IA",
     tagline: "Procesos que tomaban horas, resueltos en minutos",
+    duration: "4–8 semanas",
     description:
       "Identificamos los procesos que más tiempo y dinero consumen en tu operación. Diseñamos e implementamos flujos automatizados que se integran con tus sistemas actuales — ERP, CRM, herramientas de comunicación.",
     formats: [
@@ -55,6 +63,7 @@ const SERVICES_DETAIL = [
     number: "03",
     title: "Soluciones IA a Medida",
     tagline: "Sistemas que tu equipo puede usar desde el día 1",
+    duration: "3–8 semanas",
     description:
       "Arquitectura y construcción de soluciones digitales con IA integrada. Desde sitios web inteligentes con chatbots y personalización, hasta agentes de IA y plataformas de aprendizaje adaptativo.",
     formats: [
@@ -74,25 +83,54 @@ const SERVICES_DETAIL = [
     number: "04",
     title: "Diagnóstico y Consultoría Estratégica IA",
     tagline: "Claridad antes de invertir",
+    duration: "2–4 semanas",
+    acreditable: true,
     description:
       "Antes de construir, hay que entender. Analizamos tu operación, identificamos los puntos de mayor impacto, y te entregamos un roadmap priorizado. Sabrás exactamente dónde invertir y qué retorno esperar.",
     formats: [
       "Diagnóstico de procesos con entrevistas y mapeo",
-      "Identificación de quick wins y oportunidades de IA",
+      "Identificación de oportunidades de IA por área",
       "Roadmap priorizado con estimaciones de impacto",
       "Advisory mensual para ejecutar el plan",
     ],
     results: [
-      "Visibilidad completa de oportunidades de IA en tu operación",
-      "Decisiones de inversión basadas en datos, no en intuición",
-      "Roadmap accionable con prioridades claras",
+      "Sabes exactamente dónde invertir y cuánto retorno esperar",
+      "Decisiones de inversión con datos, no con corazonadas",
+      "Un roadmap con prioridades reales, no una lista de deseos",
     ],
   },
 ];
 
+const servicesSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Servicios de Consultoría IA — Onza",
+  itemListElement: SERVICES_DETAIL.map((s, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "Service",
+      name: s.title,
+      description: s.description,
+      provider: {
+        "@type": "Organization",
+        name: "Onza",
+        url: "https://onzaai.com",
+      },
+      areaServed: "LATAM",
+      url: `https://onzaai.com/servicios#${s.id}`,
+    },
+  })),
+};
+
 export default function ServiciosPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
+      />
+
       {/* Header */}
       <Section dark className="pt-32 pb-16">
         <Reveal>
@@ -117,10 +155,15 @@ export default function ServiciosPage() {
           <Reveal>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
               <div>
-                <span className="text-xs text-brand-red tracking-[0.3em] font-display">
-                  {service.number}
-                </span>
-                <h2 className="text-3xl md:text-4xl font-light mt-3 mb-4">
+                <div className="flex items-center gap-4 mb-3">
+                  <span className="text-xs text-brand-red tracking-[0.3em] font-display">
+                    {service.number}
+                  </span>
+                  <span className="text-xs text-brand-gray tracking-[0.15em] font-display uppercase border border-gray-200 px-2 py-0.5">
+                    {service.duration}
+                  </span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-light mt-1 mb-4">
                   {service.title}
                 </h2>
                 <p className="text-xl text-brand-red font-light mb-6">
@@ -129,6 +172,12 @@ export default function ServiciosPage() {
                 <p className="text-brand-gray leading-relaxed">
                   {service.description}
                 </p>
+                {"acreditable" in service && service.acreditable && (
+                  <p className="mt-5 text-sm text-brand-gray border-l-2 border-brand-gold pl-4">
+                    El costo del diagnóstico se acredita al 100% si contratas
+                    la implementación.
+                  </p>
+                )}
               </div>
 
               <div className="space-y-8">

@@ -28,12 +28,12 @@ export function CTA() {
 
       <div className="container-narrow relative z-10 text-center">
         <TextReveal as="h2" className="text-section-mobile md:text-section font-light text-white mb-8">
-          ¿Listo para transformar tu operación con IA?
+          Una conversación. Sin compromiso.
         </TextReveal>
 
         <Reveal delay={0.3}>
           <p className="text-lg text-[#8899AA] max-w-xl mx-auto mb-12 leading-relaxed font-light">
-            Conversemos. Sin compromiso, sin jerga — solo claridad sobre dónde la IA puede generar impacto real.
+            En 30 minutos podemos darte claridad sobre dónde la IA genera más impacto en tu operación y qué costaría resolverlo.
           </p>
         </Reveal>
 

@@ -9,10 +9,10 @@ import { TextReveal } from "@/components/ui/text-reveal";
 gsap.registerPlugin(ScrollTrigger);
 
 const STATS = [
-  { value: "$45.5B", numericPart: "45.5", prefix: "$", suffix: "B", label: "Mercado IA en LATAM 2026", sublabel: "USD · CAGR 37% hasta 2034" },
+  { value: "500+", numericPart: "500", prefix: "", suffix: "+", label: "personas formadas en IA", sublabel: "En empresas de manufactura, hospitalidad y agroindustria" },
+  { value: "3", numericPart: "3", prefix: "", suffix: "", label: "continentes, un estándar de trabajo", sublabel: "Colombia · México · Europa" },
   { value: "95%", numericPart: "95", prefix: "", suffix: "%", label: "de pilotos de IA no generan resultados medibles", sublabel: "El problema es integración, no tecnología" },
-  { value: "54%", numericPart: "54", prefix: "", suffix: "%", label: "de empresas colombianas aumentará inversión en IA", sublabel: "La pregunta no es si, sino cómo" },
-  { value: "33%", numericPart: "33", prefix: "", suffix: "%", label: "no sabe cómo integrar IA en sus procesos", sublabel: "Ahí es donde entramos nosotros" },
+  { value: "54%", numericPart: "54", prefix: "", suffix: "%", label: "de empresas en LATAM aumentará inversión en IA este año", sublabel: "La pregunta no es si, sino cómo" },
 ];
 
 function StatCard({ stat, index }: { stat: (typeof STATS)[0]; index: number }) {

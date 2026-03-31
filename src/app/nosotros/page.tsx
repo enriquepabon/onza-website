@@ -7,9 +7,15 @@ import { MagneticButton } from "@/components/ui/magnetic-button";
 import { LineReveal } from "@/components/ui/line-reveal";
 
 export const metadata: Metadata = {
-  title: "Nosotros — Onza",
+  title: "Quiénes somos — Onza | Consultoría IA boutique en LATAM",
   description:
-    "Firma boutique de consultoría en arquitectura de soluciones IA. 15+ años de experiencia transformando operaciones en LATAM.",
+    "Onza nació de 15 años en operaciones reales: manufactura, supply chain, transformación digital en multinacionales. Construimos IA que resuelve problemas de negocio.",
+  openGraph: {
+    title: "Quiénes somos — Onza | Consultoría IA boutique en LATAM",
+    description:
+      "15 años en operaciones reales. Construimos IA que resuelve problemas de negocio, no demos para sala de juntas.",
+    url: "https://onzaai.com/nosotros",
+  },
 };
 
 const PROJECTS = [
@@ -114,10 +120,9 @@ export default function NosotrosPage() {
               </h2>
               <div className="space-y-6 text-brand-gray leading-relaxed">
                 <p>
-                  Onza nace de una convicción: la inteligencia artificial solo
-                  genera valor cuando alguien entiende la operación. No basta
-                  con saber de tecnología — hay que saber de negocio, de
-                  procesos, de personas.
+                  Onza nace de una convicción simple: la IA solo genera valor
+                  cuando quien la implementa entiende la operación. No alcanza
+                  con saber de tecnología.
                 </p>
                 <p>
                   Nuestro fundador, Enrique Pabón, es Ingeniero Industrial de
@@ -277,8 +282,8 @@ export default function NosotrosPage() {
               text: "La IA es un medio, no un fin. Cada decisión se mide por su impacto en la operación y las finanzas del cliente.",
             },
             {
-              title: "Claridad sobre complejidad",
-              text: "Simplificamos lo complejo. Nuestros clientes entienden exactamente qué estamos construyendo y por qué.",
+              title: "Claridad antes que complejidad",
+              text: "Si no podemos explicarle a tu equipo qué estamos construyendo y por qué, algo está mal. Lo técnico no es excusa para la opacidad.",
             },
             {
               title: "Resultados sobre promesas",

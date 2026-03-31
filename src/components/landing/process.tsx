@@ -9,11 +9,11 @@ import { TextReveal } from "@/components/ui/text-reveal";
 gsap.registerPlugin(ScrollTrigger);
 
 const STEPS = [
-  { number: "01", title: "Descubrimiento", description: "Entendemos tu dolor, mapeamos procesos, definimos alcance y expectativas." },
-  { number: "02", title: "Diseño", description: "Arquitectura de la solución. Blueprint visual claro que todos entienden." },
-  { number: "03", title: "Construcción", description: "Desarrollo e implementación con herramientas de IA de frontera." },
-  { number: "04", title: "Entrega + Adopción", description: "Deploy, capacitación a tu equipo, documentación. Funciona desde el día 1." },
-  { number: "05", title: "Soporte", description: "Ajustes post-launch. Acompañamiento hasta que el equipo vuele solo." },
+  { number: "01", title: "Descubrimiento", description: "Entendemos el problema antes de proponer nada. Entrevistas, mapeo de procesos, alcance y expectativas claras." },
+  { number: "02", title: "Diseño", description: "Arquitectura de la solución. Blueprint visual que todos entienden, sin tecnicismos innecesarios." },
+  { number: "03", title: "Construcción", description: "Desarrollo e implementación. Iteraciones cortas, feedback constante, sin sorpresas al final." },
+  { number: "04", title: "Entrega + Adopción", description: "Deploy, capacitación al equipo, documentación. Funciona desde el día 1." },
+  { number: "05", title: "Soporte", description: "Ajustes post-lanzamiento. Acompañamiento hasta que el equipo vuele solo." },
 ];
 
 export function Process() {
@@ -48,7 +48,7 @@ export function Process() {
               </div>
             </Reveal>
             <TextReveal as="h2" className="text-section-mobile md:text-section font-light text-brand-dark">
-              De la idea al impacto en 3 a 8 semanas
+              Cómo llegamos de la primera conversación a algo que funciona
             </TextReveal>
           </div>
         </div>

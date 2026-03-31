@@ -6,9 +6,9 @@ import { TextReveal } from "@/components/ui/text-reveal";
 const DIFFERENTIATORS = [
   {
     number: "01",
-    title: "Perfil híbrido negocio + tecnología",
+    title: "Negocio primero, tecnología después",
     description:
-      "Ingeniero Industrial con MBA y 15 años liderando operaciones en multinacionales. Soluciones de IA que resuelven problemas reales.",
+      "Ingeniero Industrial, MBA, 15 años en operaciones reales. Sabemos lo que cuesta un proceso mal diseñado antes de hablar de IA.",
   },
   {
     number: "02",
@@ -18,27 +18,27 @@ const DIFFERENTIATORS = [
   },
   {
     number: "03",
-    title: "Delivery rápido y eficiente",
+    title: "Semanas, no meses",
     description:
-      "Herramientas de IA avanzadas para entregar soluciones en semanas, no meses. Resultados rápidos, sin burocracia.",
+      "Sin capas de gestión ni procesos de aprobación interminables. Entramos, entendemos, construimos. La mayoría de proyectos están en producción antes de los 60 días.",
   },
   {
     number: "04",
-    title: "Experiencia real en sectores complejos",
+    title: "Experiencia en sectores complejos",
     description:
       "Manufactura, supply chain, farmacéutica. En planta, negociando convenciones, abriendo mercados desde cero.",
   },
   {
     number: "05",
-    title: "Soluciones funcionando, no presentaciones",
+    title: "Sistemas que funcionan, no decks",
     description:
       "Cada proyecto termina con algo que tu equipo puede usar desde el día 1. No con un PDF de recomendaciones.",
   },
   {
     number: "06",
-    title: "Confidencialidad y rigor profesional",
+    title: "Discreción absoluta",
     description:
-      "Tus datos, procesos y ventajas competitivas son tuyos. Trabajamos con NDAs sólidos y estándares de seguridad enterprise.",
+      "Tus procesos y ventajas competitivas son tuyos. Trabajamos con NDAs y manejamos la información de cada cliente con el mismo cuidado que esperarías de un socio de largo plazo.",
   },
 ];
 
@@ -67,7 +67,7 @@ export function Differentiators() {
               as="h2"
               className="text-section-mobile md:text-section font-light text-brand-dark"
             >
-              No somos una agencia. Somos tu socio estratégico en IA.
+              No somos una agencia. Hemos estado en tu lugar.
             </TextReveal>
           </div>
         </div>

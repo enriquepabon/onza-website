@@ -19,29 +19,59 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Onza — Arquitectura de Soluciones IA",
+  title: "Consultoría IA para Empresas en LATAM — Onza",
   description:
-    "Diseñamos arquitectura de soluciones IA que transforma operaciones con impacto financiero medible. Consultoría boutique para LATAM.",
+    "Implementamos soluciones de IA que reducen costos y automatizan procesos en empresas de LATAM. Diagnóstico sin compromiso. Resultados medibles en semanas.",
   keywords: [
-    "consultoría IA",
-    "inteligencia artificial empresarial",
-    "automatización procesos",
-    "transformación digital",
-    "Colombia",
-    "LATAM",
+    "consultoría IA Colombia",
+    "automatización procesos con IA",
+    "implementar IA en empresa",
+    "diagnóstico IA empresarial",
+    "soluciones IA LATAM",
+    "IA para operaciones empresariales",
   ],
   openGraph: {
-    title: "Onza — Arquitectura de Soluciones IA",
+    title: "Consultoría IA para Empresas en LATAM — Onza",
     description:
-      "Soluciones IA que transforman operaciones con impacto financiero medible.",
+      "Implementamos soluciones de IA que reducen costos y automatizan procesos en empresas de LATAM. Resultados medibles en semanas.",
     url: "https://onzaai.com",
     siteName: "Onza",
     locale: "es_CO",
     type: "website",
+    images: [
+      {
+        url: "https://onzaai.com/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Onza — Consultoría IA para Empresas en LATAM",
+      },
+    ],
   },
   icons: {
     icon: "/favicon.svg",
   },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Onza",
+  url: "https://onzaai.com",
+  logo: "https://onzaai.com/favicon.svg",
+  email: "hola@onzaai.com",
+  description:
+    "Consultoría boutique de soluciones IA para empresas en LATAM. Automatización de procesos, diagnóstico estratégico y soluciones a medida.",
+  areaServed: ["CO", "MX", "PE", "CL", "AR", "UY"],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    email: "hola@onzaai.com",
+    availableLanguage: ["Spanish", "English"],
+  },
+  sameAs: [
+    "https://linkedin.com/company/onzaai",
+    "https://linkedin.com/in/enriquepabon",
+  ],
 };
 
 export default function RootLayout({
@@ -52,6 +82,10 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} ${montserrat.variable}`}>
       <body className="font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <SmoothScrollProvider>
           <Navbar />
           <main>{children}</main>
