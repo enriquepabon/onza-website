@@ -38,6 +38,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...blogEntries,
     {
+      url: "https://onzaai.com/servicios/chatbot-ia",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://onzaai.com/recursos/guia-ia",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: "https://onzaai.com/contacto",
       lastModified: new Date(),
       changeFrequency: "monthly",
