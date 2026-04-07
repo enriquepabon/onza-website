@@ -171,52 +171,56 @@ export default function NosotrosPage() {
                 </p>
               </div>
             </div>
-            <div className="lg:col-span-2 space-y-6">
-              {/* Photo */}
-              <div className="relative overflow-hidden">
-                <div className="aspect-[3/4] relative">
+            <div className="lg:col-span-2">
+              {/* Photo card — elegant frame */}
+              <div className="border border-gray-200 p-3">
+                <div className="aspect-[3/4] relative overflow-hidden">
                   <Image
                     src="/images/enrique-pabon.jpg"
                     alt="Enrique Pabón — Fundador de Onza"
                     fill
-                    className="object-cover object-top grayscale contrast-[1.1] brightness-[0.95]"
+                    className="object-cover object-top"
                     sizes="(min-width: 1024px) 33vw, 100vw"
                   />
-                  {/* Dark overlay for brand consistency */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 via-transparent to-transparent" />
-                  <div className="absolute inset-0 mix-blend-multiply bg-brand-navy/20" />
                 </div>
-                <div className="mt-3">
-                  <p className="text-sm font-medium">Enrique Pabón</p>
-                  <p className="text-xs text-brand-gray">Fundador & AI Solutions Architect</p>
+
+                {/* Name + title integrated below photo */}
+                <div className="pt-5 pb-2">
+                  <h3 className="text-lg font-light tracking-wide">
+                    Enrique Pabón
+                  </h3>
+                  <p className="text-xs text-brand-gray mt-1 tracking-wide">
+                    Fundador & AI Solutions Architect
+                  </p>
                   <a
                     href="https://enriquepabon.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs text-brand-red hover:underline mt-1 inline-block"
+                    className="text-xs text-brand-red hover:underline mt-2 inline-block"
                   >
-                    enriquepabon.com
+                    enriquepabon.com &rarr;
                   </a>
-                </div>
-              </div>
 
-              {/* Credentials */}
-              <div className="bg-brand-cream p-6 space-y-2">
-                <p className="text-xs tracking-[0.15em] uppercase text-brand-gray mb-3">
-                  Credenciales
-                </p>
-                <p className="text-sm text-brand-dark">
-                  Ing. Industrial — Universidad de los Andes
-                </p>
-                <p className="text-sm text-brand-dark">
-                  MBA — EAE Business School, Madrid
-                </p>
-                <p className="text-sm text-brand-dark">
-                  15+ años en operaciones y transformación
-                </p>
-                <p className="text-sm text-brand-dark">
-                  Colombia + LATAM + Europa
-                </p>
+                  {/* Credentials — clean, inline */}
+                  <div className="mt-5 pt-4 border-t border-gray-200 space-y-2">
+                    <div className="flex items-start gap-2">
+                      <span className="text-brand-red text-[8px] mt-1.5">●</span>
+                      <p className="text-xs text-brand-gray">Ing. Industrial — Universidad de los Andes</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-brand-red text-[8px] mt-1.5">●</span>
+                      <p className="text-xs text-brand-gray">MBA — EAE Business School, Madrid</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-brand-red text-[8px] mt-1.5">●</span>
+                      <p className="text-xs text-brand-gray">15+ años en operaciones y transformación</p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-brand-red text-[8px] mt-1.5">●</span>
+                      <p className="text-xs text-brand-gray">Colombia · LATAM · Europa</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

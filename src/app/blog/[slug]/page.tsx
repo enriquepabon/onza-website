@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
@@ -95,11 +96,11 @@ export default function BlogPostPage({
         ]}
       />
 
-      <Section dark className="pt-32 pb-16">
+      <Section dark className="pt-32 pb-8">
         <Reveal>
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-[#555] hover:text-white transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-sm text-[#777] hover:text-white transition-colors mb-8"
           >
             ← Blog
           </Link>
@@ -109,16 +110,16 @@ export default function BlogPostPage({
             <span className="text-xs text-brand-red tracking-[0.2em] uppercase font-display">
               {post.category}
             </span>
-            <span className="text-xs text-[#555]">·</span>
-            <span className="text-xs text-[#555]">
+            <span className="text-xs text-[#777]">·</span>
+            <span className="text-xs text-[#777]">
               {new Date(post.date).toLocaleDateString("es-CO", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               })}
             </span>
-            <span className="text-xs text-[#555]">·</span>
-            <span className="text-xs text-[#555]">{post.readingTime}</span>
+            <span className="text-xs text-[#777]">·</span>
+            <span className="text-xs text-[#777]">{post.readingTime}</span>
           </div>
         </Reveal>
         <TextReveal
@@ -127,10 +128,54 @@ export default function BlogPostPage({
         >
           {post.title}
         </TextReveal>
+        <Reveal delay={0.2}>
+          <p className="text-[#999] mt-6 max-w-2xl leading-relaxed text-lg font-light">
+            {post.description}
+          </p>
+        </Reveal>
       </Section>
 
+      {/* Blog hero image */}
+      <div className="relative w-full h-[30vh] md:h-[45vh] overflow-hidden">
+        <Image
+          src={`/images/blog/${post.slug}.png`}
+          alt={post.title}
+          fill
+          className="object-cover"
+          sizes="100vw"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-30" />
+      </div>
+
+      {/* Author bar */}
       <Section narrow>
-        <article className="prose prose-lg max-w-none prose-headings:font-light prose-headings:text-brand-dark prose-p:text-brand-gray prose-p:leading-relaxed prose-a:text-brand-red prose-a:no-underline hover:prose-a:underline prose-strong:text-brand-dark prose-li:text-brand-gray prose-blockquote:border-brand-gold prose-blockquote:text-brand-gray">
+        <div className="flex items-center gap-4 py-6 border-b border-gray-200 mb-12">
+          <Image
+            src="/images/enrique-pabon.jpg"
+            alt={post.author}
+            width={40}
+            height={40}
+            className="rounded-full object-cover w-10 h-10"
+          />
+          <div>
+            <p className="text-sm font-medium">{post.author}</p>
+            <p className="text-xs text-brand-gray">Fundador, Onza</p>
+          </div>
+        </div>
+
+        <article className="prose prose-lg max-w-none
+          prose-headings:font-light prose-headings:text-brand-dark prose-headings:mt-12 prose-headings:mb-4
+          prose-h2:text-2xl prose-h2:border-b prose-h2:border-gray-100 prose-h2:pb-3
+          prose-h3:text-xl prose-h3:text-brand-dark
+          prose-p:text-brand-gray prose-p:leading-[1.85] prose-p:text-justify prose-p:mb-6
+          prose-a:text-brand-red prose-a:no-underline hover:prose-a:underline prose-a:font-medium
+          prose-strong:text-brand-dark prose-strong:font-medium
+          prose-li:text-brand-gray prose-li:leading-relaxed
+          prose-ul:my-6 prose-ol:my-6
+          prose-blockquote:border-brand-gold prose-blockquote:text-brand-gray prose-blockquote:italic prose-blockquote:bg-brand-cream/50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded
+          prose-hr:border-gray-200 prose-hr:my-10
+        ">
           <MDXRemote source={post.content} />
         </article>
       </Section>
