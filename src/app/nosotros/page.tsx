@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { LineReveal } from "@/components/ui/line-reveal";
 
@@ -95,6 +96,12 @@ const EXPERIENCE = [
 export default function NosotrosPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", href: "/" },
+          { name: "Nosotros", href: "/nosotros" },
+        ]}
+      />
       {/* Header with background image */}
       <section className="relative bg-brand-black pt-32 pb-16 overflow-hidden">
         <Image
@@ -164,9 +171,38 @@ export default function NosotrosPage() {
                 </p>
               </div>
             </div>
-            <div className="lg:col-span-2">
-              <div className="bg-brand-cream p-8 space-y-2">
-                <p className="text-xs tracking-[0.15em] uppercase text-brand-gray mb-4">
+            <div className="lg:col-span-2 space-y-6">
+              {/* Photo */}
+              <div className="relative overflow-hidden">
+                <div className="aspect-[3/4] relative">
+                  <Image
+                    src="/images/enrique-pabon.jpg"
+                    alt="Enrique Pabón — Fundador de Onza"
+                    fill
+                    className="object-cover object-top grayscale contrast-[1.1] brightness-[0.95]"
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                  />
+                  {/* Dark overlay for brand consistency */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 mix-blend-multiply bg-brand-navy/20" />
+                </div>
+                <div className="mt-3">
+                  <p className="text-sm font-medium">Enrique Pabón</p>
+                  <p className="text-xs text-brand-gray">Fundador & AI Solutions Architect</p>
+                  <a
+                    href="https://enriquepabon.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-brand-red hover:underline mt-1 inline-block"
+                  >
+                    enriquepabon.com
+                  </a>
+                </div>
+              </div>
+
+              {/* Credentials */}
+              <div className="bg-brand-cream p-6 space-y-2">
+                <p className="text-xs tracking-[0.15em] uppercase text-brand-gray mb-3">
                   Credenciales
                 </p>
                 <p className="text-sm text-brand-dark">
@@ -177,9 +213,6 @@ export default function NosotrosPage() {
                 </p>
                 <p className="text-sm text-brand-dark">
                   15+ años en operaciones y transformación
-                </p>
-                <p className="text-sm text-brand-dark">
-                  Bilingüe español/inglés
                 </p>
                 <p className="text-sm text-brand-dark">
                   Colombia + LATAM + Europa

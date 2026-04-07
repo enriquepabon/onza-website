@@ -295,55 +295,41 @@ export function HeroGeometric() {
             </MagneticButton>
           </motion.div>
 
-          {/* ── Client logos marquee in hero ── */}
-          <motion.div
-            custom={4}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="mt-16 pt-8 border-t border-[#1A1A1A]"
-          >
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#999] mb-6 font-display">
-              Empresas que confían en nosotros
-            </p>
-          </motion.div>
         </div>
       </div>
 
-      {/* Marquee — full width, outside content container */}
+      {/* ── Client logos marquee — bottom of hero ── */}
       <motion.div
         custom={4}
         variants={fadeUp}
         initial="hidden"
         animate="visible"
-        className="absolute bottom-20 left-0 right-0 z-10 overflow-hidden"
+        className="absolute bottom-16 left-0 right-0 z-10"
       >
-        <div className="flex animate-marquee hover:[animation-play-state:paused]">
-          {MARQUEE_LOGOS.map((logo, i) => (
-            <div
-              key={`${logo.name}-${i}`}
-              className="flex-shrink-0 mx-10 md:mx-14 flex items-center"
-            >
-              <Image
-                src={`/images/client-logos/${logo.file}`}
-                alt={logo.name}
-                width={140}
-                height={48}
-                className="h-8 md:h-10 w-auto object-contain opacity-30 hover:opacity-60 transition-opacity duration-500 grayscale"
-              />
-            </div>
-          ))}
+        <p className="text-[10px] tracking-[0.4em] uppercase text-[#999] mb-5 font-display text-center">
+          Empresas que confían en nosotros
+        </p>
+        <div className="overflow-hidden">
+          <div className="flex animate-marquee hover:[animation-play-state:paused]">
+            {MARQUEE_LOGOS.map((logo, i) => (
+              <div
+                key={`${logo.name}-${i}`}
+                className="flex-shrink-0 mx-10 md:mx-14 flex items-center"
+              >
+                <Image
+                  src={`/images/client-logos/${logo.file}`}
+                  alt={logo.name}
+                  width={140}
+                  height={48}
+                  className="h-8 md:h-10 w-auto object-contain opacity-30 hover:opacity-60 transition-opacity duration-500 grayscale"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
 
-      {/* Scroll hint */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-20 select-none">
-        <span className="text-[9px] tracking-[0.35em] uppercase text-white font-display">Scroll</span>
-        <div className="w-px h-6 overflow-hidden relative bg-white/20">
-          <div className="absolute top-0 left-0 w-full h-1/2 bg-white"
-            style={{ animation: "scrollPulse 1.6s ease-in-out infinite" }} />
-        </div>
-      </div>
+      {/* Scroll hint — hidden, logos take this space */}
 
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-brand-black to-transparent pointer-events-none" />
 
