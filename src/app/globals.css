@@ -69,6 +69,141 @@
   animation-play-state: paused;
 }
 
+/* ── Blog article typography ── */
+.blog-article {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.blog-article p {
+  text-align: justify;
+  margin-bottom: 1.5em;
+}
+
+.blog-article h2 {
+  text-align: left;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: #1A1A1A;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+.blog-article h3 {
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #1A1A1A;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-article strong {
+  color: #1A1A1A;
+  font-weight: 600;
+}
+
+.blog-article ul,
+.blog-article ol {
+  text-align: left;
+  margin: 1.5em 0;
+  padding-left: 1.5em;
+}
+
+.blog-article ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.blog-article ul li {
+  position: relative;
+  padding-left: 1.25em;
+  margin-bottom: 0.6em;
+  color: #666;
+  line-height: 1.75;
+}
+
+.blog-article ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FF3B30;
+}
+
+.blog-article ol li {
+  color: #666;
+  line-height: 1.75;
+  margin-bottom: 0.6em;
+}
+
+.blog-article ol li::marker {
+  color: #FF3B30;
+  font-weight: 500;
+}
+
+.blog-article a {
+  color: #FF3B30;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.blog-article a:hover {
+  text-decoration: underline;
+}
+
+.blog-article blockquote {
+  border-left: 3px solid #D4AF37;
+  background: #F5F1E8;
+  padding: 1.25em 1.5em;
+  margin: 2em 0;
+  border-radius: 4px;
+  font-style: italic;
+  color: #666;
+}
+
+.blog-article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em 0;
+  font-size: 0.9em;
+}
+
+.blog-article thead th {
+  text-align: left;
+  font-weight: 500;
+  color: #1A1A1A;
+  padding: 0.75em 1em;
+  border-bottom: 2px solid #1A1A1A;
+  font-size: 0.85em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.blog-article tbody td {
+  padding: 0.75em 1em;
+  border-bottom: 1px solid #eee;
+  color: #666;
+  line-height: 1.6;
+}
+
+.blog-article tbody tr:hover {
+  background: #fafafa;
+}
+
+.blog-article hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 3em 0;
+}
+
 /* Smooth cursor for magnetic buttons */
 * {
   cursor: default;

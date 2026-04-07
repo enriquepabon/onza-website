@@ -164,18 +164,7 @@ export default function BlogPostPage({
           </div>
         </div>
 
-        <article className="prose prose-lg max-w-none
-          prose-headings:font-light prose-headings:text-brand-dark prose-headings:mt-12 prose-headings:mb-4
-          prose-h2:text-2xl prose-h2:border-b prose-h2:border-gray-100 prose-h2:pb-3
-          prose-h3:text-xl prose-h3:text-brand-dark
-          prose-p:text-brand-gray prose-p:leading-[1.85] prose-p:text-justify prose-p:mb-6
-          prose-a:text-brand-red prose-a:no-underline hover:prose-a:underline prose-a:font-medium
-          prose-strong:text-brand-dark prose-strong:font-medium
-          prose-li:text-brand-gray prose-li:leading-relaxed
-          prose-ul:my-6 prose-ol:my-6
-          prose-blockquote:border-brand-gold prose-blockquote:text-brand-gray prose-blockquote:italic prose-blockquote:bg-brand-cream/50 prose-blockquote:py-4 prose-blockquote:px-6 prose-blockquote:rounded
-          prose-hr:border-gray-200 prose-hr:my-10
-        ">
+        <article className="blog-article text-base leading-[1.85] text-brand-gray max-w-none">
           <MDXRemote source={post.content} />
         </article>
       </Section>
