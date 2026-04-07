@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -11,10 +10,12 @@ gsap.registerPlugin(ScrollTrigger);
 export function PhotoBreak({
   src,
   height = "50vh",
+  mobileHeight,
   position = "center",
 }: {
   src: string;
   height?: string;
+  mobileHeight?: string;
   position?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -43,8 +44,22 @@ export function PhotoBreak({
     <div
       ref={ref}
       className="relative w-full overflow-hidden"
-      style={{ height }}
+      style={{
+        // Use CSS custom properties for responsive height
+        ["--pb-height" as string]: height,
+        ["--pb-mobile-height" as string]: mobileHeight || height,
+      }}
     >
+      <style jsx>{`
+        div {
+          height: var(--pb-mobile-height);
+        }
+        @media (min-width: 768px) {
+          div {
+            height: var(--pb-height);
+          }
+        }
+      `}</style>
       <Image
         src={src}
         alt=""

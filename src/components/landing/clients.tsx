@@ -20,7 +20,7 @@ export function Clients() {
   return (
     <section className="bg-brand-black py-16 overflow-hidden border-t border-[#1A1A1A]">
       <Reveal>
-        <p className="text-[10px] tracking-[0.4em] uppercase text-[#555] text-center mb-10 font-display">
+        <p className="text-[10px] tracking-[0.4em] uppercase text-[#666] text-center mb-10 font-display">
           Empresas que confían en nosotros
         </p>
       </Reveal>

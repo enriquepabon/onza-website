@@ -52,7 +52,7 @@ function StatCard({ stat, index }: { stat: (typeof STATS)[0]; index: number }) {
           <span ref={numberRef}>{stat.value}</span>
         </p>
         <p className="text-sm text-gray-300 leading-relaxed mb-2">{stat.label}</p>
-        <p className="text-xs text-[#555]">{stat.sublabel}</p>
+        <p className="text-xs text-[#777]">{stat.sublabel}</p>
       </div>
     </Reveal>
   );

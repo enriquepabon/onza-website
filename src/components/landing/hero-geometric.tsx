@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { COMPANY } from "@/lib/constants";
 
@@ -9,6 +10,17 @@ const MARK_PATHS = [
   "M 68,90 L 108,90 L 301,468 L 299,468 Z",
   "M 492,90 L 532,90 L 301,468 L 299,468 Z",
   "M 328,100 L 340,100 C 330,250 312,380 301,468 L 299,468 C 308,380 320,250 328,100 Z",
+];
+
+const CLIENT_LOGOS = [
+  { name: "Grupo México", file: "white-grupomexico.png", tall: true },
+  { name: "Oleoflores", file: "white-oleoflores.png", tall: false },
+  { name: "LaTroupe", file: "white-latroupe.svg", tall: false },
+  { name: "Language for Living", file: "white-languageforliving.svg", tall: false },
+  { name: "Avicanna", file: "white-avicanna.png", tall: true },
+  { name: "Medcann", file: "white-medcann.png", tall: false },
+  { name: "Success Drivers", file: "white-successdrivers.png", tall: false },
+  { name: "Ticketmaster", file: "white-ticketmaster.png", tall: true },
 ];
 
 function FloatingMark({
@@ -109,7 +121,6 @@ export function HeroGeometric() {
 
         {/* Large ghost mark — right, shifted down */}
         <FloatingMark
-          
           size={500}
           initialRotate={18}
           entryFrom="top"
@@ -123,7 +134,6 @@ export function HeroGeometric() {
 
         {/* Centered mark — lower half */}
         <FloatingMark
-          
           size={280}
           initialRotate={-6}
           entryFrom="bottom"
@@ -137,7 +147,6 @@ export function HeroGeometric() {
 
         {/* Medium mark — bottom left, counter-tilted */}
         <FloatingMark
-          
           size={240}
           initialRotate={-22}
           entryFrom="bottom"
@@ -151,7 +160,6 @@ export function HeroGeometric() {
 
         {/* Small mark — top left area */}
         <FloatingMark
-          
           size={140}
           initialRotate={35}
           entryFrom="left"
@@ -165,7 +173,6 @@ export function HeroGeometric() {
 
         {/* Tiny mark — right mid, red tint */}
         <FloatingMark
-          
           size={100}
           initialRotate={-40}
           entryFrom="right"
@@ -180,7 +187,6 @@ export function HeroGeometric() {
 
         {/* Medium mark — lower right, red tint */}
         <FloatingMark
-          
           size={180}
           initialRotate={-15}
           entryFrom="right"
@@ -195,7 +201,6 @@ export function HeroGeometric() {
 
         {/* Single left-arm path only — bottom center, very faint */}
         <FloatingMark
-          
           size={200}
           initialRotate={170}
           entryFrom="bottom"
@@ -223,7 +228,7 @@ export function HeroGeometric() {
             className="flex items-center gap-4 mb-10"
           >
             <div className="h-px w-10 bg-brand-red flex-shrink-0" />
-            <p className="text-xs tracking-[0.3em] uppercase text-brand-gray font-display">
+            <p className="text-xs tracking-[0.3em] uppercase text-[#999] font-display">
               Arquitectura de Soluciones IA
             </p>
           </motion.div>
@@ -245,7 +250,7 @@ export function HeroGeometric() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="text-base md:text-lg text-[#555] max-w-lg leading-relaxed mb-10 font-light"
+            className="text-base md:text-lg text-[#999] max-w-lg leading-relaxed mb-10 font-light"
           >
             Diseñamos arquitectura de soluciones IA con impacto financiero medible.
           </motion.p>
@@ -255,12 +260,15 @@ export function HeroGeometric() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="flex flex-wrap gap-5"
+            className="flex flex-wrap items-center gap-5"
           >
             <MagneticButton
               href={COMPANY.calendar}
-              className="px-10 py-4 bg-brand-red text-white hover:bg-red-600 text-sm"
+              className="px-10 py-4 bg-brand-red text-white hover:bg-red-600 text-sm inline-flex items-center gap-2"
             >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+              </svg>
               Agenda una conversación
             </MagneticButton>
             <MagneticButton
@@ -269,6 +277,31 @@ export function HeroGeometric() {
             >
               Conoce nuestros servicios
             </MagneticButton>
+          </motion.div>
+
+          {/* ── Client logos integrated in hero ── */}
+          <motion.div
+            custom={4}
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            className="mt-16 pt-10 border-t border-[#1A1A1A]"
+          >
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#555] mb-6 font-display">
+              Empresas que confían en nosotros
+            </p>
+            <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
+              {CLIENT_LOGOS.map((logo) => (
+                <Image
+                  key={logo.name}
+                  src={`/images/client-logos/${logo.file}`}
+                  alt={logo.name}
+                  width={120}
+                  height={40}
+                  className={`${logo.tall ? "h-10 md:h-12" : "h-6 md:h-8"} w-auto object-contain opacity-30 hover:opacity-60 transition-opacity duration-500 grayscale`}
+                />
+              ))}
+            </div>
           </motion.div>
         </div>
       </div>
