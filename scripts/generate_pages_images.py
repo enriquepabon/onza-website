@@ -9,7 +9,7 @@ from pathlib import Path
 from google import genai
 from google.genai import types
 
-API_KEY = "AIzaSyCnfRvZMPza5-SV7qc5QbdC3KxDvltntRI"
+API_KEY = os.environ.get("GEMINI_API_KEY", "")
 OUTPUT_DIR = Path("/Users/enriquepabon/Documents/onza-website/public/images/sections/generated")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
