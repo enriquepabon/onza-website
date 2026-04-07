@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Recursos gratuitos de IA para empresas — Onza",
@@ -13,6 +14,9 @@ export const metadata: Metadata = {
     description:
       "Diagnóstico de madurez IA, guía de implementación y más. Gratis, sin compromiso.",
     url: "https://onzaai.com/recursos",
+  },
+  alternates: {
+    canonical: "https://onzaai.com/recursos",
   },
 };
 
@@ -40,6 +44,12 @@ const RESOURCES = [
 export default function RecursosPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", href: "/" },
+          { name: "Recursos", href: "/recursos" },
+        ]}
+      />
       <Section dark className="pt-32 pb-16">
         <Reveal>
           <div className="flex items-center gap-3 mb-4">

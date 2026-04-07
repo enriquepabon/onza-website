@@ -10,7 +10,7 @@ import { MagneticButton } from "@/components/ui/magnetic-button";
 gsap.registerPlugin(ScrollTrigger);
 
 const STATS = [
-  { value: "500+", numericPart: "500", prefix: "", suffix: "+", label: "personas formadas en IA", sublabel: "En empresas de manufactura, hospitalidad y agroindustria" },
+  { value: "500+", numericPart: "500", prefix: "", suffix: "+", label: "personas formadas en IA", sublabel: "En empresas de manufactura, hospitalidad y logística" },
   { value: "3", numericPart: "3", prefix: "", suffix: "", label: "continentes, un estándar de trabajo", sublabel: "Colombia · México · Europa" },
   { value: "95%", numericPart: "95", prefix: "", suffix: "%", label: "de pilotos de IA no generan resultados medibles", sublabel: "El problema es integración, no tecnología" },
   { value: "54%", numericPart: "54", prefix: "", suffix: "%", label: "de empresas en LATAM aumentará inversión en IA este año", sublabel: "La pregunta no es si, sino cómo" },

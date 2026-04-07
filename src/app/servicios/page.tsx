@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { LineReveal } from "@/components/ui/line-reveal";
+import { BreadcrumbJsonLd, FAQJsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Servicios de Consultoría IA para Empresas — Onza",
@@ -105,6 +106,34 @@ const SERVICES_DETAIL = [
   },
 ];
 
+const SERVICES_FAQ = [
+  {
+    question: "¿Cuánto tiempo toma implementar una solución de IA?",
+    answer:
+      "Dependiendo del servicio, entre 2 y 8 semanas. Las formaciones y diagnósticos toman 2-4 semanas, mientras que automatizaciones y soluciones a medida entre 4-8 semanas.",
+  },
+  {
+    question: "¿Necesito tener un equipo técnico para trabajar con Onza?",
+    answer:
+      "No. Nos adaptamos al nivel técnico de tu equipo. Desde directivos que necesitan entender qué pedirle a la IA, hasta equipos operativos que usarán las herramientas en su trabajo diario.",
+  },
+  {
+    question: "¿En qué países de LATAM trabajan?",
+    answer:
+      "Trabajamos con empresas en Colombia, México, Perú, Chile, Argentina y Uruguay. La mayoría de nuestros servicios se pueden entregar de forma remota.",
+  },
+  {
+    question: "¿Cómo se mide el ROI de implementar IA?",
+    answer:
+      "Definimos métricas de impacto antes de empezar: reducción de tiempo en procesos, ahorro en costos operativos, incremento en capacidad de atención. Medimos antes y después para cuantificar el retorno real.",
+  },
+  {
+    question: "¿Qué pasa si el diagnóstico muestra que mi empresa no está lista?",
+    answer:
+      "Te entregamos un roadmap con los pasos previos necesarios y las áreas donde sí puedes empezar a aplicar IA de forma inmediata. No todas las empresas necesitan lo mismo — el diagnóstico te da claridad.",
+  },
+];
+
 const servicesSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
@@ -134,6 +163,13 @@ export default function ServiciosPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
       />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", href: "/" },
+          { name: "Servicios", href: "/servicios" },
+        ]}
+      />
+      <FAQJsonLd items={SERVICES_FAQ} />
 
       {/* Header with background image */}
       <section className="relative bg-brand-black pt-32 pb-16 overflow-hidden">
@@ -256,6 +292,36 @@ export default function ServiciosPage() {
         </Section>
         </div>
       ))}
+
+      {/* FAQ */}
+      <Section>
+        <Reveal>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-8 bg-brand-red" />
+            <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
+              Preguntas frecuentes
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-light mb-12">
+            Lo que nos preguntan antes de empezar
+          </h2>
+        </Reveal>
+        <div className="space-y-0">
+          {SERVICES_FAQ.map((faq, i) => (
+            <Reveal key={i} delay={i * 0.05}>
+              <div className="py-6">
+                <h3 className="text-lg font-light text-brand-dark mb-2">
+                  {faq.question}
+                </h3>
+                <p className="text-brand-gray leading-relaxed text-sm">
+                  {faq.answer}
+                </p>
+              </div>
+              <LineReveal />
+            </Reveal>
+          ))}
+        </div>
+      </Section>
 
       {/* CTA */}
       <Section dark className="text-center relative overflow-hidden">

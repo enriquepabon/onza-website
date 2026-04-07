@@ -7,6 +7,7 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { MagneticButton } from "@/components/ui/magnetic-button";
+import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 
 export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
@@ -32,6 +33,9 @@ export function generateMetadata({
       publishedTime: post.date,
       authors: [post.author],
     },
+    alternates: {
+      canonical: `https://onzaai.com/blog/${post.slug}`,
+    },
   };
 }
 
@@ -49,15 +53,32 @@ export default function BlogPostPage({
     headline: post.title,
     description: post.description,
     datePublished: post.date,
+    url: `https://onzaai.com/blog/${post.slug}`,
     author: {
       "@type": "Person",
       name: post.author,
+      url: "https://linkedin.com/in/enriquepabon",
+      jobTitle: "Fundador & Consultor IA",
+      worksFor: {
+        "@type": "Organization",
+        name: "Onza",
+        url: "https://onzaai.com",
+      },
     },
     publisher: {
       "@type": "Organization",
       name: "Onza",
       url: "https://onzaai.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://onzaai.com/favicon.svg",
+      },
     },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://onzaai.com/blog/${post.slug}`,
+    },
+    inLanguage: "es",
   };
 
   return (
@@ -65,6 +86,13 @@ export default function BlogPostPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", href: "/" },
+          { name: "Blog", href: "/blog" },
+          { name: post.title, href: `/blog/${post.slug}` },
+        ]}
       />
 
       <Section dark className="pt-32 pb-16">

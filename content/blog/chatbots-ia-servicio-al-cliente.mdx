@@ -17,7 +17,7 @@ El problema es que la mayoría de implementaciones son terribles.
 
 Un chatbot que solo tiene acceso a las FAQ de tu sitio web va a dar respuestas genéricas. Y el cliente se va a frustrar porque ya leyó las FAQ y por eso está hablando con el chatbot.
 
-Para que funcione, necesita acceso a información operativa real: estados de pedido, políticas internas, historial del cliente, procedimientos de escalamiento.
+Para que funcione, necesita acceso a información operativa real: estados de pedido, políticas internas, historial del cliente, procedimientos de escalamiento. Eso implica [seguridad de datos](/blog/seguridad-datos-ia-empresas-latam), que es un tema que hay que resolver desde el inicio.
 
 ### No tienen escape al humano
 
@@ -25,9 +25,9 @@ Nada frustra más que un chatbot que insiste en "ayudarte" cuando no puede. Si e
 
 ### Se lanzan sin entrenamiento iterativo
 
-El chatbot del día 1 no va a ser bueno. Va a decir cosas incorrectas, no va a entender preguntas coloquiales, se va a confundir con variaciones regionales del español. Y eso está bien — si tienes un proceso para corregirlo.
+El chatbot del día 1 no va a ser bueno. Va a decir cosas incorrectas, no va a entender preguntas coloquiales, se va a confundir con variaciones regionales del español. Y eso está bien, si tienes un proceso para corregirlo.
 
-Lo que no está bien es lanzarlo y olvidarlo.
+Lo que no está bien es lanzarlo y olvidarlo. Es uno de los [errores clásicos](/blog/errores-comunes-implementar-ia) que vemos en todo tipo de proyectos de IA.
 
 ## Lo que sí funciona
 
@@ -41,27 +41,26 @@ El equipo lo adoptó porque les resuelve un problema real: no tener que llamar a
 
 ### Chatbots de servicio con RAG bien implementado
 
-RAG (Retrieval-Augmented Generation) es lo que permite que el chatbot consulte tus documentos internos antes de responder. Cuando está bien implementado, el bot no inventa — busca la respuesta en tu base de conocimiento y la presenta de forma conversacional.
+RAG (Retrieval-Augmented Generation) es lo que permite que el chatbot consulte tus documentos internos antes de responder. Cuando está bien implementado, el bot no inventa. Busca la respuesta en tu base de conocimiento y la presenta de forma conversacional.
 
 La diferencia entre un RAG bueno y uno malo está en la calidad de los documentos que alimentan al sistema. Si tus procedimientos internos son un Word de 2019 que nadie actualizó, el bot va a dar respuestas desactualizadas con mucha confianza. Eso es peor que no tener bot.
 
 ### Chatbots de calificación de leads
 
-Otro caso que funciona bien: un bot que recibe la primera consulta de un potencial cliente, le hace preguntas para entender qué necesita, y lo clasifica antes de pasarlo al equipo comercial. El vendedor recibe el lead ya calificado con contexto. No pierde tiempo con consultas que no van a ningún lado.
+Otro caso que funciona bien: un bot que recibe la primera consulta de un potencial cliente, le hace preguntas para entender qué necesita, y lo clasifica antes de pasarlo al equipo comercial. El vendedor recibe el lead ya calificado con contexto. No pierde tiempo con consultas que no van a ningún lado. Es especialmente útil en [retail](/blog/ia-retail-experiencia-cliente-latam), donde el volumen de consultas es alto.
 
 ## Cuánto cuesta y cuánto toma
 
 Un chatbot básico con RAG para uso interno se puede implementar en 3-6 semanas. Un chatbot de servicio al cliente con integraciones a tus sistemas toma entre 6 y 12 semanas, dependiendo de cuántos sistemas necesite consultar.
 
-Los costos operativos mensuales dependen del volumen de conversaciones, pero para la mayoría de empresas medianas en LATAM estamos hablando de costos muy razonables comparados con lo que cuesta un equipo de soporte trabajando 24/7.
+Los costos operativos mensuales dependen del volumen de conversaciones, pero para la mayoría de empresas medianas en LATAM son muy razonables comparados con lo que cuesta un equipo de soporte trabajando 24/7. Si quieres entender las opciones de modelos, lee [ChatGPT vs Claude vs Gemini para empresas](/blog/chatgpt-claude-gemini-cual-usar-empresa).
 
 ## Antes de implementar uno, pregúntate
 
-- ¿Qué preguntas hacen tus clientes (o tu equipo) una y otra vez?
-- ¿Esa información está documentada y actualizada?
-- ¿Tienes a alguien que pueda revisar y corregir las respuestas del bot la primera semana?
-- ¿Tu equipo ve esto como una ayuda o como una amenaza?
+¿Qué preguntas hacen tus clientes (o tu equipo) una y otra vez? ¿Esa información está documentada y actualizada? ¿Tienes a alguien que pueda revisar y corregir las respuestas del bot la primera semana? ¿Tu equipo ve esto como una ayuda o como una amenaza?
 
 Si las respuestas a las primeras tres son sí, tienes un buen candidato. Si la cuarta es "amenaza", tienes un problema de comunicación que hay que resolver antes de la tecnología.
 
-Tenemos un [servicio de chatbot IA](/servicios/chatbot-ia) diseñado exactamente para estos casos. Y si no estás seguro de si aplica para tu empresa, el [test de madurez IA](/recursos/diagnostico-ia) te da una primera lectura en 2 minutos.
+Si estás pensando en algo más complejo que un chatbot (que ejecute acciones, no solo responda), lee sobre [agentes de IA](/blog/agentes-ia-empresas-que-son).
+
+Tenemos un [servicio de chatbot IA](/servicios/chatbot-ia) diseñado para estos casos. Y si no estás seguro de si aplica para tu empresa, [el test de madurez IA](/recursos/diagnostico-ia) te da una primera lectura en 2 minutos.

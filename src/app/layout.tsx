@@ -50,6 +50,10 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  alternates: {
+    canonical: "https://onzaai.com",
+  },
+  metadataBase: new URL("https://onzaai.com"),
 };
 
 const organizationSchema = {
@@ -58,14 +62,14 @@ const organizationSchema = {
   name: "Onza",
   url: "https://onzaai.com",
   logo: "https://onzaai.com/favicon.svg",
-  email: "enriquepabonramirez@gmail.com",
+  email: "enrique@onzaai.com",
   description:
     "Consultoría boutique de soluciones IA para empresas en LATAM. Automatización de procesos, diagnóstico estratégico y soluciones a medida.",
   areaServed: ["CO", "MX", "PE", "CL", "AR", "UY"],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
-    email: "enriquepabonramirez@gmail.com",
+    email: "enrique@onzaai.com",
     availableLanguage: ["Spanish", "English"],
   },
   sameAs: [

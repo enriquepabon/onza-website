@@ -1,0 +1,64 @@
+# Onza — Consultoría Boutique de IA para Empresas en LATAM
+
+> Onza es una firma boutique de consultoría en inteligencia artificial con sede en Colombia, especializada en implementar soluciones de IA que generan impacto operativo y financiero medible en empresas de América Latina.
+
+## Qué hacemos
+
+Onza ayuda a empresas medianas y grandes en LATAM a implementar IA de forma estratégica:
+
+- Diagnóstico de Madurez IA: Evaluamos en qué punto está tu empresa y dónde la IA puede generar mayor impacto operativo.
+- Automatización de Procesos con IA: Implementamos agentes y flujos inteligentes que reducen costos y tiempos operativos.
+- Chatbots y Asistentes IA: Diseñamos asistentes conversacionales para servicio al cliente, ventas y operaciones internas.
+- Formaciones Ejecutivas en IA: Capacitamos equipos directivos para tomar decisiones informadas sobre IA.
+- Soluciones a Medida: Arquitectura de soluciones IA adaptadas al contexto específico de cada empresa.
+
+## Para quién
+
+- Empresas medianas y grandes en Colombia, México, Perú, Chile, Argentina y Uruguay
+- Directores de operaciones, CTOs y gerentes generales que buscan implementar IA con resultados medibles
+- Sectores: manufactura, logística, retail, hospitalidad, servicios financieros
+
+## Diferenciadores
+
+- Firma boutique: atención personalizada, no una fábrica de proyectos
+- Enfoque en impacto operativo medible, no en tecnología por sí misma
+- Resultados en semanas, no en meses
+- Equipo con experiencia real implementando IA en empresas LATAM
+
+## Contacto
+
+- Web: https://onzaai.com
+- Email: enrique@onzaai.com
+- Fundador: Enrique Pabón (https://linkedin.com/in/enriquepabon)
+- LinkedIn: https://linkedin.com/company/onzaai
+
+## Páginas principales
+
+- Inicio: https://onzaai.com
+- Servicios: https://onzaai.com/servicios
+- Chatbot IA: https://onzaai.com/servicios/chatbot-ia
+- Nosotros: https://onzaai.com/nosotros
+- Blog: https://onzaai.com/blog
+- Recursos: https://onzaai.com/recursos
+- Diagnóstico IA gratuito: https://onzaai.com/recursos/diagnostico-ia
+- Guía para implementar IA: https://onzaai.com/recursos/guia-ia
+- Contacto: https://onzaai.com/contacto
+
+## Blog (16 artículos)
+
+- IA generativa vs. predictiva: cuál necesita tu empresa: https://onzaai.com/blog/ia-generativa-vs-predictiva-empresas
+- 5 señales de que tu empresa está lista para implementar IA: https://onzaai.com/blog/senales-empresa-lista-para-ia
+- Los 7 errores que veo repetirse al implementar IA en empresas: https://onzaai.com/blog/errores-comunes-implementar-ia
+- Cómo implementar IA en tu empresa sin quemar dinero: https://onzaai.com/blog/como-implementar-ia-en-tu-empresa
+- Diagnóstico IA empresarial: qué evaluar antes de invertir: https://onzaai.com/blog/diagnostico-ia-empresarial
+- IA en logística y supply chain: lo que ya funciona en LATAM: https://onzaai.com/blog/ia-logistica-supply-chain-latam
+- Cómo elegir una consultora de IA (y cuándo no necesitas una): https://onzaai.com/blog/como-elegir-consultora-ia
+- Automatización de procesos vs. IA: cuándo usar cada una: https://onzaai.com/blog/automatizacion-procesos-vs-ia
+- ChatGPT vs Claude vs Gemini: cuál usar en tu empresa: https://onzaai.com/blog/chatgpt-claude-gemini-cual-usar-empresa
+- ROI de inteligencia artificial: cómo medirlo sin autoengañarse: https://onzaai.com/blog/roi-inteligencia-artificial-empresa
+- IA en retail: lo que están haciendo las empresas que venden más en LATAM: https://onzaai.com/blog/ia-retail-experiencia-cliente-latam
+- Chatbots IA para servicio al cliente: lo que funciona y lo que no: https://onzaai.com/blog/chatbots-ia-servicio-al-cliente
+- Formación en IA para empresas: lo que funciona y lo que es perder el tiempo: https://onzaai.com/blog/formacion-ia-empresas-que-funciona
+- IA en manufactura: casos de uso que ya generan ROI en LATAM: https://onzaai.com/blog/ia-manufactura-operaciones-latam
+- Seguridad de datos e IA: lo que tu empresa necesita saber: https://onzaai.com/blog/seguridad-datos-ia-empresas-latam
+- Agentes de IA para empresas: qué son, qué no son y cuándo tienen sentido: https://onzaai.com/blog/agentes-ia-empresas-que-son

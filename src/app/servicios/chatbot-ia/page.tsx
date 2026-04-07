@@ -4,6 +4,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { LineReveal } from "@/components/ui/line-reveal";
+import { BreadcrumbJsonLd, FAQJsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
   title: "Chatbot IA para Empresas — Onza",
@@ -22,6 +23,9 @@ export const metadata: Metadata = {
     "atención al cliente con IA",
     "chatbot servicio al cliente Colombia",
   ],
+  alternates: {
+    canonical: "https://onzaai.com/servicios/chatbot-ia",
+  },
 };
 
 const USE_CASES = [
@@ -57,6 +61,29 @@ const INCLUDES = [
   "Escalamiento a humano con contexto completo",
 ];
 
+const CHATBOT_FAQ = [
+  {
+    question: "¿Cuánto toma implementar un chatbot IA?",
+    answer:
+      "De 3 a 6 semanas desde la primera conversación hasta producción. Incluye diseño del flujo conversacional, conexión con tu base de conocimiento, integración con canales y entrenamiento iterativo.",
+  },
+  {
+    question: "¿El chatbot puede responder con información de mi empresa?",
+    answer:
+      "Sí. Usamos tecnología RAG (Retrieval-Augmented Generation) para conectar el agente con tus documentos, manuales, políticas y bases de datos. Responde con tu información real, no con genéricos.",
+  },
+  {
+    question: "¿En qué canales funciona el chatbot?",
+    answer:
+      "Se integra con web, WhatsApp, Slack y otros canales. Incluimos un panel de monitoreo para ver qué preguntan los usuarios y qué responde el agente.",
+  },
+  {
+    question: "¿Qué pasa cuando el chatbot no sabe la respuesta?",
+    answer:
+      "Escala automáticamente al agente humano correcto, transfiriendo todo el contexto de la conversación para que no tenga que repetir la consulta.",
+  },
+];
+
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -79,6 +106,14 @@ export default function ChatbotIAPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Inicio", href: "/" },
+          { name: "Servicios", href: "/servicios" },
+          { name: "Chatbot IA", href: "/servicios/chatbot-ia" },
+        ]}
+      />
+      <FAQJsonLd items={CHATBOT_FAQ} />
 
       {/* Header */}
       <Section dark className="pt-32 pb-16">
@@ -243,6 +278,36 @@ export default function ChatbotIAPage() {
             </p>
           </div>
         </Reveal>
+      </Section>
+
+      {/* FAQ */}
+      <Section>
+        <Reveal>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px w-8 bg-brand-red" />
+            <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
+              Preguntas frecuentes
+            </span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-light mb-12">
+            Preguntas sobre chatbots IA
+          </h2>
+        </Reveal>
+        <div className="space-y-0">
+          {CHATBOT_FAQ.map((faq, i) => (
+            <Reveal key={i} delay={i * 0.05}>
+              <div className="py-6">
+                <h3 className="text-lg font-light text-brand-dark mb-2">
+                  {faq.question}
+                </h3>
+                <p className="text-brand-gray leading-relaxed text-sm">
+                  {faq.answer}
+                </p>
+              </div>
+              <LineReveal />
+            </Reveal>
+          ))}
+        </div>
       </Section>
 
       {/* CTA */}
