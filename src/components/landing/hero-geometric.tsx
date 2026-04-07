@@ -113,6 +113,20 @@ export function HeroGeometric() {
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-brand-black">
 
+      {/* Subtle editorial background image */}
+      <div className="absolute inset-0 pointer-events-none">
+        <Image
+          src="/images/sections/hero-bg.png"
+          alt=""
+          fill
+          className="object-cover opacity-[0.12]"
+          style={{ objectPosition: "center 40%" }}
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/80 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-brand-black/60" />
+      </div>
+
       {/* Red glow anchored behind large right mark */}
       <div className="absolute top-[10%] right-[-5%] w-[520px] h-[520px] bg-brand-red/[0.07] blur-[100px] rounded-full pointer-events-none" />
 
@@ -285,20 +299,20 @@ export function HeroGeometric() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            className="mt-16 pt-10 border-t border-[#1A1A1A]"
+            className="mt-16 pt-8 border-t border-[#1A1A1A]"
           >
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#555] mb-6 font-display">
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#555] mb-5 font-display">
               Empresas que confían en nosotros
             </p>
-            <div className="flex flex-wrap items-center gap-x-10 gap-y-4">
+            <div className="flex items-center gap-8 md:gap-10 overflow-x-auto scrollbar-hide pb-2">
               {CLIENT_LOGOS.map((logo) => (
                 <Image
                   key={logo.name}
                   src={`/images/client-logos/${logo.file}`}
                   alt={logo.name}
-                  width={120}
-                  height={40}
-                  className={`${logo.tall ? "h-10 md:h-12" : "h-6 md:h-8"} w-auto object-contain opacity-30 hover:opacity-60 transition-opacity duration-500 grayscale`}
+                  width={100}
+                  height={32}
+                  className={`${logo.tall ? "h-7 md:h-9" : "h-5 md:h-6"} w-auto flex-shrink-0 object-contain opacity-25 hover:opacity-50 transition-opacity duration-500 grayscale`}
                 />
               ))}
             </div>

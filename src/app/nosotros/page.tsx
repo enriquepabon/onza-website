@@ -16,6 +16,9 @@ export const metadata: Metadata = {
       "15 años en operaciones reales. Construimos IA que resuelve problemas de negocio, no demos para sala de juntas.",
     url: "https://onzaai.com/nosotros",
   },
+  alternates: {
+    canonical: "https://onzaai.com/nosotros",
+  },
 };
 
 const PROJECTS = [
@@ -92,23 +95,35 @@ const EXPERIENCE = [
 export default function NosotrosPage() {
   return (
     <>
-      {/* Header */}
-      <Section dark className="pt-32 pb-16">
-        <Reveal>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-8 bg-brand-red" />
-            <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
-              Nosotros
-            </span>
-          </div>
-        </Reveal>
-        <TextReveal
-          as="h1"
-          className="text-hero-mobile md:text-hero font-light max-w-4xl"
-        >
-          Construimos soluciones de IA con mentalidad de operador
-        </TextReveal>
-      </Section>
+      {/* Header with background image */}
+      <section className="relative bg-brand-black pt-32 pb-16 overflow-hidden">
+        <Image
+          src="/images/pages/nosotros-hero.png"
+          alt=""
+          fill
+          className="object-cover opacity-[0.15]"
+          style={{ objectPosition: "center 30%" }}
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-brand-black/40" />
+        <div className="container-wide relative z-10 section-padding">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-px w-8 bg-brand-red" />
+              <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
+                Nosotros
+              </span>
+            </div>
+          </Reveal>
+          <TextReveal
+            as="h1"
+            className="text-hero-mobile md:text-hero font-light max-w-4xl text-white"
+          >
+            Construimos soluciones de IA con mentalidad de operador
+          </TextReveal>
+        </div>
+      </section>
 
       {/* Story */}
       <Section narrow>
@@ -125,7 +140,16 @@ export default function NosotrosPage() {
                   con saber de tecnología.
                 </p>
                 <p>
-                  Nuestro fundador, Enrique Pabón, es Ingeniero Industrial de
+                  Nuestro fundador,{" "}
+                  <a
+                    href="https://enriquepabon.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand-red hover:underline"
+                  >
+                    Enrique Pabón
+                  </a>
+                  , es Ingeniero Industrial de
                   la Universidad de los Andes con MBA de EAE Business School en
                   Madrid. Ha liderado operaciones, supply chain y
                   transformación en multinacionales durante más de 15 años.

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
@@ -14,6 +15,9 @@ export const metadata: Metadata = {
     description:
       "Automatización de procesos, diagnóstico IA, formaciones corporativas y soluciones a medida. Resultados en 2 a 8 semanas.",
     url: "https://onzaai.com/servicios",
+  },
+  alternates: {
+    canonical: "https://onzaai.com/servicios",
   },
 };
 
@@ -131,27 +135,54 @@ export default function ServiciosPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
       />
 
-      {/* Header */}
-      <Section dark className="pt-32 pb-16">
-        <Reveal>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px w-8 bg-brand-red" />
-            <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
-              Servicios
-            </span>
-          </div>
-        </Reveal>
-        <TextReveal
-          as="h1"
-          className="text-hero-mobile md:text-hero font-light max-w-4xl"
-        >
-          Cuatro formas de transformar tu operación con IA
-        </TextReveal>
-      </Section>
+      {/* Header with background image */}
+      <section className="relative bg-brand-black pt-32 pb-16 overflow-hidden">
+        <Image
+          src="/images/pages/servicios-hero.png"
+          alt=""
+          fill
+          className="object-cover opacity-[0.15]"
+          style={{ objectPosition: "center" }}
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-brand-black/40" />
+        <div className="container-wide relative z-10 section-padding">
+          <Reveal>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="h-px w-8 bg-brand-red" />
+              <span className="text-[10px] tracking-[0.3em] uppercase text-brand-red font-display">
+                Servicios
+              </span>
+            </div>
+          </Reveal>
+          <TextReveal
+            as="h1"
+            className="text-hero-mobile md:text-hero font-light max-w-4xl text-white"
+          >
+            Cuatro formas de transformar tu operación con IA
+          </TextReveal>
+        </div>
+      </section>
 
       {/* Service Details */}
       {SERVICES_DETAIL.map((service, i) => (
-        <Section key={service.id} id={service.id} cream={i % 2 === 1}>
+        <div key={service.id}>
+        {/* Workshop photo break after service 2 */}
+        {i === 2 && (
+          <div className="relative w-full overflow-hidden h-[25vh] md:h-[35vh]">
+            <Image
+              src="/images/pages/servicios-workshop.png"
+              alt=""
+              fill
+              className="object-cover"
+              style={{ objectPosition: "center 40%" }}
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white/10" />
+          </div>
+        )}
+        <Section id={service.id} cream={i % 2 === 1}>
           <Reveal>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
               <div>
@@ -223,6 +254,7 @@ export default function ServiciosPage() {
           </Reveal>
           <LineReveal color={i % 2 === 1 ? "bg-gray-300/30" : "bg-gray-200"} />
         </Section>
+        </div>
       ))}
 
       {/* CTA */}
