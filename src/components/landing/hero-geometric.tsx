@@ -23,6 +23,8 @@ const CLIENT_LOGOS = [
   { name: "Ticketmaster", file: "white-ticketmaster.png", tall: true },
 ];
 
+const MARQUEE_LOGOS = [...CLIENT_LOGOS, ...CLIENT_LOGOS];
+
 function FloatingMark({
   className,
   size = 200,
@@ -293,7 +295,7 @@ export function HeroGeometric() {
             </MagneticButton>
           </motion.div>
 
-          {/* ── Client logos integrated in hero ── */}
+          {/* ── Client logos marquee in hero ── */}
           <motion.div
             custom={4}
             variants={fadeUp}
@@ -301,24 +303,38 @@ export function HeroGeometric() {
             animate="visible"
             className="mt-16 pt-8 border-t border-[#1A1A1A]"
           >
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#555] mb-5 font-display">
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#999] mb-6 font-display">
               Empresas que confían en nosotros
             </p>
-            <div className="flex items-center gap-8 md:gap-10 overflow-x-auto scrollbar-hide pb-2">
-              {CLIENT_LOGOS.map((logo) => (
-                <Image
-                  key={logo.name}
-                  src={`/images/client-logos/${logo.file}`}
-                  alt={logo.name}
-                  width={100}
-                  height={32}
-                  className={`${logo.tall ? "h-7 md:h-9" : "h-5 md:h-6"} w-auto flex-shrink-0 object-contain opacity-25 hover:opacity-50 transition-opacity duration-500 grayscale`}
-                />
-              ))}
-            </div>
           </motion.div>
         </div>
       </div>
+
+      {/* Marquee — full width, outside content container */}
+      <motion.div
+        custom={4}
+        variants={fadeUp}
+        initial="hidden"
+        animate="visible"
+        className="absolute bottom-20 left-0 right-0 z-10 overflow-hidden"
+      >
+        <div className="flex animate-marquee hover:[animation-play-state:paused]">
+          {MARQUEE_LOGOS.map((logo, i) => (
+            <div
+              key={`${logo.name}-${i}`}
+              className="flex-shrink-0 mx-10 md:mx-14 flex items-center"
+            >
+              <Image
+                src={`/images/client-logos/${logo.file}`}
+                alt={logo.name}
+                width={140}
+                height={48}
+                className="h-8 md:h-10 w-auto object-contain opacity-30 hover:opacity-60 transition-opacity duration-500 grayscale"
+              />
+            </div>
+          ))}
+        </div>
+      </motion.div>
 
       {/* Scroll hint */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-20 select-none">
