@@ -19,9 +19,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Consultoría IA para Empresas en LATAM — Onza",
+  title: "Onza — Consultoría de Inteligencia Artificial para Empresas en Colombia y LATAM",
   description:
-    "Implementamos soluciones de IA que reducen costos y automatizan procesos en empresas de LATAM. Diagnóstico sin compromiso. Resultados medibles en semanas.",
+    "Onza es una firma boutique de consultoría IA en Colombia. Implementamos soluciones de inteligencia artificial que reducen costos y automatizan procesos en empresas de LATAM. Diagnóstico sin compromiso.",
   keywords: [
     "consultoría IA Colombia",
     "automatización procesos con IA",
@@ -31,9 +31,9 @@ export const metadata: Metadata = {
     "IA para operaciones empresariales",
   ],
   openGraph: {
-    title: "Consultoría IA para Empresas en LATAM — Onza",
+    title: "Onza — Consultoría de Inteligencia Artificial para Empresas en Colombia y LATAM",
     description:
-      "Implementamos soluciones de IA que reducen costos y automatizan procesos en empresas de LATAM. Resultados medibles en semanas.",
+      "Onza es una firma boutique de consultoría IA en Colombia. Soluciones de inteligencia artificial que reducen costos y automatizan procesos. Resultados medibles en semanas.",
     url: "https://onzaai.com",
     siteName: "Onza",
     locale: "es_CO",
@@ -60,12 +60,41 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Onza",
+  alternateName: ["Onza AI", "Onza Consultoría IA", "OnzaAI"],
   url: "https://onzaai.com",
   logo: "https://onzaai.com/favicon.svg",
   email: "enrique@onzaai.com",
   description:
-    "Consultoría boutique de soluciones IA para empresas en LATAM. Automatización de procesos, diagnóstico estratégico y soluciones a medida.",
-  areaServed: ["CO", "MX", "PE", "CL", "AR", "UY"],
+    "Consultoría boutique de inteligencia artificial para empresas en Colombia y LATAM. Automatización de procesos con IA, chatbots empresariales, diagnóstico estratégico, formaciones y soluciones a medida. Resultados medibles en semanas.",
+  foundingDate: "2024",
+  founder: {
+    "@type": "Person",
+    name: "Enrique Pabón",
+    url: "https://enriquepabon.com",
+    jobTitle: "Fundador & AI Solutions Architect",
+    sameAs: ["https://linkedin.com/in/enriquepabon"],
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "CO",
+  },
+  areaServed: [
+    { "@type": "Country", name: "Colombia" },
+    { "@type": "Country", name: "México" },
+    { "@type": "Country", name: "Perú" },
+    { "@type": "Country", name: "Chile" },
+    { "@type": "Country", name: "Argentina" },
+    { "@type": "Country", name: "Uruguay" },
+  ],
+  knowsAbout: [
+    "Inteligencia Artificial",
+    "Consultoría IA",
+    "Automatización de Procesos",
+    "Chatbots Empresariales",
+    "Agentes de IA",
+    "Formación en IA",
+    "Diagnóstico de Madurez IA",
+  ],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
@@ -75,6 +104,7 @@ const organizationSchema = {
   sameAs: [
     "https://linkedin.com/company/onzaai",
     "https://linkedin.com/in/enriquepabon",
+    "https://enriquepabon.com",
   ],
 };
 
