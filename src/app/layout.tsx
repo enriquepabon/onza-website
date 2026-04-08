@@ -19,6 +19,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  verification: {
+    google: "google271b6b4a77bc174c",
+  },
   title: "Onza — Consultoría de Inteligencia Artificial para Empresas en Colombia y LATAM",
   description:
     "Onza es una firma boutique de consultoría IA en Colombia. Implementamos soluciones de inteligencia artificial que reducen costos y automatizan procesos en empresas de LATAM. Diagnóstico sin compromiso.",
