@@ -37,6 +37,10 @@ Onza ayuda a empresas medianas y grandes en LATAM a implementar IA de forma estr
 - Inicio: https://onzaai.com
 - Servicios: https://onzaai.com/servicios
 - Chatbot IA: https://onzaai.com/servicios/chatbot-ia
+- Automatización de Procesos con IA: https://onzaai.com/servicios/automatizacion-ia
+- Formación en IA para Empresas: https://onzaai.com/servicios/formacion-ia
+- Diagnóstico Estratégico IA: https://onzaai.com/servicios/diagnostico-ia
+- Agentes de IA: https://onzaai.com/servicios/agentes-ia
 - Nosotros: https://onzaai.com/nosotros
 - Blog: https://onzaai.com/blog
 - Recursos: https://onzaai.com/recursos

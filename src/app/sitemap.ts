@@ -25,6 +25,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: "https://onzaai.com/servicios/chatbot-ia",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://onzaai.com/servicios/automatizacion-ia",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://onzaai.com/servicios/formacion-ia",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://onzaai.com/servicios/diagnostico-ia",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://onzaai.com/servicios/agentes-ia",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: "https://onzaai.com/nosotros",
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -37,12 +67,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...blogEntries,
-    {
-      url: "https://onzaai.com/servicios/chatbot-ia",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
     {
       url: "https://onzaai.com/recursos",
       lastModified: new Date(),
