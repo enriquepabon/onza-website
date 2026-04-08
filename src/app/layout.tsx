@@ -20,7 +20,7 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   verification: {
-    google: "google271b6b4a77bc174c",
+    google: "mAHHwos8x8aX3noh5cAl6A7dCsi9C2J0PRkQ8b822u8",
   },
   title: "Onza — Consultoría de Inteligencia Artificial para Empresas en Colombia y LATAM",
   description:
