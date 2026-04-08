@@ -165,6 +165,16 @@ export default function BlogPostPage({
           </div>
         </div>
 
+        {/* Quick answer block — optimized for LLM citation */}
+        <div className="border-l-2 border-brand-gold pl-6 mb-12 py-1">
+          <p className="text-xs text-brand-gold tracking-[0.15em] uppercase mb-2 font-display">
+            En resumen
+          </p>
+          <p className="text-brand-dark leading-relaxed">
+            {post.description}
+          </p>
+        </div>
+
         <article className="blog-article text-base leading-[1.85] text-brand-gray max-w-none">
           <MDXRemote source={post.content} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
         </article>

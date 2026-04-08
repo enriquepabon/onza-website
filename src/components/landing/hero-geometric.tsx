@@ -123,6 +123,7 @@ export function HeroGeometric() {
           fill
           className="object-cover opacity-[0.12]"
           style={{ objectPosition: "center 40%" }}
+          sizes="100vw"
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/80 to-transparent" />
