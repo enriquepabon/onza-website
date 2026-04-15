@@ -13,7 +13,7 @@ const STATS = [
   { value: "500+", numericPart: "500", prefix: "", suffix: "+", label: "personas formadas en IA", sublabel: "En empresas de manufactura, hospitalidad y logística" },
   { value: "3", numericPart: "3", prefix: "", suffix: "", label: "continentes, un estándar de trabajo", sublabel: "Colombia · México · Europa" },
   { value: "95%", numericPart: "95", prefix: "", suffix: "%", label: "de pilotos de IA no generan resultados medibles", sublabel: "El problema es integración, no tecnología" },
-  { value: "54%", numericPart: "54", prefix: "", suffix: "%", label: "de empresas en LATAM aumentará inversión en IA este año", sublabel: "La pregunta no es si, sino cómo" },
+  { value: "54%", numericPart: "54", prefix: "", suffix: "%", label: "de empresas en el mundo aumentará inversión en IA este año", sublabel: "La pregunta no es si, sino cómo" },
 ];
 
 function StatCard({ stat, index }: { stat: (typeof STATS)[0]; index: number }) {
@@ -72,7 +72,7 @@ export function Stats() {
               </div>
             </Reveal>
             <TextReveal as="h2" className="text-section-mobile md:text-section font-light text-white">
-              La IA está transformando LATAM. La pregunta es si tu empresa lidera o se queda atrás.
+              La IA está transformando el mundo. La pregunta es si tu empresa lidera o se queda atrás.
             </TextReveal>
           </div>
         </div>
