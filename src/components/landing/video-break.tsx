@@ -124,7 +124,7 @@ export function VideoBreak({
         className="absolute inset-0 w-full h-full object-cover"
         style={{ willChange: "transform" }}
       >
-        <source src={src} type="video/mp4" />
+        <source src={src} type="video/mp4" media="(min-width: 768px)" />
       </video>
 
       {/* Gradient edges — always present */}

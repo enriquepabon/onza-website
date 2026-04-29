@@ -153,7 +153,7 @@ export function HeroGeometric({ videoSrc }: { videoSrc?: string } = {}) {
             className="absolute inset-0 w-full h-full object-cover opacity-[0.22]"
             style={{ objectPosition: "center 40%" }}
           >
-            <source src={videoSrc} type="video/mp4" />
+            <source src={videoSrc} type="video/mp4" media="(min-width: 768px)" />
           </video>
         ) : (
           <Image
