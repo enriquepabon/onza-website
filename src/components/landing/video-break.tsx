@@ -17,31 +17,87 @@ export function VideoBreak({
   height?: string;
   mobileHeight?: string;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    gsap.fromTo(
-      el,
-      { clipPath: "inset(8% 0% 8% 0%)", scale: 1.06 },
-      {
-        clipPath: "inset(0% 0% 0% 0%)",
-        scale: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          end: "top 20%",
-          scrub: 1,
-        },
-      }
-    );
+    const container = containerRef.current;
+    const video = videoRef.current;
+    const overlay = overlayRef.current;
+    if (!container || !video || !overlay) return;
+
+    const ctx = gsap.context(() => {
+      // Phase 1: clip-path wipe open + container scale as it enters
+      gsap.fromTo(
+        container,
+        { clipPath: "inset(8% 0% 8% 0%)", scale: 1.04 },
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          scale: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: container,
+            start: "top 88%",
+            end: "top 15%",
+            scrub: 1,
+          },
+        }
+      );
+
+      // Phase 2: parallax — video content travels at -30% inside fixed container
+      gsap.fromTo(
+        video,
+        { yPercent: -8 },
+        {
+          yPercent: 8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: container,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+
+      // Phase 3: brand color overlay breathes in when centered, out when leaving
+      gsap.fromTo(
+        overlay,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: container,
+            start: "top 60%",
+            end: "center center",
+            scrub: 1,
+          },
+        }
+      );
+      gsap.fromTo(
+        overlay,
+        { opacity: 1 },
+        {
+          opacity: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: container,
+            start: "center center",
+            end: "bottom 40%",
+            scrub: 1,
+          },
+        }
+      );
+    }, container);
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <div
-      ref={ref}
+      ref={containerRef}
       className="relative w-full overflow-hidden"
       style={{
         ["--pb-height" as string]: height,
@@ -59,16 +115,30 @@ export function VideoBreak({
         }
       `}</style>
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
         poster={poster}
         className="absolute inset-0 w-full h-full object-cover"
+        style={{ willChange: "transform" }}
       >
         <source src={src} type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white/10" />
+
+      {/* Gradient edges — always present */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white/10 pointer-events-none" />
+
+      {/* Brand color pulse — fades in/out as section centers in viewport */}
+      <div
+        ref={overlayRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at 60% 50%, rgba(255,59,48,0.08) 0%, transparent 70%)",
+          opacity: 0,
+        }}
+      />
     </div>
   );
 }

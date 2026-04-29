@@ -1,9 +1,14 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { COMPANY } from "@/lib/constants";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // The 3 paths that form the Onza V-mark
 const MARK_PATHS = [
@@ -99,6 +104,27 @@ function FloatingMark({
 }
 
 export function HeroGeometric({ videoSrc }: { videoSrc?: string } = {}) {
+  const videoBgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = videoBgRef.current;
+    if (!el) return;
+    // Parallax: video moves at 40% of scroll speed (upward)
+    const ctx = gsap.context(() => {
+      gsap.to(el, {
+        yPercent: -20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el.closest("section"),
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    });
+    return () => ctx.revert();
+  }, []);
+
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: (i: number) => ({
@@ -116,7 +142,7 @@ export function HeroGeometric({ videoSrc }: { videoSrc?: string } = {}) {
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-brand-black">
 
       {/* Background — video when available, static image fallback */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div ref={videoBgRef} className="absolute inset-0 pointer-events-none" style={{ willChange: "transform" }}>
         {videoSrc ? (
           <video
             autoPlay
@@ -124,7 +150,7 @@ export function HeroGeometric({ videoSrc }: { videoSrc?: string } = {}) {
             loop
             playsInline
             poster="/images/sections/hero-bg.png"
-            className="absolute inset-0 w-full h-full object-cover opacity-[0.18]"
+            className="absolute inset-0 w-full h-full object-cover opacity-[0.22]"
             style={{ objectPosition: "center 40%" }}
           >
             <source src={videoSrc} type="video/mp4" />
