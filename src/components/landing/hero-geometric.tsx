@@ -98,7 +98,7 @@ function FloatingMark({
   );
 }
 
-export function HeroGeometric() {
+export function HeroGeometric({ videoSrc }: { videoSrc?: string } = {}) {
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: (i: number) => ({
@@ -115,17 +115,31 @@ export function HeroGeometric() {
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-brand-black">
 
-      {/* Subtle editorial background image */}
+      {/* Background — video when available, static image fallback */}
       <div className="absolute inset-0 pointer-events-none">
-        <Image
-          src="/images/sections/hero-bg.png"
-          alt=""
-          fill
-          className="object-cover opacity-[0.12]"
-          style={{ objectPosition: "center 40%" }}
-          sizes="100vw"
-          priority
-        />
+        {videoSrc ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/images/sections/hero-bg.png"
+            className="absolute inset-0 w-full h-full object-cover opacity-[0.18]"
+            style={{ objectPosition: "center 40%" }}
+          >
+            <source src={videoSrc} type="video/mp4" />
+          </video>
+        ) : (
+          <Image
+            src="/images/sections/hero-bg.png"
+            alt=""
+            fill
+            className="object-cover opacity-[0.12]"
+            style={{ objectPosition: "center 40%" }}
+            sizes="100vw"
+            priority
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/80 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-brand-black/60" />
       </div>
