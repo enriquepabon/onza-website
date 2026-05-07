@@ -1,0 +1,1060 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onza · C-Level Sprint · Trading Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-0: #0C0C0C;
+  --bg-1: #141414;
+  --bg-2: #181818;
+  --border: #2A2A2A;
+  --white: #ffffff;
+  --off-white: #E8E8E8;
+  --light: #C8C8C8;
+  --med: #888;
+  --dim: #555;
+  --red: #FF3B30;
+  --gold: #D4AF37;
+  --accent-glow: rgba(255, 59, 48, 0.18);
+  --gold-glow: rgba(212, 175, 55, 0.12);
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --max-w: 1080px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-0);
+  color: var(--off-white);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  font-weight: 300;
+  letter-spacing: 0.005em;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Ambient radial glows that follow viewport */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 10%, var(--gold-glow), transparent 40%),
+    radial-gradient(circle at 80% 90%, var(--accent-glow), transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top progress bar */
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), var(--gold));
+  width: 0%;
+  z-index: 100;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* Top nav */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 18px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  background: rgba(12, 12, 12, 0.6);
+  border-bottom: 0.5px solid var(--border);
+  transform: translateY(-100%);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.nav.visible { transform: translateY(0); }
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: 4px;
+  font-size: 12px;
+  color: var(--white);
+}
+.nav-mark {
+  width: 22px; height: 22px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--gold);
+  font-weight: 700;
+}
+.nav-meta {
+  font-size: 10px;
+  color: var(--dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Side rail (section progress) */
+.rail {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 40;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.rail.visible { opacity: 1; }
+.rail a {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.3s ease;
+  display: block;
+  text-decoration: none;
+  position: relative;
+}
+.rail a.active {
+  background: var(--gold);
+  transform: scale(1.4);
+  box-shadow: 0 0 12px var(--gold-glow);
+}
+.rail a::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--dim);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.rail a:hover::after,
+.rail a.active::after { opacity: 1; color: var(--gold); }
+
+/* Cover */
+.cover {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 32px;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cover-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+  will-change: transform;
+}
+.cover-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(12,12,12,0.85) 0%, rgba(12,12,12,0.55) 40%, rgba(12,12,12,0.55) 60%, rgba(12,12,12,0.95) 100%);
+}
+.cover-frame {
+  position: absolute; inset: 0;
+  border: 4px solid var(--red);
+  border-left: 0; border-right: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.cover-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 760px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: rise 1.2s 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+.cover-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 32px;
+  position: relative;
+}
+.cover-eyebrow::after {
+  content: "";
+  display: block;
+  margin: 8px auto 0;
+  width: 36px; height: 1.5px;
+  background: var(--red);
+}
+.cover-title {
+  font-family: var(--serif);
+  font-size: clamp(48px, 7vw, 84px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 28px;
+  letter-spacing: -0.02em;
+}
+.cover-tagline {
+  font-size: 18px;
+  color: var(--gold);
+  font-weight: 400;
+  margin-bottom: 60px;
+  font-style: italic;
+}
+.cover-meta {
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+  padding: 24px 0;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.cover-meta-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.cover-meta-name {
+  font-size: 20px;
+  color: var(--white);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.cover-meta-role {
+  font-size: 13px;
+  color: var(--light);
+}
+.cover-author {
+  font-size: 11px;
+  color: var(--dim);
+  margin-top: 18px;
+  letter-spacing: 1px;
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--dim);
+  z-index: 3;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: translate(-50%, 0); }
+  50% { opacity: 1; transform: translate(-50%, 6px); }
+}
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sections */
+.section {
+  position: relative;
+  padding: 120px 32px 100px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  z-index: 1;
+}
+.section-banner {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-1 * (100vw - 100%) / 2);
+  height: 360px;
+  overflow: hidden;
+  margin-top: 80px;
+}
+.section-banner img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.05);
+  transition: transform 1.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  clip-path: inset(0 100% 0 0);
+}
+.section-banner.in-view img {
+  transform: scale(1);
+  clip-path: inset(0 0 0 0);
+  transition: transform 1.6s ease, clip-path 1.4s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.section-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(12,12,12,0.4) 100%);
+  pointer-events: none;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.section-label::after {
+  content: "";
+  display: block;
+  width: 30px; height: 1.5px;
+  background: var(--red);
+  margin-top: 8px;
+}
+.section h2 {
+  font-family: var(--serif);
+  font-size: clamp(34px, 4.5vw, 52px);
+  font-weight: 400;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+}
+.section h2 em {
+  color: var(--gold);
+  font-style: normal;
+}
+.section p {
+  font-size: 16px;
+  color: var(--light);
+  margin-bottom: 18px;
+  max-width: 720px;
+}
+.lead {
+  font-size: 18px !important;
+  color: var(--off-white) !important;
+  line-height: 1.55;
+}
+
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Cards grid */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 44px;
+}
+.card {
+  background: var(--bg-1);
+  border: 0.5px solid var(--border);
+  padding: 26px 22px;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 2px;
+  background: var(--red);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.card:hover {
+  transform: translateY(-4px);
+  background: var(--bg-2);
+  border-color: var(--gold);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 30px var(--gold-glow);
+}
+.card:hover::before { transform: scaleY(1); }
+.card-num {
+  font-family: var(--serif);
+  font-size: 32px;
+  color: var(--red);
+  font-weight: 400;
+  margin-bottom: 12px;
+  display: block;
+}
+.card h3 {
+  font-size: 15px;
+  color: var(--white);
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: 0.01em;
+}
+.card h3::after {
+  content: "";
+  display: block;
+  width: 16px; height: 1px;
+  background: var(--red);
+  margin-top: 6px;
+  transition: width 0.4s ease;
+}
+.card:hover h3::after { width: 36px; background: var(--gold); }
+.card p {
+  font-size: 13px;
+  color: var(--light);
+  line-height: 1.55;
+  margin: 12px 0 0 0;
+  font-weight: 300;
+}
+
+/* Sessions list (numbered cards) */
+.sessions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+  margin-top: 36px;
+}
+.session-card {
+  background: var(--bg-1);
+  border-left: 3px solid var(--red);
+  padding: 20px 22px;
+  position: relative;
+  transition: all 0.4s ease;
+}
+.session-card:hover {
+  background: var(--bg-2);
+  border-left-color: var(--gold);
+  transform: translateX(4px);
+}
+.session-card .num {
+  font-family: var(--serif);
+  color: var(--gold);
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 4px;
+  display: block;
+}
+.session-card h4 {
+  font-size: 14px;
+  color: var(--white);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.session-card p {
+  font-size: 12px;
+  color: var(--light);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Pull quote */
+.pull-quote {
+  border-left: 2px solid var(--gold);
+  padding: 6px 24px;
+  margin: 50px 0 30px;
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--gold);
+  font-size: 22px;
+  line-height: 1.4;
+  max-width: 720px;
+}
+
+/* Investment table */
+.invest-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 32px;
+  border-top: 1px solid var(--gold);
+}
+.invest-table tr {
+  border-bottom: 0.5px solid var(--border);
+  transition: background 0.3s ease;
+}
+.invest-table tr:hover { background: var(--bg-1); }
+.invest-table th {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: 600;
+  padding: 18px 16px;
+  text-align: left;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--gold);
+}
+.invest-table td {
+  padding: 22px 16px;
+  vertical-align: top;
+  font-size: 14px;
+  color: var(--light);
+}
+.invest-table td.modality {
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 12px;
+  width: 200px;
+}
+.invest-table td.price {
+  text-align: right;
+  font-weight: 600;
+  color: var(--white);
+  font-size: 18px;
+  font-family: var(--serif);
+  white-space: nowrap;
+  width: 200px;
+}
+
+/* Big number block */
+.big-number {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin: 36px 0 16px;
+}
+.big-number .amount {
+  font-family: var(--serif);
+  font-size: clamp(56px, 8vw, 96px);
+  color: var(--gold);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.big-number .currency {
+  font-size: 18px;
+  color: var(--med);
+  letter-spacing: 2px;
+}
+.big-number .note {
+  font-size: 14px;
+  color: var(--light);
+  flex: 1;
+  padding-bottom: 8px;
+}
+
+/* Bundle box */
+.bundle-box {
+  background: var(--bg-1);
+  border: 0.5px solid var(--gold);
+  padding: 24px;
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.bundle-box .label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.bundle-box .title {
+  font-size: 16px;
+  color: var(--white);
+  font-weight: 500;
+}
+.bundle-box .price {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--gold);
+}
+
+/* Phases (corporate) */
+.phases {
+  margin-top: 36px;
+}
+.phase {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 0.5px solid var(--border);
+  transition: padding-left 0.4s ease;
+}
+.phase:hover { padding-left: 12px; }
+.phase-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--red);
+  font-weight: 600;
+  padding-top: 4px;
+}
+.phase h4 {
+  font-size: 18px;
+  color: var(--white);
+  font-weight: 500;
+  margin-bottom: 6px;
+  font-family: var(--serif);
+}
+.phase p {
+  font-size: 14px;
+  color: var(--light);
+  margin: 0;
+}
+
+/* Guarantee box */
+.guarantee {
+  background: var(--bg-1);
+  border-left: 3px solid var(--red);
+  padding: 28px 32px;
+  margin-top: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.guarantee::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 200px;
+  background: radial-gradient(circle at right, var(--accent-glow), transparent 70%);
+  pointer-events: none;
+}
+.guarantee .label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.guarantee h3 {
+  font-family: var(--serif);
+  font-size: 24px;
+  color: var(--white);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+.guarantee p {
+  font-size: 14px;
+  color: var(--light);
+  margin: 0;
+  max-width: 600px;
+}
+
+/* CTA */
+.cta {
+  background: linear-gradient(135deg, var(--red) 0%, #c2261d 100%);
+  padding: 40px;
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent 70%);
+  z-index: -1;
+}
+.cta h3 {
+  font-family: var(--serif);
+  font-size: 28px;
+  color: var(--white);
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.cta p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+.cta-btn {
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--white);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 14px 24px;
+  border: 1.5px solid var(--white);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  white-space: nowrap;
+}
+.cta-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--white);
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: -1;
+}
+.cta-btn:hover { color: var(--red); }
+.cta-btn:hover::before { transform: translateX(0); }
+
+/* Footer */
+.footer {
+  border-top: 0.5px solid var(--border);
+  padding: 40px 32px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 1px;
+  margin-top: 60px;
+}
+.footer .gold { color: var(--gold); }
+
+/* Steps grid */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+.step {
+  background: var(--bg-1);
+  padding: 24px;
+  position: relative;
+  transition: all 0.4s ease;
+  border: 0.5px solid var(--border);
+}
+.step:hover {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+.step .num {
+  font-family: var(--serif);
+  color: var(--red);
+  font-size: 28px;
+  display: block;
+  margin-bottom: 10px;
+}
+.step h4 {
+  font-size: 14px;
+  color: var(--white);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.step p {
+  font-size: 12px;
+  color: var(--light);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Two-column */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 32px;
+}
+@media (max-width: 720px) {
+  .two-col { grid-template-columns: 1fr; gap: 30px; }
+  .nav { padding: 14px 18px; }
+  .section { padding: 80px 20px 60px; }
+  .rail { display: none; }
+}
+.two-col .col h4 {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.two-col .col p {
+  font-size: 14px;
+  color: var(--light);
+}
+</style>
+</head>
+<body>
+
+<div class="progress"></div>
+
+<header class="nav">
+  <div class="nav-brand">
+    <span class="nav-mark">O</span>
+    <span>ONZA</span>
+  </div>
+  <span class="nav-meta">C-LEVEL SPRINT · TRADING SOLUTIONS</span>
+</header>
+
+<nav class="rail" aria-label="Secciones">
+  <a href="#momento" data-label="El momento"></a>
+  <a href="#resultados" data-label="Resultados"></a>
+  <a href="#estructura" data-label="Estructura"></a>
+  <a href="#inversion" data-label="Inversión"></a>
+  <a href="#garantia" data-label="Garantía"></a>
+  <a href="#proximos" data-label="Próximos pasos"></a>
+</nav>
+
+<section class="cover">
+  <div class="cover-bg" style="background-image: url('assets/cover-corporate.png');"></div>
+  <div class="cover-frame"></div>
+  <div class="cover-content">
+    <span class="cover-eyebrow">PROPUESTA C-LEVEL</span>
+    <h1 class="cover-title">C-Level Sprint<br>en IA</h1>
+    <p class="cover-tagline">Ocho semanas. Hasta ocho personas. Una compañía alineada.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-label">PREPARADA PARA</div>
+      <div class="cover-meta-name">Trading Solutions Company S.A.S.</div>
+      <div class="cover-meta-role">Equipo C-Level · Miami / Barranquilla</div>
+      <div class="cover-author">Por Enrique Pabón · 6 de mayo de 2026</div>
+    </div>
+  </div>
+  <div class="scroll-hint">DESPLAZAR ↓</div>
+</section>
+
+<section id="momento" class="section">
+  <span class="section-label reveal">01 / EL MOMENTO</span>
+  <h2 class="reveal">Trading Solutions está escalando.<br><em>La IA no puede esperar.</em></h2>
+  <p class="lead reveal reveal-delay-1">
+    El equipo C-Level enfrenta una ventana clara: la operación Miami / Barranquilla está
+    creciendo, los procesos se complejizan y los competidores ya están experimentando con IA.
+    La pregunta ya no es si la organización adopta IA, sino qué tan rápido el equipo
+    directivo se apropia de ella para tomar mejores decisiones, escalar sin sumar headcount y proteger márgenes.
+  </p>
+  <p class="reveal reveal-delay-2">
+    Te propongo un sprint intensivo de ocho semanas para hasta ocho personas del C-Level.
+    El objetivo: que cada miembro salga con dominio operativo de IA aplicada a su área y
+    con al menos un proyecto piloto vivo en su gerencia.
+  </p>
+</section>
+
+<div class="section-banner">
+  <img src="assets/banner-corporate-context.png" alt="">
+</div>
+
+<section id="resultados" class="section">
+  <span class="section-label reveal">02 / LO QUE SE LLEVAN</span>
+  <h2 class="reveal">Cuatro resultados<br><em>verificables al cierre.</em></h2>
+
+  <div class="cards">
+    <div class="card reveal reveal-delay-1">
+      <span class="card-num">01</span>
+      <h3>C-Level alineado en una sola visión IA</h3>
+      <p>Lenguaje común, criterio compartido y prioridades claras de adopción.</p>
+    </div>
+    <div class="card reveal reveal-delay-2">
+      <span class="card-num">02</span>
+      <h3>Cada gerencia con un piloto activo</h3>
+      <p>Hasta ocho casos de uso priorizados, diseñados y prototipados durante el sprint.</p>
+    </div>
+    <div class="card reveal reveal-delay-3">
+      <span class="card-num">03</span>
+      <h3>Roadmap de 12 meses</h3>
+      <p>Plan de adopción por área, con métricas, hitos y responsables definidos.</p>
+    </div>
+    <div class="card reveal reveal-delay-4">
+      <span class="card-num">04</span>
+      <h3>Capacidad interna de seguir construyendo</h3>
+      <p>Cada líder con criterio para escalar IA sin depender de un proveedor externo.</p>
+    </div>
+  </div>
+
+  <div class="pull-quote reveal">
+    El C-Level deja de hablar de IA en abstracto. La aplica a sus decisiones cada semana.
+    Es la diferencia entre una empresa que adopta IA y una que la respira.
+  </div>
+</section>
+
+<div class="section-banner">
+  <img src="assets/banner-corporate-program.png" alt="">
+</div>
+
+<section id="estructura" class="section">
+  <span class="section-label reveal">03 / ESTRUCTURA</span>
+  <h2 class="reveal">Ocho semanas.<br><em>Tres fases. Un piloto.</em></h2>
+  <p class="reveal reveal-delay-1">Una sesión semanal de 2 horas. Modalidad híbrida Barranquilla / virtual.</p>
+
+  <div class="phases">
+    <div class="phase reveal">
+      <div class="phase-label">FASE 1</div>
+      <div>
+        <h4>Fundamentos · Semanas 1-2</h4>
+        <p>Calibración del lenguaje, herramientas base (Claude, Gemini, ChatGPT, n8n) y casos de uso priorizados por gerencia.</p>
+      </div>
+    </div>
+    <div class="phase reveal reveal-delay-1">
+      <div class="phase-label">FASE 2</div>
+      <div>
+        <h4>Construcción · Semanas 3-6</h4>
+        <p>Diseño y prototipo de un piloto por área, con datos reales. Sesiones semanales de revisión y ajuste.</p>
+      </div>
+    </div>
+    <div class="phase reveal reveal-delay-2">
+      <div class="phase-label">FASE 3</div>
+      <div>
+        <h4>Adopción · Semanas 7-8</h4>
+        <p>Validación con equipos extendidos, roadmap de 12 meses y plan de gobernanza interna de IA.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top: 60px;">
+    <div class="col reveal">
+      <h4>METODOLOGÍA</h4>
+      <p>Cada semana combina marco conceptual breve, trabajo hands-on con casos del propio C-Level y revisión de pilotos en curso. Todas las sesiones se graban.</p>
+    </div>
+    <div class="col reveal reveal-delay-1">
+      <h4>PROPIEDAD</h4>
+      <p>Los pilotos quedan en propiedad de Trading Solutions. Entre sesiones el equipo recibe retos cortos para mantener el momentum.</p>
+    </div>
+  </div>
+</section>
+
+<section id="inversion" class="section">
+  <span class="section-label reveal">04 / INVERSIÓN</span>
+  <h2 class="reveal">Inversión total<br><em>del sprint completo.</em></h2>
+
+  <div class="big-number reveal reveal-delay-1">
+    <span class="amount">USD 4,000</span>
+    <span class="note">Sprint completo de 8 semanas para hasta 8 personas del C-Level. Incluye sesiones, materiales, grabaciones y soporte de pilotos.</span>
+  </div>
+
+  <p class="reveal reveal-delay-3" style="margin-top: 28px; font-size: 13px; color: var(--med);">
+    Pago: 40% al inicio, 30% al cierre de la fase 2, 30% a la entrega final.
+    Facturación en COP a tasa del día. Sesiones presenciales en Barranquilla incluidas.
+  </p>
+</section>
+
+<div class="section-banner">
+  <img src="assets/closing-corporate.png" alt="">
+</div>
+
+<section id="garantia" class="section">
+  <span class="section-label reveal">05 / GARANTÍA</span>
+  <h2 class="reveal">Si no hay pilotos vivos,<br><em>no se factura la fase 3.</em></h2>
+
+  <div class="guarantee reveal reveal-delay-1">
+    <div class="label">COMPROMISO DE ENTREGA</div>
+    <h3>Si al cierre de la fase 2 no hay al menos un piloto activo por gerencia, Onza no factura la fase 3.</h3>
+    <p>Onza asume el costo de cualquier ajuste hasta cumplir el bar. El sprint solo continúa si los resultados están a la vista.</p>
+  </div>
+</section>
+
+<section id="proximos" class="section">
+  <span class="section-label reveal">06 / SOBRE ONZA Y PRÓXIMOS PASOS</span>
+  <h2 class="reveal">Quien dirige el sprint.<br><em>Y cómo arrancamos.</em></h2>
+  <p class="reveal reveal-delay-1">
+    Enrique Pabón dirige el sprint. Ingeniero industrial de Uniandes, MBA de EAE Madrid.
+    15 años de carrera en operaciones, finanzas y supply chain en GM, O-I, Avicanna, YVY,
+    Medcann y Oleoflores. Experiencia directa en comercio exterior, exportaciones y apertura
+    de mercados. Hace tres años transicionó hacia IA aplicada. Hoy lidera Onza, firma
+    boutique de arquitectura de soluciones IA en Colombia y LATAM.
+  </p>
+
+  <div class="steps">
+    <div class="step reveal">
+      <span class="num">01</span>
+      <h4>Confirmación de interés</h4>
+      <p>Yohanna lo presenta al C-Level.</p>
+    </div>
+    <div class="step reveal reveal-delay-1">
+      <span class="num">02</span>
+      <h4>Sesión de scoping</h4>
+      <p>30 minutos para mapear casos de uso por gerencia.</p>
+    </div>
+    <div class="step reveal reveal-delay-2">
+      <span class="num">03</span>
+      <h4>Calendario y arranque</h4>
+      <p>Definir fechas. Kick-off en máximo dos semanas.</p>
+    </div>
+  </div>
+
+  <div class="cta reveal">
+    <div>
+      <h3>Construyamos esto con el C-Level.</h3>
+      <p>enrique@onzaai.com · +57 314 206 4795 · onzaai.com</p>
+    </div>
+    <a class="cta-btn" href="mailto:enrique@onzaai.com">AGENDEMOS SCOPING →</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>ONZA · Arquitectura de Soluciones IA · Colombia + LATAM</p>
+  <p style="margin-top: 6px;"><span class="gold">enrique@onzaai.com</span> · onzaai.com · Documento confidencial</p>
+</footer>
+
+<script>
+// Progress bar
+const progress = document.querySelector('.progress');
+const nav = document.querySelector('.nav');
+const rail = document.querySelector('.rail');
+
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  progress.style.width = scrolled + '%';
+  if (h.scrollTop > 200) {
+    nav.classList.add('visible');
+    rail.classList.add('visible');
+  } else {
+    nav.classList.remove('visible');
+    rail.classList.remove('visible');
+  }
+}, { passive: true });
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('in-view');
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal, .section-banner').forEach(el => io.observe(el));
+
+// Section rail active state
+const sections = document.querySelectorAll('section[id]');
+const railLinks = document.querySelectorAll('.rail a');
+const sectionIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      railLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(s => sectionIO.observe(s));
+
+// Parallax cover
+const coverBg = document.querySelector('.cover-bg');
+if (coverBg) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight) {
+      coverBg.style.transform = `translateY(${y * 0.4}px) scale(${1 + y * 0.0003})`;
+    }
+  }, { passive: true });
+}
+</script>
+</body>
+</html>
