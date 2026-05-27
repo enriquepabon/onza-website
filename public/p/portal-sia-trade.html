@@ -324,6 +324,44 @@ body::before {
 .module-card.featured .kpi-val { font-size: 22px; }
 .kpi-label { font-size: 9px; letter-spacing: 1.1px; color: var(--med); text-transform: uppercase; line-height: 1.4; display: block; }
 
+/* ─── OPEX ─── */
+.opex-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 36px; }
+.opex-block { background: var(--bg-1); border: 0.5px solid var(--border); padding: 26px; }
+.opex-block-title { font-size: 10px; letter-spacing: 3px; color: var(--red); font-weight: 600; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 0.5px solid var(--border); }
+.opex-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 0.5px solid rgba(255,255,255,0.04); gap: 14px; }
+.opex-item { font-size: 13px; color: var(--off-white); flex: 1; }
+.opex-item small { display: block; font-size: 10px; color: var(--dim); margin-top: 2px; }
+.opex-amount { font-family: var(--serif); font-size: 15px; color: var(--light); white-space: nowrap; flex-shrink: 0; }
+.opex-subtotal { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 13px; border-top: 0.5px solid var(--border); font-size: 13px; color: var(--gold); font-weight: 600; }
+.opex-subtotal .s-val { font-family: var(--serif); font-size: 16px; }
+/* slider */
+.opex-slider-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+.opex-slider-label { font-size: 13px; color: var(--off-white); }
+.opex-ops-display { font-family: var(--serif); font-size: 22px; color: var(--gold); line-height: 1; }
+.opex-slider-track { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.opex-tick { font-size: 10px; color: var(--dim); flex-shrink: 0; }
+.opex-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 4px; outline: none; cursor: pointer; border-radius: 0; }
+.opex-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; background: var(--gold); cursor: pointer; border-radius: 0; border: 2.5px solid var(--bg-0); box-shadow: 0 0 0 1px var(--gold); transition: transform 0.15s; }
+.opex-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+.opex-slider::-moz-range-thumb { width: 18px; height: 18px; background: var(--gold); cursor: pointer; border-radius: 0; border: 2.5px solid var(--bg-0); }
+.opex-var-rows { display: flex; flex-direction: column; gap: 0; margin-bottom: 16px; }
+.opex-var-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 10px 0; border-bottom: 0.5px solid rgba(255,255,255,0.04); gap: 14px; }
+.opex-var-name { font-size: 12px; color: var(--light); flex: 1; }
+.opex-var-name small { display: block; font-size: 10px; color: var(--dim); margin-top: 2px; }
+.opex-var-amount { font-family: var(--serif); font-size: 15px; color: var(--light); white-space: nowrap; flex-shrink: 0; transition: color 0.3s; }
+/* total bar */
+.opex-total-bar { background: linear-gradient(135deg, rgba(212,175,55,0.09), rgba(255,59,48,0.04)); border: 0.5px solid rgba(212,175,55,0.32); padding: 26px 32px; margin-top: 18px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.opex-breakdown { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.opex-breakdown-item { text-align: center; }
+.opex-breakdown-item .bd-label { font-size: 9px; letter-spacing: 2px; color: var(--dim); text-transform: uppercase; display: block; margin-bottom: 4px; }
+.opex-breakdown-item .bd-val { font-family: var(--serif); font-size: 18px; color: var(--light); }
+.opex-breakdown-sep { font-size: 20px; color: var(--dim); }
+.opex-total-right { text-align: right; }
+.opex-total-label { font-size: 9px; letter-spacing: 3px; color: var(--gold); font-weight: 600; display: block; margin-bottom: 6px; }
+.opex-total-val { font-family: var(--serif); font-size: 36px; color: var(--gold); line-height: 1; transition: color 0.3s; }
+.opex-disclaimer { margin-top: 14px; font-size: 11px; color: var(--dim); max-width: 780px; }
+@media (max-width: 768px) { .opex-wrapper { grid-template-columns: 1fr; } .opex-total-bar { flex-direction: column; text-align: center; } .opex-total-right { text-align: center; } }
+
 /* ─── CARD FOCUS ZOOM ─── */
 .card-overlay { position: fixed; inset: 0; background: rgba(12,12,12,0.75); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.38s ease; }
 .card-overlay.active { opacity: 1; pointer-events: all; }
@@ -397,6 +435,7 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
   <a href="#problema" data-label="El problema"></a>
   <a href="#solucion" data-label="La solución"></a>
   <a href="#inversion" data-label="Inversión"></a>
+  <a href="#operativos" data-label="Costos operativos"></a>
   <a href="#proximos" data-label="Próximos pasos"></a>
 </nav>
 
@@ -965,9 +1004,99 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
   </p>
 </section>
 
+<!-- ══════════════ COSTOS OPERATIVOS ══════════════ -->
+<section id="operativos" class="section force-break">
+  <span class="section-label reveal">06 / COSTOS OPERATIVOS</span>
+  <h2 class="reveal">Post-implementación:<br><em>lo que cuesta operarlo.</em></h2>
+  <p class="lead reveal reveal-delay-1">Dos componentes predecibles: una parte fija de suscripciones a los servicios integrados y una parte variable según el volumen de operaciones que el sistema procesa cada mes. Ambos costos corren directamente con los proveedores, sin markup de Onza AI.</p>
+
+  <div class="opex-wrapper reveal reveal-delay-2">
+
+    <!-- FIJO -->
+    <div class="opex-block">
+      <div class="opex-block-title">COSTO FIJO MENSUAL</div>
+      <div class="opex-row">
+        <span class="opex-item">ZapSign<small>Firma electrónica · Circular 170 + Mandato Aduanero · Ley 527</small></span>
+        <span class="opex-amount">$320,000</span>
+      </div>
+      <div class="opex-row">
+        <span class="opex-item">Truora / LAFT<small>Verificación SARLAFT en onboarding de clientes nuevos</small></span>
+        <span class="opex-amount">$350,000</span>
+      </div>
+      <div class="opex-row">
+        <span class="opex-item">WhatsApp Business API<small>Cargo base Meta · conversaciones activas del bot</small></span>
+        <span class="opex-amount">$200,000</span>
+      </div>
+      <div class="opex-row">
+        <span class="opex-item">Servidor de producción<small>VPS Colombia · alta disponibilidad · base de datos</small></span>
+        <span class="opex-amount">$400,000</span>
+      </div>
+      <div class="opex-subtotal">
+        <span>Subtotal fijo</span>
+        <span class="s-val">$1,270,000 COP/mes</span>
+      </div>
+    </div>
+
+    <!-- VARIABLE -->
+    <div class="opex-block">
+      <div class="opex-block-title">VARIABLE — APIs POR VOLUMEN</div>
+      <div class="opex-slider-header">
+        <span class="opex-slider-label">Operaciones CE procesadas / mes</span>
+        <span class="opex-ops-display" id="ops-display">150 ops</span>
+      </div>
+      <div class="opex-slider-track">
+        <span class="opex-tick">30</span>
+        <input type="range" class="opex-slider" id="ops-slider" min="30" max="400" value="150" step="10">
+        <span class="opex-tick">400</span>
+      </div>
+      <div class="opex-var-rows">
+        <div class="opex-var-row">
+          <span class="opex-var-name">Modelos de visión OCR<small>GPT-4o Vision · extracción de documentos · ~$600 COP/op</small></span>
+          <span class="opex-var-amount" id="var-vision">$90,000</span>
+        </div>
+        <div class="opex-var-row">
+          <span class="opex-var-name">Modelos de razonamiento<small>Agentes IA · validación y coherencia · ~$900 COP/op</small></span>
+          <span class="opex-var-amount" id="var-llm">$135,000</span>
+        </div>
+        <div class="opex-var-row">
+          <span class="opex-var-name">Mensajes WhatsApp<small>Bot de estado + alertas automáticas · ~$240 COP/op</small></span>
+          <span class="opex-var-amount" id="var-wa">$36,000</span>
+        </div>
+      </div>
+      <div class="opex-subtotal">
+        <span>Subtotal variable</span>
+        <span class="s-val" id="var-subtotal">$261,000 COP/mes</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TOTAL BAR -->
+  <div class="opex-total-bar reveal reveal-delay-3">
+    <div class="opex-breakdown">
+      <div class="opex-breakdown-item">
+        <span class="bd-label">Fijo mensual</span>
+        <span class="bd-val">$1,270,000</span>
+      </div>
+      <span class="opex-breakdown-sep">+</span>
+      <div class="opex-breakdown-item">
+        <span class="bd-label">Variable estimado</span>
+        <span class="bd-val" id="var-label">$261,000</span>
+      </div>
+    </div>
+    <div class="opex-total-right">
+      <span class="opex-total-label">TOTAL MENSUAL ESTIMADO</span>
+      <span class="opex-total-val" id="opex-total">$1,531,000 COP</span>
+    </div>
+  </div>
+
+  <p class="opex-disclaimer reveal reveal-delay-4">Costos a cargo de SIA Trade directamente con cada proveedor. Sin markup de Onza AI. Valores variables estimados con base en tarifas públicas de cada servicio a mayo 2026 y TRM $4,000 COP/USD.</p>
+
+</section>
+
 <!-- PRÓXIMOS PASOS -->
 <section id="proximos" class="section force-break">
-  <span class="section-label reveal">06 / PRÓXIMOS PASOS</span>
+  <span class="section-label reveal">07 / PRÓXIMOS PASOS</span>
   <h2 class="reveal">Demo hoy.<br><em>Sistema en producción en 3 semanas.</em></h2>
   <p class="reveal reveal-delay-1">El Módulo 2 está listo. No es una maqueta. Es el sistema procesando una factura comercial real con las reglas del checklist de SIA Trade.</p>
 
@@ -1062,6 +1191,29 @@ if (coverBg) {
     const y = window.scrollY;
     if (y < window.innerHeight) coverBg.style.transform = `translateY(${y * 0.35}px) scale(${1 + y * 0.0002})`;
   }, { passive: true });
+}
+const opsSlider = document.getElementById('ops-slider');
+if (opsSlider) {
+  const fmt = n => '$' + n.toLocaleString('en-US');
+  function updateOpex() {
+    const ops = parseInt(opsSlider.value);
+    document.getElementById('ops-display').textContent = ops + ' ops';
+    const vision = ops * 600;
+    const llm = ops * 900;
+    const wa = ops * 240;
+    const varTotal = vision + llm + wa;
+    const total = 1270000 + varTotal;
+    document.getElementById('var-vision').textContent = fmt(vision);
+    document.getElementById('var-llm').textContent = fmt(llm);
+    document.getElementById('var-wa').textContent = fmt(wa);
+    document.getElementById('var-subtotal').textContent = fmt(varTotal) + ' COP/mes';
+    document.getElementById('var-label').textContent = fmt(varTotal);
+    document.getElementById('opex-total').textContent = fmt(total) + ' COP';
+    const pct = ((ops - 30) / (400 - 30)) * 100;
+    opsSlider.style.background = `linear-gradient(to right, var(--gold) 0%, var(--gold) ${pct.toFixed(1)}%, rgba(255,255,255,0.08) ${pct.toFixed(1)}%, rgba(255,255,255,0.08) 100%)`;
+  }
+  opsSlider.addEventListener('input', updateOpex);
+  updateOpex();
 }
 </script>
 </body>
