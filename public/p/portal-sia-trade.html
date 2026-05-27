@@ -307,14 +307,46 @@ body::before {
 .page-footer .right { color: var(--light); }
 @media screen { .page-header, .page-footer, .page-bar-top, .page-bar-bottom { display: none; } }
 @media (max-width: 768px) {
+  /* layout grids */
   .founder-grid { grid-template-columns: 1fr; gap: 32px; }
   .modules-grid { grid-template-columns: 1fr; }
   .module-card.featured, .module-card.agent-card { grid-column: 1; }
   .agent-mockup { grid-template-columns: 1fr; }
   .payment-terms { grid-template-columns: 1fr; }
+  .problem-list { grid-template-columns: 1fr; }
+  /* section padding */
   .section { padding: 80px 18px 60px; }
+  /* nav */
+  .nav { padding: 12px 16px; }
+  .nav-meta { display: none; }
   .rail { display: none; }
+  /* cover */
+  .cover { padding: 60px 18px 80px; }
+  .cover-tagline { font-size: 16px; margin-bottom: 36px; }
+  /* pricing: tag + desc side by side, amount full width below */
+  .pricing-row { grid-template-columns: 55px 1fr; gap: 4px 10px; padding: 14px 14px; }
+  .pricing-row .amount { grid-column: 1 / -1; font-size: 15px; padding-top: 0; text-align: left; }
+  .pricing-row.total .amount { font-size: 19px; }
+  /* CTA: stack vertically */
+  .cta { flex-direction: column; text-align: center; padding: 28px 18px; }
+  .cta-btn { align-self: stretch; text-align: center; }
+  /* zoom: smaller scale so card stays on screen */
+  .problem-item.expanded { transform: scale(1.05) !important; }
+  .module-card.expanded { transform: translateY(-4px) scale(1.05) !important; }
+  /* OPEX */
+  .opex-wrapper { grid-template-columns: 1fr; }
+  .opex-total-bar { flex-direction: column; text-align: center; }
+  .opex-total-right { text-align: center; }
+  /* misc */
   .arch-flow { gap: 4px; }
+  .lead { font-size: 16px !important; }
+  .pull-quote { font-size: 17px; margin: 32px 0 20px; }
+  .savings-banner { flex-direction: column; }
+}
+@media (max-width: 480px) {
+  .steps { grid-template-columns: 1fr; }
+  .team-row { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: 1fr 1fr; }
 }
 /* ─── KPI IMPACT ROW ─── */
 .kpi-row { display: flex; flex-wrap: wrap; gap: 0; margin-top: 14px; border-top: 0.5px solid var(--border); padding-top: 12px; }
@@ -360,7 +392,6 @@ body::before {
 .opex-total-label { font-size: 9px; letter-spacing: 3px; color: var(--gold); font-weight: 600; display: block; margin-bottom: 6px; }
 .opex-total-val { font-family: var(--serif); font-size: 36px; color: var(--gold); line-height: 1; transition: color 0.3s; }
 .opex-disclaimer { margin-top: 14px; font-size: 11px; color: var(--dim); max-width: 780px; }
-@media (max-width: 768px) { .opex-wrapper { grid-template-columns: 1fr; } .opex-total-bar { flex-direction: column; text-align: center; } .opex-total-right { text-align: center; } }
 
 /* ─── CARD FOCUS ZOOM ─── */
 .card-overlay { position: fixed; inset: 0; background: rgba(12,12,12,0.75); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.38s ease; }
