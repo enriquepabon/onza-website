@@ -316,6 +316,14 @@ body::before {
   .rail { display: none; }
   .arch-flow { gap: 4px; }
 }
+/* ─── KPI IMPACT ROW ─── */
+.kpi-row { display: flex; flex-wrap: wrap; gap: 0; margin-top: 14px; border-top: 0.5px solid var(--border); padding-top: 12px; }
+.kpi { flex: 1; min-width: 72px; padding: 8px 12px 8px 0; }
+.kpi + .kpi { padding-left: 12px; border-left: 0.5px solid var(--border); }
+.kpi-val { display: block; font-family: var(--serif); font-size: 19px; color: var(--gold); line-height: 1; margin-bottom: 4px; letter-spacing: -0.01em; }
+.module-card.featured .kpi-val { font-size: 22px; }
+.kpi-label { font-size: 9px; letter-spacing: 1.1px; color: var(--med); text-transform: uppercase; line-height: 1.4; display: block; }
+
 /* ─── CARD FOCUS ZOOM ─── */
 .card-overlay { position: fixed; inset: 0; background: rgba(12,12,12,0.75); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.38s ease; }
 .card-overlay.active { opacity: 1; pointer-events: all; }
@@ -671,25 +679,11 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
         <li>Reglas parametrizables desde el checklist Excel de SIA Trade, sin tocar código</li>
         <li>Portal cliente con estado en tiempo real por documento y por operación</li>
       </ul>
-      <div class="tech-chips">
-        <span class="chip chip-blue">OCR + LLM</span>
-        <span class="chip chip-red">3 Agentes IA</span>
-        <span class="chip chip-blue">GPT-4o Vision</span>
-        <span class="chip chip-gold">Rules Engine</span>
-        <span class="chip chip-green">Portal Cliente</span>
-      </div>
-      <div class="notif-row">
-        <span class="notif-badge"><span class="icon">📧</span> Email cliente resultado</span>
-        <span class="notif-badge"><span class="icon">💬</span> WhatsApp alerta</span>
-        <span class="notif-badge"><span class="icon">🔵</span> Teams equipo técnico</span>
-      </div>
-      <div class="arch-flow" style="margin-top: 14px;">
-        <span class="arch-node">Cliente carga docs</span><span class="arch-arrow">→</span>
-        <span class="arch-node highlight">OCR + Vision</span><span class="arch-arrow">→</span>
-        <span class="arch-node">Agente Factura</span><span class="arch-arrow">→</span>
-        <span class="arch-node">Agente BL</span><span class="arch-arrow">→</span>
-        <span class="arch-node">Coherencia cruzada</span><span class="arch-arrow">→</span>
-        <span class="arch-node highlight">Resultado inmediato</span>
+      <div class="kpi-row">
+        <div class="kpi"><span class="kpi-val">−90%</span><span class="kpi-label">tiempo de validación</span></div>
+        <div class="kpi"><span class="kpi-val">−60%</span><span class="kpi-label">errores documentales</span></div>
+        <div class="kpi"><span class="kpi-val">×2–3</span><span class="kpi-label">capacidad operativa</span></div>
+        <div class="kpi"><span class="kpi-val">−55%</span><span class="kpi-label">carga equipo técnico</span></div>
       </div>
       <span class="module-price">$34,000,000 COP</span>
       </div>
@@ -712,24 +706,11 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
         <li>Firma electrónica (ZapSign · Ley 527) integrada en el portal</li>
         <li>Aprobación paralela: Jurídico + Comercial + Contable simultáneos</li>
       </ul>
-      <div class="tech-chips">
-        <span class="chip chip-blue">OCR Engine</span>
-        <span class="chip chip-blue">GPT-4o Vision</span>
-        <span class="chip chip-red">Multi-Agente</span>
-        <span class="chip chip-green">ZapSign API</span>
-        <span class="chip chip-purple">Truora LAFT</span>
-      </div>
-      <div class="notif-row">
-        <span class="notif-badge"><span class="icon">📧</span> Email áreas</span>
-        <span class="notif-badge"><span class="icon">💬</span> WhatsApp cliente</span>
-        <span class="notif-badge"><span class="icon">🔵</span> Teams interno</span>
-      </div>
-      <div class="arch-flow" style="margin-top: 14px;">
-        <span class="arch-node">Cliente carga</span><span class="arch-arrow">→</span>
-        <span class="arch-node">OCR extrae</span><span class="arch-arrow">→</span>
-        <span class="arch-node">Agente valida</span><span class="arch-arrow">→</span>
-        <span class="arch-node highlight">LAFT + Firma</span><span class="arch-arrow">→</span>
-        <span class="arch-node">3 áreas paralelas</span>
+      <div class="kpi-row">
+        <div class="kpi"><span class="kpi-val">−70%</span><span class="kpi-label">tiempo de onboarding</span></div>
+        <div class="kpi"><span class="kpi-val">−60%</span><span class="kpi-label">documentos devueltos</span></div>
+        <div class="kpi"><span class="kpi-val">−45%</span><span class="kpi-label">carga en aprobaciones</span></div>
+        <div class="kpi"><span class="kpi-val">+20%</span><span class="kpi-label">satisfacción cliente</span></div>
       </div>
       <span class="module-price">$48,000,000 COP</span>
       </div>
@@ -752,17 +733,11 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
         <li>Email digest diario automatizado para cada cliente</li>
         <li>Eliminación de grupos de WhatsApp para consultas de estado</li>
       </ul>
-      <div class="tech-chips">
-        <span class="chip chip-blue">BD Connector</span>
-        <span class="chip chip-red">LLM Agent</span>
-        <span class="chip chip-green">WhatsApp API</span>
-        <span class="chip chip-blue">REST API</span>
-        <span class="chip chip-gold">Portal DO</span>
-      </div>
-      <div class="notif-row">
-        <span class="notif-badge"><span class="icon">💬</span> WhatsApp bot</span>
-        <span class="notif-badge"><span class="icon">📧</span> Digest diario</span>
-        <span class="notif-badge"><span class="icon">🔵</span> Teams alertas</span>
+      <div class="kpi-row">
+        <div class="kpi"><span class="kpi-val">−75%</span><span class="kpi-label">consultas manuales de DO</span></div>
+        <div class="kpi"><span class="kpi-val">&lt;60s</span><span class="kpi-label">respuesta al cliente</span></div>
+        <div class="kpi"><span class="kpi-val">−40%</span><span class="kpi-label">carga operativa equipo</span></div>
+        <div class="kpi"><span class="kpi-val">+20%</span><span class="kpi-label">satisfacción cliente externo</span></div>
       </div>
       <span class="module-price">$52,000,000 COP</span>
       </div>
@@ -785,16 +760,11 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
         <li>Agente 3: detección de errores contra normativa DIAN (RAG sobre cartillas)</li>
         <li>Panel revisor: cola / en revisión / devueltas / aprobadas + métricas por analista</li>
       </ul>
-      <div class="tech-chips">
-        <span class="chip chip-blue">OCR Engine</span>
-        <span class="chip chip-red">3 Agentes IA</span>
-        <span class="chip chip-purple">RAG Normativa</span>
-        <span class="chip chip-gold">Dashboard BI</span>
-      </div>
-      <div class="notif-row">
-        <span class="notif-badge"><span class="icon">📧</span> Email revisor</span>
-        <span class="notif-badge"><span class="icon">🔵</span> Teams cola</span>
-        <span class="notif-badge"><span class="icon">📊</span> Métricas tiempo real</span>
+      <div class="kpi-row">
+        <div class="kpi"><span class="kpi-val">−60%</span><span class="kpi-label">errores en declaraciones</span></div>
+        <div class="kpi"><span class="kpi-val">−40%</span><span class="kpi-label">tiempo de revisión</span></div>
+        <div class="kpi"><span class="kpi-val">−50%</span><span class="kpi-label">devoluciones al analista</span></div>
+        <div class="kpi"><span class="kpi-val">100%</span><span class="kpi-label">trazabilidad del proceso</span></div>
       </div>
       <span class="module-price">$38,000,000 COP</span>
       </div>
@@ -816,11 +786,11 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
         <li>Investigación de normativa DIAN con NotebookLM</li>
         <li>Automatización de flujos y proyectos por área</li>
       </ul>
-      <div class="tech-chips">
-        <span class="chip chip-gold">Claude</span>
-        <span class="chip chip-gold">Gemini</span>
-        <span class="chip chip-gold">NotebookLM</span>
-        <span class="chip chip-gold">Canvas</span>
+      <div class="kpi-row">
+        <div class="kpi"><span class="kpi-val">+20%</span><span class="kpi-label">productividad individual</span></div>
+        <div class="kpi"><span class="kpi-val">−30%</span><span class="kpi-label">tiempo tareas repetitivas</span></div>
+        <div class="kpi"><span class="kpi-val">+60%</span><span class="kpi-label">adopción herramientas IA</span></div>
+        <div class="kpi"><span class="kpi-val">−35%</span><span class="kpi-label">dependencia procesos manuales</span></div>
       </div>
       <span class="module-price">$950,000 COP / persona · mín. 8 personas</span>
       </div>
@@ -881,18 +851,18 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
         </div>
       </div>
 
-      <div class="tech-chips" style="margin-top: 16px;">
-        <span class="chip chip-blue">RAG Agent</span>
-        <span class="chip chip-blue">Portal Chat</span>
-        <span class="chip chip-green">WhatsApp</span>
-        <span class="chip chip-red">Multi-Source Context</span>
-        <span class="chip chip-purple">LLM Reasoning</span>
-        <span class="chip chip-gold">I-Business + Módulos 1-4</span>
+      <div class="kpi-row" style="margin-top: 16px;">
+        <div class="kpi"><span class="kpi-val">−70%</span><span class="kpi-label">consultas por WhatsApp y llamada</span></div>
+        <div class="kpi"><span class="kpi-val">−55%</span><span class="kpi-label">tiempo de atención al cliente</span></div>
+        <div class="kpi"><span class="kpi-val">24/7</span><span class="kpi-label">disponibilidad del servicio</span></div>
+        <div class="kpi"><span class="kpi-val">75%</span><span class="kpi-label">resolución autónoma de consultas</span></div>
       </div>
       </div><!-- /module-body -->
     </div>
 
   </div><!-- /modules-grid -->
+
+  <p style="margin-top: 18px; font-size: 11px; color: var(--dim); max-width: 720px;">Los indicadores de impacto son estimados conservadores con base en implementaciones de automatización documental en empresas de servicios similares en Colombia y LATAM. Los valores reales dependen de los volúmenes y condiciones operativas de SIA Trade.</p>
 
   <!-- INTEGRATIONS -->
   <div style="margin-top: 56px;">
