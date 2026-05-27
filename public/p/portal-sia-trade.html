@@ -162,23 +162,30 @@ body::before {
 .prob-flow .pf-step { font-size: 10px; color: var(--med); background: var(--bg-2); border: 0.5px solid var(--border); padding: 3px 8px; white-space: nowrap; }
 .prob-flow .pf-arrow { font-size: 10px; color: var(--dim); }
 
-/* ─── FOUNDER GRID ─── */
-.founder-grid { display: grid; grid-template-columns: 280px 1fr; gap: 56px; margin-top: 40px; align-items: start; }
-.founder-photo { position: relative; }
-.founder-photo img { width: 100%; aspect-ratio: 3/4; object-fit: contain; object-position: center bottom; display: block; }
-.founder-photo::after { display: none; }
-.founder-photo-border { position: absolute; bottom: -12px; right: -12px; width: 55%; height: 38%; border: 1.5px solid var(--gold); pointer-events: none; }
-.founder-info h3 { font-family: var(--serif); font-size: 28px; color: var(--white); font-weight: 400; margin-bottom: 4px; }
-.founder-info .title { font-size: 11px; letter-spacing: 3px; color: var(--gold); font-weight: 600; margin-bottom: 20px; display: block; }
-.founder-info p { font-size: 15px; color: var(--light); line-height: 1.65; margin-bottom: 14px; }
+/* ─── TEAM DUO GRID ─── */
+.duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 40px; }
+.member-card { background: var(--bg-1); border: 0.5px solid var(--border); overflow: hidden; transition: border-color 0.4s, box-shadow 0.4s; }
+.member-card:hover { border-color: rgba(212,175,55,0.4); box-shadow: 0 12px 36px rgba(0,0,0,0.4); }
+.member-card.tech-lead:hover { border-color: rgba(74,158,255,0.4); }
+.member-photo-wrap { position: relative; height: 300px; overflow: hidden; background: var(--bg-3); }
+.member-photo-wrap img { width: 100%; height: 100%; object-fit: contain; object-position: top center; display: block; transition: transform 0.8s cubic-bezier(0.2,0.8,0.2,1); }
+.member-card:hover .member-photo-wrap img { transform: scale(1.03); }
+.member-photo-wrap::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+.member-card.tech-lead .member-photo-wrap::after { background: var(--blue); }
+.member-body { padding: 22px 22px 26px; }
+.member-name { font-family: var(--serif); font-size: 22px; color: var(--white); font-weight: 400; margin-bottom: 4px; }
+.member-role-tag { font-size: 10px; letter-spacing: 3px; font-weight: 600; color: var(--gold); margin-bottom: 16px; display: block; }
+.member-card.tech-lead .member-role-tag { color: var(--blue); }
+.member-body p { font-size: 13px; color: var(--light); line-height: 1.6; margin-bottom: 10px; }
+.member-body .badges { margin-top: 14px; }
+/* keep .badges and .badge for reuse */
 .badges { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
 .badge { font-size: 10px; letter-spacing: 1.5px; color: var(--off-white); border: 0.5px solid var(--border); padding: 5px 11px; font-weight: 500; }
-.team-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 40px; padding-top: 40px; border-top: 0.5px solid var(--border); }
-.team-member { background: var(--bg-1); padding: 20px; border: 0.5px solid var(--border); transition: all 0.4s; }
-.team-member:hover { border-color: var(--gold); }
-.team-member .name { font-size: 15px; color: var(--white); font-weight: 600; margin-bottom: 2px; }
-.team-member .role { font-size: 10px; letter-spacing: 2px; color: var(--gold); font-weight: 500; margin-bottom: 10px; display: block; }
-.team-member p { font-size: 12px; color: var(--light); margin: 0; line-height: 1.5; }
+/* credibility strip below duo */
+.cred-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+.cred-item { background: var(--bg-2); border: 0.5px solid var(--border); padding: 16px 18px; }
+.cred-item .ci-label { font-size: 10px; letter-spacing: 2.5px; color: var(--gold); font-weight: 600; margin-bottom: 5px; display: block; }
+.cred-item p { font-size: 12px; color: var(--med); margin: 0; line-height: 1.5; }
 
 /* ─── PULL QUOTE ─── */
 .pull-quote { border-left: 2px solid var(--gold); padding: 6px 24px; margin: 48px 0 28px; font-family: var(--serif); font-style: italic; color: var(--gold); font-size: 21px; line-height: 1.4; max-width: 720px; }
@@ -308,7 +315,8 @@ body::before {
 @media screen { .page-header, .page-footer, .page-bar-top, .page-bar-bottom { display: none; } }
 @media (max-width: 768px) {
   /* layout grids */
-  .founder-grid { grid-template-columns: 1fr; gap: 32px; }
+  .duo-grid { grid-template-columns: 1fr; }
+  .cred-strip { grid-template-columns: 1fr; }
   .modules-grid { grid-template-columns: 1fr; }
   .module-card.featured, .module-card.agent-card { grid-column: 1; }
   .agent-mockup { grid-template-columns: 1fr; }
@@ -492,51 +500,61 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
 <section id="onza" class="section">
   <span class="section-label reveal">01 / ONZA AI</span>
   <h2 class="reveal">Arquitectura de soluciones IA<br><em>con impacto financiero medible.</em></h2>
-  <p class="lead reveal reveal-delay-1">
-    Onza AI es una firma boutique de consultoría en arquitectura de soluciones de inteligencia artificial con sede en Colombia. Diseñamos e implementamos sistemas que transforman operaciones con resultados medibles en costo, tiempo y calidad.
-  </p>
+  <p class="lead reveal reveal-delay-1">Firma boutique de consultoría en IA con sede en Colombia. Diseñamos e implementamos sistemas que transforman operaciones con resultados medibles en costo, tiempo y calidad.</p>
 
-  <div class="founder-grid reveal reveal-delay-2">
-    <div class="founder-photo">
-      <img src="backgrounds-a4/sia-trade/enrique-2.png" alt="Enrique Pabón · Founder, Onza AI">
-      <div class="founder-photo-border"></div>
-    </div>
-    <div class="founder-info">
-      <h3>Enrique Pabón</h3>
-      <span class="title">FOUNDER · ONZA AI</span>
-      <p>
-        Ingeniero Industrial (Universidad de los Andes, Bogotá) con MBA (EAE Business School, Madrid). 15 años liderando operaciones en sectores de alta complejidad regulatoria: General Motors, Owens-Illinois, Avicanna, YVY Life Sciences y Oleoflores.
-      </p>
-      <p>
-        Especialización en IA aplicada: agentes conversacionales, automatización documental, OCR con visión computacional, sistemas multi-agente, integración de sistemas legacy. Habla el idioma del negocio y el de la tecnología.
-      </p>
-      <div class="badges">
-        <span class="badge">ING. INDUSTRIAL · UNIANDES</span>
-        <span class="badge">MBA · EAE MADRID</span>
-        <span class="badge">15+ AÑOS EN OPERACIONES</span>
-        <span class="badge">COLOMBIA + LATAM</span>
-        <span class="badge">SISTEMAS IA DESDE 2021</span>
+  <div class="duo-grid reveal reveal-delay-2">
+
+    <!-- Enrique -->
+    <div class="member-card">
+      <div class="member-photo-wrap">
+        <img src="backgrounds-a4/sia-trade/enrique-2.png" alt="Enrique Pabón">
+      </div>
+      <div class="member-body">
+        <div class="member-name">Enrique Pabón</div>
+        <span class="member-role-tag">FOUNDER · ESTRATEGIA & NEGOCIO</span>
+        <p>Ingeniero Industrial (Uniandes) con MBA (EAE Madrid). 15 años liderando operaciones en sectores de alta complejidad regulatoria: General Motors, Owens-Illinois, Avicanna y Oleoflores.</p>
+        <p>Diseña arquitecturas de soluciones IA que conectan operación y tecnología. Habla el idioma del CFO y el del modelo de lenguaje.</p>
+        <div class="badges">
+          <span class="badge">ING. INDUSTRIAL · UNIANDES</span>
+          <span class="badge">MBA · EAE MADRID</span>
+          <span class="badge">15+ AÑOS EN OPERACIONES</span>
+          <span class="badge">COLOMBIA + LATAM</span>
+        </div>
       </div>
     </div>
+
+    <!-- Robert -->
+    <div class="member-card tech-lead">
+      <div class="member-photo-wrap">
+        <img src="backgrounds-a4/sia-trade/robert.png" alt="Robert · Tech Lead, Onza AI">
+      </div>
+      <div class="member-body">
+        <div class="member-name">Robert</div>
+        <span class="member-role-tag">TECH LEAD · ARQUITECTURA IA</span>
+        <p>Ingeniero de software con 6+ años construyendo productos digitales en salud, banca y SaaS. Lidera equipos y lleva soluciones del prototipo a producción en entornos de alta exigencia.</p>
+        <p>Especialización en sistemas multi-agente, integraciones API, automatización documental y detección de errores en runtime. Co-ejecutor del portal SIA Trade.</p>
+        <div class="badges">
+          <span class="badge">6+ AÑOS EN DESARROLLO</span>
+          <span class="badge">FULL-STACK</span>
+          <span class="badge">SISTEMAS MULTI-AGENTE</span>
+          <span class="badge">SALUD · BANCA · SAAS</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <div class="team-row">
-    <div class="team-member reveal">
-      <div class="name">Robert Triana</div>
-      <span class="role">TECH LEAD · DESARROLLO IA</span>
-      <p>Desarrollador full-stack, sistemas multi-agente, integraciones API y automatización documental. Co-ejecutor del portal SIA Trade.</p>
-    </div>
-    <div class="team-member reveal reveal-delay-1">
-      <div class="name">Onza AI</div>
-      <span class="role">FIRMA BOUTIQUE · BARRANQUILLA</span>
+  <div class="cred-strip reveal reveal-delay-3">
+    <div class="cred-item">
+      <span class="ci-label">FIRMA BOUTIQUE · BARRANQUILLA</span>
       <p>Consultoría en arquitectura de soluciones IA. Clientes activos en Colombia y LATAM. Delivery en semanas, no en meses.</p>
     </div>
-    <div class="team-member reveal reveal-delay-2">
-      <div class="name">Referencia del Grupo</div>
-      <span class="role">EXPERIENCIA VALIDADA</span>
+    <div class="cred-item">
+      <span class="ci-label">EXPERIENCIA VALIDADA EN EL GRUPO</span>
       <p>Formación IA ya implementada en otra empresa del grupo. Metodología probada, resultados verificables.</p>
     </div>
   </div>
+
 </section>
 
 <div class="section-banner">
