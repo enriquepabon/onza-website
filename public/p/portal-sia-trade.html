@@ -411,6 +411,17 @@ body::before {
 .opex-total-label { font-size: 9px; letter-spacing: 3px; color: var(--gold); font-weight: 600; display: block; margin-bottom: 6px; }
 .opex-total-val { font-family: var(--serif); font-size: 36px; color: var(--gold); line-height: 1; transition: color 0.3s; }
 .opex-disclaimer { margin-top: 14px; font-size: 11px; color: var(--dim); max-width: 780px; }
+/* ─── OPEX SUPUESTOS ─── */
+.opex-supuestos { margin-top: 20px; border: 0.5px solid var(--border); background: var(--bg-1); padding: 20px 22px; }
+.opex-supuestos-title { font-size: 9px; letter-spacing: 3px; color: var(--med); font-weight: 600; text-transform: uppercase; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 0.5px solid var(--border); }
+.opex-supuestos-title span { color: var(--gold); }
+.supuestos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+.supuesto-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 0.5px solid rgba(255,255,255,0.03); }
+.supuesto-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.supuesto-text { font-size: 11px; color: var(--light); line-height: 1.5; }
+.supuesto-text strong { color: var(--off-white); font-weight: 500; display: block; margin-bottom: 1px; }
+.supuestos-note { margin-top: 12px; font-size: 10px; color: var(--dim); line-height: 1.6; padding-top: 10px; border-top: 0.5px solid var(--border); }
+@media (max-width: 768px) { .supuestos-grid { grid-template-columns: 1fr; } }
 
 /* ─── CARD FOCUS ZOOM ─── */
 .card-overlay { position: fixed; inset: 0; background: rgba(12,12,12,0.75); backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.38s ease; }
@@ -1116,15 +1127,15 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
 
     <!-- VARIABLE -->
     <div class="opex-block">
-      <div class="opex-block-title">VARIABLE — APIs POR VOLUMEN</div>
+      <div class="opex-block-title">VARIABLE — POR OPERACIÓN DE IMPORTACIÓN / EXPORTACIÓN</div>
       <div class="opex-slider-header">
-        <span class="opex-slider-label">Operaciones CE procesadas / mes</span>
+        <span class="opex-slider-label">Operaciones imp. / exp. procesadas al mes</span>
         <span class="opex-ops-display" id="ops-display">150 ops</span>
       </div>
       <div class="opex-slider-track">
-        <span class="opex-tick">30</span>
-        <input type="range" class="opex-slider" id="ops-slider" min="30" max="400" value="150" step="10">
-        <span class="opex-tick">400</span>
+        <span class="opex-tick">50</span>
+        <input type="range" class="opex-slider" id="ops-slider" min="50" max="1000" value="150" step="10">
+        <span class="opex-tick">1,000</span>
       </div>
       <div class="opex-var-rows">
         <div class="opex-var-row">
@@ -1168,6 +1179,55 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
   </div>
 
   <p class="opex-disclaimer reveal reveal-delay-4">Costos a cargo de SIA Trade directamente con cada proveedor. Sin markup de Onza AI. Valores variables estimados con base en tarifas públicas de cada servicio a mayo 2026 y TRM $4,000 COP/USD.</p>
+
+  <div class="opex-supuestos reveal reveal-delay-5">
+    <div class="opex-supuestos-title">Supuestos del simulador · <span>¿qué es una operación de importación / exportación?</span></div>
+    <div class="supuestos-grid">
+      <div class="supuesto-item">
+        <span class="supuesto-icon">📄</span>
+        <div class="supuesto-text">
+          <strong>Documentos procesados por OCR</strong>
+          Hasta 4 documentos por operación: Factura Comercial, BL o AWB, Lista de Empaque y Certificado de Origen. Cada uno es analizado campo por campo por el modelo de visión.
+        </div>
+      </div>
+      <div class="supuesto-item">
+        <span class="supuesto-icon">🤖</span>
+        <div class="supuesto-text">
+          <strong>Validación multi-agente</strong>
+          1 ciclo completo de validación: agente OCR extrae campos, agente de coherencia cruza documentos entre sí, agente normativo verifica contra checklist DIAN y reglamentos técnicos.
+        </div>
+      </div>
+      <div class="supuesto-item">
+        <span class="supuesto-icon">🔍</span>
+        <div class="supuesto-text">
+          <strong>Consulta de trazabilidad</strong>
+          1 consulta de estado de DO en I-Business / Synergy Soft vía mapeo de base de datos. Incluye extracción y formateo de la información para el cliente.
+        </div>
+      </div>
+      <div class="supuesto-item">
+        <span class="supuesto-icon">💬</span>
+        <div class="supuesto-text">
+          <strong>Notificaciones WhatsApp</strong>
+          Hasta 2 mensajes por operación: resultado de validación documental + confirmación de estado DO. Si hay devolución, 1 mensaje adicional con observaciones.
+        </div>
+      </div>
+      <div class="supuesto-item">
+        <span class="supuesto-icon">✍️</span>
+        <div class="supuesto-text">
+          <strong>Firma electrónica</strong>
+          1 documento firmado vía ZapSign por operación (Circular 170 o Mandato Aduanero). El costo de ZapSign es parte del fijo mensual, no del variable.
+        </div>
+      </div>
+      <div class="supuesto-item">
+        <span class="supuesto-icon">🏢</span>
+        <div class="supuesto-text">
+          <strong>Onboarding de cliente nuevo</strong>
+          Si la operación incluye un cliente nuevo: 1 verificación SARLAFT vía Truora (incluida en el fijo). Los clientes recurrentes no generan costo adicional de Truora.
+        </div>
+      </div>
+    </div>
+    <p class="supuestos-note">Una operación equivale a una declaración de importación o exportación procesada de inicio a fin por el sistema. Las operaciones que solo consultan estado de DO sin validación documental cuentan como 0.3 operaciones para efectos del cálculo variable. Los valores por operación (~$1,740 COP/op) son estimados con base en tarifas públicas de OpenAI, Anthropic y Meta a mayo 2026.</p>
+  </div>
 
 </section>
 
@@ -1286,7 +1346,7 @@ if (opsSlider) {
     document.getElementById('var-subtotal').textContent = fmt(varTotal) + ' COP/mes';
     document.getElementById('var-label').textContent = fmt(varTotal);
     document.getElementById('opex-total').textContent = fmt(total) + ' COP';
-    const pct = ((ops - 30) / (400 - 30)) * 100;
+    const pct = ((ops - 50) / (1000 - 50)) * 100;
     opsSlider.style.background = `linear-gradient(to right, var(--gold) 0%, var(--gold) ${pct.toFixed(1)}%, rgba(255,255,255,0.08) ${pct.toFixed(1)}%, rgba(255,255,255,0.08) 100%)`;
   }
   opsSlider.addEventListener('input', updateOpex);
