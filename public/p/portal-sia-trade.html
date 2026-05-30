@@ -274,6 +274,18 @@ body::before {
 .savings-banner .label { font-size: 10px; letter-spacing: 3px; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 4px; }
 .savings-banner .value { font-family: var(--serif); font-size: 26px; color: var(--white); }
 .savings-banner .note { font-size: 13px; color: rgba(255,255,255,0.8); }
+/* ─── ANNUAL MAINTENANCE ─── */
+.maint-block { margin-top: 20px; border: 0.5px solid rgba(212,175,55,0.3); background: rgba(212,175,55,0.04); padding: 22px 24px; }
+.maint-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; gap: 20px; flex-wrap: wrap; }
+.maint-tag { font-size: 9px; letter-spacing: 3px; color: var(--gold); font-weight: 600; text-transform: uppercase; margin-bottom: 4px; display: block; }
+.maint-label { font-size: 13px; color: var(--light); }
+.maint-price { font-family: var(--serif); font-size: 24px; color: var(--gold); white-space: nowrap; flex-shrink: 0; line-height: 1; }
+.maint-price small { font-family: var(--sans); font-size: 10px; color: var(--med); letter-spacing: 1.5px; margin-left: 6px; vertical-align: middle; }
+.maint-includes { display: flex; flex-wrap: wrap; gap: 7px 18px; margin-top: 14px; padding-top: 14px; border-top: 0.5px solid rgba(212,175,55,0.15); }
+.maint-item { font-size: 11px; color: var(--med); display: flex; align-items: center; gap: 7px; }
+.maint-item::before { content: "→"; color: var(--gold); font-size: 9px; flex-shrink: 0; }
+.maint-disclaimer { font-size: 10px; color: var(--dim); margin-top: 12px; line-height: 1.6; border-top: 0.5px solid rgba(212,175,55,0.1); padding-top: 10px; }
+
 .payment-terms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 28px; }
 .payment-term { background: var(--bg-1); border: 0.5px solid var(--border); padding: 16px 18px; text-align: center; }
 .payment-term .pct { font-family: var(--serif); font-size: 30px; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; }
@@ -1046,6 +1058,26 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
     <div class="payment-term"><span class="pct">40%</span><p>Al completar los módulos restantes y entrega final</p></div>
   </div>
 
+  <div class="maint-block reveal reveal-delay-5">
+    <div class="maint-header">
+      <div>
+        <span class="maint-tag">Mantenimiento y evolución continua · a partir del año 2</span>
+        <span class="maint-label">Contrato anual para mantener el sistema vigente y en operación</span>
+      </div>
+      <div class="maint-price">$25,000,000 COP<small>/ AÑO</small></div>
+    </div>
+    <div class="maint-includes">
+      <span class="maint-item">Actualizaciones por cambios normativos DIAN</span>
+      <span class="maint-item">Ajuste y reentrenamiento de modelos IA</span>
+      <span class="maint-item">Nuevas versiones de modelos (GPT-4o Vision, Claude, Gemini)</span>
+      <span class="maint-item">Monitoreo de APIs integradas (ZapSign, Truora, WhatsApp)</span>
+      <span class="maint-item">Soporte técnico con SLA definido</span>
+      <span class="maint-item">Hasta 4 sesiones de optimización por año</span>
+      <span class="maint-item">Hotfixes y parches de seguridad</span>
+      <span class="maint-item">Documentación técnica actualizada</span>
+    </div>
+    <p class="maint-disclaimer">El primer año de operación queda cubierto dentro del paquete integral. A partir del segundo año, el contrato de mantenimiento garantiza que el sistema se mantenga vigente frente a cambios regulatorios, actualizaciones de plataformas de terceros y evolución de los modelos de inteligencia artificial. Los sistemas IA requieren ajuste continuo: los checklists cambian, los modelos se actualizan y las APIs de terceros evolucionan. Sin mantenimiento activo, el rendimiento del sistema se degrada en 6 a 12 meses. Este contrato es opcional y se negocia al momento de la entrega final.</p>
+  </div>
 
 </section>
 
