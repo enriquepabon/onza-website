@@ -22,8 +22,8 @@ const CASES = [
     metricLabel: "personas formadas",
   },
   {
-    client: "Oleoflores",
-    sector: "Agroindustria",
+    client: "Avicanna",
+    sector: "Ciencias de la Vida",
     country: "Colombia",
     service: "Automatización + Aplicativos",
     duration: "6 meses",

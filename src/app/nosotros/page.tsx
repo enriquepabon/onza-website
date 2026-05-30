@@ -35,7 +35,7 @@ const PROJECTS = [
   },
   {
     name: "oleoflores-formacion.jpg",
-    client: "Oleoflores",
+    client: "Avicanna",
     category: "Transformación Digital",
     metric: "100+",
     metricLabel: "colaboradores certificados",
@@ -45,7 +45,7 @@ const PROJECTS = [
   },
   {
     name: "oleoflores-apps.jpg",
-    client: "Oleoflores",
+    client: "Avicanna",
     category: "Desarrollo de Aplicativos",
     metric: "8+",
     metricLabel: "aplicativos desplegados",
