@@ -299,6 +299,18 @@ body::before {
 .step h4 { font-size: 14px; color: var(--white); font-weight: 600; margin-bottom: 5px; }
 .step p { font-size: 12px; color: var(--light); margin: 0; line-height: 1.5; }
 
+/* ─── ACOMPAÑAMIENTO ─── */
+.acomp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
+.acomp-block { background: var(--bg-1); border: 0.5px solid var(--border); padding: 22px 20px; }
+.acomp-block-title { font-size: 9px; letter-spacing: 3px; font-weight: 600; text-transform: uppercase; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 0.5px solid var(--border); }
+.acomp-block.impl .acomp-block-title { color: var(--red); }
+.acomp-block.post .acomp-block-title { color: var(--gold); }
+.acomp-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.acomp-list li { font-size: 12px; color: var(--light); padding-left: 16px; position: relative; line-height: 1.5; }
+.acomp-block.impl .acomp-list li::before { content: "→"; position: absolute; left: 0; color: var(--red); font-size: 9px; top: 3px; }
+.acomp-block.post .acomp-list li::before { content: "→"; position: absolute; left: 0; color: var(--gold); font-size: 9px; top: 3px; }
+@media (max-width: 768px) { .acomp-grid { grid-template-columns: 1fr; } }
+
 /* ─── CTA ─── */
 .cta { background: linear-gradient(135deg, var(--red) 0%, #c2261d 100%); padding: 38px; margin-top: 52px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; position: relative; overflow: hidden; isolation: isolate; }
 .cta::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(255,255,255,0.1), transparent 70%); z-index: -1; }
@@ -1257,6 +1269,29 @@ section.has-expanded .module-card:not(.expanded) { opacity: 0.25; filter: blur(1
       <span class="num">04</span>
       <h4>Sistema completo</h4>
       <p>Paquete integral entregado en 14–15 semanas. Formación corre en paralelo con el desarrollo desde la semana 3.</p>
+    </div>
+  </div>
+
+  <div class="acomp-grid reveal reveal-delay-4">
+    <div class="acomp-block impl">
+      <div class="acomp-block-title">Durante la implementación</div>
+      <ul class="acomp-list">
+        <li>Reuniones semanales de seguimiento con el equipo de SIA Trade</li>
+        <li>Ajustes dentro del alcance pactado sin costo adicional</li>
+        <li>Entorno de pruebas (staging) antes del go-live de cada módulo</li>
+        <li>Capacitación técnica al equipo de SIA Trade para transferencia de conocimiento</li>
+        <li>Go-live asistido: Onza AI presente en el primer día de operación real</li>
+      </ul>
+    </div>
+    <div class="acomp-block post">
+      <div class="acomp-block-title">Post-implementación · incluido en el paquete</div>
+      <ul class="acomp-list">
+        <li>30 días de soporte por módulo entregado</li>
+        <li>Corrección de bugs sin costo durante el primer mes post-entrega</li>
+        <li>Sesión de retroalimentación a 30 y 90 días de operación</li>
+        <li>Documentación técnica y de usuario entregada al cierre</li>
+        <li>Canal directo de comunicación (WhatsApp + correo) con el equipo Onza AI</li>
+      </ul>
     </div>
   </div>
 
