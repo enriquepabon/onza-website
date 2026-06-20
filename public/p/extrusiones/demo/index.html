@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Homologador de Perfiles · Extrusiones S.A.</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+:root{
+  --paper:#F4F1E9; --paper-2:#EEEADF; --card:#FFFFFF;
+  --ink:#17150F; --ink-soft:#43403A; --muted:#8E897C;
+  --red:#E51D2B; --red-deep:#B3121C; --red-wash:rgba(229,29,43,0.08);
+  --hair:#DCD6C7; --hair-2:#E7E2D6;
+  --green:#1E8E5A;
+  --shadow:0 1px 0 rgba(23,21,15,.04), 0 18px 40px -24px rgba(23,21,15,.35);
+  --disp:"Archivo", sans-serif; --mono:"Space Mono", monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased}
+body{
+  background:var(--paper); color:var(--ink); font-family:var(--disp);
+  font-size:16px; line-height:1.55; min-height:100vh; overflow-x:hidden; position:relative;
+}
+/* blueprint grid + grain background */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--hair-2) 1px,transparent 1px),linear-gradient(90deg,var(--hair-2) 1px,transparent 1px);
+  background-size:46px 46px; mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 80%); opacity:.6;}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.wrap{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 28px}
+
+/* ── topbar ── */
+.topbar{position:relative;z-index:5;display:flex;align-items:center;justify-content:space-between;
+  padding:20px 28px;max-width:1180px;margin:0 auto;border-bottom:1px solid var(--hair)}
+.tb-left{display:flex;align-items:center;gap:16px}
+.tb-left img{height:30px;width:auto;display:block}
+.tb-divider{width:1px;height:26px;background:var(--hair)}
+.tb-tag{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;color:var(--muted);text-transform:uppercase;line-height:1.3}
+.tb-tag b{display:block;color:var(--ink);font-weight:700;letter-spacing:3px}
+.status{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;color:var(--ink-soft);text-transform:uppercase}
+.status .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(30,142,90,.5);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(30,142,90,.45)}70%{box-shadow:0 0 0 7px rgba(30,142,90,0)}100%{box-shadow:0 0 0 0 rgba(30,142,90,0)}}
+/* entrada en CSS puro: el contenido es visible por defecto; la animacion solo lo mejora */
+@keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:no-preference){.rise{opacity:0;animation:riseIn .7s cubic-bezier(.2,.8,.2,1) both}}
+
+/* ── masthead ── */
+.stage{padding:54px 0 90px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:5px;color:var(--red);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.eyebrow::before{content:"";width:34px;height:2px;background:var(--red);display:inline-block}
+.masthead h1{font-family:var(--disp);font-weight:800;font-size:clamp(38px,6.4vw,82px);line-height:.96;letter-spacing:-.03em;max-width:14ch}
+.masthead h1 .accent{color:var(--red);font-style:italic;font-weight:800}
+.masthead .sub{margin-top:24px;font-size:clamp(15px,1.5vw,18px);color:var(--ink-soft);max-width:56ch;line-height:1.6}
+.masthead .sub b{color:var(--ink);font-weight:600}
+
+/* ── console / dropzone ── */
+.console{margin-top:46px}
+.dropzone{display:block;position:relative;background:var(--card);border:1.5px dashed var(--hair);border-radius:4px;
+  padding:54px 40px;text-align:center;cursor:pointer;transition:border-color .35s,background .35s,transform .35s;overflow:hidden;box-shadow:var(--shadow)}
+.dropzone:hover{border-color:#C9C2B0}
+.dropzone.drag{border-color:var(--red);background:#fff;transform:scale(1.005)}
+.dropzone.drag::after{content:"";position:absolute;inset:0;background:var(--red-wash)}
+.dz-bracket{position:absolute;width:26px;height:26px;border:2px solid var(--red);opacity:0;transition:opacity .3s}
+.dropzone.drag .dz-bracket{opacity:1}
+.dz-bracket.tl{top:14px;left:14px;border-right:0;border-bottom:0}
+.dz-bracket.tr{top:14px;right:14px;border-left:0;border-bottom:0}
+.dz-bracket.bl{bottom:14px;left:14px;border-right:0;border-top:0}
+.dz-bracket.br{bottom:14px;right:14px;border-left:0;border-top:0}
+.dz-icon{width:54px;height:54px;margin:0 auto 20px;position:relative}
+.dz-icon svg{width:100%;height:100%;stroke:var(--ink);stroke-width:1.4;fill:none}
+.dz-title{font-family:var(--disp);font-weight:700;font-size:20px;letter-spacing:-.01em}
+.dz-title .pick{color:var(--red);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1.5px}
+.dz-hint{margin-top:8px;font-size:13.5px;color:var(--muted)}
+.dz-formats{display:flex;gap:8px;justify-content:center;margin-top:20px}
+.fmt{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;color:var(--ink-soft);border:1px solid var(--hair);border-radius:2px;padding:4px 11px;background:var(--paper)}
+/* input de archivo transparente que cubre todo el recuadro: el clic ES el input nativo */
+.dz-input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:4}
+
+/* ── examples ── */
+.examples{margin-top:30px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.examples .lbl{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.ex-list{display:flex;gap:12px;flex-wrap:wrap}
+.ex{width:74px;height:74px;border-radius:3px;overflow:hidden;border:1px solid var(--hair);background:#fff;cursor:pointer;position:relative;transition:transform .3s,border-color .3s,box-shadow .3s}
+.ex img{width:100%;height:100%;object-fit:cover;display:block}
+.ex:hover{transform:translateY(-3px);border-color:var(--red);box-shadow:0 10px 22px -12px rgba(23,21,15,.5)}
+.ex .ex-tag{position:absolute;bottom:0;left:0;right:0;font-family:var(--mono);font-size:7.5px;letter-spacing:.5px;text-transform:uppercase;color:#fff;background:rgba(23,21,15,.72);padding:2px 4px;text-align:center}
+
+/* ── processing ── */
+.panel{margin-top:6px}
+.proc{display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:40px;align-items:center}
+.scan-frame{position:relative;background:#fff;border:1px solid var(--hair);border-radius:4px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center}
+.scan-frame img{max-width:100%;max-height:100%;object-fit:contain;display:block;filter:saturate(.9)}
+.scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);box-shadow:0 0 16px 3px rgba(229,29,43,.55);top:0}
+.scan-glow{position:absolute;left:0;right:0;top:0;height:64px;background:linear-gradient(180deg,rgba(229,29,43,.18),transparent);pointer-events:none}
+.scan-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(229,29,43,.10) 1px,transparent 1px),linear-gradient(90deg,rgba(229,29,43,.10) 1px,transparent 1px);background-size:22px 22px;opacity:.5;pointer-events:none}
+.proc-side .p-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:4px;color:var(--red);text-transform:uppercase;margin-bottom:14px}
+.proc-side h3{font-family:var(--disp);font-weight:800;font-size:30px;letter-spacing:-.02em;line-height:1.05;margin-bottom:22px}
+.steps{list-style:none;display:flex;flex-direction:column;gap:11px}
+.steps li{font-family:var(--mono);font-size:13px;letter-spacing:.5px;color:var(--muted);display:flex;align-items:center;gap:12px;transition:color .3s}
+.steps li .mk{width:14px;height:14px;border:1.5px solid var(--hair);border-radius:50%;flex-shrink:0;position:relative;transition:border-color .3s}
+.steps li.on{color:var(--ink)}
+.steps li.on .mk{border-color:var(--red)}
+.steps li.done .mk{border-color:var(--red);background:var(--red)}
+.steps li.done .mk::after{content:"";position:absolute;inset:3px;border-radius:50%;background:#fff}
+
+/* ── results ── */
+.results-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:26px;flex-wrap:wrap}
+.results-head .rh-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:4px;color:var(--red);text-transform:uppercase;margin-bottom:10px}
+.results-head h3{font-family:var(--disp);font-weight:800;font-size:clamp(26px,3.4vw,40px);letter-spacing:-.025em;line-height:1}
+.results-head h3 em{color:var(--red);font-style:italic}
+.reset{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink);background:none;border:1px solid var(--ink);border-radius:2px;padding:11px 18px;cursor:pointer;transition:all .3s;white-space:nowrap}
+.reset:hover{background:var(--ink);color:var(--paper)}
+.results-grid{display:grid;grid-template-columns:248px 1fr;gap:34px;align-items:start}
+.query-card{background:var(--card);border:1px solid var(--hair);border-radius:4px;padding:18px;box-shadow:var(--shadow);position:sticky;top:20px}
+.query-card .qc-lbl{font-family:var(--mono);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.query-card .qc-img{background:var(--paper);border:1px solid var(--hair-2);border-radius:3px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.query-card .qc-img img{width:100%;height:100%;object-fit:contain}
+.query-card .qc-meta{margin-top:13px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--ink-soft);text-transform:uppercase}
+.query-card .qc-meta .chip{border:1px solid var(--hair);border-radius:2px;padding:3px 8px;color:var(--muted)}
+
+.matches{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:980px){.matches{grid-template-columns:repeat(3,1fr)}}
+.match{background:var(--card);border:1px solid var(--hair);border-radius:4px;overflow:hidden;box-shadow:var(--shadow);position:relative;transition:transform .35s,box-shadow .35s,border-color .35s;will-change:transform,opacity}
+.match:hover{transform:translateY(-5px);box-shadow:0 22px 40px -22px rgba(23,21,15,.55);border-color:#C9C2B0}
+.match .rank{position:absolute;top:9px;left:9px;font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--muted);z-index:2}
+.match .m-img{background:var(--paper);aspect-ratio:1;display:flex;align-items:center;justify-content:center;padding:14px;border-bottom:1px solid var(--hair-2)}
+.match .m-img img{width:100%;height:100%;object-fit:contain}
+.match .m-body{padding:12px 13px 14px}
+.match .code{font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.5px;color:var(--ink);word-break:break-all;line-height:1.2}
+.match .origin{display:inline-block;margin-top:7px;font-family:var(--mono);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);border:1px solid rgba(30,142,90,.3);background:rgba(30,142,90,.07);border-radius:2px;padding:2px 6px}
+.match .score-row{margin-top:13px;display:flex;align-items:baseline;justify-content:space-between}
+.match .score-row .lab{font-family:var(--mono);font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.match .score-row .val{font-family:var(--disp);font-weight:800;font-size:24px;letter-spacing:-.02em;color:var(--ink)}
+.match .score-row .val .pc{font-size:13px;color:var(--muted);font-weight:600}
+.match .bar{margin-top:8px;height:4px;background:var(--hair-2);border-radius:3px;overflow:hidden}
+.match .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--red-deep),var(--red));border-radius:3px}
+.match.best{border-color:var(--red);box-shadow:0 0 0 1px var(--red),0 22px 44px -22px rgba(229,29,43,.5)}
+.match.best .ribbon{position:absolute;top:0;right:0;background:var(--red);color:#fff;font-family:var(--mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 9px;z-index:3;border-bottom-left-radius:4px}
+.match.best .score-row .val{color:var(--red)}
+
+.note{margin-top:30px;font-family:var(--mono);font-size:11px;letter-spacing:.5px;color:var(--muted);max-width:70ch;line-height:1.7;border-left:2px solid var(--hair);padding-left:14px}
+.note b{color:var(--ink-soft);font-weight:700}
+.lowconf{background:var(--red-wash);border:1px solid rgba(229,29,43,.3);border-left:3px solid var(--red);border-radius:3px;padding:12px 16px;margin-bottom:22px;font-size:13px;line-height:1.55;color:var(--ink-soft)}
+.lowconf b{color:var(--red);font-weight:600}
+
+/* ── error ── */
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);z-index:40;background:var(--ink);color:var(--paper);
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.5px;padding:14px 22px;border-radius:3px;box-shadow:0 18px 40px -16px rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .35s,transform .35s;max-width:80vw}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast b{color:var(--red)}
+
+/* ── footer ── */
+.foot{position:relative;z-index:2;border-top:1px solid var(--hair);margin-top:30px}
+.foot-in{max-width:1180px;margin:0 auto;padding:26px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.byonza{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.byonza img{height:68px;width:auto;display:block;opacity:.95}
+.foot-meta{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
+
+[hidden]{display:none !important}
+@media(max-width:760px){
+  .proc{grid-template-columns:1fr;gap:24px}
+  .results-grid{grid-template-columns:1fr;gap:22px}
+  .query-card{position:static;max-width:240px}
+  .matches{grid-template-columns:repeat(2,1fr)}
+  .tb-tag{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="tb-left">
+    <img src="brand/extrusiones-logo.svg" alt="Extrusiones S.A.">
+    <span class="tb-divider"></span>
+    <span class="tb-tag">Reconocimiento por forma<b>Homologador de perfiles</b></span>
+  </div>
+  <div class="status"><span class="dot"></span><span id="statusTxt">Motor activo · cargando…</span></div>
+</header>
+
+<main class="wrap">
+  <section class="stage">
+    <div class="masthead">
+      <div class="eyebrow rise" id="eyebrow" style="animation-delay:.05s">Demo · Prueba de concepto</div>
+      <h1 id="headline" class="rise" style="animation-delay:.13s">Encuentra el <span class="accent">homólogo.</span><br>En segundos, no en horas.</h1>
+      <p class="sub rise" id="subline" style="animation-delay:.24s">Sube la imagen que te manda el cliente, foto, plano o dibujo, y el motor la convierte en una silueta y te trae las <b>5 referencias más parecidas</b> de la base de Extrusiones, sin importar tamaño, rotación o si está volteada.</p>
+    </div>
+
+    <!-- CONSOLE -->
+    <div class="console rise" id="console" style="animation-delay:.36s">
+      <div class="dropzone" id="dropzone">
+        <span class="dz-bracket tl"></span><span class="dz-bracket tr"></span><span class="dz-bracket bl"></span><span class="dz-bracket br"></span>
+        <div class="dz-icon">
+          <svg viewBox="0 0 48 48"><path d="M24 32V10M24 10l-9 9M24 10l9 9" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 30v6a2 2 0 002 2h28a2 2 0 002-2v-6" stroke-linecap="round"/></svg>
+        </div>
+        <div class="dz-title">Arrastra, pega (⌘V) o <span class="pick">haz clic para subir</span></div>
+        <div class="dz-hint">Foto del perfil (incluye HEIC), plano, dibujo o captura · arrastrar y pegar funcionan siempre</div>
+        <div class="dz-formats"><span class="fmt">JPG</span><span class="fmt">PNG</span><span class="fmt">HEIC</span><span class="fmt">WEBP</span><span class="fmt">PDF</span></div>
+        <input type="file" id="fileInput" class="dz-input" accept="image/*,application/pdf,.heic,.heif" title="Subir imagen del perfil">
+      </div>
+
+      <div class="examples">
+        <span class="lbl">O prueba con un ejemplo</span>
+        <div class="ex-list" id="exList">
+          <div class="ex" data-src="examples/ej-silueta.png" data-name="ej-silueta.png"><img src="examples/ej-silueta.png" alt=""><span class="ex-tag">Silueta</span></div>
+          <div class="ex" data-src="examples/ej-perfil-madera.jpg" data-name="ej-perfil.jpg"><img src="examples/ej-perfil-madera.jpg" alt=""><span class="ex-tag">Foto</span></div>
+          <div class="ex" data-src="examples/ej-perfil-grid.jpg" data-name="ej-perfil-grid.jpg"><img src="examples/ej-perfil-grid.jpg" alt=""><span class="ex-tag">Foto</span></div>
+          <div class="ex" data-src="examples/ej-seccion.jpg" data-name="ej-seccion.jpg"><img src="examples/ej-seccion.jpg" alt=""><span class="ex-tag">Sección</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROCESSING -->
+    <div class="panel" id="processing" hidden>
+      <div class="proc">
+        <div class="scan-frame">
+          <img id="scanImg" src="" alt="">
+          <div class="scan-grid"></div>
+          <div class="scan-glow" id="scanGlow"></div>
+          <div class="scan-line" id="scanLine"></div>
+        </div>
+        <div class="proc-side">
+          <div class="p-eyebrow">Procesando</div>
+          <h3 id="procH3">Leyendo la geometría…</h3>
+          <ul class="steps" id="steps">
+            <li data-i="0"><span class="mk"></span>Normalizando la imagen</li>
+            <li data-i="1"><span class="mk"></span>Extrayendo la silueta de la sección</li>
+            <li data-i="2"><span class="mk"></span>Comparando contra la base de referencias</li>
+            <li data-i="3"><span class="mk"></span>Ordenando por similitud de forma</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="panel" id="results" hidden>
+      <div class="results-head">
+        <div>
+          <div class="rh-eyebrow" id="rhEyebrow">5 coincidencias · ordenadas por forma</div>
+          <h3>Las más <em>parecidas</em>.</h3>
+        </div>
+        <button class="reset" id="resetBtn">↺ Nueva búsqueda</button>
+      </div>
+      <div class="lowconf" id="lowconf" hidden>Coincidencias parejas, sin un ganador claro. Si subiste una vista en 3D del producto, prueba con una foto de la <b>sección cortada, de frente</b>, que es lo que la herramienta compara.</div>
+      <div class="results-grid">
+        <div class="query-card">
+          <div class="qc-lbl">Tu perfil</div>
+          <div class="qc-img"><img id="queryImg" src="" alt="silueta normalizada"></div>
+          <div class="qc-meta"><span id="qcMethod">Silueta</span><span class="chip" id="qcBase">base 48</span></div>
+        </div>
+        <div class="matches" id="matches"></div>
+      </div>
+      <p class="note">El motor compara por <b>forma</b>, no por tamaño ni material: la silueta no dice si el perfil es grande o pequeño, así que el gestor valida medidas sobre estos candidatos. Demo con motor clásico sobre una muestra de la base; en producción suma segmentación robusta (SAM 2) y la base completa de 15.000+ referencias.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div class="byonza">by <img src="brand/onza-logo-horizontal.svg" alt="Onza"></div>
+    <div class="foot-meta">Homologador de perfiles · Demo · 2026 · Documento confidencial</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* si GSAP (CDN) no carga, un stub no-op evita que cualquier animacion lance error */
+window.gsap = window.gsap || (()=>{const n=()=>s,s={from:n,to:n,fromTo:n,set:n,timeline:()=>s};return s;})();
+const STILL = new URLSearchParams(location.search).get('still');   // captura estatica para presentaciones/screenshots
+if(STILL){ window.gsap = (()=>{const n=()=>s,s={from:n,to:n,fromTo:n,set:n,timeline:()=>s};return s;})(); }
+const $ = s => document.querySelector(s);
+const dz = $('#dropzone'), fileInput = $('#fileInput');
+const consoleEl = $('#console'), processing = $('#processing'), results = $('#results');
+
+/* base del backend (configurable para despliegue; vacío = mismo origen, modo local) */
+const API_BASE = (window.HOMOLOGADOR_API || '').replace(/\/$/,'');
+const api = p => (API_BASE ? API_BASE + '/' : '') + p;
+
+/* health */
+fetch(api('api/health')).then(r=>r.json()).then(d=>{ $('#statusTxt').textContent = `Motor activo · ${d.siluetas} referencias`; })
+  .catch(()=>{ $('#statusTxt').textContent='Motor sin conexión'; });
+
+/* la entrada del hero ahora es CSS puro (clase .rise) — no depende de JS, el recuadro siempre es visible y clickeable */
+
+/* dropzone interactions — el clic abre Finder de forma nativa via <label for> */
+fileInput.addEventListener('change',e=>{ if(e.target.files[0]) handleFile(e.target.files[0]); });
+['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('drag');}));
+['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();if(ev!=='dragleave'||!dz.contains(e.relatedTarget))dz.classList.remove('drag');}));
+dz.addEventListener('drop',e=>{ const f=e.dataTransfer.files[0]; if(f) handleFile(f); });
+
+/* pegar imagen (Cmd+V) — funciona aunque el dialogo de archivos este bloqueado por politica de empresa */
+window.addEventListener('paste',e=>{
+  const items=(e.clipboardData||{}).items||[];
+  for(const it of items){ if(it.type && it.type.indexOf('image/')===0){ const f=it.getAsFile(); if(f){ e.preventDefault(); handleFile(f); return; } } }
+});
+
+/* examples */
+document.querySelectorAll('.ex').forEach(ex=>ex.addEventListener('click',async()=>{
+  try{ const blob = await (await fetch(ex.dataset.src)).blob();
+    handleFile(new File([blob], ex.dataset.name, {type:blob.type})); }
+  catch(err){ showError('No se pudo cargar el ejemplo.'); }
+}));
+if(STILL){ const _ex=[...document.querySelectorAll('.ex')].find(e=>(e.dataset.name+e.dataset.src).includes(STILL))||document.querySelector('.ex'); if(_ex) _ex.click(); }
+
+function showError(msg){ const t=$('#toast'); t.innerHTML='<b>⚠</b> &nbsp;'+msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),4200); }
+
+let scanTween;
+function startScan(imgURL){
+  const si=$('#scanImg'); si.onerror=()=>{ si.onerror=null; si.src='brand/onza-logo-mark.svg'; }; si.src=imgURL;
+  consoleEl.hidden = true; results.hidden = true; processing.hidden = false;
+  document.querySelectorAll('.steps li').forEach(li=>li.classList.remove('on','done'));
+  gsap.fromTo('#processing',{opacity:0,y:18},{opacity:1,y:0,duration:.5,ease:'power3.out'});
+  // scan line sweeps the frame
+  scanTween = gsap.timeline({repeat:-1});
+  scanTween.fromTo('#scanLine',{top:'0%'},{top:'100%',duration:1.15,ease:'sine.inOut'})
+           .fromTo('#scanGlow',{top:'0%'},{top:'calc(100% - 64px)',duration:1.15,ease:'sine.inOut'},0)
+           .to('#scanLine',{top:'0%',duration:1.15,ease:'sine.inOut'})
+           .to('#scanGlow',{top:'0%',duration:1.15,ease:'sine.inOut'},'-=1.15');
+  // step ticker
+  const steps=[...document.querySelectorAll('.steps li')]; const h3=$('#procH3');
+  const labels=['Normalizando la imagen…','Extrayendo la silueta…','Comparando 48 referencias…','Ordenando por similitud…'];
+  steps.forEach((li,i)=>setTimeout(()=>{ steps.forEach((s,j)=>{ s.classList.toggle('done',j<i); s.classList.toggle('on',j===i); }); h3.textContent=labels[i]; }, 360*i+200));
+}
+function stopScan(){ if(scanTween) scanTween.kill(); }
+
+async function handleFile(file){
+  const okType = (file.type||'').startsWith('image/') || file.type==='application/pdf';
+  const okExt = /\.(jpe?g|png|webp|heic|heif|bmp|tiff?|gif|pdf)$/i.test(file.name);
+  if(!okType && !okExt){ showError('Usa una imagen (JPG, PNG, HEIC, WEBP…) o un PDF.'); return; }
+  // el navegador no dibuja HEIC/PDF/TIFF: en esos casos mostramos un placeholder (el backend sí los procesa)
+  const noPreview = file.type==='application/pdf' || /\.(pdf|heic|heif|tiff?)$/i.test(file.name) || (file.type||'').includes('heic') || (file.type||'').includes('heif');
+  const previewURL = noPreview ? 'brand/onza-logo-mark.svg' : URL.createObjectURL(file);
+  startScan(previewURL);
+
+  const t0=performance.now();
+  const fd=new FormData(); fd.append('file',file);
+  let data;
+  try{ const r=await fetch(api('api/match'),{method:'POST',body:fd}); data=await r.json();
+       if(!r.ok){ stopScan(); processing.hidden=true; consoleEl.hidden=false; showError(data.error||'No se pudo procesar la imagen.'); return; } }
+  catch(err){ stopScan(); processing.hidden=true; consoleEl.hidden=false; showError('Error de conexión con el motor.'); return; }
+
+  const elapsed=performance.now()-t0;
+  const minShow= STILL ? 0 : 2100;        // deja correr la animación para el efecto
+  setTimeout(()=>{ stopScan(); renderResults(data); }, Math.max(0,minShow-elapsed));
+}
+
+function renderResults(data){
+  processing.hidden=true; results.hidden=false;
+  $('#queryImg').src = data.silueta;
+  $('#qcMethod').textContent = (data.metodo==='foto') ? 'Foto → silueta' : 'Silueta';
+  $('#qcBase').textContent = 'base '+data.total_base;
+  $('#rhEyebrow').textContent = `${data.matches.length} coincidencias · de ${data.total_base} referencias`;
+  $('#lowconf').hidden = !data.low_conf;
+
+  const grid=$('#matches'); grid.innerHTML='';
+  data.matches.forEach((m,i)=>{
+    const best = i===0;
+    const el=document.createElement('div');
+    el.className='match'+(best?' best':'');
+    el.innerHTML = `${best?'<span class="ribbon">Mejor coincidencia</span>':''}
+      <span class="rank">0${i+1}</span>
+      <div class="m-img"><img src="${m.thumb}" alt="${m.codigo}"></div>
+      <div class="m-body">
+        <div class="code">${m.codigo}</div>
+        <span class="origin">${m.origen}</span>
+        <div class="score-row"><span class="lab">Similitud</span><span class="val" data-score="${m.score}">0<span class="pc">%</span></span></div>
+        <div class="bar"><i data-w="${m.score}"></i></div>
+      </div>`;
+    grid.appendChild(el);
+  });
+
+  gsap.fromTo('#results',{opacity:0,y:18},{opacity:1,y:0,duration:.5,ease:'power3.out'});
+  gsap.fromTo('.query-card',{opacity:0,x:-18},{opacity:1,x:0,duration:.6,ease:'power3.out',delay:.1});
+  gsap.fromTo('.match',{opacity:0,y:26,scale:.96},{opacity:1,y:0,scale:1,duration:.55,stagger:.09,ease:'power3.out',delay:.18,
+    onComplete:()=>{
+      document.querySelectorAll('.match .val').forEach(v=>{ const target={n:0}, end=+v.dataset.score;
+        gsap.to(target,{n:end,duration:1.1,ease:'power2.out',onUpdate:()=>{ v.firstChild.textContent=target.n.toFixed(0); }}); });
+      document.querySelectorAll('.match .bar i').forEach(b=>gsap.to(b,{width:b.dataset.w+'%',duration:1.1,ease:'power2.out'}));
+    }});
+}
+
+$('#resetBtn').addEventListener('click',()=>{
+  results.hidden=true; consoleEl.hidden=false; fileInput.value='';
+  gsap.fromTo('#console',{opacity:0,y:18},{opacity:1,y:0,duration:.5,ease:'power3.out'});
+});
+</script>
+</body>
+</html>

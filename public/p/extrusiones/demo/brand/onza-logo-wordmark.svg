@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="600" height="200">
+  <rect width="600" height="200" fill="#FFFFFF"/>
+
+  <!-- Wordmark only -->
+  <text x="300" y="120"
+        font-family="Futura"
+        font-weight="300"
+        font-size="60"
+        letter-spacing="30"
+        text-anchor="middle"
+        fill="#1A1A1A">ONZA</text>
+</svg>

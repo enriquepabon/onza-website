@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" width="1000" height="400">
+
+  <!-- Mark: Three converging wedge shapes, scaled to fit left side -->
+  <!-- Vertex at (250, 310), arms spread to top -->
+  <g fill="#1A1A1A">
+    <!-- Left arm -->
+    <polygon points="100,70 120,70 251,308 249,308"/>
+    <!-- Right arm -->
+    <polygon points="380,70 400,70 251,308 249,308"/>
+    <!-- Inner line with curve -->
+    <path d="M 270,78 L 277,78 C 271,180 258,260 251,308 L 249,308 C 255,260 264,180 270,78 Z"/>
+  </g>
+
+  <!-- Thin vertical separator -->
+  <line x1="470" y1="130" x2="470" y2="280" stroke="#1A1A1A" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- Wordmark -->
+  <text x="540" y="225"
+        font-family="Futura"
+        font-weight="300"
+        font-size="52"
+        letter-spacing="26"
+        text-anchor="start"
+        fill="#1A1A1A">ONZA</text>
+</svg>

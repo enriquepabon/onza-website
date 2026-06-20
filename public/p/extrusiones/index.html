@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Extrusiones S.A. × Onza AI · Homologador de perfiles</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0C0C0C;--bg1:#141414;--bg2:#1A1A1A;--border:#2A2A2A;--white:#fff;--off:#E8E8E8;--light:#C8C8C8;--med:#8A8A8A;--dim:#555;--red:#E51D2B;--gold:#D4AF37;--serif:"Playfair Display",Georgia,serif;--sans:"Inter",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--off);font-family:var(--sans);font-weight:300;min-height:100vh;display:flex;flex-direction:column}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 5%,rgba(212,175,55,.10),transparent 40%),radial-gradient(circle at 85% 95%,rgba(229,29,43,.10),transparent 40%)}
+.wrap{position:relative;max-width:1080px;margin:0 auto;padding:0 28px;width:100%}
+header{padding:26px 28px;max-width:1080px;margin:0 auto;width:100%;display:flex;align-items:center;gap:16px}
+header .chip{background:#fff;border-radius:8px;padding:7px 12px;display:inline-flex}
+header .chip img{height:22px;display:block}
+header .x{color:var(--dim);font-size:18px}
+header .onza{font-weight:300;letter-spacing:8px;font-size:17px;color:var(--off)}
+.hero{padding:60px 0 30px}
+.hero .eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,6vw,62px);line-height:1.04;color:var(--white);letter-spacing:-.01em}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero p{margin-top:18px;color:var(--light);max-width:60ch;font-size:16px;line-height:1.6}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:36px 0 60px}
+@media(max-width:820px){.cards{grid-template-columns:1fr}}
+.card{display:flex;flex-direction:column;background:var(--bg1);border:.5px solid var(--border);border-radius:12px;padding:26px 24px;text-decoration:none;color:inherit;transition:all .4s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden;min-height:230px}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .5s}
+.card:hover{border-color:rgba(212,175,55,.4);transform:translateY(-4px);box-shadow:0 22px 50px -24px rgba(0,0,0,.7)}
+.card:hover::before{transform:scaleX(1)}
+.card .num{font-family:var(--serif);font-size:15px;color:var(--dim)}
+.card .ico{font-size:26px;margin:10px 0 16px}
+.card h2{font-family:var(--serif);font-weight:400;font-size:24px;color:var(--white);margin-bottom:8px;line-height:1.1}
+.card p{font-size:13.5px;color:var(--med);line-height:1.55;flex:1}
+.card .go{margin-top:16px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:7px}
+.card.demo .ico{color:var(--red)}
+.note{font-size:12px;color:var(--dim);border-left:2px solid var(--border);padding-left:14px;max-width:70ch;line-height:1.7;margin-bottom:50px}
+footer{margin-top:auto;border-top:.5px solid var(--border);padding:24px 28px;max-width:1080px;margin-left:auto;margin-right:auto;width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--med)}
+footer .onza{font-weight:300;letter-spacing:7px;font-size:14px;color:var(--off)}
+</style>
+</head>
+<body>
+<header>
+  <span class="chip"><img src="assets/extrusiones-logo.svg" alt="Extrusiones"></span>
+  <span class="x">×</span>
+  <span class="onza">ONZA</span>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Documento de trabajo · confidencial</div>
+    <h1>Homologador de perfiles.<br><em>Todo en un solo lugar.</em></h1>
+    <p>La propuesta, el demo funcionando y el simulador del caso de negocio. Para Extrusiones S.A., de parte de Onza AI.</p>
+  </div>
+
+  <div class="cards">
+    <a class="card" href="propuesta.html">
+      <span class="num">01</span>
+      <div class="ico">📄</div>
+      <h2>La propuesta</h2>
+      <p>El problema, la solución, la arquitectura, las fases y la inversión. Lista para presentar a gerencia.</p>
+      <span class="go">Abrir →</span>
+    </a>
+    <a class="card demo" href="demo/">
+      <span class="num">02</span>
+      <div class="ico">▰</div>
+      <h2>El demo</h2>
+      <p>Sube una imagen de un perfil y recibe las 5 referencias más parecidas de la base. El motor, funcionando.</p>
+      <span class="go">Probar →</span>
+    </a>
+    <a class="card" href="simulador.html">
+      <span class="num">03</span>
+      <div class="ico">📊</div>
+      <h2>Simulador de retorno</h2>
+      <p>El caso de negocio en sus propias cifras: ROI, TIR, payback y flujo de caja, ajustables en vivo.</p>
+      <span class="go">Calcular →</span>
+    </a>
+  </div>
+
+  <p class="note">Documento confidencial preparado para Extrusiones S.A. El demo corre sobre una muestra de la base; en producción usa la base completa. El simulador es ilustrable: las cifras se ajustan a la realidad de Extrusiones.</p>
+</main>
+
+<footer>
+  <div>by <span class="onza">ONZA</span></div>
+  <div>Onza AI · Arquitectura de soluciones IA · 2026</div>
+</footer>
+</body>
+</html>
