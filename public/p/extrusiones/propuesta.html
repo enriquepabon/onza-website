@@ -260,6 +260,14 @@ body::before { content: ""; position: fixed; inset: 0; background: radial-gradie
 .op-includes { display: flex; flex-wrap: wrap; gap: 7px 18px; margin-top: 14px; padding-top: 14px; border-top: 0.5px solid rgba(212,175,55,0.15); }
 .op-item { font-size: 11.5px; color: var(--med); display: flex; align-items: center; gap: 7px; }
 .op-item::before { content: "→"; color: var(--gold); font-size: 9px; flex-shrink: 0; }
+.op-breakdown { margin-top: 16px; }
+.ob-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 9px 0; border-bottom: 0.5px solid rgba(212,175,55,0.12); font-size: 13px; color: var(--light); }
+.ob-row b { font-family: var(--serif); font-weight: 400; color: var(--off-white); white-space: nowrap; }
+.ob-row b small { font-family: var(--sans); font-size: 10px; color: var(--med); letter-spacing: 0.5px; }
+.ob-row.total { border-bottom: none; border-top: 0.5px solid rgba(212,175,55,0.3); margin-top: 4px; padding-top: 12px; }
+.ob-row.total span { color: var(--off-white); }
+.ob-row.total b { color: var(--gold); font-size: 18px; }
+.op-disc { font-size: 11.5px; color: var(--med); line-height: 1.65; margin-top: 14px; }
 .payment-terms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 28px; }
 .payment-term { background: var(--bg-1); border: 0.5px solid var(--border); padding: 16px 18px; text-align: center; }
 .payment-term .pct { font-family: var(--serif); font-size: 28px; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; }
@@ -700,19 +708,14 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
   </div>
 
   <div class="op-block reveal">
-    <div class="op-header">
-      <div>
-        <span class="op-tag">OPERACIÓN MENSUAL</span>
-        <div class="op-label">Infraestructura en la nube y consumo de IA por imagen procesada. Se cobra a costo de operación y se ajusta al volumen real. Las mejoras y los módulos nuevos se cotizan aparte.</div>
-      </div>
-      <div class="op-price">$ 400.000 – 1.000.000<small>COP / MES SEGÚN VOLUMEN</small></div>
+    <span class="op-tag">OPERACIÓN MENSUAL · ESTIMADA</span>
+    <div class="op-label">Es costo de operación, no honorarios. Se cobra a costo y se ajusta al volumen real de imágenes.</div>
+    <div class="op-breakdown">
+      <div class="ob-row"><span>Costo fijo · servidor, hosting e infraestructura</span><b>$ 500.000 <small>/ mes</small></b></div>
+      <div class="ob-row"><span>Costo variable · IA por cotización (segmentar y comparar la forma)</span><b>$ 300 <small>c/u</small></b></div>
+      <div class="ob-row total"><span>Total estimado · a ~120 cotizaciones al mes</span><b>~ $ 536.000 <small>/ mes</small></b></div>
     </div>
-    <div class="op-includes">
-      <span class="op-item">Servidor y hosting en la nube</span>
-      <span class="op-item">Consumo de IA por imagen</span>
-      <span class="op-item">Re-indexado de la carpeta dinámica</span>
-      <span class="op-item">60 días de soporte tras el go-live</span>
-    </div>
+    <p class="op-disc">El costo variable asume las llamadas de IA por cotización: segmentar la imagen y compararla contra la base, y en fotos 3D sumar el recorte de la sección con visión. Es un estimado a precios de proveedores de IA en la nube y se ajusta al volumen real. Pueden calcular el costo a su propio volumen en el simulador de retorno.</p>
   </div>
 
   <div class="pricing-table reveal" style="margin-top: 20px;">
