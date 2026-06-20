@@ -268,6 +268,14 @@ body::before { content: ""; position: fixed; inset: 0; background: radial-gradie
 .ob-row.total span { color: var(--off-white); }
 .ob-row.total b { color: var(--gold); font-size: 18px; }
 .op-disc { font-size: 11.5px; color: var(--med); line-height: 1.65; margin-top: 14px; }
+.op-slider { margin-top: 16px; }
+.op-slider-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 11px; font-size: 13px; color: var(--light); }
+.op-slider-head b { font-family: var(--serif); font-size: 19px; color: var(--gold); font-weight: 400; }
+.op-block input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 3px; border-radius: 3px; background: var(--bg-3); outline: none; cursor: pointer; }
+.op-block input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 17px; height: 17px; border-radius: 50%; background: var(--gold); border: 3px solid var(--bg-0); box-shadow: 0 0 0 1px var(--gold); transition: transform .15s; }
+.op-block input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.18); }
+.op-block input[type=range]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--gold); border: 3px solid var(--bg-0); box-shadow: 0 0 0 1px var(--gold); }
+.op-hint { font-size: 10px; letter-spacing: 1px; color: var(--gold); text-transform: uppercase; margin-top: 10px; opacity: .8; }
 .payment-terms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 28px; }
 .payment-term { background: var(--bg-1); border: 0.5px solid var(--border); padding: 16px 18px; text-align: center; }
 .payment-term .pct { font-family: var(--serif); font-size: 28px; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; }
@@ -709,13 +717,17 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
 
   <div class="op-block reveal">
     <span class="op-tag">OPERACIÓN MENSUAL · ESTIMADA</span>
-    <div class="op-label">Es costo de operación, no honorarios. Se cobra a costo y se ajusta al volumen real de imágenes.</div>
-    <div class="op-breakdown">
-      <div class="ob-row"><span>Costo fijo · servidor, hosting e infraestructura</span><b>$ 500.000 <small>/ mes</small></b></div>
-      <div class="ob-row"><span>Costo variable · IA por cotización (segmentar y comparar la forma)</span><b>$ 300 <small>c/u</small></b></div>
-      <div class="ob-row total"><span>Total estimado · a ~120 cotizaciones al mes</span><b>~ $ 536.000 <small>/ mes</small></b></div>
+    <div class="op-label">Es costo de operación, no honorarios. Muevan la barra según sus cotizaciones al mes y el total se ajusta.</div>
+    <div class="op-slider">
+      <div class="op-slider-head"><span>Cotizaciones al mes</span><b id="opQ">120</b></div>
+      <input type="range" id="opRange" min="20" max="500" step="10" value="120">
     </div>
-    <p class="op-disc">El costo variable asume las llamadas de IA por cotización: segmentar la imagen y compararla contra la base, y en fotos 3D sumar el recorte de la sección con visión. Es un estimado a precios de proveedores de IA en la nube y se ajusta al volumen real. Pueden calcular el costo a su propio volumen en el simulador de retorno.</p>
+    <div class="op-breakdown">
+      <div class="ob-row"><span>Costo fijo · servidor, hosting e infraestructura</span><b>$ 200.000 <small>/ mes</small></b></div>
+      <div class="ob-row"><span>Costo variable · IA por cotización ($ 300 c/u)</span><b id="opVar">$ 36.000 <small>/ mes</small></b></div>
+      <div class="ob-row total"><span>Total de operación estimado</span><b id="opTotal">~ $ 236.000 <small>/ mes</small></b></div>
+    </div>
+    <p class="op-disc">El costo variable asume las llamadas de IA por cotización: segmentar la imagen y compararla contra la base, y en fotos 3D sumar el recorte de la sección con visión. Es un estimado a precios de proveedores de IA en la nube. El detalle completo, con todas las variables, está en el simulador de retorno.</p>
   </div>
 
   <div class="pricing-table reveal" style="margin-top: 20px;">
@@ -804,6 +816,20 @@ overlay.addEventListener('click', closeZoom);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeZoom(); });
 const coverBg = document.querySelector('.cover-bg');
 if (coverBg) { window.addEventListener('scroll', () => { const y = window.scrollY; if (y < window.innerHeight) coverBg.style.transform = `translateY(${y * 0.35}px) scale(${1 + y * 0.0002})`; }, { passive: true }); }
+
+/* barra interactiva de costo de operación */
+(function(){
+  const r = document.getElementById('opRange'); if (!r) return;
+  const FIJO = 200000, API = 300, F = new Intl.NumberFormat('es-CO');
+  const m = v => '$ ' + F.format(Math.round(v));
+  function upd(){
+    const q = +r.value, varc = API * q;
+    document.getElementById('opQ').textContent = F.format(q);
+    document.getElementById('opVar').innerHTML = m(varc) + ' <small>/ mes</small>';
+    document.getElementById('opTotal').innerHTML = '~ ' + m(FIJO + varc) + ' <small>/ mes</small>';
+  }
+  r.addEventListener('input', upd); upd();
+})();
 </script>
 </body>
 </html>
