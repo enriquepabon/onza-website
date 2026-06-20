@@ -47,6 +47,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .ctrl-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
 .ctrl-label{font-size:13.5px;color:var(--off)}
 .ctrl-val{font-family:var(--serif);font-size:17px;color:var(--gold);white-space:nowrap}
+.ctrl-fixed{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-top:2px}
 input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:3px;border-radius:3px;background:var(--bg-3);outline:none;cursor:pointer}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:17px;height:17px;border-radius:50%;background:var(--gold);border:3px solid var(--bg-0);box-shadow:0 0 0 1px var(--gold);transition:transform .15s}
 input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.18)}
@@ -94,7 +95,7 @@ footer{border-top:.5px solid var(--border);padding:24px 28px;max-width:1280px;ma
 </style>
 </head>
 <body>
-<a href="/p/extrusiones/" style="position:fixed;left:18px;bottom:18px;z-index:99999;font-family:system-ui,-apple-system,sans-serif;font-weight:600;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#E8E8E8;background:rgba(18,18,18,.85);border:1px solid rgba(212,175,55,.5);border-radius:30px;padding:11px 16px;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)">← Portal</a>
+<a href="/p/extrusiones" style="position:fixed;left:18px;bottom:18px;z-index:99999;font-family:system-ui,-apple-system,sans-serif;font-weight:600;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#E8E8E8;background:rgba(18,18,18,.85);border:1px solid rgba(212,175,55,.5);border-radius:30px;padding:11px 16px;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)">← Portal</a>
 
 <header>
   <div class="h-left">
@@ -175,9 +176,9 @@ const SPEC = [
   {id:'pPerd', label:'Oportunidades que se pierden por demora (hoy)', min:0, max:30, step:1, val:6, unit:'%'},
   {id:'pRec', label:'De esas, recuperadas con respuesta rápida', min:0, max:100, step:5, val:25, unit:'%'},
   {g:'Costos del proyecto'},
-  {id:'inv', label:'Inversión de implementación (año 1)', min:15000000, max:45000000, step:1000000, val:28000000, money:1},
-  {id:'oper', label:'Costo de operación mensual (servidor, infra, IA)', min:100000, max:1500000, step:50000, val:500000, money:1},
-  {id:'lic', label:'Licenciamiento anual Onza (desde el año 2)', min:0, max:12000000, step:500000, val:4000000, money:1},
+  {id:'inv', label:'Inversión de implementación (año 1)', val:28000000, money:1, fixed:1},
+  {id:'oper', label:'Costo de operación mensual (servidor, infra, IA)', val:500000, money:1, fixed:1},
+  {id:'lic', label:'Licenciamiento anual Onza (desde el año 2)', val:4000000, money:1, fixed:1},
   {g:'Parámetros financieros'},
   {id:'horiz', label:'Horizonte de análisis', min:3, max:5, step:1, val:3, unit:'años'},
   {id:'tasa', label:'Tasa de descuento (VPN / TIR)', min:5, max:25, step:1, val:12, unit:'%'},
@@ -193,6 +194,11 @@ SPEC.forEach(s=>{
   if(s.g){ const h=document.createElement('div'); h.className='grp'; h.textContent=s.g; cont.appendChild(h); return; }
   V[s.id]=s.val;
   const d=document.createElement('div'); d.className='ctrl';
+  if(s.fixed){                                          // costo del proyecto: valor fijo, sin barra
+    d.innerHTML=`<div class="ctrl-head"><span class="ctrl-label">${s.label}</span><span class="ctrl-val" id="v-${s.id}"></span></div>
+      <div class="ctrl-fixed">Valor fijo de la propuesta</div>`;
+    cont.appendChild(d); return;
+  }
   d.innerHTML=`<div class="ctrl-head"><span class="ctrl-label">${s.label}</span><span class="ctrl-val" id="v-${s.id}"></span></div>
     <input type="range" id="r-${s.id}" min="${s.min}" max="${s.max}" step="${s.step}" value="${s.val}">`;
   cont.appendChild(d);
@@ -263,7 +269,7 @@ function compute(){
 }
 
 document.getElementById('reset').addEventListener('click',()=>{
-  SPEC.forEach(s=>{ if(s.g) return; V[s.id]=s.val; document.getElementById('r-'+s.id).value=s.val; });
+  SPEC.forEach(s=>{ if(s.g) return; V[s.id]=s.val; const el=document.getElementById('r-'+s.id); if(el) el.value=s.val; });
   init();
 });
 function init(){ SPEC.forEach(s=>{ if(s.g) return; document.getElementById('v-'+s.id).textContent=fmtVal(s); }); compute(); }
