@@ -331,6 +331,7 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
 </style>
 </head>
 <body>
+<a href="/p/extrusiones/" style="position:fixed;left:18px;bottom:18px;z-index:99999;font-family:system-ui,-apple-system,sans-serif;font-weight:600;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#E8E8E8;background:rgba(18,18,18,.85);border:1px solid rgba(212,175,55,.5);border-radius:30px;padding:11px 16px;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)">← Portal</a>
 
 <div class="card-overlay"></div>
 <div class="progress"></div>
@@ -716,18 +717,14 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
   </div>
 
   <div class="op-block reveal">
-    <span class="op-tag">OPERACIÓN MENSUAL · ESTIMADA</span>
-    <div class="op-label">Es costo de operación, no honorarios. Muevan la barra según sus cotizaciones al mes y el total se ajusta.</div>
-    <div class="op-slider">
-      <div class="op-slider-head"><span>Cotizaciones al mes</span><b id="opQ">120</b></div>
-      <input type="range" id="opRange" min="20" max="500" step="10" value="120">
+    <div class="op-header">
+      <div>
+        <span class="op-tag">SERVICIO GESTIONADO · MENSUAL</span>
+        <div class="op-label">Onza opera y mantiene todo: servidor e infraestructura, consumo de IA, actualizaciones del modelo, ingestión automática de OneDrive y soporte. Una sola tarifa, todo incluido.</div>
+      </div>
+      <div class="op-price">$ 500.000<small>+ IVA · COP / MES</small></div>
     </div>
-    <div class="op-breakdown">
-      <div class="ob-row"><span>Costo fijo · servidor, hosting e infraestructura</span><b>$ 200.000 <small>/ mes</small></b></div>
-      <div class="ob-row"><span>Costo variable · IA por cotización ($ 300 c/u)</span><b id="opVar">$ 36.000 <small>/ mes</small></b></div>
-      <div class="ob-row total"><span>Total de operación estimado</span><b id="opTotal">~ $ 236.000 <small>/ mes</small></b></div>
-    </div>
-    <p class="op-disc">El costo variable asume las llamadas de IA por cotización: segmentar la imagen y compararla contra la base, y en fotos 3D sumar el recorte de la sección con visión. Es un estimado a precios de proveedores de IA en la nube. El detalle completo, con todas las variables, está en el simulador de retorno.</p>
+    <p class="op-disc">Tarifa plana desde la puesta en producción, no honorarios por hora. Cubre la operación completa del homologador. Se asume un uso razonable acorde al volumen de cotizaciones de Extrusiones; si creciera de forma muy significativa, se revisa de común acuerdo.</p>
   </div>
 
   <div class="pricing-table reveal" style="margin-top: 20px;">
@@ -817,19 +814,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeZoom();
 const coverBg = document.querySelector('.cover-bg');
 if (coverBg) { window.addEventListener('scroll', () => { const y = window.scrollY; if (y < window.innerHeight) coverBg.style.transform = `translateY(${y * 0.35}px) scale(${1 + y * 0.0002})`; }, { passive: true }); }
 
-/* barra interactiva de costo de operación */
-(function(){
-  const r = document.getElementById('opRange'); if (!r) return;
-  const FIJO = 200000, API = 300, F = new Intl.NumberFormat('es-CO');
-  const m = v => '$ ' + F.format(Math.round(v));
-  function upd(){
-    const q = +r.value, varc = API * q;
-    document.getElementById('opQ').textContent = F.format(q);
-    document.getElementById('opVar').innerHTML = m(varc) + ' <small>/ mes</small>';
-    document.getElementById('opTotal').innerHTML = '~ ' + m(FIJO + varc) + ' <small>/ mes</small>';
-  }
-  r.addEventListener('input', upd); upd();
-})();
 </script>
 </body>
 </html>

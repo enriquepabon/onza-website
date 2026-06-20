@@ -94,6 +94,7 @@ footer{border-top:.5px solid var(--border);padding:24px 28px;max-width:1280px;ma
 </style>
 </head>
 <body>
+<a href="/p/extrusiones/" style="position:fixed;left:18px;bottom:18px;z-index:99999;font-family:system-ui,-apple-system,sans-serif;font-weight:600;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#E8E8E8;background:rgba(18,18,18,.85);border:1px solid rgba(212,175,55,.5);border-radius:30px;padding:11px 16px;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)">← Portal</a>
 
 <header>
   <div class="h-left">
@@ -132,11 +133,9 @@ footer{border-top:.5px solid var(--border);padding:24px 28px;max-width:1280px;ma
       </div>
 
       <div class="opex">
-        <div class="opex-title">Costo de operación estimado</div>
-        <div class="opex-row"><span>Cotizaciones al mes <span style="color:var(--dim)">(personas × cotizaciones c/u)</span></span><b id="ox-q">—</b></div>
-        <div class="opex-row"><span>Costo fijo · hosting e infraestructura</span><b id="ox-fijo">—</b></div>
-        <div class="opex-row"><span>Costo variable · IA por cotización (<span id="ox-api">—</span> c/u)</span><b id="ox-var">—</b></div>
-        <div class="opex-row total"><span>Total operación</span><b id="ox-total">—</b></div>
+        <div class="opex-title">Servicio gestionado · recurrente</div>
+        <div class="opex-row"><span>Servicio gestionado Onza · todo incluido</span><b id="ox-mes">—</b></div>
+        <div class="opex-row total"><span>Equivalente anual</span><b id="ox-ano">—</b></div>
         <div class="opex-disc" id="ox-disc"></div>
       </div>
 
@@ -176,9 +175,7 @@ const SPEC = [
   {id:'pRec', label:'De esas, recuperadas con respuesta rápida', min:0, max:100, step:5, val:25, unit:'%'},
   {g:'Costos del proyecto'},
   {id:'inv', label:'Inversión de implementación (año 1)', min:15000000, max:45000000, step:1000000, val:28000000, money:1},
-  {id:'lic', label:'Licencia anual Onza (desde año 2)', min:0, max:12000000, step:500000, val:4000000, money:1},
-  {id:'api', label:'Costo de IA / API por cotización', min:0, max:1500, step:50, val:300, money:1},
-  {id:'host',label:'Servidor, hosting e infraestructura al mes', min:0, max:2000000, step:50000, val:200000, money:1},
+  {id:'gestion', label:'Servicio gestionado Onza · mensual (todo incluido)', min:200000, max:1500000, step:50000, val:500000, money:1},
   {g:'Parámetros financieros'},
   {id:'horiz', label:'Horizonte de análisis', min:3, max:5, step:1, val:3, unit:'años'},
   {id:'tasa', label:'Tasa de descuento (VPN / TIR)', min:5, max:25, step:1, val:12, unit:'%'},
@@ -215,7 +212,7 @@ function compute(){
   const recup = Qtot*(V.pPerd/100)*(V.pRec/100);       // negocios/mes
   const benNeg = recup*margenNeg;                      // COP/mes
   const brutoMes = ahorroMO+benNeg, brutoAno=brutoMes*12;
-  const opexMes = V.api*Qtot + V.host, opexAno=opexMes*12;
+  const opexMes = V.gestion, opexAno=opexMes*12;       // tarifa plana de servicio gestionado
   const netoRecurMes = brutoMes-opexMes;
   const payback = netoRecurMes>0 ? V.inv/netoRecurMes : Infinity;  // meses
   const costoAno1 = V.inv+opexAno;
@@ -223,12 +220,12 @@ function compute(){
   const roi1 = costoAno1>0 ? (neto1/costoAno1*100) : 0;
 
   const flows=[-V.inv];
-  for(let t=1;t<=V.horiz;t++){ const lic=t>=2?V.lic:0; flows.push(brutoAno-opexAno-lic); }
+  for(let t=1;t<=V.horiz;t++){ flows.push(brutoAno-opexAno); }
   const tir=irr(flows), vpn=npv(flows,V.tasa/100);
 
   // KPIs
   document.getElementById('k-neto1').textContent = money(neto1);
-  document.getElementById('k-neto1-sub').textContent = `Beneficio bruto ${moneyM(brutoAno)} − costos año 1 ${moneyM(costoAno1)}. Desde el año 2: ~${moneyM(brutoAno-opexAno-V.lic)} al año.`;
+  document.getElementById('k-neto1-sub').textContent = `Beneficio bruto ${moneyM(brutoAno)} − costos año 1 ${moneyM(costoAno1)}. Recurrente desde el año 1: ~${moneyM(brutoAno-opexAno)} al año.`;
   document.getElementById('k-payback').textContent = isFinite(payback) ? (payback<1? '<1 mes' : payback.toFixed(1).replace('.0','')+' meses') : 'n/a';
   document.getElementById('k-roi').textContent = Math.round(roi1)+'%';
   document.getElementById('k-tir').textContent = tir==null ? 'n/a' : (tir>5?'>500%':Math.round(tir*100)+'%');
@@ -240,21 +237,17 @@ function compute(){
   document.getElementById('k-negocios').textContent = moneyM(benNeg*12);
   document.getElementById('k-negocios-note').textContent = `${recup.toFixed(1)} negocios/mes recuperados`;
 
-  // costo de operación: fijo + variable por cotización
-  const otVar = V.api*Qtot, otTotal = V.host + otVar;
-  document.getElementById('ox-q').textContent = FMT.format(Qtot)+' /mes';
-  document.getElementById('ox-api').textContent = money(V.api);
-  document.getElementById('ox-fijo').textContent = money(V.host)+' /mes';
-  document.getElementById('ox-var').textContent = money(otVar)+' /mes';
-  document.getElementById('ox-total').textContent = money(otTotal)+' /mes · '+moneyM(otTotal*12)+' /año';
-  document.getElementById('ox-disc').innerHTML = 'El costo <b>variable</b> asume las llamadas de IA por cotización (segmentar la imagen y comparar la forma contra la base; en fotos 3D se suma el recorte de la sección con visión). Es un estimado a precios de proveedores de IA en la nube y se ajusta al volumen real. El costo <b>fijo</b> cubre servidor y hosting. La licencia anual de Onza se contabiliza aparte, desde el año 2.';
+  // servicio gestionado (tarifa plana, recurrente)
+  document.getElementById('ox-mes').textContent = money(V.gestion)+' /mes';
+  document.getElementById('ox-ano').textContent = moneyM(V.gestion*12)+' /año';
+  document.getElementById('ox-disc').innerHTML = 'Tarifa plana, todo incluido: servidor e infraestructura, consumo de IA, actualizaciones del modelo, ingestión automática de OneDrive y soporte. Reemplaza el costo de operación variable y la licencia. Se asume un uso razonable acorde al volumen de cotizaciones.';
 
   // flujo de caja
   let acc=0; const rows=[];
   for(let t=0;t<=V.horiz;t++){
     let ben, cost, net;
     if(t===0){ ben=0; cost=V.inv; net=-V.inv; }
-    else { ben=brutoAno; const lic=t>=2?V.lic:0; cost=opexAno+lic; net=ben-cost; }
+    else { ben=brutoAno; cost=opexAno; net=ben-cost; }
     acc+=net;
     rows.push(`<tr><td class="year">${t===0?'0 · hoy':'Año '+t}</td><td>${t===0?'—':moneyM(ben)}</td><td>${moneyM(cost)}</td>
       <td class="${net>=0?'pos':'neg'}">${moneyM(net)}</td><td class="${acc>=0?'pos':'neg'}">${moneyM(acc)}</td></tr>`);
@@ -262,8 +255,7 @@ function compute(){
   document.getElementById('flowbody').innerHTML = rows.join('');
 
   document.getElementById('assum').innerHTML =
-    `<b>Cómo leerlo.</b> Inversión de implementación <b>${moneyM(V.inv)} + IVA</b> en el año 1. Desde el año 2, licencia anual Onza <b>${moneyM(V.lic)} + IVA</b> (mantenimiento, actualizaciones del modelo y soporte). `+
-    `Costo operativo: IA por cotización (${money(V.api)}) más hosting (${money(V.host)}/mes) = <b>${moneyM(opexAno)}/año</b>. `+
+    `<b>Cómo leerlo.</b> Inversión de implementación <b>${moneyM(V.inv)} + IVA</b> en el año 1. Servicio gestionado Onza <b>${money(V.gestion)} + IVA / mes</b> (${moneyM(V.gestion*12)}/año), todo incluido: infraestructura, IA, mantenimiento, actualizaciones del modelo, ingestión de OneDrive y soporte. `+
     `El costo por hora sale del salario cargado dividido en ${HORAS_MES} horas. El IVA se asume descontable, por eso el retorno se calcula sobre el valor neto. Cifras para ajustar a la realidad de Extrusiones.`;
 }
 
