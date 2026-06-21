@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo · Motor de auditoría · Plastibarranca</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0C0C0C;--bg1:#141414;--bg2:#1A1A1A;--border:#2A2A2A;--white:#fff;--off:#E8E8E8;--light:#C8C8C8;--med:#8A8A8A;--dim:#555;--red:#FF3B30;--gold:#D4AF37;--green:#30D158;--serif:"Playfair Display",Georgia,serif;--sans:"Inter",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--off);font-family:var(--sans);font-weight:300;min-height:100vh;display:flex;flex-direction:column}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 5%,rgba(212,175,55,.10),transparent 40%),radial-gradient(circle at 85% 95%,rgba(255,59,48,.10),transparent 40%)}
+.wrap{position:relative;max-width:1080px;margin:0 auto;padding:0 28px;width:100%}
+header{padding:24px 28px;max-width:1080px;margin:0 auto;width:100%;display:flex;align-items:center;gap:16px}
+header .chip{background:#fff;border-radius:8px;padding:6px 12px;display:inline-flex}
+header .chip img{height:26px;display:block}
+header .x{color:var(--dim);font-size:18px}
+header .onza{font-weight:300;letter-spacing:8px;font-size:16px;color:var(--off)}
+.hero{padding:44px 0 8px}
+.hero .eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(30px,5vw,52px);line-height:1.05;color:var(--white);letter-spacing:-.01em}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero p{margin-top:16px;color:var(--light);max-width:64ch;font-size:16px;line-height:1.6}
+.live{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--green);border:.5px solid rgba(48,209,88,.35);background:rgba(48,209,88,.06);border-radius:30px;padding:7px 14px}
+.live .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(48,209,88,.5);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(48,209,88,.45)}70%{box-shadow:0 0 0 8px rgba(48,209,88,0)}100%{box-shadow:0 0 0 0 rgba(48,209,88,0)}}
+.shot{margin:34px 0 10px;border:.5px solid var(--border);border-radius:14px;overflow:hidden;background:#f5f7fb;box-shadow:0 30px 70px -30px rgba(0,0,0,.8);position:relative}
+.shot .bar{display:flex;align-items:center;gap:7px;padding:11px 16px;background:var(--bg2);border-bottom:.5px solid var(--border)}
+.shot .bar i{width:10px;height:10px;border-radius:50%;background:var(--dim);display:block}
+.shot .bar i:nth-child(1){background:#FF5F57}.shot .bar i:nth-child(2){background:#FEBC2E}.shot .bar i:nth-child(3){background:#28C840}
+.shot .bar span{margin-left:10px;font-size:11px;color:var(--med);letter-spacing:1px}
+.shot img{width:100%;display:block}
+.feats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:30px 0 16px}
+@media(max-width:760px){.feats{grid-template-columns:1fr}}
+.feat{background:var(--bg1);border:.5px solid var(--border);border-radius:10px;padding:18px 20px}
+.feat h3{font-size:14px;color:var(--white);font-weight:600;margin-bottom:6px}
+.feat p{font-size:12.5px;color:var(--med);line-height:1.55}
+.note{font-size:12.5px;color:var(--light);border-left:2px solid var(--gold);padding:6px 16px;max-width:74ch;line-height:1.7;margin:14px 0 56px}
+.note b{color:var(--white);font-weight:600}
+footer{margin-top:auto;border-top:.5px solid var(--border);padding:24px 28px;max-width:1080px;margin-left:auto;margin-right:auto;width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--med)}
+footer .onza{font-weight:300;letter-spacing:7px;font-size:14px;color:var(--off)}
+</style>
+</head>
+<body>
+<a href="/p/plastibarranca" style="position:fixed;left:18px;bottom:18px;z-index:99999;font-family:system-ui,-apple-system,sans-serif;font-weight:600;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#E8E8E8;background:rgba(18,18,18,.85);border:1px solid rgba(212,175,55,.5);border-radius:30px;padding:11px 16px;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)">← Portal</a>
+
+<header>
+  <span class="chip"><img src="/p/plastibarranca/assets/plastibarranca-logo.gif" alt="Plastibarranca"></span>
+  <span class="x">×</span>
+  <span class="onza">ONZA</span>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="eyebrow">Demo · motor de auditoría de facturación</div>
+    <h1>Pedido contra factura, <em>leído por IA.</em></h1>
+    <p>Se registra el pedido y se le van agregando sus facturas. Un agente de IA con OCR lee cada documento, las relaciona por número de pedido, acumula las entregas parciales y compara contra el pedido montado. Abajo, un resultado real sobre documentos de Plastibarranca.</p>
+    <div class="live"><span class="dot"></span>Corre en vivo en la reunión</div>
+  </div>
+
+  <div class="shot">
+    <div class="bar"><i></i><i></i><i></i><span>Plasti Flow · Seguimiento de facturación</span></div>
+    <img src="/p/plastibarranca/assets/conciliador-resultado.png" alt="Resultado real del motor de auditoría: pedido contra facturas, con diferencias por línea">
+  </div>
+
+  <div class="feats">
+    <div class="feat"><h3>Lee PDF o foto, sin digitar</h3><p>OCR de IA sobre el documento. No hay que transcribir nada.</p></div>
+    <div class="feat"><h3>Relaciona y acumula parciales</h3><p>Empareja cada factura con su pedido por número y suma las entregas parciales.</p></div>
+    <div class="feat"><h3>Compara contra el pedido montado</h3><p>Precio de la orden de compra y cantidad. Marca diferencias, faltantes y sobre-despachos.</p></div>
+    <div class="feat"><h3>Alerta donde lo ven</h3><p>Cuando un pedido sale con precio o cantidad errada, avisa por WhatsApp o correo.</p></div>
+  </div>
+
+  <p class="note"><b>Esto ya funciona.</b> El motor lee documentos reales y calcula las diferencias línea por línea; la aritmética la hace el sistema, así que los números son exactos. En la reunión se procesa un pedido y una factura en vivo. Para que el demo quede activo también en este link, se conecta el motor a un servidor (lo coordinamos en la Fase 1).</p>
+</main>
+
+<footer>
+  <div>by <span class="onza">ONZA</span></div>
+  <div>Demo del motor de auditoría · resultado real · documento confidencial · 2026</div>
+</footer>
+</body>
+</html>
