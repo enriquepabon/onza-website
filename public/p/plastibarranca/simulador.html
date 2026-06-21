@@ -31,12 +31,13 @@ header{display:flex;align-items:center;justify-content:space-between;padding:22p
 .intro .eyebrow{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
 .intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(28px,4vw,46px);line-height:1.05;color:var(--white);letter-spacing:-.01em}
 .intro h1 em{color:var(--gold);font-style:italic}
-.intro p{margin-top:14px;color:var(--light);max-width:74ch;font-size:15px}
+.intro p{margin-top:14px;color:var(--light);max-width:78ch;font-size:15px}
 .layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:30px;padding:30px 0 70px;align-items:start}
 @media(max-width:940px){.layout{grid-template-columns:1fr}}
 .panel{background:var(--bg-1);border:.5px solid var(--border);border-radius:12px;padding:24px}
 .grp{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);font-weight:600;margin:26px 0 4px;padding-bottom:8px;border-bottom:.5px solid var(--border)}
 .grp:first-child{margin-top:0}
+.grp.op{color:var(--gold)}
 .ctrl{padding:15px 0;border-bottom:.5px solid rgba(255,255,255,.04)}
 .ctrl:last-child{border-bottom:none}
 .ctrl-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
@@ -60,8 +61,12 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .kpi .note{font-size:11px;color:var(--med);margin-top:5px}
 .opex{background:var(--bg-1);border:.5px solid var(--border);border-radius:10px;padding:16px 18px}
 .opex-title{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
-.opex-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:7px 0;font-size:13px;color:var(--light)}
-.opex-row b{font-family:var(--serif);color:var(--gold);font-weight:400;white-space:nowrap;font-size:16px}
+.opex-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:7px 0;font-size:13px;color:var(--light);border-bottom:.5px solid rgba(255,255,255,.04)}
+.opex-row:last-child{border-bottom:none}
+.opex-row b{font-family:var(--serif);color:var(--off);font-weight:400;white-space:nowrap;font-size:15px}
+.opex-row.sub span{color:var(--med);padding-left:12px;font-size:12px}
+.opex-row.total{margin-top:4px;padding-top:10px;border-top:.5px solid var(--border);border-bottom:none}
+.opex-row.total span{color:var(--off)} .opex-row.total b{color:var(--gold);font-size:18px}
 .opex-disc{font-size:11px;color:var(--med);line-height:1.6;margin-top:11px}
 .flowtable{background:var(--bg-1);border:.5px solid var(--border);border-radius:10px;overflow:hidden}
 .flowtable .ft-title{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;padding:14px 18px 4px}
@@ -95,8 +100,8 @@ footer{border-top:.5px solid var(--border);padding:24px 28px;max-width:1280px;ma
 <main class="wrap">
   <div class="intro">
     <div class="eyebrow">Simulador de retorno · Onza AI para Plastibarranca</div>
-    <h1>El caso de negocio, <em>en sus propias cifras.</em></h1>
-    <p>Mueva cada variable hasta los números que pueda defender. El modelo recalcula en vivo el ROI, la TIR, el payback y el flujo de caja. El caso se arma con tres palancas: el tiempo que se ahorra al revisar y coordinar, la plata que se recupera al detectar errores de facturación, y el valor operativo de programar y entregar a tiempo. Las dos primeras son el piso; el valor operativo lo estiman ustedes y se puede poner en cero.</p>
+    <h1>El caso de negocio, <em>palanca por palanca.</em></h1>
+    <p>Cada variable se mueve hasta el número que ustedes puedan defender, y el modelo recalcula en vivo el ROI, la TIR, el payback y el flujo de caja. El piso son dos cosas concretas: el tiempo del equipo y la plata que se recupera al detectar errores de facturación. Encima va el valor operativo de programar y entregar a tiempo, abierto en sus tres fuentes reales: más throughput por usar mejor la capacidad, menos entregas tardías y menos merma. Todo se puede poner en cero.</p>
   </div>
 
   <div class="layout">
@@ -114,13 +119,23 @@ footer{border-top:.5px solid var(--border);padding:24px 28px;max-width:1280px;ma
         <div class="kpi"><div class="lbl">ROI · año 1</div><div class="val green" id="k-roi">—</div><div class="note">beneficio sobre costo</div></div>
         <div class="kpi"><div class="lbl">TIR <span style="font-size:8px">(IRR)</span></div><div class="val" id="k-tir">—</div><div class="note" id="k-tir-note">a horizonte</div></div>
         <div class="kpi"><div class="lbl">VPN <span style="font-size:8px">(NPV)</span></div><div class="val white" id="k-vpn">—</div><div class="note" id="k-vpn-note">valor presente</div></div>
-        <div class="kpi"><div class="lbl">Ahorro de tiempo · año</div><div class="val" id="k-ahorro">—</div><div class="note" id="k-ahorro-note"></div></div>
-        <div class="kpi"><div class="lbl">Facturación corregida · año</div><div class="val" id="k-fact">—</div><div class="note" id="k-fact-note"></div></div>
+        <div class="kpi"><div class="lbl">Piso · tiempo + facturación · año</div><div class="val" id="k-piso">—</div><div class="note" id="k-piso-note"></div></div>
+        <div class="kpi"><div class="lbl">Valor operativo · año</div><div class="val" id="k-valop">—</div><div class="note" id="k-valop-note"></div></div>
+      </div>
+
+      <div class="opex">
+        <div class="opex-title">Desglose del beneficio mensual</div>
+        <div class="opex-row sub"><span>Tiempo del equipo · revisión + reuniones</span><b id="d-tiempo">—</b></div>
+        <div class="opex-row sub"><span>Facturación recuperada · errores atrapados</span><b id="d-fact">—</b></div>
+        <div class="opex-row sub"><span>Throughput · mejor uso de capacidad</span><b id="d-cap">—</b></div>
+        <div class="opex-row sub"><span>Entregas a tiempo · sobrecostos evitados</span><b id="d-tarde">—</b></div>
+        <div class="opex-row sub"><span>Menos merma y reproceso</span><b id="d-merma">—</b></div>
+        <div class="opex-row total"><span>Beneficio bruto · mes</span><b id="d-total">—</b></div>
       </div>
 
       <div class="opex">
         <div class="opex-title">Costo recurrente</div>
-        <div class="opex-row"><span>Operación · servidor, infraestructura e IA</span><b id="ox-oper">—</b></div>
+        <div class="opex-row total"><span>Operación · servidor, infraestructura e IA</span><b id="ox-oper">—</b></div>
         <div class="opex-disc" id="ox-disc"></div>
       </div>
 
@@ -146,34 +161,54 @@ const money = v => '$ ' + FMT.format(Math.round(v));
 const moneyM = v => '$ ' + (v/1e6).toLocaleString('es-CO',{maximumFractionDigits:1}) + ' M';
 
 const SPEC = [
-  {g:'Lo que hoy cuesta revisar y coordinar'},
+  {g:'Tiempo del equipo · piso'},
   {id:'N',    label:'Personas que revisan facturas y coordinan pedidos', min:1, max:12, step:1, val:3},
   {id:'Qpp',  label:'Facturas que revisa cada una al mes', min:20, max:400, step:10, val:120},
   {id:'tHoy', label:'Tiempo de revisión por factura HOY', min:2, max:30, step:1, val:8, unit:'min'},
   {id:'tTool',label:'Tiempo con la plataforma', min:0, max:10, step:1, val:1, unit:'min'},
+  {id:'hReun',label:'Horas/día del equipo en reuniones de estado (hoy)', min:0, max:3, step:0.25, val:1.25, unit:'h/día'},
+  {id:'pReun',label:'De esas reuniones, las que elimina el tablero', min:0, max:100, step:5, val:70, unit:'%'},
   {id:'sal',  label:'Costo empresa de quien revisa (cargado / mes)', min:1500000, max:8000000, step:100000, val:3000000, money:1},
-  {g:'Plata recuperada al detectar errores de facturación (conservador)'},
+
+  {g:'Facturación recuperada · piso'},
   {id:'valNeg', label:'Valor promedio del error por factura', min:50000, max:2000000, step:50000, val:300000, money:1},
   {id:'margen', label:'Porción del error que es recuperable', min:50, max:100, step:5, val:100, unit:'%'},
   {id:'pPerd',  label:'Facturas con error de precio o cantidad', min:0, max:15, step:1, val:3, unit:'%'},
   {id:'pRec',   label:'Errores que hoy se escapan y la plataforma atrapa', min:0, max:100, step:5, val:70, unit:'%'},
-  {g:'Valor operativo de programar y entregar a tiempo (lo estiman ustedes)'},
-  {id:'opVal', label:'Valor mensual de cumplir a tiempo y usar mejor la capacidad', min:0, max:30000000, step:500000, val:4000000, money:1},
+
+  {g:'Valor operativo · throughput (usar mejor la capacidad)', op:1},
+  {id:'ton',    label:'Toneladas que produce al mes', min:40, max:300, step:5, val:120, unit:'ton'},
+  {id:'margTon',label:'Margen de contribución por tonelada', min:1000000, max:8000000, step:250000, val:3500000, money:1},
+  {id:'capUp',  label:'Aumento de capacidad efectiva con mejor programación', min:0, max:10, step:0.5, val:1.5, unit:'%'},
+
+  {g:'Valor operativo · entregas a tiempo', op:1},
+  {id:'desp',    label:'Entregas / despachos al mes', min:20, max:1000, step:10, val:200},
+  {id:'pTarde',  label:'Entregas tardías hoy', min:0, max:50, step:1, val:15, unit:'%'},
+  {id:'pEvit',   label:'De esas tardías, las que el sistema evita', min:0, max:100, step:5, val:35, unit:'%'},
+  {id:'costTarde',label:'Costo de una entrega tardía (flete urgente, sobrecosto)', min:0, max:2000000, step:20000, val:180000, money:1},
+
+  {g:'Valor operativo · menos merma y reproceso', op:1},
+  {id:'matMes',   label:'Costo de material al mes', min:50000000, max:2000000000, step:50000000, val:400000000, money:1},
+  {id:'pMerma',   label:'Merma y reproceso hoy', min:0, max:15, step:0.5, val:3, unit:'%'},
+  {id:'pRedMerma',label:'De esa merma, la que se reduce con programación', min:0, max:50, step:5, val:5, unit:'%'},
+
   {g:'Costos del proyecto'},
   {id:'inv',  label:'Inversión de implementación · Fases 0 a 2 (año 1)', val:58000000, money:1, fixed:1},
   {id:'oper', label:'Operación mensual · servidor, infraestructura, IA', val:1000000, money:1, fixed:1},
+
   {g:'Parámetros financieros'},
   {id:'horiz', label:'Horizonte de análisis', min:3, max:5, step:1, val:3, unit:'años'},
   {id:'tasa',  label:'Tasa de descuento (VPN / TIR)', min:8, max:25, step:1, val:15, unit:'%'},
 ];
 const HORAS_MES = 160;
+const DIAS_MES = 22;
 
 const V = {};
 const fmtVal = s => s.money ? money(V[s.id]) : FMT.format(V[s.id]) + (s.unit?(' '+s.unit):'');
 
 const cont = document.getElementById('controls');
 SPEC.forEach(s=>{
-  if(s.g){ const h=document.createElement('div'); h.className='grp'; h.textContent=s.g; cont.appendChild(h); return; }
+  if(s.g){ const h=document.createElement('div'); h.className='grp'+(s.op?' op':''); h.textContent=s.g; cont.appendChild(h); return; }
   V[s.id]=s.val;
   const d=document.createElement('div'); d.className='ctrl';
   if(s.fixed){
@@ -195,13 +230,18 @@ function irr(f){ let lo=-0.95, hi=20; if(npv(f,lo)*npv(f,hi)>0) return null;
 function compute(){
   const Qtot = V.N*V.Qpp;
   const costoHora = V.sal/HORAS_MES;
-  const ahorroH = Qtot*(V.tHoy-V.tTool)/60;
-  const ahorroMO = ahorroH*costoHora;
-  const margenErr = V.valNeg*V.margen/100;
+  const auditH = Qtot*(V.tHoy-V.tTool)/60;
+  const reunH = V.hReun*DIAS_MES*(V.pReun/100);
+  const horasMes = auditH+reunH;
+  const labour = horasMes*costoHora;                       // tiempo del equipo (piso)
   const recup = Qtot*(V.pPerd/100)*(V.pRec/100);
-  const benFact = recup*margenErr;
-  const benOp = V.opVal;
-  const brutoMes = ahorroMO+benFact+benOp, brutoAno=brutoMes*12;
+  const benFact = recup*(V.valNeg*V.margen/100);           // facturación recuperada (piso)
+  const capVal = V.ton*(V.capUp/100)*V.margTon;            // throughput
+  const tardeVal = V.desp*(V.pTarde/100)*(V.pEvit/100)*V.costTarde; // entregas a tiempo
+  const mermaVal = V.matMes*(V.pMerma/100)*(V.pRedMerma/100);       // menos merma
+  const benOp = capVal+tardeVal+mermaVal;
+  const piso = labour+benFact;
+  const brutoMes = piso+benOp, brutoAno=brutoMes*12;
   const opexMes = V.oper, opexAno=opexMes*12;
   const netoRecurMes = brutoMes-opexMes;
   const payback = netoRecurMes>0 ? V.inv/netoRecurMes : Infinity;
@@ -214,17 +254,24 @@ function compute(){
   const tir=irr(flows), vpn=npv(flows,V.tasa/100);
 
   document.getElementById('k-neto1').textContent = money(neto1);
-  document.getElementById('k-neto1-sub').textContent = `Beneficio bruto ${moneyM(brutoAno)} − costos año 1 ${moneyM(costoAno1)}. Incluye ${moneyM(benOp*12)}/año de valor operativo que ustedes estiman (se puede poner en cero).`;
+  document.getElementById('k-neto1-sub').textContent = `Beneficio bruto ${moneyM(brutoAno)} − costos año 1 ${moneyM(costoAno1)}. El piso (tiempo + facturación) aporta ${moneyM(piso*12)}/año; el valor operativo, ${moneyM(benOp*12)}/año.`;
   document.getElementById('k-payback').textContent = isFinite(payback) ? (payback<1? '<1 mes' : payback.toFixed(1).replace('.0','')+' meses') : 'n/a';
   document.getElementById('k-roi').textContent = Math.round(roi1)+'%';
   document.getElementById('k-tir').textContent = tir==null ? 'n/a' : (tir>5?'>500%':Math.round(tir*100)+'%');
   document.getElementById('k-tir-note').textContent = `a ${V.horiz} años`;
   document.getElementById('k-vpn').textContent = moneyM(vpn);
   document.getElementById('k-vpn-note').textContent = `a ${V.horiz} años, ${V.tasa}%`;
-  document.getElementById('k-ahorro').textContent = moneyM(ahorroMO*12);
-  document.getElementById('k-ahorro-note').textContent = `${Math.round(ahorroH)} h/mes liberadas · ${Qtot} facturas/mes`;
-  document.getElementById('k-fact').textContent = moneyM(benFact*12);
-  document.getElementById('k-fact-note').textContent = `${recup.toFixed(1)} facturas con error/mes atrapadas`;
+  document.getElementById('k-piso').textContent = moneyM(piso*12);
+  document.getElementById('k-piso-note').textContent = `${Math.round(horasMes)} h/mes liberadas · ${recup.toFixed(1)} facturas con error/mes`;
+  document.getElementById('k-valop').textContent = moneyM(benOp*12);
+  document.getElementById('k-valop-note').textContent = `throughput + entregas + merma`;
+
+  document.getElementById('d-tiempo').textContent = money(labour);
+  document.getElementById('d-fact').textContent = money(benFact);
+  document.getElementById('d-cap').textContent = money(capVal);
+  document.getElementById('d-tarde').textContent = money(tardeVal);
+  document.getElementById('d-merma').textContent = money(mermaVal);
+  document.getElementById('d-total').textContent = money(brutoMes)+' /mes';
 
   document.getElementById('ox-oper').textContent = money(V.oper)+' /mes · '+moneyM(V.oper*12)+' /año';
   document.getElementById('ox-disc').innerHTML = 'La <b>operación</b> cubre servidor, infraestructura y consumo de IA por documento, a costo y ajustable al volumen real. El soporte y la evolución se definen como un plan recurrente aparte.';
@@ -241,9 +288,10 @@ function compute(){
   document.getElementById('flowbody').innerHTML = rows.join('');
 
   document.getElementById('assum').innerHTML =
-    `<b>Cómo leerlo.</b> Inversión de implementación <b>${moneyM(V.inv)} + IVA</b> en el año 1 (Fases 0 a 2). Operación <b>${money(V.oper)} + IVA / mes</b> (${moneyM(V.oper*12)}/año). `+
-    `El costo por hora sale del salario cargado dividido en ${HORAS_MES} horas productivas. El IVA se asume descontable, por eso el retorno se calcula sobre el valor neto. `+
-    `Si pone el valor operativo en cero, el caso se sostiene solo con el tiempo ahorrado y la facturación recuperada. Cifras para ajustar a la realidad de Plastibarranca.`;
+    `<b>Cómo leerlo.</b> Inversión <b>${moneyM(V.inv)} + IVA</b> en el año 1 (Fases 0 a 2) y operación <b>${money(V.oper)} + IVA / mes</b>. `+
+    `El piso son dos cosas medibles: el tiempo del equipo (revisión de facturas + reuniones de estado, valoradas con el salario cargado entre ${HORAS_MES} horas) y la plata que se recupera al atrapar errores de facturación. `+
+    `El <b>valor operativo</b> se abre en tres fuentes: <b>throughput</b> (toneladas × margen de contribución × % de capacidad ganada, la palanca más grande y más sensible, muévanla con cuidado), <b>entregas a tiempo</b> (sobrecostos de los despachos tardíos que se evitan) y <b>merma</b> (la parte de reproceso que baja con mejor programación; la cámara de inspección la ataca a fondo en una fase posterior). `+
+    `Pongan el valor operativo en cero y el caso se sostiene solo sobre el piso. El IVA se asume descontable, por eso el retorno va sobre el valor neto. Cifras para ajustar a la realidad de Plastibarranca.`;
 }
 
 document.getElementById('reset').addEventListener('click',()=>{
