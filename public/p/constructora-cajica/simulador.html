@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Simulador de retorno · Agente comercial · CONSTRUCTORA_X</title>
+<title>Simulador de retorno · Agente comercial · Inversiones Milenium</title>
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -108,9 +108,9 @@ footer{border-top:.5px solid var(--border);padding:24px 28px;max-width:1280px;ma
 
 <main class="wrap">
   <div class="intro">
-    <div class="eyebrow">Simulador de retorno · Onza para CONSTRUCTORA_X</div>
+    <div class="eyebrow">Simulador de retorno · Onza para Inversiones Milenium</div>
     <h1>El caso de negocio, <em>en sus propias cifras.</em></h1>
-    <p>Mueva cada variable hasta los números que pueda defender. El modelo recalcula en vivo el retorno, el payback, la TIR y el flujo de caja. El tiempo comercial que se libera es el piso del caso y no depende de vender una unidad más. Las unidades adicionales van aparte, y arrancan en cero a propósito.</p>
+    <p>Mueva cada variable hasta los números que pueda defender. El modelo recalcula en vivo el retorno, el payback, la TIR y el flujo de caja. El tiempo comercial que se libera es el piso del caso y no depende de vender una unidad más. Las unidades adicionales van aparte, y arrancan en cero a propósito. Los valores por defecto salen de los proyectos que Milenium tiene hoy en comercialización.</p>
     <div class="opt-switch">
       <button id="btn-A" class="on">Opción A · Piloto</button>
       <button id="btn-B">Opción B · Plataforma</button>
@@ -183,7 +183,8 @@ const SPEC = [
   {id:'sal',       label:'Costo empresa de un asesor comercial (salario cargado / mes)', min:2000000, max:12000000, step:250000, val:4500000, money:1},
 
   {g:'Unidades adicionales por responder a tiempo'},
-  {id:'valUnidad', label:'Valor promedio de una unidad (casa o local)', min:100000000, max:1500000000, step:10000000, val:450000000, money:1},
+  {id:'valUnidad', label:'Valor promedio de una unidad (casa o local)', min:300000000, max:2000000000, step:5000000, val:705000000, money:1,
+                   hint:'Arranca en $705 M, que es el precio desde de Lagos de Sagano. Ruta 45 Mall abre en $689 M y Bosque de Sagano en $1.220 M: mueva la barra al proyecto que quiera analizar.'},
   {id:'margenPct', label:'Margen del desarrollador sobre la unidad', min:5, max:35, step:1, val:18, unit:'%'},
   {id:'unidAno',   label:'Unidades adicionales al año por responder a tiempo', min:0, max:6, step:0.5, val:0, unit:'unid.',
                    hint:'Arranca en cero a propósito. Todo lo que ve a la derecha se sostiene solo con el tiempo comercial que se libera. Suba esta barra si cree que responder en minutos en vez de en días le salva aunque sea una unidad al año.'},
