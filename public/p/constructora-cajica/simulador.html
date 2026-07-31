@@ -66,7 +66,8 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .kpi{background:var(--bg-1);border:.5px solid var(--border);border-radius:10px;padding:16px 18px}
 .kpi .lbl{font-size:9.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--med);margin-bottom:7px}
 .kpi .val{font-family:var(--serif);font-size:26px;color:var(--gold);line-height:1;letter-spacing:-.01em}
-.kpi .val.green{color:var(--green)} .kpi .val.white{color:var(--white)}
+.kpi .val.green{color:var(--green)} .kpi .val.white{color:var(--white)} .kpi .val.neg{color:var(--red)}
+.hero-kpi .big.neg{color:var(--red)}
 .kpi .note{font-size:11px;color:var(--med);margin-top:5px}
 .opex{background:var(--bg-1);border:.5px solid var(--border);border-radius:10px;padding:16px 18px}
 .opex-title{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px}
@@ -139,7 +140,7 @@ footer{border-top:.5px solid var(--border);padding:24px 28px;max-width:1280px;ma
 
       <div class="opex">
         <div class="opex-title">Costo recurrente</div>
-        <div class="opex-row"><span>Costo de operación · WhatsApp, IA e infraestructura</span><b id="ox-oper">—</b></div>
+        <div class="opex-row"><span id="ox-oper-lbl">Costo de operación · WhatsApp, IA e infraestructura</span><b id="ox-oper">—</b></div>
         <div class="opex-row" id="ox-lic-row"><span>Licenciamiento anual Onza (desde el año 2)</span><b id="ox-lic">—</b></div>
         <div class="opex-row total"><span>Recurrente · año 2 en adelante</span><b id="ox-rec">—</b></div>
         <div class="opex-disc" id="ox-disc"></div>
@@ -167,10 +168,10 @@ const money = v => '$ ' + FMT.format(Math.round(v));
 const moneyM = v => '$ ' + (v/1e6).toLocaleString('es-CO',{maximumFractionDigits:1}) + ' M';
 
 const OPCIONES = {
-  A: { inv: 2000000,  oper: 100000, lic: 0,
+  A: { inv: 2000000,  operFijo: 100000, lic: 0,
        note:'Piloto a la medida sobre WhatsApp, con la base de leads calificados en Excel actualizada en vivo. Sin licenciamiento: el recurrente es solo la operación.' },
-  B: { inv: 10000000, oper: 450000, lic: 3600000,
-       note:'Plataforma con CRM propio, acceso por usuario, calificación configurable y seguimiento. Incluye licenciamiento desde el año 2, con el primer año dentro de la implementación.' }
+  B: { inv: 18000000, operPorUsuario: 100000, lic: 3600000,
+       note:'Plataforma impulsada con IA: CRM propio con acceso por usuario, calificación configurable, alertas automáticas al WhatsApp de cada asesor, seguimiento y reportes automatizados. La operación se cobra por usuario. A esta inversión el caso ya no se sostiene solo con el tiempo liberado: lo que paga la plataforma es el seguimiento automático que recupera leads que hoy se enfrían. Mueva la barra de unidades adicionales.' }
 };
 let OPT = 'A';
 
@@ -190,6 +191,8 @@ const SPEC = [
                    hint:'Arranca en cero a propósito. Todo lo que ve a la derecha se sostiene solo con el tiempo comercial que se libera. Suba esta barra si cree que responder en minutos en vez de en días le salva aunque sea una unidad al año.'},
 
   {g:'Costos del proyecto'},
+  {id:'usuarios', label:'Usuarios de la plataforma', min:1, max:25, step:1, val:6,
+                  hint:'Solo aplica a la Opción B: la operación se cobra a $100.000 al mes por cada usuario con acceso.'},
   {id:'inv',  label:'Inversión de implementación (año 1)', val:2000000, money:1, fixed:1},
   {id:'oper', label:'Costo mensual de operación (WhatsApp, IA, infraestructura)', val:100000, money:1, fixed:1},
   {id:'lic',  label:'Licenciamiento anual Onza (desde el año 2)', val:0, money:1, fixed:1},
@@ -209,7 +212,7 @@ SPEC.forEach(s=>{
   V[s.id]=s.val;
   const d=document.createElement('div'); d.className='ctrl';
   if(s.fixed){
-    d.innerHTML=`<div class="ctrl-head"><span class="ctrl-label">${s.label}</span><span class="ctrl-val" id="v-${s.id}"></span></div>
+    d.innerHTML=`<div class="ctrl-head"><span class="ctrl-label" id="l-${s.id}">${s.label}</span><span class="ctrl-val" id="v-${s.id}"></span></div>
       <div class="ctrl-fixed">Valor fijo de la propuesta</div>`;
     cont.appendChild(d); return;
   }
@@ -226,6 +229,14 @@ function irr(f){ let lo=-0.95, hi=20; if(npv(f,lo)*npv(f,hi)>0) return null;
   for(let i=0;i<240;i++){ const m=(lo+hi)/2; (npv(f,lo)*npv(f,m)<0)?(hi=m):(lo=m); } return (lo+hi)/2; }
 
 function compute(){
+  // la Opción B cobra la operación por usuario; la A es una tarifa fija
+  const cfg = OPCIONES[OPT];
+  V.oper = cfg.operPorUsuario ? cfg.operPorUsuario*V.usuarios : cfg.operFijo;
+  document.getElementById('v-oper').textContent = money(V.oper);
+  document.getElementById('l-oper').textContent = cfg.operPorUsuario
+    ? `Costo mensual de operación (${FMT.format(cfg.operPorUsuario)} × ${V.usuarios} usuarios)`
+    : 'Costo mensual de operación (WhatsApp, IA, infraestructura)';
+
   const leadsNoCal = V.leads*V.pctNoCal/100;
   const leadsCal   = V.leads - leadsNoCal;
   const horasLib   = (leadsNoCal*V.tNoCal + leadsCal*V.tAhorroCal)/60;
@@ -251,7 +262,12 @@ function compute(){
   document.getElementById('k-neto1-sub').textContent =
     `Beneficio bruto ${moneyM(brutoAno)} menos costos del año 1 ${moneyM(costoAno1)}. Desde el año 2: cerca de ${moneyM(brutoAno-opexAno-V.lic)} al año.`;
   document.getElementById('k-payback').textContent = isFinite(payback) ? (payback<1?'<1 mes':payback.toFixed(1).replace('.0','')+' meses') : 'n/a';
-  document.getElementById('k-roi').textContent = Math.round(roi1)+'%';
+  const elRoi=document.getElementById('k-roi');
+  elRoi.textContent = Math.round(roi1)+'%';
+  // un ROI negativo pintado de verde sería engañoso
+  elRoi.classList.toggle('green', roi1>=0);
+  elRoi.classList.toggle('neg', roi1<0);
+  document.getElementById('k-neto1').classList.toggle('neg', neto1<0);
   document.getElementById('k-tir').textContent = tir==null?'n/a':(tir>5?'>500%':Math.round(tir*100)+'%');
   document.getElementById('k-tir-note').textContent = `a ${V.horiz} años`;
   document.getElementById('k-vpn').textContent = moneyM(vpn);
@@ -261,14 +277,18 @@ function compute(){
   document.getElementById('k-negocios').textContent = benUnidAno>0 ? moneyM(benUnidAno) : '$ 0';
   document.getElementById('k-negocios-note').textContent = V.unidAno>0
     ? `${V.unidAno} unidad(es) al año · margen de ${moneyM(V.valUnidad*V.margenPct/100)} cada una`
-    : 'en cero: el caso se sostiene sin vender una unidad más';
+    : (neto1>=0 ? 'en cero: el caso se sostiene sin vender una unidad más'
+                : 'en cero. A esta inversión hace falta el seguimiento que recupera leads');
 
   document.getElementById('ox-oper').textContent = money(V.oper)+' /mes · '+moneyM(V.oper*12)+' /año';
+  document.getElementById('ox-oper-lbl').textContent = OPCIONES[OPT].operPorUsuario
+    ? `Costo de operación · ${FMT.format(OPCIONES[OPT].operPorUsuario)} por usuario × ${V.usuarios}`
+    : 'Costo de operación · WhatsApp, IA e infraestructura';
   document.getElementById('ox-lic-row').style.display = V.lic>0 ? 'flex' : 'none';
   document.getElementById('ox-lic').textContent = moneyM(V.lic)+' /año';
   document.getElementById('ox-rec').textContent = moneyM(V.oper*12 + V.lic)+' /año';
   document.getElementById('ox-disc').innerHTML = V.lic>0
-    ? 'El <b>costo de operación</b> cubre infraestructura y consumo de IA, a costo y ajustable al volumen. El <b>licenciamiento</b> es la licencia del software de Onza, con actualizaciones y soporte, y arranca en el año 2 porque el primero va incluido.'
+    ? 'El <b>costo de operación</b> se cobra por usuario con acceso a la plataforma y cubre infraestructura y consumo de IA. El <b>licenciamiento</b> es la licencia del software de Onza, con actualizaciones y soporte, y arranca en el año 2 porque el primero va incluido.'
     : 'El <b>costo de operación</b> cubre el consumo de IA y la infraestructura, a costo y ajustable al volumen. Las conversaciones que inicia el cliente en WhatsApp no tienen costo por mensaje. El piloto no lleva licenciamiento.';
 
   let acc=0; const rows=[];
@@ -292,7 +312,7 @@ function compute(){
 
 function setOpcion(k){
   OPT=k;
-  V.inv=OPCIONES[k].inv; V.oper=OPCIONES[k].oper; V.lic=OPCIONES[k].lic;
+  V.inv=OPCIONES[k].inv; V.lic=OPCIONES[k].lic;
   document.getElementById('btn-A').classList.toggle('on',k==='A');
   document.getElementById('btn-B').classList.toggle('on',k==='B');
   document.getElementById('opt-note').textContent=OPCIONES[k].note;
@@ -303,6 +323,9 @@ function setOpcion(k){
   // sin licenciamiento (Opción A) la fila sobra: mostrarla en $0 confunde
   const licCtrl=document.getElementById('v-lic').closest('.ctrl');
   if(licCtrl) licCtrl.style.display = V.lic>0 ? '' : 'none';
+  // la barra de usuarios solo tiene sentido cuando la operación se cobra por usuario
+  const usrCtrl=document.getElementById('r-usuarios').closest('.ctrl');
+  if(usrCtrl) usrCtrl.style.display = OPCIONES[k].operPorUsuario ? '' : 'none';
   compute();
 }
 document.getElementById('btn-A').addEventListener('click',()=>setOpcion('A'));
