@@ -29,3 +29,27 @@ Next.js 14 (App Router), React 18, TypeScript, Tailwind CSS 3, Framer Motion, Re
 - `npm run dev` — dev server
 - `npm run build` — production build
 - `npm run lint` — linting
+
+## Propuestas de cliente (/p/*)
+
+Los portales de cliente son HTML estático en `public/p/<cliente>/`. Están cerrados
+tras un formulario de identificación, para saber quién abre cada propuesta.
+
+- `src/middleware.ts` — intercepta todo documento HTML bajo `/p/`. Sin cookie
+  válida redirige a `/acceso?r=<ruta>`; con cookie deja pasar y registra la vista.
+  Los recursos con extensión (`/assets/*.jpg`) pasan sin interceptar.
+- `src/app/acceso/route.ts` — el formulario (nombre, correo, empresa, cargo).
+  Se sirve como HTML propio, fuera del layout del sitio, con la estética de los
+  portales.
+- `src/app/api/acceso/route.ts` — valida, firma la cookie (90 días), guarda el
+  registro y avisa a Enrique por correo.
+- `src/lib/acceso.ts` — firma HMAC de la cookie y mapa ruta → cliente. **Al
+  publicar una propuesta nueva hay que sumar su prefijo a `CLIENTES`**, o el
+  registro queda etiquetado como "Onza".
+- Datos en Supabase `onza-web` (ref `olzclgsavfrbuolvajjy`), tabla
+  `propuesta_accesos` y vista `propuesta_visitas`. Esquema en
+  `supabase/propuesta-accesos.sql`. RLS activo sin políticas: solo el
+  service_role lee y escribe.
+
+Variables de entorno: `ACCESO_SECRET`, `SUPABASE_URL`,
+`SUPABASE_SERVICE_ROLE_KEY` (más `RESEND_API_KEY` y `CONTACT_EMAIL` para el aviso).
