@@ -125,13 +125,18 @@ async function avisarPorCorreo({
   cliente: string;
   ruta: string;
 }) {
-  if (!process.env.RESEND_API_KEY) return;
+  if (!process.env.RESEND_API_KEY) {
+    console.error("[acceso] falta RESEND_API_KEY; no se envió el aviso");
+    return;
+  }
 
   const destino = process.env.CONTACT_EMAIL || "enriquepabonramirez@gmail.com";
   const remitente = process.env.FROM_EMAIL || "Onza <web@onzaai.com>";
   const momento = new Date().toLocaleString("es-CO", { timeZone: "America/Bogota" });
 
-  await getResend().emails.send({
+  // Resend devuelve el error en la respuesta en vez de lanzarlo, así que un
+  // dominio sin verificar pasaría inadvertido si no se revisa aquí.
+  const { error } = await getResend().emails.send({
     from: remitente,
     to: destino,
     replyTo: correo,
@@ -151,4 +156,8 @@ async function avisarPorCorreo({
       </div>
     `,
   });
+
+  if (error) {
+    console.error("[acceso] Resend rechazó el aviso:", JSON.stringify(error), "| destino:", destino, "| remitente:", remitente);
+  }
 }
