@@ -42,7 +42,7 @@ create view public.propuesta_visitas
 with (security_invoker = true) as
 with identidad as (
   select distinct on (visita_id)
-    visita_id, nombre, correo, empresa, cargo, ciudad, pais, creado_en as registrado_en
+    visita_id, nombre, correo, empresa, cargo, creado_en as registrado_en
   from public.propuesta_accesos
   where tipo = 'registro'
   order by visita_id, creado_en
@@ -54,14 +54,16 @@ select
   i.correo,
   i.empresa,
   i.cargo,
-  i.ciudad,
-  i.pais,
+  -- La geolocalización solo la resuelve el edge, así que llega en las vistas,
+  -- no en la fila de registro.
+  max(a.ciudad) as ciudad,
+  max(a.pais) as pais,
   min(a.creado_en) as primer_acceso,
   max(a.creado_en) as ultimo_acceso,
   count(*) filter (where a.tipo = 'vista') as paginas_vistas,
   count(distinct a.ruta) filter (where a.tipo = 'vista') as documentos_distintos
 from public.propuesta_accesos a
 left join identidad i on i.visita_id = a.visita_id
-group by a.visita_id, a.cliente, i.nombre, i.correo, i.empresa, i.cargo, i.ciudad, i.pais;
+group by a.visita_id, a.cliente, i.nombre, i.correo, i.empresa, i.cargo;
 
 revoke all on public.propuesta_visitas from anon, authenticated;

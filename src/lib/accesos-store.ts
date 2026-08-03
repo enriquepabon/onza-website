@@ -30,10 +30,13 @@ export type RegistroAcceso = {
 export async function guardarAcceso(registro: RegistroAcceso): Promise<void> {
   const url = process.env.SUPABASE_URL;
   const llave = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !llave) return;
+  if (!url || !llave) {
+    console.error("[acceso] falta SUPABASE_URL o SUPABASE_SERVICE_ROLE_KEY; no se registró el acceso");
+    return;
+  }
 
   try {
-    await fetch(`${url}/rest/v1/propuesta_accesos`, {
+    const respuesta = await fetch(`${url}/rest/v1/propuesta_accesos`, {
       method: "POST",
       headers: {
         apikey: llave,
@@ -43,7 +46,10 @@ export async function guardarAcceso(registro: RegistroAcceso): Promise<void> {
       },
       body: JSON.stringify(registro),
     });
-  } catch {
-    // silencio intencional
+    if (!respuesta.ok) {
+      console.error("[acceso] Supabase rechazó el registro:", respuesta.status, await respuesta.text());
+    }
+  } catch (error) {
+    console.error("[acceso] error de red al registrar el acceso:", error);
   }
 }

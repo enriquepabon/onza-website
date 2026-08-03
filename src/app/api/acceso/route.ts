@@ -87,10 +87,19 @@ export async function POST(request: NextRequest) {
       referer: request.headers.get("referer"),
     };
 
-    // No bloquean la entrega del documento: si el registro o el correo fallan,
-    // el visitante entra igual.
-    guardarAcceso(registro).catch(() => {});
-    avisarPorCorreo({ nombre, correo, empresa, cargo, cliente, ruta: retorno }).catch(() => {});
+    // Se esperan las dos: en serverless la función se congela al responder y
+    // una promesa suelta puede quedarse sin ejecutar. Ninguna de las dos puede
+    // tumbar la entrega del documento, así que los fallos solo se registran.
+    const [registroResultado, correoResultado] = await Promise.allSettled([
+      guardarAcceso(registro),
+      avisarPorCorreo({ nombre, correo, empresa, cargo, cliente, ruta: retorno }),
+    ]);
+    if (registroResultado.status === "rejected") {
+      console.error("[acceso] falló el registro en Supabase:", registroResultado.reason);
+    }
+    if (correoResultado.status === "rejected") {
+      console.error("[acceso] falló el aviso por correo:", correoResultado.reason);
+    }
 
     return respuesta;
   } catch {
