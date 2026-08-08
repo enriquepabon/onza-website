@@ -6,6 +6,7 @@ import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
 import { COMPANY } from "@/lib/constants";
+import { trackEvent } from "@/lib/gtag";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
@@ -35,6 +36,7 @@ export default function ContactForm() {
       if (res.ok) {
         setStatus("sent");
         form.reset();
+        trackEvent("generate_lead", { form: "contacto" });
       } else {
         setStatus("error");
       }

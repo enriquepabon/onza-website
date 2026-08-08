@@ -9,6 +9,7 @@ import {
   type QuizResult,
 } from "@/lib/quiz";
 import { COMPANY } from "@/lib/constants";
+import { trackEvent } from "@/lib/gtag";
 
 // ── Progress Bar ───────────────────────────────────────────────────────────
 
@@ -130,6 +131,7 @@ export default function QuizClient() {
       if (res.ok) {
         setFormStatus("sent");
         setPhase("done");
+        trackEvent("generate_lead", { form: "diagnostico-ia" });
       } else {
         setFormStatus("error");
       }

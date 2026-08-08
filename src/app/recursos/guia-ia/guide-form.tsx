@@ -5,6 +5,7 @@ import type { FormEvent } from "react";
 import { Section } from "@/components/ui/section";
 import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
+import { trackEvent } from "@/lib/gtag";
 
 const GUIDE_TOPICS = [
   "Cómo identificar los procesos con mayor potencial de IA en tu empresa",
@@ -42,6 +43,7 @@ export default function GuideForm() {
       if (res.ok) {
         setStatus("sent");
         form.reset();
+        trackEvent("generate_lead", { form: "guia-ia" });
       } else {
         setStatus("error");
       }
