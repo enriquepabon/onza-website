@@ -51,6 +51,71 @@
   }
 }
 
+/* ── Hero entrance — CSS puro para que el texto pinte con el HTML,
+   sin esperar la hidratación de JS ── */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-fade {
+  animation: heroFadeUp 1s cubic-bezier(0.25, 0.4, 0.25, 1) both;
+  animation-delay: var(--hero-delay, 0.5s);
+}
+
+@keyframes markEntry {
+  from {
+    opacity: 0;
+    transform: translate(var(--mark-x, 0px), var(--mark-y, -120px))
+      rotate(calc(var(--mark-rotate, 0deg) - 12deg));
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) rotate(var(--mark-rotate, 0deg));
+  }
+}
+
+@keyframes markFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(calc(var(--float-y, 18px) * -1))
+      rotate(var(--rotate-drift, 4deg)) scale(1.02);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  75% {
+    transform: translateY(calc(var(--float-y, 18px) * 0.4))
+      rotate(calc(var(--rotate-drift, 4deg) * -0.6)) scale(0.99);
+  }
+}
+
+.mark-entry {
+  animation: markEntry 2.2s cubic-bezier(0.23, 0.86, 0.39, 0.96) both;
+  animation-delay: var(--mark-delay, 0s);
+}
+
+.mark-float {
+  animation: markFloat var(--float-duration, 10s) ease-in-out infinite;
+  animation-delay: var(--mark-delay, 0s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade,
+  .mark-entry,
+  .mark-float {
+    animation: none;
+  }
+}
+
 /* Marquee animation for client logos */
 @keyframes marquee {
   0% {

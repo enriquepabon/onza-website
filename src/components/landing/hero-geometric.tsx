@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -62,28 +61,22 @@ function FloatingMark({
   }[entryFrom];
 
   return (
-    <motion.div
-      className={`absolute pointer-events-none select-none ${className ?? ""}`}
-      initial={{ opacity: 0, x: entryOffset.x, y: entryOffset.y, rotate: initialRotate - 12 }}
-      animate={{ opacity: 1, x: 0, y: 0, rotate: initialRotate }}
-      transition={{
-        duration: 2.2,
-        delay,
-        ease: [0.23, 0.86, 0.39, 0.96],
-        opacity: { duration: 1.4 },
+    <div
+      className={`absolute pointer-events-none select-none mark-entry ${className ?? ""}`}
+      style={{
+        ["--mark-x" as string]: `${entryOffset.x}px`,
+        ["--mark-y" as string]: `${entryOffset.y}px`,
+        ["--mark-rotate" as string]: `${initialRotate}deg`,
+        ["--mark-delay" as string]: `${delay}s`,
       }}
     >
       {/* Loop: float + gentle rotate drift */}
-      <motion.div
-        animate={{
-          y: [0, -floatY, 0, floatY * 0.4, 0],
-          rotate: [0, rotateDrift, 0, -rotateDrift * 0.6, 0],
-          scale: [1, 1.02, 1, 0.99, 1],
-        }}
-        transition={{
-          duration: floatDuration,
-          repeat: Infinity,
-          ease: "easeInOut",
+      <div
+        className="mark-float"
+        style={{
+          ["--float-y" as string]: `${floatY}px`,
+          ["--float-duration" as string]: `${floatDuration}s`,
+          ["--rotate-drift" as string]: `${rotateDrift}deg`,
         }}
       >
         <svg
@@ -97,8 +90,8 @@ function FloatingMark({
             <path key={i} d={d} fill={color} />
           ))}
         </svg>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 
@@ -123,19 +116,6 @@ export function HeroGeometric({ videoSrc }: { videoSrc?: string } = {}) {
     });
     return () => ctx.revert();
   }, []);
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-        delay: 0.5 + i * 0.2,
-        ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number],
-      },
-    }),
-  };
 
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-brand-black">
@@ -273,50 +253,39 @@ export function HeroGeometric({ videoSrc }: { videoSrc?: string } = {}) {
       <div className="noise-overlay" />
 
       {/* ── Content ── */}
-      <div className="relative z-10 container-wide w-full pt-24 pb-20">
+      {/* pb amplio: reserva espacio para el marquee de logos (absolute bottom) */}
+      <div className="relative z-10 container-wide w-full pt-24 pb-48 md:pb-52">
         <div className="max-w-5xl">
 
-          <motion.div
-            custom={0}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="flex items-center gap-4 mb-10"
+          <div
+            className="hero-fade flex items-center gap-4 mb-10"
+            style={{ ["--hero-delay" as string]: "0.5s" }}
           >
             <div className="h-px w-10 bg-brand-red flex-shrink-0" />
             <p className="text-xs tracking-[0.3em] uppercase text-[#999] font-display">
               Arquitectura de Soluciones IA
             </p>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            custom={1}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="text-[2.8rem] md:text-[4.5rem] lg:text-[5.8rem] font-light leading-[1.0] mb-8"
+          <h1
+            className="hero-fade text-[2.8rem] md:text-[4.5rem] lg:text-[5.8rem] font-light leading-[1.0] mb-8"
+            style={{ ["--hero-delay" as string]: "0.7s" }}
           >
             <span className="block text-white">Tu operación</span>
             <span className="block text-white">pierde tiempo</span>
             <span className="block text-brand-red">y dinero.</span>
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            custom={2}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="text-base md:text-lg text-[#999] max-w-lg leading-relaxed mb-10 font-light"
+          <p
+            className="hero-fade text-base md:text-lg text-[#999] max-w-lg leading-relaxed mb-10 font-light"
+            style={{ ["--hero-delay" as string]: "0.9s" }}
           >
             Diseñamos arquitectura de soluciones IA con impacto financiero medible.
-          </motion.p>
+          </p>
 
-          <motion.div
-            custom={3}
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            className="flex flex-wrap items-center gap-5"
+          <div
+            className="hero-fade flex flex-wrap items-center gap-5"
+            style={{ ["--hero-delay" as string]: "1.1s" }}
           >
             <MagneticButton
               href={COMPANY.calendar}
@@ -333,18 +302,15 @@ export function HeroGeometric({ videoSrc }: { videoSrc?: string } = {}) {
             >
               Conoce nuestros servicios
             </MagneticButton>
-          </motion.div>
+          </div>
 
         </div>
       </div>
 
       {/* ── Client logos marquee — bottom of hero ── */}
-      <motion.div
-        custom={4}
-        variants={fadeUp}
-        initial="hidden"
-        animate="visible"
-        className="absolute bottom-16 left-0 right-0 z-10"
+      <div
+        className="hero-fade absolute bottom-16 left-0 right-0 z-10"
+        style={{ ["--hero-delay" as string]: "1.3s" }}
       >
         <p className="text-[10px] tracking-[0.4em] uppercase text-[#999] mb-5 font-display text-center">
           Empresas que confían en nosotros
@@ -367,7 +333,7 @@ export function HeroGeometric({ videoSrc }: { videoSrc?: string } = {}) {
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Scroll hint — hidden, logos take this space */}
 

@@ -102,6 +102,10 @@ export function VideoBreak({
       style={{
         ["--pb-height" as string]: height,
         ["--pb-mobile-height" as string]: mobileHeight || height,
+        // Estado inicial de la animación de scroll, presente desde el SSR
+        // para que no salte cuando GSAP hidrata.
+        clipPath: "inset(8% 0% 8% 0%)",
+        transform: "scale(1.04)",
       }}
     >
       <style jsx>{`
