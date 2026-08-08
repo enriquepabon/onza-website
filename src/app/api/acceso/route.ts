@@ -130,7 +130,7 @@ async function avisarPorCorreo({
     return;
   }
 
-  const destino = process.env.CONTACT_EMAIL || "enriquepabonramirez@gmail.com";
+  const destino = process.env.CONTACT_EMAIL || "enrique@onzaai.com";
   const remitente = process.env.FROM_EMAIL || "Onza <web@onzaai.com>";
   const momento = new Date().toLocaleString("es-CO", { timeZone: "America/Bogota" });
 
