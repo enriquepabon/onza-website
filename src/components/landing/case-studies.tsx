@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/ui/reveal";
 import { TextReveal } from "@/components/ui/text-reveal";
@@ -8,6 +9,7 @@ import { LineReveal } from "@/components/ui/line-reveal";
 
 const CASES = [
   {
+    slug: "formacion-ia-grupo-mexico",
     client: "Grupo México",
     sector: "Manufactura",
     country: "México",
@@ -22,6 +24,7 @@ const CASES = [
     metricLabel: "personas formadas",
   },
   {
+    slug: "automatizacion-ia-avicanna",
     client: "Avicanna",
     sector: "Ciencias de la Vida",
     country: "Colombia",
@@ -36,6 +39,7 @@ const CASES = [
     metricLabel: "aplicativos desplegados",
   },
   {
+    slug: "agente-ia-latroupe",
     client: "LaTroupe",
     sector: "Hospitalidad",
     country: "Europa",
@@ -50,6 +54,7 @@ const CASES = [
     metricLabel: "hoteles estandarizados",
   },
   {
+    slug: "plataforma-ia-language-for-living",
     client: "Language for Living",
     sector: "Educación",
     country: "Colombia",
@@ -137,6 +142,13 @@ function CaseCard({ c, index }: { c: typeof CASES[number]; index: number }) {
                     <p className="text-xs text-brand-gold tracking-[0.15em] uppercase">
                       Resultado: {c.result}
                     </p>
+                    <Link
+                      href={`/casos/${c.slug}`}
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-block mt-4 text-xs tracking-[0.15em] uppercase text-white border-b border-brand-red pb-0.5 hover:text-brand-red transition-colors"
+                    >
+                      Ver caso completo
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -25,6 +25,14 @@ Onza ayuda a empresas medianas y grandes en LATAM a implementar IA de forma estr
 - Resultados en semanas, no en meses
 - Equipo con experiencia real implementando IA en empresas LATAM
 
+## Casos de éxito (con resultados verificables)
+
+- Grupo México (manufactura): 500+ personas formadas en IA y Copilot en 8 semanas: https://onzaai.com/casos/formacion-ia-grupo-mexico
+- Avicanna (ciencias de la vida): 8 aplicativos de IA en producción y 100+ colaboradores certificados: https://onzaai.com/casos/automatizacion-ia-avicanna
+- LaTroupe (hospitalidad, 7 hoteles en 3 países): estándar operativo unificado consultable con un agente IA: https://onzaai.com/casos/agente-ia-latroupe
+- Language for Living (educación): plataforma completa con test de nivel adaptativo por IA, en producción en 6 semanas: https://onzaai.com/casos/plataforma-ia-language-for-living
+- Índice de casos: https://onzaai.com/casos
+
 ## Contacto
 
 - Web: https://onzaai.com
@@ -35,6 +43,7 @@ Onza ayuda a empresas medianas y grandes en LATAM a implementar IA de forma estr
 ## Páginas principales
 
 - Inicio: https://onzaai.com
+- Casos de éxito: https://onzaai.com/casos
 - Servicios: https://onzaai.com/servicios
 - Chatbot IA: https://onzaai.com/servicios/chatbot-ia
 - Automatización de Procesos con IA: https://onzaai.com/servicios/automatizacion-ia

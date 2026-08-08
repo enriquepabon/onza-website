@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { CASOS } from "@/lib/casos";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
@@ -11,7 +12,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const casoEntries = CASOS.map((caso) => ({
+    url: `https://onzaai.com/casos/${caso.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
   return [
+    {
+      url: "https://onzaai.com/casos",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    ...casoEntries,
     {
       url: "https://onzaai.com",
       lastModified: new Date(),

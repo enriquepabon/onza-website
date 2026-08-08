@@ -51,6 +51,7 @@ export function Footer() {
             <div className="flex flex-col gap-3">
               <Link href="/recursos/diagnostico-ia" className="text-sm text-gray-400 hover:text-white transition-colors">Diagnóstico de madurez IA</Link>
               <Link href="/recursos/guia-ia" className="text-sm text-gray-400 hover:text-white transition-colors">Guía de implementación</Link>
+              <Link href="/casos" className="text-sm text-gray-400 hover:text-white transition-colors">Casos de éxito</Link>
               <Link href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors">Blog</Link>
               <Link href="/nosotros" className="text-sm text-gray-400 hover:text-white transition-colors">Nosotros</Link>
             </div>

@@ -1,0 +1,356 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "ONZA" [ref=e4] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e11]:
+        - link "Servicios" [ref=e12] [cursor=pointer]:
+          - /url: /servicios
+        - link "Nosotros" [ref=e13] [cursor=pointer]:
+          - /url: /nosotros
+        - link "Blog" [ref=e14] [cursor=pointer]:
+          - /url: /blog
+        - link "Contacto" [ref=e15] [cursor=pointer]:
+          - /url: /contacto
+        - link "Diagnóstico gratis" [ref=e16] [cursor=pointer]:
+          - /url: /recursos/diagnostico-ia
+        - link "Hablemos" [ref=e17] [cursor=pointer]:
+          - /url: https://calendar.app.google/ebqvMY41sfw9865f8
+  - main [ref=e18]:
+    - generic [ref=e19]:
+      - generic [ref=e21]:
+        - paragraph [ref=e24]: Arquitectura de Soluciones IA
+        - heading "Tu operación pierde tiempo y dinero." [level=1] [ref=e25]:
+          - generic [ref=e26]: Tu operación
+          - generic [ref=e27]: pierde tiempo
+          - generic [ref=e28]: y dinero.
+        - paragraph [ref=e29]: Diseñamos arquitectura de soluciones IA con impacto financiero medible.
+        - generic [ref=e30]:
+          - link "Agenda una conversación" [ref=e31] [cursor=pointer]:
+            - /url: https://calendar.app.google/ebqvMY41sfw9865f8
+          - link "Conoce nuestros servicios" [ref=e34] [cursor=pointer]:
+            - /url: /servicios?utm_source=homepage&utm_medium=cta&utm_content=hero-secondary
+      - generic [ref=e35]:
+        - paragraph [ref=e36]: Empresas que confían en nosotros
+        - generic [ref=e38]:
+          - img "Grupo México" [ref=e40]
+          - img "LaTroupe" [ref=e42]
+          - img "Avicanna" [ref=e44]
+          - img "Language for Living" [ref=e46]
+          - img "Medcann" [ref=e48]
+          - img "Success Drivers" [ref=e50]
+          - img "Ticketmaster" [ref=e52]
+          - img "Grupo México" [ref=e54]
+          - img "LaTroupe" [ref=e56]
+          - img "Avicanna" [ref=e58]
+          - img "Language for Living" [ref=e60]
+          - img "Medcann" [ref=e62]
+          - img "Success Drivers" [ref=e64]
+          - img "Ticketmaster" [ref=e66]
+    - generic [ref=e70]:
+      - generic [ref=e71]:
+        - generic [ref=e72]: Servicios
+        - heading "Cuatro formas de transformar tu operación con inteligencia artificial" [level=2] [ref=e78]:
+          - generic [ref=e79]: Cuatro
+          - generic [ref=e81]: formas
+          - generic [ref=e83]: de
+          - generic [ref=e85]: transformar
+          - generic [ref=e87]: tu
+          - generic [ref=e89]: operación
+          - generic [ref=e91]: con
+          - generic [ref=e93]: inteligencia
+          - generic [ref=e95]: artificial
+      - generic [ref=e97]:
+        - link "01 Formaciones IA Empresariales Tu equipo domina IA en semanas, no meses. Sesiones prácticas adaptadas a tu industria. Equipos 3x más productivos con herramientas IA →" [ref=e99] [cursor=pointer]:
+          - /url: /servicios#formaciones
+          - generic [ref=e100]:
+            - generic [ref=e101]: "01"
+            - heading "Formaciones IA Empresariales" [level=3] [ref=e103]
+            - paragraph [ref=e105]: Tu equipo domina IA en semanas, no meses. Sesiones prácticas adaptadas a tu industria.
+            - generic [ref=e106]:
+              - paragraph [ref=e107]: Equipos 3x más productivos con herramientas IA
+              - generic [ref=e108]: →
+        - link "02 Automatización de Procesos Identificamos los procesos que más tiempo y dinero consumen. Flujos automatizados que se integran con tus sistemas. Hasta 80% de reducción en tiempo de procesos →" [ref=e110] [cursor=pointer]:
+          - /url: /servicios#automatizacion
+          - generic [ref=e111]:
+            - generic [ref=e112]: "02"
+            - heading "Automatización de Procesos" [level=3] [ref=e114]
+            - paragraph [ref=e116]: Identificamos los procesos que más tiempo y dinero consumen. Flujos automatizados que se integran con tus sistemas.
+            - generic [ref=e117]:
+              - paragraph [ref=e118]: Hasta 80% de reducción en tiempo de procesos
+              - generic [ref=e119]: →
+        - link "03 Soluciones IA a Medida Webs inteligentes, agentes de IA, plataformas de aprendizaje. Sistemas que tu equipo usa desde el día 1. Funcionando en 3-8 semanas →" [ref=e121] [cursor=pointer]:
+          - /url: /servicios#soluciones
+          - generic [ref=e122]:
+            - generic [ref=e123]: "03"
+            - heading "Soluciones IA a Medida" [level=3] [ref=e125]
+            - paragraph [ref=e127]: Webs inteligentes, agentes de IA, plataformas de aprendizaje. Sistemas que tu equipo usa desde el día 1.
+            - generic [ref=e128]:
+              - paragraph [ref=e129]: Funcionando en 3-8 semanas
+              - generic [ref=e130]: →
+        - link "04 Diagnóstico Estratégico IA Descubre exactamente dónde la IA genera más impacto en tu operación. Roadmap priorizado. Claridad antes de invertir →" [ref=e132] [cursor=pointer]:
+          - /url: /servicios#diagnostico
+          - generic [ref=e133]:
+            - generic [ref=e134]: "04"
+            - heading "Diagnóstico Estratégico IA" [level=3] [ref=e136]
+            - paragraph [ref=e138]: Descubre exactamente dónde la IA genera más impacto en tu operación. Roadmap priorizado.
+            - generic [ref=e139]:
+              - paragraph [ref=e140]: Claridad antes de invertir
+              - generic [ref=e141]: →
+    - generic [ref=e143]:
+      - generic [ref=e145]:
+        - generic [ref=e146]: Por qué Onza
+        - heading "No somos una agencia. Hemos estado en tu lugar." [level=2] [ref=e150]:
+          - generic [ref=e151]: "No"
+          - generic [ref=e153]: somos
+          - generic [ref=e155]: una
+          - generic [ref=e157]: agencia.
+          - generic [ref=e159]: Hemos
+          - generic [ref=e161]: estado
+          - generic [ref=e163]: en
+          - generic [ref=e165]: tu
+          - generic [ref=e167]: lugar.
+      - generic [ref=e169]:
+        - generic [ref=e171]:
+          - text: "01"
+          - heading "Negocio primero, tecnología después" [level=3] [ref=e172]
+          - paragraph [ref=e173]: Ingeniero Industrial, MBA, 15 años en operaciones reales. Sabemos lo que cuesta un proceso mal diseñado antes de hablar de IA.
+        - generic [ref=e175]:
+          - text: "02"
+          - heading "Hablamos el idioma del negocio" [level=3] [ref=e176]
+          - paragraph [ref=e177]: Cuántas horas pierdes en esto. Cuánto te cuesta este error. En cuánto tiempo ves retorno. El CFO entiende, el COO entiende.
+        - generic [ref=e179]:
+          - text: "03"
+          - heading "Semanas, no meses" [level=3] [ref=e180]
+          - paragraph [ref=e181]: Sin capas de gestión ni procesos de aprobación interminables. Entramos, entendemos, construimos. La mayoría de proyectos están en producción antes de los 60 días.
+        - generic [ref=e183]:
+          - text: "04"
+          - heading "Experiencia en sectores complejos" [level=3] [ref=e184]
+          - paragraph [ref=e185]: Manufactura, supply chain, farmacéutica. En planta, negociando convenciones, abriendo mercados desde cero.
+        - generic [ref=e187]:
+          - text: "05"
+          - heading "Sistemas que funcionan, no decks" [level=3] [ref=e188]
+          - paragraph [ref=e189]: Cada proyecto termina con algo que tu equipo puede usar desde el día 1. No con un PDF de recomendaciones.
+        - generic [ref=e191]:
+          - text: "06"
+          - heading "Discreción absoluta" [level=3] [ref=e192]
+          - paragraph [ref=e193]: Tus procesos y ventajas competitivas son tuyos. Trabajamos con NDAs y manejamos la información de cada cliente con el mismo cuidado que esperarías de un socio de largo plazo.
+    - generic [ref=e197]:
+      - generic [ref=e199]:
+        - generic [ref=e200]: El contexto
+        - heading "La IA está transformando el mundo. La pregunta es si tu empresa lidera o se queda atrás." [level=2] [ref=e204]:
+          - generic [ref=e205]: La
+          - generic [ref=e207]: IA
+          - generic [ref=e209]: está
+          - generic [ref=e211]: transformando
+          - generic [ref=e213]: el
+          - generic [ref=e215]: mundo.
+          - generic [ref=e217]: La
+          - generic [ref=e219]: pregunta
+          - generic [ref=e221]: es
+          - generic [ref=e223]: si
+          - generic [ref=e225]: tu
+          - generic [ref=e227]: empresa
+          - generic [ref=e229]: lidera
+          - generic [ref=e231]: o
+          - generic [ref=e233]: se
+          - generic [ref=e235]: queda
+          - generic [ref=e237]: atrás.
+      - generic [ref=e239]:
+        - generic [ref=e241]:
+          - paragraph [ref=e243]: 500+
+          - paragraph [ref=e244]: personas formadas en IA
+          - paragraph [ref=e245]: En empresas de manufactura, hospitalidad y logística
+        - generic [ref=e247]:
+          - paragraph [ref=e249]: "3"
+          - paragraph [ref=e250]: continentes, un estándar de trabajo
+          - paragraph [ref=e251]: Colombia · México · Europa
+        - generic [ref=e253]:
+          - paragraph [ref=e255]: 95%
+          - paragraph [ref=e256]: de pilotos de IA no generan resultados medibles
+          - paragraph [ref=e257]: El problema es integración, no tecnología
+        - generic [ref=e259]:
+          - paragraph [ref=e261]: 54%
+          - paragraph [ref=e262]: de empresas en el mundo aumentará inversión en IA este año
+          - paragraph [ref=e263]: La pregunta no es si, sino cómo
+      - generic [ref=e265]:
+        - link "¿Dónde está tu empresa? Haz el test" [ref=e266] [cursor=pointer]:
+          - /url: /recursos/diagnostico-ia?utm_source=homepage&utm_medium=cta&utm_content=stats-diagnostico
+        - link "Hablemos de tu operación" [ref=e267] [cursor=pointer]:
+          - /url: /contacto?utm_source=homepage&utm_medium=cta&utm_content=stats
+    - generic [ref=e269]:
+      - generic [ref=e270]:
+        - generic [ref=e271]: Proyectos
+        - heading "Soluciones que ya están operando" [level=2] [ref=e277]:
+          - generic [ref=e278]: Soluciones
+          - generic [ref=e280]: que
+          - generic [ref=e282]: ya
+          - generic [ref=e284]: están
+          - generic [ref=e286]: operando
+      - generic [ref=e288]:
+        - button [ref=e290] [cursor=pointer]:
+          - generic [ref=e291]:
+            - generic [ref=e292]:
+              - paragraph [ref=e293]: Manufactura · México
+              - heading "Grupo México" [level=3] [ref=e294]
+              - paragraph [ref=e295]: Formación IA · 8 semanas
+            - paragraph [ref=e297]: Programa nacional de adopción de IA para equipos operativos y directivos. Desde planta hasta sala de juntas.
+            - generic [ref=e298]:
+              - paragraph [ref=e299]: 500+
+              - paragraph [ref=e300]: personas formadas
+        - button [ref=e306] [cursor=pointer]:
+          - generic [ref=e307]:
+            - generic [ref=e308]:
+              - paragraph [ref=e309]: Ciencias de la Vida · Colombia
+              - heading "Avicanna" [level=3] [ref=e310]
+              - paragraph [ref=e311]: Automatización + Aplicativos · 6 meses
+            - paragraph [ref=e313]: Suite de apps para supply chain y trazabilidad. Programa de certificación para personal operativo en herramientas IA.
+            - generic [ref=e314]:
+              - paragraph [ref=e315]: "8"
+              - paragraph [ref=e316]: aplicativos desplegados
+        - button [ref=e322] [cursor=pointer]:
+          - generic [ref=e323]:
+            - generic [ref=e324]:
+              - paragraph [ref=e325]: Hospitalidad · Europa
+              - heading "LaTroupe" [level=3] [ref=e326]
+              - paragraph [ref=e327]: IA Operacional · 4 sesiones
+            - paragraph [ref=e329]: Playbook unificado para 7 sedes en 3 países. Agente IA que cualquier colaborador consulta en tiempo real.
+            - generic [ref=e330]:
+              - paragraph [ref=e331]: "7"
+              - paragraph [ref=e332]: hoteles estandarizados
+        - button [ref=e338] [cursor=pointer]:
+          - generic [ref=e339]:
+            - generic [ref=e340]:
+              - paragraph [ref=e341]: Educación · Colombia
+              - heading "Language for Living" [level=3] [ref=e342]
+              - paragraph [ref=e343]: Solución IA a Medida · 6 semanas
+            - paragraph [ref=e345]: Test de nivel adaptativo, registro de estudiantes y automatización de procesos internos. Funcionando desde el día 1.
+            - generic [ref=e346]:
+              - paragraph [ref=e347]: "6"
+              - paragraph [ref=e348]: semanas a producción
+    - generic [ref=e356]:
+      - generic [ref=e358]:
+        - generic [ref=e359]: Cómo trabajamos
+        - heading "Cómo llegamos de la primera conversación a algo que funciona" [level=2] [ref=e363]:
+          - generic [ref=e364]: Cómo
+          - generic [ref=e366]: llegamos
+          - generic [ref=e368]: de
+          - generic [ref=e370]: la
+          - generic [ref=e372]: primera
+          - generic [ref=e374]: conversación
+          - generic [ref=e376]: a
+          - generic [ref=e378]: algo
+          - generic [ref=e380]: que
+          - generic [ref=e382]: funciona
+      - generic [ref=e386]:
+        - generic [ref=e388]:
+          - generic [ref=e389]: "01"
+          - generic [ref=e392]:
+            - heading "Descubrimiento" [level=3] [ref=e393]
+            - paragraph [ref=e394]: Entendemos el problema antes de proponer nada. Entrevistas, mapeo de procesos, alcance y expectativas claras.
+        - generic [ref=e396]:
+          - generic [ref=e397]: "02"
+          - generic [ref=e400]:
+            - heading "Diseño" [level=3] [ref=e401]
+            - paragraph [ref=e402]: Arquitectura de la solución. Blueprint visual que todos entienden, sin tecnicismos innecesarios.
+        - generic [ref=e404]:
+          - generic [ref=e405]: "03"
+          - generic [ref=e408]:
+            - heading "Construcción" [level=3] [ref=e409]
+            - paragraph [ref=e410]: Desarrollo e implementación. Iteraciones cortas, feedback constante, sin sorpresas al final.
+        - generic [ref=e412]:
+          - generic [ref=e413]: "04"
+          - generic [ref=e416]:
+            - heading "Entrega + Adopción" [level=3] [ref=e417]
+            - paragraph [ref=e418]: Deploy, capacitación al equipo, documentación. Funciona desde el día 1.
+        - generic [ref=e420]:
+          - generic [ref=e421]: "05"
+          - generic [ref=e424]:
+            - heading "Soporte" [level=3] [ref=e425]
+            - paragraph [ref=e426]: Ajustes post-lanzamiento. Acompañamiento hasta que el equipo vuele solo.
+      - link "Agenda una conversación" [ref=e429] [cursor=pointer]:
+        - /url: https://calendar.app.google/ebqvMY41sfw9865f8
+    - generic [ref=e431]:
+      - generic [ref=e432]:
+        - generic [ref=e433]: Clientes
+        - heading "Lo que dicen quienes ya trabajaron con nosotros" [level=2] [ref=e439]:
+          - generic [ref=e440]: Lo
+          - generic [ref=e442]: que
+          - generic [ref=e444]: dicen
+          - generic [ref=e446]: quienes
+          - generic [ref=e448]: ya
+          - generic [ref=e450]: trabajaron
+          - generic [ref=e452]: con
+          - generic [ref=e454]: nosotros
+      - generic [ref=e456]:
+        - generic [ref=e458]:
+          - paragraph [ref=e459]: "“Enrique construyó toda la plataforma en semanas: el test de nivel de inglés, el registro de estudiantes, las integraciones con nuestros procesos. Nunca tuve que explicarle nada dos veces. Llegó, entendió el negocio, y lo que entregó fue exactamente lo que teníamos en la cabeza.”"
+          - generic [ref=e460]:
+            - paragraph [ref=e462]: Samuel Avila
+            - paragraph [ref=e463]: Fundador · Language for Living
+            - paragraph [ref=e464]: Educación · Colombia
+        - generic [ref=e466]:
+          - paragraph [ref=e467]: "“Tenemos siete hoteles en tres países y cada uno funcionaba distinto. Enrique tomó ese caos y lo convirtió en algo estandarizado: SOPs unificados, procesos por sede, y un agente que cualquier colaborador puede consultar cuando lo necesita. En cuatro sesiones hicimos lo que nos habría tomado un año.”"
+          - generic [ref=e468]:
+            - paragraph [ref=e470]: Javier Parra
+            - paragraph [ref=e471]: Gerente de Operaciones Global · LaTroupe
+            - paragraph [ref=e472]: Hospitalidad · Europa
+        - generic [ref=e474]:
+          - paragraph [ref=e475]: “Sabíamos que la IA importaba pero no teníamos claro por dónde entrar. Onza llegó, identificó dónde estaba el impacto y nos ayudó a ejecutarlo. Sin presentaciones, sin vueltas, directo al grano.”
+          - generic [ref=e476]:
+            - paragraph [ref=e478]: César Suárez
+            - paragraph [ref=e479]: Co-Fundador · Success Drivers
+            - paragraph [ref=e480]: Consultoría · Colombia
+    - generic [ref=e484]:
+      - heading "Una conversación. Sin compromiso." [level=2] [ref=e485]:
+        - generic [ref=e486]: Una
+        - generic [ref=e488]: conversación.
+        - generic [ref=e490]: Sin
+        - generic [ref=e492]: compromiso.
+      - paragraph [ref=e495]: En 30 minutos podemos darte claridad sobre dónde la IA genera más impacto en tu operación y qué costaría resolverlo.
+      - generic [ref=e497]:
+        - link "Agenda una conversación" [ref=e498] [cursor=pointer]:
+          - /url: https://calendar.app.google/ebqvMY41sfw9865f8
+        - link "Haz el diagnóstico gratis" [ref=e499] [cursor=pointer]:
+          - /url: /recursos/diagnostico-ia?utm_source=homepage&utm_medium=cta&utm_content=cta-diagnostico
+  - contentinfo [ref=e500]:
+    - generic [ref=e501]:
+      - generic [ref=e502]:
+        - generic [ref=e503]:
+          - generic [ref=e504]: ONZA
+          - paragraph [ref=e511]: Diseñamos arquitectura de soluciones IA que transforma operaciones con impacto financiero medible.
+        - generic [ref=e512]:
+          - heading "Servicios" [level=4] [ref=e513]
+          - generic [ref=e514]:
+            - link "Formaciones IA" [ref=e515] [cursor=pointer]:
+              - /url: /servicios#formaciones
+            - link "Automatización" [ref=e516] [cursor=pointer]:
+              - /url: /servicios#automatizacion
+            - link "Soluciones a Medida" [ref=e517] [cursor=pointer]:
+              - /url: /servicios#soluciones
+            - link "Chatbot IA" [ref=e518] [cursor=pointer]:
+              - /url: /servicios/chatbot-ia
+            - link "Diagnóstico Estratégico" [ref=e519] [cursor=pointer]:
+              - /url: /servicios#diagnostico
+        - generic [ref=e520]:
+          - heading "Recursos" [level=4] [ref=e521]
+          - generic [ref=e522]:
+            - link "Diagnóstico de madurez IA" [ref=e523] [cursor=pointer]:
+              - /url: /recursos/diagnostico-ia
+            - link "Guía de implementación" [ref=e524] [cursor=pointer]:
+              - /url: /recursos/guia-ia
+            - link "Blog" [ref=e525] [cursor=pointer]:
+              - /url: /blog
+            - link "Nosotros" [ref=e526] [cursor=pointer]:
+              - /url: /nosotros
+        - generic [ref=e527]:
+          - heading "Contacto" [level=4] [ref=e528]
+          - generic [ref=e529]:
+            - link "Agendar conversación" [ref=e530] [cursor=pointer]:
+              - /url: https://calendar.app.google/ebqvMY41sfw9865f8
+            - link "enrique@onzaai.com" [ref=e531] [cursor=pointer]:
+              - /url: mailto:enrique@onzaai.com
+            - link "LinkedIn" [ref=e532] [cursor=pointer]:
+              - /url: https://linkedin.com/company/onzaai
+      - paragraph [ref=e534]: © 2026 Onza. Colombia.
+  - alert [ref=e535]

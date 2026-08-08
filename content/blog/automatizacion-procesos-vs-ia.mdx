@@ -1,15 +1,23 @@
 ---
-title: "Automatización de procesos vs. IA: cuándo usar cada una"
-description: "No todo necesita inteligencia artificial. A veces una automatización simple resuelve el 80% del problema. Cómo decidir cuándo usar cada enfoque."
-date: "2026-03-15"
+title: "Automatización de procesos con IA: cuándo la necesitas y cuándo no"
+description: "Qué es la automatización de procesos con IA, qué procesos se están automatizando hoy en empresas de LATAM, cuánto tarda un proyecto y cómo decidir entre automatización clásica e inteligencia artificial."
+date: "2026-08-08"
 author: "Enrique Pabón"
 category: "Automatización"
-keywords: ["automatización procesos con IA", "automatización vs inteligencia artificial", "automatización empresarial", "RPA vs IA"]
+keywords: ["automatización de procesos con IA", "automatización procesos con IA", "automatización vs inteligencia artificial", "automatización empresarial", "RPA vs IA", "qué procesos automatizar con IA"]
 ---
 
 No todo lo que parece un problema de IA lo es. A veces lo que necesitas es una automatización básica que conecte dos sistemas que hoy dependen de alguien copiando datos de un lado a otro en Excel.
 
 La diferencia importa porque **la automatización clásica es más barata, más rápida de implementar y más fácil de mantener**. **Si puedes resolver el problema sin IA, hazlo.**
+
+## Qué es la automatización de procesos con IA
+
+La automatización de procesos con IA combina dos cosas: flujos automáticos que mueven información entre sistemas (la automatización clásica) y modelos de inteligencia artificial que se encargan de los pasos donde antes hacía falta una persona leyendo, interpretando o decidiendo.
+
+En la práctica, eso significa que un proceso completo (recibir una factura, validarla contra la orden de compra, registrarla en el ERP y avisar al responsable) puede correr solo, incluida la parte que antes era imposible de automatizar porque requería entender un documento que llega en cualquier formato.
+
+La distinción con la automatización clásica no es académica: define cuánto cuesta el proyecto, cuánto tarda y qué tan fácil es mantenerlo. Por eso conviene entender cuándo se necesita cada una.
 
 ## Automatización clásica: reglas fijas, procesos repetitivos
 
@@ -46,6 +54,20 @@ La realidad es que muchos proyectos necesitan ambas cosas. Un flujo típico:
 
 Para entender mejor estos flujos combinados, lee [qué son los agentes de IA](/blog/agentes-ia-empresas-que-son).
 
+## Qué procesos se están automatizando con IA hoy
+
+Estos son los frentes donde vemos más proyectos reales en empresas de LATAM, con el tipo de combinación que usa cada uno:
+
+**Facturación y finanzas.** Recepción de facturas en cualquier formato, extracción de datos, validación contra órdenes de compra y registro en el ERP. La IA lee el documento; la automatización hace el resto. Es de los casos con retorno más rápido porque el volumen es alto y el proceso es idéntico todos los días.
+
+**Servicio al cliente.** Clasificación de solicitudes por intención y urgencia, respuesta automática de las consultas frecuentes con información real de la empresa, y escalamiento al humano correcto con el contexto completo. Lo cubrimos a fondo en [chatbots con IA para servicio al cliente](/blog/chatbots-ia-servicio-al-cliente).
+
+**Logística y cadena de suministro.** Trazabilidad automatizada, reportes de producción que se generan solos y alertas tempranas sobre desviaciones. En [Avicanna](/casos/automatizacion-ia-avicanna) esto tomó la forma de 8 aplicativos que digitalizaron los procesos críticos de supply chain, de la materia prima a la reportería. Más contexto de este frente en [IA para logística](/industrias/logistica).
+
+**Reportería y consolidación.** Los reportes que alguien arma cada semana copiando de tres sistemas distintos son el candidato perfecto: la automatización junta los datos y la IA redacta el resumen ejecutivo.
+
+**Gestión documental interna.** Políticas, manuales y procedimientos consultables en lenguaje natural, en lugar de carpetas que nadie navega. Es lo que hicimos con el agente de [LaTroupe](/casos/agente-ia-latroupe) para 7 hoteles en 3 países.
+
 ## Cómo decidir en la práctica
 
 ¿El proceso sigue reglas fijas que puedes escribir en una página? Si la respuesta es sí, empieza con automatización. Es más rápido, más barato y más predecible.
@@ -54,10 +76,34 @@ Para entender mejor estos flujos combinados, lee [qué son los agentes de IA](/b
 
 ¿Cuánto tiempo tarda un humano en hacer esto hoy? Si son 2 minutos por caso pero pasa 200 veces al día, **la automatización te da el 80% del valor**. Si cada caso toma 30 minutos de análisis, la IA tiene más sentido.
 
+## Cuánto tarda y de qué depende el costo
+
+Un proyecto de automatización de procesos con IA bien delimitado llega a producción en **2 a 8 semanas**. Lo que mueve el plazo y el costo no es la IA en sí, son tres factores:
+
+1. **El acceso a los sistemas.** Si tu ERP o CRM tiene API, la integración es directa. Si la información vive en PDFs, correos y Excel, hay que construir la capa que la estructura (y ahí la IA ayuda, pero agrega trabajo de validación).
+2. **La variabilidad del proceso.** Un proceso que se comporta igual el 95% de las veces se automatiza rápido. Uno lleno de excepciones exige decidir qué hace el sistema cuando no sabe, y eso es diseño, no tecnología.
+3. **Quién mantiene el resultado.** Un flujo que tu propio equipo puede ajustar cuesta menos a mediano plazo que uno que depende del proveedor para cada cambio. Por eso en nuestros proyectos incluimos la transferencia al equipo interno.
+
+Desconfía de propuestas que prometen automatizarlo todo en días sin haber visto tus sistemas, y de proyectos de un año para un solo proceso. Los dos extremos suelen terminar mal.
+
+## Preguntas frecuentes
+
+**¿Qué procesos conviene automatizar primero?**
+Los de alto volumen y reglas estables: facturación, reportería, registro de datos entre sistemas. Dan retorno rápido y generan la confianza interna para los proyectos siguientes. Un [diagnóstico previo](/blog/diagnostico-ia-empresarial) evita empezar por el proceso equivocado.
+
+**¿La automatización con IA reemplaza al equipo?**
+En los proyectos que hemos hecho, lo que elimina es el trabajo repetitivo de personas que la empresa necesita para cosas de más valor. El equipo de Avicanna no se redujo: se certificó en las herramientas y hoy opera los aplicativos por su cuenta.
+
+**¿Necesito tener los datos perfectos antes de empezar?**
+No. Se empieza por el proceso, no por el proyecto de datos. Si el proceso elegido depende de información que hoy está en papel o en formatos caóticos, el primer paso del proyecto es estructurarla, y eso ya es parte del alcance.
+
+**¿Automatización con IA es lo mismo que RPA?**
+No. El RPA imita clics de una persona sobre pantallas y se rompe cuando la pantalla cambia. La automatización moderna conecta sistemas por API y usa IA para los pasos de interpretación. El RPA sigue teniendo sentido solo cuando el sistema no ofrece otra puerta de entrada.
+
 ## Lo que recomendamos
 
 En nuestra experiencia, **el 60-70% de los procesos** que nos piden "resolver con IA" se resuelven mejor con automatización simple, o con una combinación donde la IA solo interviene en el paso que realmente lo necesita.
 
 No es glamoroso. Pero le ahorra al cliente meses de desarrollo y dinero que puede invertir donde la IA sí hace diferencia. Es lo primero que evaluamos en un [diagnóstico](/blog/diagnostico-ia-empresarial).
 
-Si no tienes claro qué necesita tu operación, revisa el servicio de [automatización de procesos con IA](/servicios/automatizacion-ia) o [haz el test de madurez IA](/recursos/diagnostico-ia).
+Si no tienes claro qué necesita tu operación, revisa el servicio de [automatización de procesos con IA](/servicios/automatizacion-ia), mira [cómo lo hicimos en Avicanna](/casos/automatizacion-ia-avicanna) o [haz el test de madurez IA](/recursos/diagnostico-ia).
