@@ -70,7 +70,7 @@ const CHATBOT_FAQ = [
   {
     question: "¿El chatbot puede responder con información de mi empresa?",
     answer:
-      "Sí. Usamos tecnología RAG (Retrieval-Augmented Generation) para conectar el agente con tus documentos, manuales, políticas y bases de datos. Responde con tu información real, no con genéricos.",
+      "Sí. El agente se conecta con tus documentos, manuales, políticas y bases de datos, y consulta esa información antes de responder. Contesta con datos reales de tu operación, no con respuestas genéricas.",
   },
   {
     question: "¿En qué canales funciona el chatbot?",
