@@ -10,39 +10,41 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0C0C0C;--bg1:#141414;--bg2:#1A1A1A;--border:#2A2A2A;--white:#fff;--off:#E8E8E8;--light:#C8C8C8;--med:#8A8A8A;--dim:#555;--red:#E51D2B;--gold:#D4AF37;--serif:"Playfair Display",Georgia,serif;--sans:"Inter",sans-serif}
+:root{--bg:#0C0C0C;--bg1:#141414;--bg2:#1A1A1A;--border:#2A2A2A;--white:#fff;--off:#E8E8E8;--light:#C8C8C8;--med:#8A8A8A;--dim:#555;--red:#FF6930;--gold:#D4AF37;--serif:"Playfair Display",Georgia,serif;--sans:"Inter",sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--off);font-family:var(--sans);font-weight:300;min-height:100vh;display:flex;flex-direction:column}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 5%,rgba(212,175,55,.10),transparent 40%),radial-gradient(circle at 85% 95%,rgba(229,29,43,.10),transparent 40%)}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 5%,rgba(212,175,55,.10),transparent 40%),radial-gradient(circle at 85% 95%,rgba(255,105,48,.10),transparent 40%)}
 .wrap{position:relative;max-width:1080px;margin:0 auto;padding:0 28px;width:100%}
 header{padding:26px 28px;max-width:1080px;margin:0 auto;width:100%;display:flex;align-items:center;gap:16px}
 header .chip{background:#fff;border-radius:8px;padding:8px 13px;display:inline-flex}
 header .chip img{height:24px;display:block}
 header .x{color:var(--dim);font-size:18px}
 header .onza{font-weight:300;letter-spacing:8px;font-size:17px;color:var(--off)}
-.hero{padding:60px 0 30px}
+.hero{padding:56px 0 26px}
 .hero .eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
-.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(34px,6vw,62px);line-height:1.04;color:var(--white);letter-spacing:-.01em}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(32px,5.4vw,58px);line-height:1.04;color:var(--white);letter-spacing:-.01em}
 .hero h1 em{color:var(--gold);font-style:italic}
-.hero p{margin-top:18px;color:var(--light);max-width:60ch;font-size:16px;line-height:1.6}
-.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding:36px 0 40px}
+.hero p{margin-top:18px;color:var(--light);max-width:62ch;font-size:16px;line-height:1.6}
+.cards{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;padding:34px 0 36px}
 @media(max-width:820px){.cards{grid-template-columns:1fr}}
 .card{display:flex;flex-direction:column;background:var(--bg1);border:.5px solid var(--border);border-radius:12px;padding:28px 26px;text-decoration:none;color:inherit;transition:all .4s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden;min-height:250px}
 .card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .5s}
 .card:hover{border-color:rgba(212,175,55,.4);transform:translateY(-4px);box-shadow:0 22px 50px -24px rgba(0,0,0,.7)}
 .card:hover::before{transform:scaleX(1)}
+.card.primary{background:linear-gradient(135deg,rgba(212,175,55,.07),rgba(255,105,48,.035));border-color:rgba(212,175,55,.3)}
 .card .num{font-family:var(--serif);font-size:15px;color:var(--dim)}
-.card .ico{font-size:26px;margin:10px 0 16px}
-.card h2{font-family:var(--serif);font-weight:400;font-size:25px;color:var(--white);margin-bottom:9px;line-height:1.1}
+.card .flag{display:inline-block;font-size:9px;letter-spacing:2.5px;font-weight:700;text-transform:uppercase;color:var(--gold);border:.5px solid rgba(212,175,55,.4);padding:4px 9px;margin:12px 0 14px;align-self:flex-start}
+.card h2{font-family:var(--serif);font-weight:400;font-size:26px;color:var(--white);margin-bottom:9px;line-height:1.1}
 .card p{font-size:13.5px;color:var(--med);line-height:1.6;flex:1}
 .card .go{margin-top:18px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:7px}
-.resumen{background:var(--bg1);border:.5px solid var(--border);border-radius:12px;padding:24px 26px;margin-bottom:34px}
+.resumen{background:var(--bg1);border:.5px solid var(--border);border-radius:12px;padding:24px 26px;margin-bottom:22px}
 .resumen .t{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px}
-.r-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:9px 0;font-size:13.5px;color:var(--light);border-bottom:.5px solid rgba(255,255,255,.05)}
+.r-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:10px 0;font-size:13.5px;color:var(--light);border-bottom:.5px solid rgba(255,255,255,.05)}
 .r-row:last-child{border-bottom:none}
 .r-row b{font-family:var(--serif);color:var(--white);font-weight:400;white-space:nowrap;font-size:16px}
+.r-row.tot b{color:var(--gold);font-size:20px}
 .r-row small{display:block;font-size:11.5px;color:var(--med);margin-top:2px}
-.note{font-size:12px;color:var(--dim);border-left:2px solid var(--border);padding-left:14px;max-width:70ch;line-height:1.7;margin-bottom:50px}
+.note{font-size:12px;color:var(--dim);border-left:2px solid var(--border);padding-left:14px;max-width:74ch;line-height:1.7;margin-bottom:50px}
 footer{margin-top:auto;border-top:.5px solid var(--border);padding:24px 28px;max-width:1080px;margin-left:auto;margin-right:auto;width:100%;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--med)}
 footer .onza{font-weight:300;letter-spacing:7px;font-size:14px;color:var(--off)}
 </style>
@@ -57,42 +59,42 @@ footer .onza{font-weight:300;letter-spacing:7px;font-size:14px;color:var(--off)}
 <main class="wrap">
   <div class="hero">
     <div class="eyebrow">Documento de trabajo · confidencial</div>
-    <h1>Agente comercial de WhatsApp.<br><em>Todo en un solo lugar.</em></h1>
-    <p>La propuesta completa y el simulador del caso de negocio, para Inversiones Milenium, de parte de Onza. Los números del simulador salen de los cuatro proyectos que tienen hoy en comercialización.</p>
+    <h1>Agente comercial de WhatsApp.<br><em>Respuesta a su requerimiento.</em></h1>
+    <p>Preparamos la respuesta a las once áreas que nos enviaron, dimensionada sobre el escenario de referencia que ustedes construyeron: 400 conversaciones mensuales, tres líneas, tres asesores y tres proyectos activos.</p>
   </div>
 
   <div class="cards">
-    <a class="card" href="/p/constructora-cajica/propuesta.html">
+    <a class="card primary" href="/p/constructora-cajica/memoria-tecnica.html">
       <span class="num">01</span>
-      <div class="ico">📄</div>
-      <h2>La propuesta</h2>
-      <p>Lo que escuchamos en la llamada, cómo funciona el agente, qué entra en el piloto y qué queda como hoja de ruta, el cronograma y las dos opciones de inversión.</p>
+      <span class="flag">Documento principal</span>
+      <h2>Memoria técnica</h2>
+      <p>Las once áreas del requerimiento, respondidas una por una y en su mismo orden. Cada sección abre con la pregunta textual que ustedes formularon. Incluye la arquitectura de la solución, el esquema de las tres líneas, la interfaz del CRM, los niveles de soporte con SLA, el detalle de costos y el total a 36 meses.</p>
       <span class="go">Abrir →</span>
     </a>
     <a class="card" href="/p/constructora-cajica/simulador.html">
       <span class="num">02</span>
-      <div class="ico">📊</div>
+      <span class="flag" style="color:var(--med);border-color:var(--border)">Complemento</span>
       <h2>Simulador de retorno</h2>
-      <p>El caso de negocio en sus propias cifras. Mueva leads mensuales, tiempo comercial y valor de unidad, y vea el ROI, la TIR, el payback y el flujo de caja de cada opción.</p>
+      <p>El caso de negocio en sus propias cifras. Mueva los leads mensuales, el tiempo de sus asesores y el valor de la unidad, y vea el retorno con y sin el SLA extendido.</p>
       <span class="go">Calcular →</span>
     </a>
   </div>
 
   <div class="resumen">
-    <div class="t">Resumen de la propuesta</div>
-    <div class="r-row"><span>Opción A · Piloto a la medida<small>Agente de WhatsApp, calificación con semáforo, base de leads en Excel y tablero</small></span><b>$ 2.000.000 + IVA</b></div>
-    <div class="r-row"><span>Opción B · Plataforma impulsada con IA<small>Todo lo anterior, más CRM con acceso por usuario, alertas al WhatsApp de cada asesor, seguimiento automático y reportes</small></span><b>$ 18.000.000 + IVA</b></div>
-    <div class="r-row"><span>Operación mensual · Opción A<small>Tarifa fija. Consumo de IA, infraestructura y WhatsApp</small></span><b>$ 100.000 + IVA</b></div>
-    <div class="r-row"><span>Operación mensual · Opción B<small>Por cada usuario con acceso a la plataforma</small></span><b>$ 100.000 + IVA / usuario</b></div>
-    <div class="r-row"><span>Entrega<small>Desde la aceptación, con la sesión de arranque resuelta</small></span><b>2 semanas</b></div>
+    <div class="t">Resumen económico</div>
+    <div class="r-row"><span>Implementación<small>Desarrollo, configuración, tres líneas, migración de 2.000 contactos y capacitación</small></span><b>$ 18.000.000</b></div>
+    <div class="r-row"><span>Mensualidad · operación y soporte<small>Infraestructura, IA, WhatsApp, audios, actualizaciones y mantenimiento</small></span><b>$ 1.400.000</b></div>
+    <div class="r-row"><span>Mensualidad · SLA extendido<small>Incidencias críticas los siete días, incluidos festivos</small></span><b>$ 400.000</b></div>
+    <div class="r-row"><span>Entrega<small>Desde la aceptación y la sesión de arranque con el equipo comercial</small></span><b>6 semanas</b></div>
+    <div class="r-row tot"><span>Costo total a 36 meses<small>IVA incluido. Sin servicios de terceros por contratar aparte</small></span><b>$ 98.532.000</b></div>
   </div>
 
-  <p class="note">Documento confidencial preparado para Inversiones Milenium. La conversación de ejemplo que aparece en la propuesta es ilustrativa: las preguntas de calificación, el tono y las reglas del semáforo se definen con su equipo comercial en la sesión de arranque. Las cifras del simulador son estimaciones para ajustar con sus datos reales. Propuesta válida por 30 días.</p>
+  <p class="note">Documento confidencial preparado para Inversiones Milenium. Valores en pesos colombianos, calculados sobre una TRM de referencia de $3.123 del 13 de agosto de 2026. Las conversaciones y cifras de ejemplo que aparecen en la memoria técnica son ilustrativas: las preguntas de calificación, el tono del agente y las reglas del semáforo se definen con su equipo comercial en la sesión de arranque. Propuesta válida por 30 días.</p>
 </main>
 
 <footer>
   <div>by <span class="onza">ONZA</span></div>
-  <div>Onza · Arquitectura de soluciones IA · Julio de 2026</div>
+  <div>Onza · Arquitectura de soluciones IA · Agosto de 2026</div>
 </footer>
 </body>
 </html>

@@ -111,10 +111,10 @@ footer{border-top:.5px solid var(--border);padding:24px 28px;max-width:1280px;ma
   <div class="intro">
     <div class="eyebrow">Simulador de retorno · Onza para Inversiones Milenium</div>
     <h1>El caso de negocio, <em>en sus propias cifras.</em></h1>
-    <p>Mueva cada variable hasta los números que pueda defender. El modelo recalcula en vivo el retorno, el payback, la TIR y el flujo de caja. El tiempo comercial que se libera es el piso del caso y no depende de vender una unidad más. Las unidades adicionales van aparte, y arrancan en cero a propósito. Los valores por defecto salen de los proyectos que Milenium tiene hoy en comercialización.</p>
+    <p>Mueva cada variable hasta los números que pueda defender. El modelo recalcula en vivo el retorno, el payback, la TIR y el flujo de caja. El simulador arranca con <b>cero unidades adicionales</b> a propósito, y por eso el primer año aparece en negativo. Es la lectura honesta: a esta inversión el sistema no se paga solo con el tiempo comercial que libera. Se paga con las ventas que se recuperan por responder a tiempo y por no dejar enfriar un interesado. Mueva la barra de unidades adicionales a lo que usted crea defendible y vea qué pasa. Los valores por defecto salen de los proyectos que Milenium tiene hoy en comercialización.</p>
     <div class="opt-switch">
-      <button id="btn-A" class="on">Opción A · Piloto</button>
-      <button id="btn-B">Opción B · Plataforma</button>
+      <button id="btn-A" class="on">Horario hábil</button>
+      <button id="btn-B">Con SLA extendido</button>
     </div>
     <div class="opt-note" id="opt-note"></div>
   </div>
@@ -168,10 +168,10 @@ const money = v => '$ ' + FMT.format(Math.round(v));
 const moneyM = v => '$ ' + (v/1e6).toLocaleString('es-CO',{maximumFractionDigits:1}) + ' M';
 
 const OPCIONES = {
-  A: { inv: 2000000,  operFijo: 100000, lic: 0,
-       note:'Piloto a la medida sobre WhatsApp, con la base de leads calificados en Excel actualizada en vivo. Sin licenciamiento: el recurrente es solo la operación.' },
-  B: { inv: 18000000, operPorUsuario: 100000, lic: 3600000,
-       note:'Plataforma impulsada con IA: CRM propio con acceso por usuario, calificación configurable, alertas automáticas al WhatsApp de cada asesor, seguimiento y reportes automatizados. La operación se cobra por usuario. A esta inversión el caso ya no se sostiene solo con el tiempo liberado: lo que paga la plataforma es el seguimiento automático que recupera leads que hoy se enfrían. Mueva la barra de unidades adicionales.' }
+  A: { inv: 18000000, operFijo: 1400000, lic: 0,
+       note:'Operación y soporte en horario hábil. Incluye infraestructura, consumo de IA, canal de WhatsApp, audios, actualizaciones y mantenimiento.' },
+  B: { inv: 18000000, operFijo: 1800000, lic: 0,
+       note:'Igual que la anterior, con SLA extendido: atención de incidencias críticas los siete días, incluidos festivos, de 7:00 a. m. a 9:00 p. m.' }
 };
 let OPT = 'A';
 
@@ -191,8 +191,6 @@ const SPEC = [
                    hint:'Arranca en cero a propósito. Todo lo que ve a la derecha se sostiene solo con el tiempo comercial que se libera. Suba esta barra si cree que responder en minutos en vez de en días le salva aunque sea una unidad al año.'},
 
   {g:'Costos del proyecto'},
-  {id:'usuarios', label:'Usuarios de la plataforma', min:1, max:25, step:1, val:6,
-                  hint:'Solo aplica a la Opción B: la operación se cobra a $100.000 al mes por cada usuario con acceso.'},
   {id:'inv',  label:'Inversión de implementación (año 1)', val:2000000, money:1, fixed:1},
   {id:'oper', label:'Costo mensual de operación (WhatsApp, IA, infraestructura)', val:100000, money:1, fixed:1},
   {id:'lic',  label:'Licenciamiento anual Onza (desde el año 2)', val:0, money:1, fixed:1},
@@ -229,13 +227,12 @@ function irr(f){ let lo=-0.95, hi=20; if(npv(f,lo)*npv(f,hi)>0) return null;
   for(let i=0;i<240;i++){ const m=(lo+hi)/2; (npv(f,lo)*npv(f,m)<0)?(hi=m):(lo=m); } return (lo+hi)/2; }
 
 function compute(){
-  // la Opción B cobra la operación por usuario; la A es una tarifa fija
   const cfg = OPCIONES[OPT];
-  V.oper = cfg.operPorUsuario ? cfg.operPorUsuario*V.usuarios : cfg.operFijo;
+  V.oper = cfg.operFijo;
   document.getElementById('v-oper').textContent = money(V.oper);
-  document.getElementById('l-oper').textContent = cfg.operPorUsuario
-    ? `Costo mensual de operación (${FMT.format(cfg.operPorUsuario)} × ${V.usuarios} usuarios)`
-    : 'Costo mensual de operación (WhatsApp, IA, infraestructura)';
+  document.getElementById('l-oper').textContent = OPT === 'B'
+    ? 'Mensualidad (operación, soporte y SLA extendido)'
+    : 'Mensualidad (operación y soporte en horario hábil)';
 
   const leadsNoCal = V.leads*V.pctNoCal/100;
   const leadsCal   = V.leads - leadsNoCal;
@@ -281,14 +278,14 @@ function compute(){
                 : 'en cero. A esta inversión hace falta el seguimiento que recupera leads');
 
   document.getElementById('ox-oper').textContent = money(V.oper)+' /mes · '+moneyM(V.oper*12)+' /año';
-  document.getElementById('ox-oper-lbl').textContent = OPCIONES[OPT].operPorUsuario
-    ? `Costo de operación · ${FMT.format(OPCIONES[OPT].operPorUsuario)} por usuario × ${V.usuarios}`
-    : 'Costo de operación · WhatsApp, IA e infraestructura';
+  document.getElementById('ox-oper-lbl').textContent = OPT === 'B'
+    ? 'Mensualidad · operación, soporte y SLA extendido'
+    : 'Mensualidad · operación y soporte en horario hábil';
   document.getElementById('ox-lic-row').style.display = V.lic>0 ? 'flex' : 'none';
   document.getElementById('ox-lic').textContent = moneyM(V.lic)+' /año';
   document.getElementById('ox-rec').textContent = moneyM(V.oper*12 + V.lic)+' /año';
   document.getElementById('ox-disc').innerHTML = V.lic>0
-    ? 'El <b>costo de operación</b> se cobra por usuario con acceso a la plataforma y cubre infraestructura y consumo de IA. El <b>licenciamiento</b> es la licencia del software de Onza, con actualizaciones y soporte, y arranca en el año 2 porque el primero va incluido.'
+    ? 'La <b>mensualidad</b> cubre infraestructura, consumo de IA, canal de WhatsApp, audios, actualizaciones, mantenimiento y soporte, más el SLA extendido de fines de semana y festivos. No hay licenciamiento aparte ni servicios de terceros por contratar.'
     : 'El <b>costo de operación</b> cubre el consumo de IA y la infraestructura, a costo y ajustable al volumen. Las conversaciones que inicia el cliente en WhatsApp no tienen costo por mensaje. El piloto no lleva licenciamiento.';
 
   let acc=0; const rows=[];
@@ -323,9 +320,6 @@ function setOpcion(k){
   // sin licenciamiento (Opción A) la fila sobra: mostrarla en $0 confunde
   const licCtrl=document.getElementById('v-lic').closest('.ctrl');
   if(licCtrl) licCtrl.style.display = V.lic>0 ? '' : 'none';
-  // la barra de usuarios solo tiene sentido cuando la operación se cobra por usuario
-  const usrCtrl=document.getElementById('r-usuarios').closest('.ctrl');
-  if(usrCtrl) usrCtrl.style.display = OPCIONES[k].operPorUsuario ? '' : 'none';
   compute();
 }
 document.getElementById('btn-A').addEventListener('click',()=>setOpcion('A'));
