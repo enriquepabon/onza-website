@@ -141,7 +141,6 @@ footer{border-top:.5px solid var(--border);padding:24px 28px;max-width:1280px;ma
       <div class="opex">
         <div class="opex-title">Costo recurrente</div>
         <div class="opex-row"><span id="ox-oper-lbl">Costo de operación · WhatsApp, IA e infraestructura</span><b id="ox-oper">—</b></div>
-        <div class="opex-row" id="ox-lic-row"><span>Licenciamiento anual Onza (desde el año 2)</span><b id="ox-lic">—</b></div>
         <div class="opex-row total"><span>Recurrente · año 2 en adelante</span><b id="ox-rec">—</b></div>
         <div class="opex-disc" id="ox-disc"></div>
       </div>
@@ -193,7 +192,6 @@ const SPEC = [
   {g:'Costos del proyecto'},
   {id:'inv',  label:'Inversión de implementación (año 1)', val:2000000, money:1, fixed:1},
   {id:'oper', label:'Costo mensual de operación (WhatsApp, IA, infraestructura)', val:100000, money:1, fixed:1},
-  {id:'lic',  label:'Licenciamiento anual Onza (desde el año 2)', val:0, money:1, fixed:1},
 
   {g:'Parámetros financieros'},
   {id:'horiz',label:'Horizonte de análisis', min:3, max:5, step:1, val:3, unit:'años'},
@@ -281,8 +279,6 @@ function compute(){
   document.getElementById('ox-oper-lbl').textContent = OPT === 'B'
     ? 'Mensualidad · operación, soporte y SLA extendido'
     : 'Mensualidad · operación y soporte en horario hábil';
-  document.getElementById('ox-lic-row').style.display = V.lic>0 ? 'flex' : 'none';
-  document.getElementById('ox-lic').textContent = moneyM(V.lic)+' /año';
   document.getElementById('ox-rec').textContent = moneyM(V.oper*12 + V.lic)+' /año';
   document.getElementById('ox-disc').innerHTML = V.lic>0
     ? 'La <b>mensualidad</b> cubre infraestructura, consumo de IA, canal de WhatsApp, audios, actualizaciones, mantenimiento y soporte, más el SLA extendido de fines de semana y festivos. No hay licenciamiento aparte ni servicios de terceros por contratar.'
@@ -313,13 +309,10 @@ function setOpcion(k){
   document.getElementById('btn-A').classList.toggle('on',k==='A');
   document.getElementById('btn-B').classList.toggle('on',k==='B');
   document.getElementById('opt-note').textContent=OPCIONES[k].note;
-  ['inv','oper','lic'].forEach(id=>{
+  ['inv','oper'].forEach(id=>{
     const s=SPEC.find(x=>x.id===id);
     document.getElementById('v-'+id).textContent=fmtVal(s);
   });
-  // sin licenciamiento (Opción A) la fila sobra: mostrarla en $0 confunde
-  const licCtrl=document.getElementById('v-lic').closest('.ctrl');
-  if(licCtrl) licCtrl.style.display = V.lic>0 ? '' : 'none';
   compute();
 }
 document.getElementById('btn-A').addEventListener('click',()=>setOpcion('A'));
