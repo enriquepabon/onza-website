@@ -728,7 +728,7 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
 
   <div class="respuesta reveal">
     <span class="rp-tag">Respuesta directa</span>
-    <p>El agente responde en menos de un minuto a cualquier hora. Identifica el proyecto por la línea de entrada o por la conversación misma, resuelve las dudas con la información real de sus proyectos, y mientras responde averigua lo que su equipo necesita para decidir si vale una llamada.</p>
+    <p>El agente responde típicamente en menos de un minuto, a cualquier hora. Identifica el proyecto por la línea de entrada o por la conversación misma, resuelve las dudas con la información real de sus proyectos, y mientras responde averigua lo que su equipo necesita para decidir si vale una llamada.</p>
     <p>Sobre audios: <b>sí, en las dos direcciones.</b> Recibe la nota de voz, la entiende igual que un texto, y puede responder con voz cuando corresponde.</p>
   </div>
 
@@ -1099,7 +1099,7 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
   <details class="tecnica reveal">
     <summary>Detalle técnico · aislamiento de datos en infraestructura compartida</summary>
     <div class="tc-body">
-      <p>La plataforma opera en modo multi-cliente: la misma infraestructura sirve a varios clientes con separación lógica estricta. Cada cliente tiene su propio espacio de datos, y ninguna consulta puede cruzar de un cliente a otro, ni por error de la aplicación ni por acceso directo.</p>
+      <p>La plataforma opera en modo multi-cliente: la misma infraestructura sirve a varios clientes con separación lógica estricta. Cada cliente tiene su propio espacio de datos, y la separación se aplica en la capa de acceso y en la de base de datos, de modo que una consulta de un cliente no alcanza los datos de otro.</p>
       <p>Es el modelo estándar de la industria y es lo que permite que el costo de infraestructura sea el que es. <b>Si su política interna exige infraestructura dedicada</b>, es viable: una instancia exclusiva para Milenium, con sobrecosto mensual que cotizamos a solicitud. Preferimos ofrecerlo que esperar a que lo pregunten en la auditoría.</p>
     </div>
   </details>
@@ -1133,7 +1133,7 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
     <div class="sn-r si"><span class="ic">⚖</span><span><b>Atención de derechos del titular</b><small>Consulta, rectificación y supresión. El sistema permite localizar y eliminar toda la información de una persona cuando lo solicita.</small></span></div>
   </div>
 
-  <p class="reveal" style="margin-top:24px;"><strong style="color:var(--white)">Un punto que corresponde señalar:</strong> el registro de la base de datos ante la Superintendencia de Industria y Comercio es obligación del responsable, es decir de Inversiones Milenium. Si ya lo tienen, no hay nada que hacer. Si no, los acompañamos en el trámite sin costo, pero la titularidad del registro es de ustedes y así debe ser.</p>
+  <p class="reveal" style="margin-top:24px;"><strong style="color:var(--white)">Un punto que corresponde señalar:</strong> el registro de la base de datos ante la Superintendencia de Industria y Comercio es obligación del responsable, es decir de Inversiones Milenium. Si ya lo tienen, no hay nada que hacer. Si no, los orientamos sobre qué exige el trámite, pero la titularidad del registro es de ustedes y así debe ser.</p>
 </section>
 
 <!-- ══════════ 09 COSTOS ══════════ -->
@@ -1194,9 +1194,9 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
     <div class="ext-r h"><span>Concepto</span><span>Incluido</span><span>Excedente</span></div>
     <div class="ext-r"><span>Líneas de WhatsApp<span class="who">Cada línea adicional implica su propia habilitación de canal y su verificación</span></span><span>3</span><span>$200.000 / mes</span></div>
     <div class="ext-r"><span>Usuarios de la plataforma</span><span>8</span><span>$80.000 / mes</span></div>
-    <div class="ext-r"><span>Mensajes procesados</span><span>12.000 / mes</span><span>$45 c/u</span></div>
+    <div class="ext-r"><span>Mensajes procesados<span class="who">Cada mensaje que entra de un interesado y cada respuesta del agente. No cuentan las alertas internas a los asesores ni los reportes</span></span><span>12.000 / mes</span><span>$45 c/u</span></div>
     <div class="ext-r"><span>Proyectos activos<span class="who">Cargar el catálogo de un proyecto lo hace su equipo sin costo. El excedente cubre configurar reglas de calificación propias, ajustar el agente y el volumen adicional</span></span><span>3</span><span>$2.500.000 + $120.000/mes</span></div>
-    <div class="ext-r"><span>Audios recibidos y enviados</span><span>Sin límite adicional</span><span class="inc">—</span></div>
+    <div class="ext-r"><span>Audios recibidos y enviados<span class="who">Dentro del volumen de mensajes contratado, hasta 4.000 audios al mes entre entrantes y salientes</span></span><span>4.000 / mes</span><span>$250 c/u</span></div>
     <div class="ext-r"><span>Almacenamiento e historial</span><span>Sin límite de tiempo</span><span class="inc">—</span></div>
     <div class="ext-r"><span>Consumo de modelos de IA</span><span>Dentro del volumen de mensajes</span><span class="inc">—</span></div>
   </div>
