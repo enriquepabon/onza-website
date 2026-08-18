@@ -678,7 +678,8 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
   <p class="reveal">Preguntaron explícitamente si dependemos de servicios externos. La respuesta honesta es que sí, y preferimos listarlos antes de que los descubran:</p>
 
   <div class="sino reveal reveal-delay-1">
-    <div class="sn-r si"><span class="ic">●</span><span><b>Meta (WhatsApp Cloud API)</b><small>El canal oficial. Conexión directa a Meta, sin revendedor intermedio. La cuenta queda a nombre de Milenium.</small></span></div>
+    <div class="sn-r si"><span class="ic">●</span><span><b>Meta · WhatsApp Cloud API</b><small>El canal oficial. La cuenta de WhatsApp queda a nombre de Milenium, en su propio Business Manager.</small></span></div>
+    <div class="sn-r si"><span class="ic">●</span><span><b>Proveedor de conectividad</b><small>Una capa técnica que habilita el modo Coexistence sobre la API de Meta. No almacena sus conversaciones ni interviene en el contenido: solo enruta. Onza lo contrata y lo paga.</small></span></div>
     <div class="sn-r si"><span class="ic">●</span><span><b>Proveedor de modelo de lenguaje</b><small>Acceso directo por API a modelos de frontera. Es una decisión de arquitectura: nos permite cambiar de modelo cuando aparece uno mejor, sin rehacer el sistema.</small></span></div>
     <div class="sn-r si"><span class="ic">●</span><span><b>Proveedor de voz</b><small>Transcripción de audio entrante y síntesis del saliente.</small></span></div>
     <div class="sn-r si"><span class="ic">●</span><span><b>Infraestructura de nube</b><small>Servidores, base de datos gestionada y copias de seguridad.</small></span></div>
@@ -763,7 +764,7 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
 
   <div class="respuesta reveal">
     <span class="rp-tag">Respuesta directa</span>
-    <p><b>Sí, API oficial de Meta</b> (WhatsApp Cloud API), con conexión directa y sin revendedor intermedio.</p>
+    <p><b>Sí, API oficial de Meta</b> (WhatsApp Cloud API). No usamos ninguna solución no oficial de las que ponen en riesgo el número.</p>
     <p><b>Recomendamos conservar las tres líneas</b>, no centralizar. Y recomendamos hacerlo en modo Coexistence, que permite que cada número siga funcionando en el celular del asesor al tiempo que el agente opera sobre él.</p>
     <p><b>Las líneas quedan a nombre de Inversiones Milenium.</b> La cuenta de WhatsApp Business se crea dentro del Business Manager de ustedes, no del nuestro.</p>
   </div>
@@ -1212,6 +1213,7 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
   <div class="ext reveal reveal-delay-1">
     <div class="ext-r h"><span>Servicio de tercero</span><span>Quién lo contrata</span><span>Estado</span></div>
     <div class="ext-r"><span>Meta · WhatsApp Cloud API<span class="who">Mensajes y plantillas</span></span><span>Onza</span><span class="inc">Incluido</span></div>
+    <div class="ext-r"><span>Proveedor de conectividad<span class="who">Habilita el modo Coexistence sobre la API de Meta</span></span><span>Onza</span><span class="inc">Incluido</span></div>
     <div class="ext-r"><span>Proveedor de modelo de IA<span class="who">Consumo del motor conversacional</span></span><span>Onza</span><span class="inc">Incluido</span></div>
     <div class="ext-r"><span>Proveedor de voz<span class="who">Transcripción y síntesis de audio</span></span><span>Onza</span><span class="inc">Incluido</span></div>
     <div class="ext-r"><span>Servidores y base de datos<span class="who">Infraestructura de nube</span></span><span>Onza</span><span class="inc">Incluido</span></div>
@@ -1222,7 +1224,8 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
     <div class="ext-r"><span>Licencia de Multifox<span class="who">El CRM que Milenium ya usa hoy</span></span><span>Milenium</span><span style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--med);text-transform:uppercase;">Preexistente</span></div>
   </div>
 
-  <p class="reveal" style="margin-top:24px;">La única línea que no paga Onza es la licencia de Multifox, y es porque ustedes ya la tienen y la usan hoy. No es un costo nuevo que introduzca este proyecto. Si en algún momento deciden prescindir de Multifox, el sistema sigue funcionando igual.</p>
+  <p class="reveal" style="margin-top:24px;"><strong style="color:var(--white)">Una precisión sobre Meta.</strong> Como la cuenta de WhatsApp queda a nombre de Inversiones Milenium (área 03), el método de pago se adjunta a esa cuenta, que es como Meta exige que funcione. <b>Ese consumo lo asume Onza</b> y está dentro de la mensualidad. En su operación ronda los $20.000 al mes, porque el cliente escribe primero y los mensajes dentro de la ventana de 24 horas no tienen costo. Lo señalamos para que la titularidad de la cuenta y quién paga queden separados con claridad.</p>
+  <p class="reveal">La única línea que no paga Onza es la licencia de Multifox, y es porque ustedes ya la tienen y la usan hoy. No es un costo nuevo que introduzca este proyecto. Si en algún momento deciden prescindir de Multifox, el sistema sigue funcionando igual.</p>
   <p class="reveal">Lo señalamos porque el modelo alternativo, muy común en este mercado, es cotizar una licencia baja y dejar por fuera el consumo de IA, la infraestructura y el canal, que después llegan como cobros separados y variables. Preferimos el número completo desde el principio, aunque se vea más grande.</p>
 </section>
 
