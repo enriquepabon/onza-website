@@ -454,9 +454,9 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
 .tecnica .tc-body code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11.5px; color: var(--blue); background: rgba(74,158,255,0.08); padding: 1px 5px; }
 .tecnica .tc-body b { color: var(--off-white); }
 
-/* Escrow */
-.escrow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 26px; }
-@media (max-width: 760px) { .escrow { grid-template-columns: 1fr; } }
+/* Entrega al cierre */
+.entrega { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 26px; }
+@media (max-width: 760px) { .entrega { grid-template-columns: 1fr; } }
 .esc { background: var(--bg-1); border: 0.5px solid var(--border); padding: 20px 18px; text-align: center; }
 .esc .en { font-family: var(--serif); font-size: 26px; color: var(--gold); display: block; line-height: 1; margin-bottom: 10px; }
 .esc h4 { font-size: 13px; color: var(--white); font-weight: 600; margin-bottom: 6px; }
@@ -1046,14 +1046,14 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
     <div class="sn-r no"><span class="ic">◆</span><span><b>De Onza</b><small>El código fuente de la plataforma. Es el mismo motor que sirve a otros clientes, y por eso el precio de implementación es el que es y no tres veces más.</small></span></div>
   </div>
 
-  <h3 style="font-family:var(--serif);font-size:22px;color:var(--white);font-weight:400;margin:48px 0 4px;" class="reveal">Qué pasa si terminamos el contrato, y qué pasa si Onza desaparece</h3>
-  <p class="reveal">La primera pregunta la responde la exportación. La segunda merece una respuesta mejor que una promesa, y por eso ofrecemos escrow.</p>
+  <h3 style="font-family:var(--serif);font-size:22px;color:var(--white);font-weight:400;margin:48px 0 4px;" class="reveal">Qué se entrega al finalizar el contrato</h3>
+  <p class="reveal">No hace falta esperar al final para llevarse la información. La exportación está disponible desde el primer día, así que en cualquier momento ustedes tienen una copia completa fuera de nuestra plataforma.</p>
 
-  <div class="escrow reveal reveal-delay-1">
+  <div class="entrega reveal reveal-delay-1">
     <div class="esc">
       <span class="en">01</span>
       <h4>Exportación permanente</h4>
-      <p>En cualquier momento y sin pedirnos permiso, descargan datos y configuración en Excel y CSV. No es una cortesía de salida: está disponible desde el primer día.</p>
+      <p>Descargan datos y configuración en Excel y CSV cuando quieran, sin pedirnos permiso y sin límite de veces. No es una cortesía de salida: está desde el día uno.</p>
     </div>
     <div class="esc">
       <span class="en">02</span>
@@ -1062,22 +1062,10 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
     </div>
     <div class="esc">
       <span class="en">03</span>
-      <h4>Escrow del código</h4>
-      <p>Opcional. Una copia del código queda en custodia de un tercero neutral, y se les libera si se cumple un disparador acordado.</p>
+      <h4>Sin retención</h4>
+      <p>Cerrada la transición, Onza elimina la información de Milenium de su infraestructura y lo certifica por escrito. No conservamos copias.</p>
     </div>
   </div>
-
-  <details class="tecnica reveal" open>
-    <summary>Cómo funciona el escrow, y quién es el tercero</summary>
-    <div class="tc-body">
-      <p><b>El mecanismo.</b> Un tercero independiente guarda una copia del código fuente y su documentación. Ni Onza ni Milenium pueden retirarla unilateralmente. Si se cumple alguno de los disparadores pactados en el contrato, el tercero entrega el código a Milenium.</p>
-      <p><b>Disparadores habituales, que se acuerdan por escrito:</b> disolución o insolvencia de Onza; incumplimiento sostenido de las obligaciones de soporte; abandono del mantenimiento de la plataforma.</p>
-      <p><b>Quién puede ser el tercero.</b> Hay dos caminos y ambos son válidos:</p>
-      <p style="padding-left:16px;">— <b>Depósito notarial en Colombia.</b> Una notaría custodia el depósito sellado, con actualización semestral. Es la opción económica, local y suficiente para un contrato de este tamaño.</p>
-      <p style="padding-left:16px;">— <b>Agente de escrow especializado.</b> Empresas como Codekeeper o NCC Group (que integró el servicio de Iron Mountain) ofrecen custodia automatizada con sincronización continua desde el repositorio y verificación de que lo depositado efectivamente compila. Cuesta más y da más garantías.</p>
-      <p><b>Quién lo paga.</b> Lo proponemos como línea opcional porque no todos los clientes lo quieren. Si Milenium lo solicita, cotizamos el proveedor elegido al costo, sin margen de Onza. No lo incluimos por defecto en la mensualidad para no cargarles un costo que quizá no necesitan.</p>
-    </div>
-  </details>
 
   <details class="tecnica reveal">
     <summary>Detalle técnico · aislamiento de datos en infraestructura compartida</summary>
