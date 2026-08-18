@@ -454,6 +454,23 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
 .tecnica .tc-body code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11.5px; color: var(--blue); background: rgba(74,158,255,0.08); padding: 1px 5px; }
 .tecnica .tc-body b { color: var(--off-white); }
 
+/* Resumen de las once respuestas */
+.recap { margin-top: 38px; border: 0.5px solid var(--border); }
+.rc-row { display: grid; grid-template-columns: 40px 200px 1fr; gap: 18px; padding: 15px 22px; border-bottom: 0.5px solid rgba(255,255,255,0.055); align-items: baseline; text-decoration: none; transition: background .3s, padding-left .3s; }
+.rc-row:last-child { border-bottom: none; }
+.rc-row:hover { background: var(--bg-1); padding-left: 28px; }
+.rc-row.h { background: var(--bg-2); }
+.rc-row.h span { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--med); font-weight: 600; }
+.rc-n { font-family: var(--serif); font-size: 17px; color: var(--red); line-height: 1; }
+.rc-a { font-size: 13px; color: var(--white); font-weight: 600; line-height: 1.35; }
+.rc-r { font-size: 13px; color: var(--light); line-height: 1.5; }
+.rc-row:hover .rc-a { color: var(--gold); }
+@media (max-width: 760px) {
+  .rc-row { grid-template-columns: 34px 1fr; gap: 6px 14px; padding: 14px 18px; }
+  .rc-r { grid-column: 2; }
+  .rc-row.h { display: none; }
+}
+
 /* Entrega al cierre */
 .entrega { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 26px; }
 @media (max-width: 760px) { .entrega { grid-template-columns: 1fr; } }
@@ -509,6 +526,7 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
   <a href="#a08" data-label="SEGURIDAD"></a>
   <a href="#a09" data-label="COSTOS"></a>
   <a href="#a11" data-label="DÓLARES"></a>
+  <a href="#resumen" data-label="RESUMEN"></a>
 </div>
 
 <!-- ══════════ PORTADA ══════════ -->
@@ -1257,6 +1275,30 @@ section.has-expanded .problem-item:not(.expanded), section.has-expanded .module-
   </div>
 
   <p class="reveal" style="margin-top:24px;">Optamos por la banda de revisión en vez del ajuste automático mensual porque su pregunta apunta a poder presupuestar 36 meses. Un valor que cambia cada mes con el dólar responde la pregunta técnica pero no resuelve el problema real.</p>
+</section>
+
+<!-- ══════════ RESUMEN ══════════ -->
+<section class="section" id="resumen">
+  <div class="reveal">
+    <span class="section-label">RESUMEN</span>
+    <h2>Las once respuestas, <em>en una página.</em></h2>
+    <p>Para llenar su matriz de comparación sin volver a recorrer el documento. Cada fila lleva a la sección completa.</p>
+  </div>
+
+  <div class="recap reveal reveal-delay-1">
+    <div class="rc-row h"><span>#</span><span>Área</span><span>Respuesta</span></div>
+    <a class="rc-row" href="#a01"><span class="rc-n">01</span><span class="rc-a">Solución propuesta</span><span class="rc-r">Plataforma propia de Onza configurada para Milenium. Es una combinación, no un producto de estante ni un desarrollo desde cero.</span></a>
+    <a class="rc-row" href="#a02"><span class="rc-n">02</span><span class="rc-a">Atención y calificación</span><span class="rc-r">Responde en menos de un minuto a cualquier hora, califica dentro de la conversación y escala al asesor. Recibe, interpreta y envía audios.</span></a>
+    <a class="rc-row" href="#a03"><span class="rc-n">03</span><span class="rc-a">WhatsApp y líneas</span><span class="rc-r">API oficial de Meta. Las tres líneas en modo Coexistence, sin perder historial. La cuenta queda a nombre de Inversiones Milenium.</span></a>
+    <a class="rc-row" href="#a04"><span class="rc-n">04</span><span class="rc-a">Datos y embudo</span><span class="rc-r">CRM, tablero, reportes, historial, agenda y embudo configurable. Exportación en Excel y CSV cuando quieran, sin pedir permiso.</span></a>
+    <a class="rc-row" href="#a05"><span class="rc-n">05</span><span class="rc-a">Configuración y soporte</span><span class="rc-r">Seis semanas de implementación. Su equipo administra el asistente tras la capacitación. Tres niveles de soporte con SLA por severidad.</span></a>
+    <a class="rc-row" href="#a06"><span class="rc-n">06</span><span class="rc-a">Actualización tecnológica</span><span class="rc-r">Todas las actualizaciones van en la mensualidad. Cambios de Meta y de modelos de IA sin cobro adicional.</span></a>
+    <a class="rc-row" href="#a07"><span class="rc-n">07</span><span class="rc-a">Infraestructura y propiedad</span><span class="rc-r">Nube contratada y pagada por Onza. Los datos y la configuración son de Milenium; el software es de Onza. Exportación permanente y eliminación certificada al cierre.</span></a>
+    <a class="rc-row" href="#a08"><span class="rc-n">08</span><span class="rc-a">Seguridad y datos personales</span><span class="rc-r">Cifrado en tránsito y en reposo, acceso nominal auditado y copias diarias. Ley 1581 sobre la política que ustedes ya tienen publicada.</span></a>
+    <a class="rc-row" href="#a09"><span class="rc-n">09</span><span class="rc-a">Costos</span><span class="rc-r">$18.000.000 de implementación, $1.400.000 mensuales y $400.000 del SLA extendido. Total a 36 meses con IVA: $98.532.000.</span></a>
+    <a class="rc-row" href="#a10"><span class="rc-n">10</span><span class="rc-a">Costos externos</span><span class="rc-r">Onza contrata y paga todos los servicios de terceros. Milenium no contrata nada adicional y recibe una sola factura.</span></a>
+    <a class="rc-row" href="#a11"><span class="rc-n">11</span><span class="rc-a">Valores en dólares</span><span class="rc-r">Ningún valor se factura en dólares. Pesos fijos, TRM de referencia $3.123 y banda de revisión del 10%.</span></a>
+  </div>
 </section>
 
 <!-- ══════════ CRONOGRAMA ══════════ -->
