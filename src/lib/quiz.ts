@@ -23,6 +23,22 @@ export interface QuizResult {
   answers: Record<string, number>;
 }
 
+// Generada con Claude en el servidor (src/lib/diagnostico-ia.ts)
+export interface LecturaPersonalizada {
+  lectura: string;
+  estimacion: string; // vacía si el visitante no describió un proceso
+  primerPaso: string;
+  pregunta: string;
+}
+
+export function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 // ── Questions ──────────────────────────────────────────────────────────────
 
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
@@ -243,7 +259,24 @@ const LEVEL_CONTEXT: Record<string, string> = {
   aceleracion: "Ya tienes tracción con IA. El reto ahora es escalar lo que funciona, corregir lo que no, y medir el retorno para justificar la siguiente fase.",
 };
 
-export function generateReportHtml(result: QuizResult, name: string): string {
+function lecturaBlock(lectura: LecturaPersonalizada): string {
+  return `
+<tr><td style="padding:32px 0 0 0;">
+  <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#FF3B30;margin:0 0 12px 0;">Lectura de tu caso</p>
+  <p style="font-size:16px;color:#FFFFFF;line-height:1.6;margin:0 0 12px 0;">${escapeHtml(lectura.lectura)}</p>
+  ${lectura.estimacion ? `<p style="font-size:14px;color:#999999;line-height:1.6;margin:0 0 12px 0;">${escapeHtml(lectura.estimacion)}</p>` : ""}
+  <p style="font-size:14px;color:#D4AF37;line-height:1.6;margin:0 0 12px 0;">Primer paso: ${escapeHtml(lectura.primerPaso)}</p>
+</td></tr>
+<tr><td style="padding:0 0 32px 0;border-bottom:1px solid #1F1F1F;">
+  <p style="font-size:14px;color:#999999;line-height:1.6;margin:0;">Para conversar: ${escapeHtml(lectura.pregunta)}</p>
+</td></tr>`;
+}
+
+export function generateReportHtml(
+  result: QuizResult,
+  name: string,
+  lectura?: LecturaPersonalizada | null,
+): string {
   const levelColor = result.level === "exploracion" ? "#FF3B30" : result.level === "oportunidad" ? "#D4AF37" : "#FFFFFF";
   const areaBlocks = ["shadow_ai", "adopcion", "conocimiento", "datos"]
     .map((areaId) => {
@@ -282,7 +315,7 @@ export function generateReportHtml(result: QuizResult, name: string): string {
 <!-- Title -->
 <tr><td style="padding:0 0 32px 0;border-bottom:1px solid #1F1F1F;">
   <p style="font-size:28px;font-weight:300;color:#FFFFFF;margin:0 0 8px 0;">Tu diagnóstico de madurez IA</p>
-  <p style="font-size:14px;color:#666;margin:0;">${name}, estos son tus resultados.</p>
+  <p style="font-size:14px;color:#666;margin:0;">${escapeHtml(name)}, estos son tus resultados.</p>
 </td></tr>
 
 <!-- Score -->
@@ -293,6 +326,7 @@ export function generateReportHtml(result: QuizResult, name: string): string {
 <tr><td style="padding:0 0 32px 0;border-bottom:1px solid #1F1F1F;">
   <p style="font-size:14px;color:#999;line-height:1.6;margin:0;">${LEVEL_CONTEXT[result.level]}</p>
 </td></tr>
+${lectura ? lecturaBlock(lectura) : ""}
 
 <!-- Analysis by area -->
 <tr><td style="padding:16px 0 0 0;">
@@ -332,7 +366,10 @@ ${areaBlocks}
 </body></html>`;
 }
 
-export function generateReportSummary(result: QuizResult): string {
+export function generateReportSummary(
+  result: QuizResult,
+  extra: { proceso?: string; lectura?: LecturaPersonalizada | null } = {},
+): string {
   const lines = [
     `[Diagnóstico IA] Score: ${result.score}/24 — Nivel: ${result.levelLabel}`,
     `Mayor oportunidad: ${result.topAreaService}`,
@@ -350,6 +387,21 @@ export function generateReportSummary(result: QuizResult): string {
   const urgency = result.answers["urgencia"] ?? 1;
   const temp = urgency <= 1 ? "Frío" : urgency <= 2 ? "Tibio" : "Caliente";
   lines.push("", `Temperatura del lead: ${temp}`);
+
+  if (extra.proceso) {
+    lines.push("", `Proceso descrito: ${extra.proceso}`);
+  }
+  if (extra.lectura) {
+    const l = extra.lectura;
+    lines.push(
+      "",
+      "Lectura IA:",
+      l.lectura,
+      ...(l.estimacion ? [l.estimacion] : []),
+      `Primer paso: ${l.primerPaso}`,
+      `Para conversar: ${l.pregunta}`,
+    );
+  }
 
   return lines.join("\n");
 }

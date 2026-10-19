@@ -6,6 +6,7 @@ import { MagneticButton } from "@/components/ui/magnetic-button";
 import {
   QUIZ_QUESTIONS,
   calculateResult,
+  type LecturaPersonalizada,
   type QuizResult,
 } from "@/lib/quiz";
 import { COMPANY } from "@/lib/constants";
@@ -58,6 +59,7 @@ export default function QuizClient() {
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [result, setResult] = useState<QuizResult | null>(null);
+  const [lectura, setLectura] = useState<LecturaPersonalizada | null>(null);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -119,6 +121,7 @@ export default function QuizClient() {
       name: (form.elements.namedItem("name") as HTMLInputElement).value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
       company: (form.elements.namedItem("company") as HTMLInputElement).value,
+      proceso: (form.elements.namedItem("proceso") as HTMLTextAreaElement).value,
       answers,
     };
 
@@ -129,6 +132,8 @@ export default function QuizClient() {
         body: JSON.stringify(data),
       });
       if (res.ok) {
+        const json = await res.json().catch(() => null);
+        setLectura(json?.lectura ?? null);
         setFormStatus("sent");
         setPhase("done");
         trackEvent("generate_lead", { form: "diagnostico-ia" });
@@ -266,9 +271,9 @@ export default function QuizClient() {
                   ¿Quieres el reporte completo?
                 </p>
                 <p className="text-sm text-[#555] mb-8">
-                  Análisis por cada área, recomendaciones específicas y el
-                  siguiente paso sugerido. Llega a tu correo en menos de un
-                  minuto.
+                  Análisis por cada área, una lectura de tu caso y el
+                  siguiente paso sugerido. Si nos cuentas qué proceso le quita
+                  más tiempo a tu equipo, la lectura parte de ahí.
                 </p>
 
                 <form onSubmit={handleFormSubmit} className="space-y-6">
@@ -292,6 +297,13 @@ export default function QuizClient() {
                     placeholder="Tu empresa (opcional)"
                     className={inputClasses}
                   />
+                  <textarea
+                    name="proceso"
+                    rows={3}
+                    maxLength={600}
+                    placeholder="¿Qué proceso o tarea le quita más tiempo a tu equipo? (opcional)"
+                    className={`${inputClasses} resize-none`}
+                  />
                   <div className="flex flex-wrap gap-4 pt-2">
                     <button
                       type="submit"
@@ -299,7 +311,7 @@ export default function QuizClient() {
                       className="px-10 py-4 bg-brand-red text-white text-sm tracking-[0.15em] uppercase hover:bg-red-600 transition-colors disabled:opacity-50"
                     >
                       {formStatus === "sending"
-                        ? "Enviando..."
+                        ? "Preparando tu diagnóstico..."
                         : "Recibir reporte completo"}
                     </button>
                     <MagneticButton
@@ -329,13 +341,43 @@ export default function QuizClient() {
                 </span>
                 <div className="h-px w-8 bg-brand-red" />
               </div>
-              <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
-                Revisa tu correo
-              </h2>
-              <p className="text-[#777] mb-10 max-w-md mx-auto leading-relaxed">
-                El reporte completo ya salió. Si no lo ves en tu bandeja
-                principal, revisa spam.
-              </p>
+              {lectura ? (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-light text-white mb-10">
+                    La lectura de tu caso
+                  </h2>
+                  <div className="text-left border-l-2 border-brand-gold pl-6 mb-10 space-y-4">
+                    <p className="text-lg text-white font-light leading-relaxed">
+                      {lectura.lectura}
+                    </p>
+                    {lectura.estimacion && (
+                      <p className="text-sm text-[#999] leading-relaxed">
+                        {lectura.estimacion}
+                      </p>
+                    )}
+                    <p className="text-sm text-brand-gold leading-relaxed">
+                      Primer paso: {lectura.primerPaso}
+                    </p>
+                    <p className="text-sm text-[#777] leading-relaxed">
+                      Para conversar: {lectura.pregunta}
+                    </p>
+                  </div>
+                  <p className="text-[#777] mb-10 max-w-md mx-auto leading-relaxed text-sm">
+                    El reporte completo, con el análisis por área, ya está en
+                    tu correo. Si no lo ves, revisa spam.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
+                    Revisa tu correo
+                  </h2>
+                  <p className="text-[#777] mb-10 max-w-md mx-auto leading-relaxed">
+                    El reporte completo ya salió. Si no lo ves en tu bandeja
+                    principal, revisa spam.
+                  </p>
+                </>
+              )}
               <MagneticButton
                 href={COMPANY.calendar}
                 className="px-10 py-4 bg-brand-red text-white hover:bg-red-600 text-sm"
