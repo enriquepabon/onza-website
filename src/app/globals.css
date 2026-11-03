@@ -51,71 +51,6 @@
   }
 }
 
-/* ── Hero entrance — CSS puro para que el texto pinte con el HTML,
-   sin esperar la hidratación de JS ── */
-@keyframes heroFadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-fade {
-  animation: heroFadeUp 1s cubic-bezier(0.25, 0.4, 0.25, 1) both;
-  animation-delay: var(--hero-delay, 0.5s);
-}
-
-@keyframes markEntry {
-  from {
-    opacity: 0;
-    transform: translate(var(--mark-x, 0px), var(--mark-y, -120px))
-      rotate(calc(var(--mark-rotate, 0deg) - 12deg));
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0) rotate(var(--mark-rotate, 0deg));
-  }
-}
-
-@keyframes markFloat {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg) scale(1);
-  }
-  25% {
-    transform: translateY(calc(var(--float-y, 18px) * -1))
-      rotate(var(--rotate-drift, 4deg)) scale(1.02);
-  }
-  50% {
-    transform: translateY(0) rotate(0deg) scale(1);
-  }
-  75% {
-    transform: translateY(calc(var(--float-y, 18px) * 0.4))
-      rotate(calc(var(--rotate-drift, 4deg) * -0.6)) scale(0.99);
-  }
-}
-
-.mark-entry {
-  animation: markEntry 2.2s cubic-bezier(0.23, 0.86, 0.39, 0.96) both;
-  animation-delay: var(--mark-delay, 0s);
-}
-
-.mark-float {
-  animation: markFloat var(--float-duration, 10s) ease-in-out infinite;
-  animation-delay: var(--mark-delay, 0s);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-fade,
-  .mark-entry,
-  .mark-float {
-    animation: none;
-  }
-}
-
 /* Marquee animation for client logos */
 @keyframes marquee {
   0% {
@@ -132,6 +67,250 @@
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/* ── Hero Vertex — la V de Onza como sistema de líneas convergentes.
+   Todo en CSS para que el texto pinte con el HTML; JS solo agrega
+   la inclinación con el cursor y el parallax de scroll. ── */
+.vx-hero {
+  --vx-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --vx-loop: 7s;
+  --vx-loop-delay: 2.6s;
+}
+
+/* Titular: cada línea sube desde detrás de su máscara */
+.vx-mask {
+  display: block;
+  overflow: hidden;
+  padding: 0.08em 0 0.14em;
+  margin: -0.08em 0 -0.14em;
+}
+
+.vx-line {
+  display: block;
+  animation: vxLineUp 1.3s var(--vx-ease) both;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes vxLineUp {
+  from {
+    transform: translate3d(0, 112%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.vx-rule {
+  transform-origin: left center;
+  animation: vxRule 1s cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes vxRule {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.vx-kicker {
+  letter-spacing: 0.3em;
+  animation: vxKicker 1.4s var(--vx-ease) both;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes vxKicker {
+  from {
+    opacity: 0;
+    letter-spacing: 0.55em;
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.3em;
+  }
+}
+
+.vx-blur-in {
+  animation: vxBlurIn 1.2s var(--vx-ease) both;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes vxBlurIn {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Marca: contorno que se dibuja y relleno que aparece */
+.vx-draw {
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+  animation: vxDraw 1.8s cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+.vx-draw-slow {
+  animation-duration: 2.2s;
+}
+
+@keyframes vxDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.vx-fade {
+  animation: vxFade 1.4s ease-out both;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes vxFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Pulsos: viajan acelerando hacia el vértice y se absorben en él */
+.vx-pulse {
+  stroke-dashoffset: var(--d0);
+  animation: vxPulse var(--pulse-duration, var(--vx-loop)) infinite both;
+  animation-delay: var(--pulse-delay, var(--vx-loop-delay));
+}
+
+@keyframes vxPulse {
+  0% {
+    stroke-dashoffset: var(--d0);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.8, 0.55);
+  }
+  45% {
+    stroke-dashoffset: var(--d1);
+    animation-timing-function: linear;
+  }
+  48%,
+  100% {
+    stroke-dashoffset: var(--d2);
+  }
+}
+
+/* El vértice se enciende cuando llegan los tres pulsos */
+.vx-flare,
+.vx-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-duration: var(--vx-loop);
+  animation-delay: var(--vx-loop-delay);
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.vx-flare {
+  animation-name: vxFlare;
+}
+
+.vx-ring {
+  animation-name: vxRing;
+}
+
+@keyframes vxFlare {
+  0%,
+  42% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+  46% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  72%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes vxRing {
+  0%,
+  44% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  45% {
+    opacity: 0.8;
+    transform: scale(1);
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(9);
+  }
+}
+
+/* Inclinación 3D con el cursor (variables puestas desde JS) */
+.vx-tilt {
+  transform: perspective(1400px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))
+    translate3d(var(--tx, 0px), var(--ty, 0px), 0);
+  will-change: transform;
+}
+
+.vx-spotlight {
+  @apply absolute inset-0 pointer-events-none;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  background: radial-gradient(
+    560px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.045),
+    rgba(255, 59, 48, 0.02) 40%,
+    transparent 70%
+  );
+}
+
+.vx-lit .vx-spotlight {
+  opacity: 1;
+}
+
+.vx-marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+.vx-paused *,
+.vx-paused *::before,
+.vx-paused *::after {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vx-line,
+  .vx-rule,
+  .vx-kicker,
+  .vx-blur-in,
+  .vx-draw,
+  .vx-fade,
+  .vx-flare {
+    animation: none;
+  }
+  .vx-draw {
+    stroke-dashoffset: 0;
+  }
+  .vx-pulse,
+  .vx-ring {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 /* ── Blog article typography ── */

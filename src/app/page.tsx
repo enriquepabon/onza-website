@@ -1,4 +1,4 @@
-import { HeroGeometric } from "@/components/landing/hero-geometric";
+import { HeroVertex } from "@/components/landing/hero-vertex";
 import { ServicesOverview } from "@/components/landing/services-overview";
 import { Differentiators } from "@/components/landing/differentiators";
 import { Stats } from "@/components/landing/stats";
@@ -97,7 +97,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={professionalServiceSchema} />
-      <HeroGeometric videoSrc="/videos/hero-bg.mp4" />
+      <HeroVertex videoSrc="/videos/hero-bg.mp4" />
 
       {/* Workspace editorial — laptop + café + notebook */}
       <VideoBreak
