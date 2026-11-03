@@ -25,7 +25,7 @@ const RESOURCES = [
     label: "Herramienta",
     title: "Diagnóstico de madurez IA",
     description:
-      "6 preguntas, 2 minutos. Descubre dónde la IA genera más impacto en tu operación y qué tan lista está tu empresa para implementarla.",
+      "8 preguntas, 2 minutos. Descubre qué proceso conviene atender primero, cuántas horas hay en juego y qué tan lista está tu empresa para implementar IA.",
     href: "/recursos/diagnostico-ia",
     cta: "Hacer el diagnóstico",
     highlight: true,

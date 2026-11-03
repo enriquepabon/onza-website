@@ -223,9 +223,9 @@ export default function DiagnosticoIAPage() {
               ¿Quieres una primera lectura gratuita?
             </h2>
             <p className="text-brand-gray leading-relaxed mb-8">
-              Nuestro test de madurez IA toma 2 minutos. Son 6 preguntas que te
-              dan una primera lectura de dónde está tu empresa y dónde la IA
-              puede generar mayor impacto. Sin compromiso, sin datos de tarjeta.
+              Nuestro diagnóstico toma 2 minutos. Son 8 preguntas que te dicen
+              qué proceso conviene atender primero, cuántas horas hay en juego
+              y por dónde empezar. Sin compromiso, sin datos de tarjeta.
             </p>
             <MagneticButton
               href="/recursos/diagnostico-ia"

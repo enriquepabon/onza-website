@@ -6,11 +6,13 @@ export async function createPipelineLead({
   email,
   company,
   message,
+  proximaAccion = "Responder mensaje del formulario web",
 }: {
   name: string;
   email: string;
   company?: string;
   message: string;
+  proximaAccion?: string;
 }) {
   if (!NOTION_API_KEY) return;
 
@@ -35,7 +37,7 @@ export async function createPipelineLead({
         Canal: { select: { name: "Website" } },
         Probabilidad: { select: { name: "10%" } },
         Notas: { rich_text: [{ text: { content: message.slice(0, 2000) } }] },
-        "Próxima Acción": { rich_text: [{ text: { content: "Responder mensaje del formulario web" } }] },
+        "Próxima Acción": { rich_text: [{ text: { content: proximaAccion.slice(0, 2000) } }] },
         "Fecha Próxima Acción": { date: { start: followUpDate } },
       },
     }),

@@ -5,11 +5,11 @@ import { BreadcrumbJsonLd } from "@/components/seo/json-ld";
 export const metadata: Metadata = {
   title: "Diagnóstico de Madurez IA Gratuito — Onza",
   description:
-    "6 preguntas, 2 minutos. Descubre en qué punto está tu empresa para implementar IA y dónde puede generar mayor impacto operativo. Resultados inmediatos.",
+    "8 preguntas, 2 minutos. Descubre qué proceso de tu operación conviene atender primero con IA, cuántas horas hay en juego y por dónde empezar.",
   openGraph: {
     title: "Diagnóstico de Madurez IA Gratuito — Onza",
     description:
-      "6 preguntas, 2 minutos. Descubre dónde la IA puede generar mayor impacto en tu operación. Resultados inmediatos y sin compromiso.",
+      "8 preguntas, 2 minutos. Descubre dónde la IA puede generar mayor impacto en tu operación y por dónde empezar. Sin compromiso.",
     url: "https://onzaai.com/recursos/diagnostico-ia",
     siteName: "Onza",
     locale: "es_CO",
