@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // El MCP lee los artículos del blog en tiempo de ejecución
+  experimental: {
+    outputFileTracingIncludes: {
+      "/api/mcp": ["./content/blog/**/*"],
+    },
+  },
   headers: async () => [
     {
       source: "/(.*)",

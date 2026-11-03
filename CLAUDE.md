@@ -53,3 +53,26 @@ tras un formulario de identificación, para saber quién abre cada propuesta.
 
 Variables de entorno: `ACCESO_SECRET`, `SUPABASE_URL`,
 `SUPABASE_SERVICE_ROLE_KEY` (más `RESEND_API_KEY` y `CONTACT_EMAIL` para el aviso).
+
+## MCP (Claude y ChatGPT)
+
+`https://onzaai.com/api/mcp` es un servidor MCP (Streamable HTTP, sin sesiones)
+para consultar el sitio desde Claude o ChatGPT. Código en `src/lib/mcp/`.
+
+- OAuth 2.1 propio, sin base de datos (`src/lib/mcp/oauth.ts`): registro
+  dinámico de clientes, PKCE S256, `resource` y `iss` (RFC 9207). Clientes,
+  códigos y tokens son cargas firmadas con una llave derivada de
+  `ACCESO_SECRET`. Subir `MCP_TOKEN_VERSION` invalida todas las conexiones.
+- Solo autoriza al dueño: `/oauth/authorize` envía un código de 8 caracteres a
+  `MCP_OWNER_EMAIL` (por defecto `CONTACT_EMAIL`) por Resend.
+- Metadatos en `/.well-known/oauth-protected-resource` (también con
+  `/api/mcp` al final) y `/.well-known/oauth-authorization-server`.
+- Herramientas (`src/lib/mcp/server.ts`): resumen_actividad, leads (Notion),
+  propuestas_visitas y propuesta_recorrido (Supabase), trafico_web y
+  busquedas_google (Google), blog_listar, blog_leer, blog_guia, blog_validar,
+  blog_crear_borrador (abre un PR, nunca publica), search y fetch (formato de
+  ChatGPT) y get_profile (`openai/profile`).
+- Variables opcionales: `GOOGLE_SERVICE_ACCOUNT_JSON` (cuenta de servicio con
+  lectura en GA4 `531795156` y Search Console), `GITHUB_TOKEN` (contenido y PR
+  sobre el repo). Sin ellas, esas herramientas responden qué falta.
+- `next.config.mjs` incluye `content/blog` en la función `/api/mcp`.
