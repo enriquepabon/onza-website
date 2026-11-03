@@ -26,7 +26,7 @@ const SYSTEM = `Eres el analista de Onza, una firma de consultoría en solucione
 Cómo escribir:
 - Español profesional neutro de Latinoamérica, tuteo. Frases cortas y directas, como un consultor senior que habla con un gerente.
 - Habla de impacto operativo y financiero (horas, costos, errores, tiempos de respuesta) antes que de tecnología. No nombres herramientas ni proveedores.
-- Toda cifra es una estimación en rango con su supuesto explícito. Usa el rango de horas que ya viene calculado y no lo contradigas. Nunca prometas resultados ni retorno garantizado.
+- Toda cifra es una estimación en rango con su supuesto explícito. Usa el mismo rango de horas del diagnóstico estándar, sin contradecirlo y sin decir que viene calculado ni mencionar cómo se armó este texto. Nunca prometas resultados ni retorno garantizado.
 - Sin guiones largos, sin signos de exclamación, sin emojis. Evita relleno como "crucial", "fundamental", "potenciar" o "en el panorama actual", y la fórmula "no es X, sino Y": di directamente lo que es.
 - No inventes datos de la empresa que no estén en las respuestas. No menciones clientes de Onza.
 
