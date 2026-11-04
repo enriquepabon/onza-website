@@ -52,6 +52,12 @@ export function guiaBlog() {
       "Al menos 3 enlaces internos: otros artículos del blog y un servicio relacionado.",
       "Cierre con una invitación concreta: el diagnóstico gratuito (/recursos/diagnostico-ia) o el servicio del tema.",
     ],
+    imagenes: [
+      "Toda nota lleva portada: horizontal, de al menos 1600 × 900, en JPG o WebP de menos de 1 MB. Se muestra a todo el ancho y recortada a 16:10 en el listado.",
+      "Las imágenes dentro del texto van con un alt que describa lo que se ve, no con palabras clave.",
+      "Flujo: blog_crear_borrador, luego blog_agregar_imagen (uso portada, y las de contenido que hagan falta) e insertar en el MDX el markdown que devuelve con blog_actualizar_borrador.",
+      "Fotos reales de operación o abstractas sobrias. Nada de robots, cerebros brillantes ni pantallas con código.",
+    ],
     frontmatter: [
       "---",
       'title: "Título de máximo 70 caracteres, orientado al resultado"',
@@ -104,6 +110,7 @@ export function validarPost(mdx: string, slug?: string): { valido: boolean; hall
   if (typeof data.category !== "string" || !data.category) error("Falta category.");
   else if (!CATEGORIAS.includes(data.category)) aviso(`La categoría "${data.category}" es nueva; las actuales son ${CATEGORIAS.join(", ")}.`);
   if (!Array.isArray(data.keywords) || data.keywords.length < 3) aviso("Agrega al menos 3 keywords.");
+  if (typeof data.image !== "string") aviso("Sin portada: después de crear el borrador, súbela con blog_agregar_imagen (uso portada).");
 
   if (slug !== undefined) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) error("El slug solo admite minúsculas sin tildes, números y guiones.");
@@ -134,9 +141,16 @@ export function validarPost(mdx: string, slug?: string): { valido: boolean; hall
   return { valido: !hallazgos.some((h) => h.nivel === "error"), hallazgos, palabras };
 }
 
-// Abre un PR en GitHub con el artículo. Requiere GITHUB_TOKEN con permiso de
-// contenido y pull requests sobre el repositorio.
-export async function crearBorrador(slug: string, mdx: string, nota?: string) {
+// ── GitHub: borradores como PR ─────────────────────────────────────────────
+// Requiere GITHUB_TOKEN con permiso de contenido y pull requests sobre el repo.
+
+class ErrorGitHub extends Error {
+  constructor(public status: number, mensaje: string) {
+    super(mensaje);
+  }
+}
+
+function github() {
   const token = process.env.GITHUB_TOKEN;
   const repo = process.env.GITHUB_REPO || "enriquepabon/onza-website";
   if (!token) {
@@ -144,8 +158,9 @@ export async function crearBorrador(slug: string, mdx: string, nota?: string) {
       "Falta GITHUB_TOKEN en Vercel. Mientras tanto, entrega el MDX validado para que Enrique lo agregue en content/blog/.",
     );
   }
-  const gh = async (path: string, init?: RequestInit) => {
-    const res = await fetch(`https://api.github.com/repos/${repo}${path}`, {
+  return async (path: string, init?: RequestInit) => {
+    const api = process.env.GITHUB_API_URL || "https://api.github.com";
+    const res = await fetch(`${api}/repos/${repo}${path}`, {
       ...init,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -155,26 +170,160 @@ export async function crearBorrador(slug: string, mdx: string, nota?: string) {
       },
     });
     const body = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(`GitHub ${res.status} en ${path}: ${body.message ?? "error"}`);
+    if (!res.ok) throw new ErrorGitHub(res.status, `GitHub ${res.status} en ${path}: ${body.message ?? "error"}`);
     return body;
   };
+}
 
-  const titulo = String(matter(mdx).data.title ?? slug);
-  const rama = `blog/${slug}`;
-  const main = await gh("/git/ref/heads/main");
-  await gh("/git/refs", { method: "POST", body: JSON.stringify({ ref: `refs/heads/${rama}`, sha: main.object.sha }) });
-  await gh(`/contents/content/blog/${slug}.mdx`, {
+type GitHub = ReturnType<typeof github>;
+
+const rama = (slug: string) => `blog/${slug}`;
+const rutaMdx = (slug: string) => `content/blog/${slug}.mdx`;
+
+async function exigirRama(gh: GitHub, slug: string) {
+  try {
+    await gh(`/git/ref/heads/${rama(slug)}`);
+  } catch (error) {
+    if (error instanceof ErrorGitHub && error.status === 404) {
+      throw new Error(`No hay borrador para "${slug}". Créalo primero con blog_crear_borrador.`);
+    }
+    throw error;
+  }
+}
+
+async function leerArchivo(gh: GitHub, ruta: string, ref: string): Promise<{ sha: string; texto: string } | null> {
+  try {
+    const f = await gh(`/contents/${ruta}?ref=${encodeURIComponent(ref)}`);
+    return { sha: f.sha, texto: Buffer.from(f.content ?? "", "base64").toString("utf8") };
+  } catch (error) {
+    if (error instanceof ErrorGitHub && error.status === 404) return null;
+    throw error;
+  }
+}
+
+async function guardarArchivo(gh: GitHub, ruta: string, ref: string, contenido: Buffer, mensaje: string) {
+  const actual = await leerArchivo(gh, ruta, ref);
+  await gh(`/contents/${ruta}`, {
     method: "PUT",
-    body: JSON.stringify({ message: `Blog: ${titulo}`, content: Buffer.from(mdx).toString("base64"), branch: rama }),
+    body: JSON.stringify({ message: mensaje, content: contenido.toString("base64"), branch: ref, ...(actual ? { sha: actual.sha } : {}) }),
   });
+}
+
+export async function crearBorrador(slug: string, mdx: string, nota?: string) {
+  const gh = github();
+  const titulo = String(matter(mdx).data.title ?? slug);
+  const main = await gh("/git/ref/heads/main");
+  try {
+    await gh("/git/refs", { method: "POST", body: JSON.stringify({ ref: `refs/heads/${rama(slug)}`, sha: main.object.sha }) });
+  } catch (error) {
+    if (error instanceof ErrorGitHub && error.status === 422) {
+      throw new Error(`Ya existe un borrador para "${slug}". Usa blog_actualizar_borrador para cambiarlo.`);
+    }
+    throw error;
+  }
+  await guardarArchivo(gh, rutaMdx(slug), rama(slug), Buffer.from(mdx), `Blog: ${titulo}`);
   const pr = await gh("/pulls", {
     method: "POST",
     body: JSON.stringify({
       title: `Blog: ${titulo}`,
-      head: rama,
+      head: rama(slug),
       base: "main",
       body: `Borrador creado desde el MCP de Onza.${nota ? `\n\n${nota}` : ""}\n\nVercel deja una vista previa en este PR. Al fusionarlo, el artículo se publica en https://onzaai.com/blog/${slug}.`,
     }),
   });
-  return { pr: pr.html_url as string, rama, url: `https://onzaai.com/blog/${slug}` };
+  return { pr: pr.html_url as string, rama: rama(slug), url: `https://onzaai.com/blog/${slug}` };
+}
+
+export async function actualizarBorrador(slug: string, mdx: string) {
+  const gh = github();
+  await exigirRama(gh, slug);
+  await guardarArchivo(gh, rutaMdx(slug), rama(slug), Buffer.from(mdx), `Blog: ajustes a ${slug}`);
+  const prs = await gh(`/pulls?head=${encodeURIComponent(`${(process.env.GITHUB_REPO || "enriquepabon/onza-website").split("/")[0]}:${rama(slug)}`)}&state=open`);
+  return { rama: rama(slug), pr: (prs[0]?.html_url as string | undefined) ?? null };
+}
+
+// ── Imágenes ───────────────────────────────────────────────────────────────
+
+const MAX_IMAGEN = 8 * 1024 * 1024;
+
+// Se reconoce el formato por los primeros bytes: ChatGPT y Drive a veces
+// entregan las imágenes como application/octet-stream
+function formatoImagen(b: Buffer): string | null {
+  if (b.length < 12) return null;
+  if (b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff) return "jpg";
+  if (b.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))) return "png";
+  if (b.subarray(0, 4).toString("ascii") === "RIFF" && b.subarray(8, 12).toString("ascii") === "WEBP") return "webp";
+  if (b.subarray(4, 12).toString("ascii").startsWith("ftypavi")) return "avif";
+  return null;
+}
+
+// Un enlace de Drive "compartir" devuelve una página, no el archivo
+function urlDescargable(url: string): string {
+  const drive = url.match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([\w-]{20,})/);
+  return drive ? `https://drive.google.com/uc?export=download&id=${drive[1]}` : url;
+}
+
+async function descargar(url: string): Promise<Buffer> {
+  const u = new URL(urlDescargable(url));
+  const privada = /^(localhost|127\.|10\.|192\.168\.|169\.254\.|172\.(1[6-9]|2\d|3[01])\.|\[?::1\]?$)/;
+  if (u.protocol !== "https:" || privada.test(u.hostname)) throw new Error("La imagen debe estar en una URL https pública.");
+  const res = await fetch(u, { redirect: "follow", signal: AbortSignal.timeout(20_000) });
+  if (!res.ok) throw new Error(`No se pudo descargar la imagen (HTTP ${res.status}).`);
+  if (Number(res.headers.get("content-length") ?? 0) > MAX_IMAGEN) throw new Error("La imagen pesa más de 8 MB.");
+  const bytes = Buffer.from(await res.arrayBuffer());
+  if (bytes.length > MAX_IMAGEN) throw new Error("La imagen pesa más de 8 MB.");
+  return bytes;
+}
+
+const nombreArchivo = (texto: string) =>
+  texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 50) || "imagen";
+
+// Pone o reemplaza "image:" en el frontmatter sin reescribir el resto
+function conPortada(mdx: string, ruta: string): string {
+  const m = mdx.match(/^---\n([\s\S]*?)\n---/);
+  if (!m) return mdx;
+  const linea = `image: "${ruta}"`;
+  const fm = /^image:.*$/m.test(m[1]) ? m[1].replace(/^image:.*$/m, linea) : `${m[1]}\n${linea}`;
+  return mdx.replace(m[0], `---\n${fm}\n---`);
+}
+
+export interface OrigenImagen {
+  url?: string;
+  base64?: string;
+}
+
+export async function agregarImagen({ slug, origen, uso, alt, nombre }: { slug: string; origen: OrigenImagen; uso: "portada" | "contenido"; alt: string; nombre?: string }) {
+  const gh = github();
+  await exigirRama(gh, slug);
+
+  const bytes = origen.base64 ? Buffer.from(origen.base64.replace(/^data:[^,]+,/, ""), "base64") : await descargar(origen.url!);
+  if (bytes.length > MAX_IMAGEN) throw new Error("La imagen pesa más de 8 MB.");
+  const ext = formatoImagen(bytes);
+  if (!ext) throw new Error("El archivo no es una imagen JPG, PNG, WebP o AVIF.");
+
+  const archivo = uso === "portada" ? `portada.${ext}` : `${nombreArchivo(nombre || alt)}.${ext}`;
+  const publica = `/images/blog/${slug}/${archivo}`;
+  await guardarArchivo(gh, `public${publica}`, rama(slug), bytes, `Blog: imagen ${archivo} para ${slug}`);
+
+  let portadaEnMdx = false;
+  if (uso === "portada") {
+    const mdx = await leerArchivo(gh, rutaMdx(slug), rama(slug));
+    if (mdx) {
+      await guardarArchivo(gh, rutaMdx(slug), rama(slug), Buffer.from(conPortada(mdx.texto, publica)), `Blog: portada de ${slug}`);
+      portadaEnMdx = true;
+    }
+  }
+
+  return {
+    ruta: publica,
+    pesoKB: Math.round(bytes.length / 1024),
+    ...(uso === "contenido" ? { markdown: `![${alt.replace(/[[\]]/g, "")}](${publica})` } : { portadaEnMdx }),
+    rama: rama(slug),
+  };
 }

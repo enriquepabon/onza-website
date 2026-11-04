@@ -5,6 +5,11 @@ import readingTime from "reading-time";
 
 const BLOG_DIR = path.join(process.cwd(), "content/blog");
 
+// Solo rutas locales de public/images: una URL externa no pasa por next/image
+function portada(image: unknown, slug: string): string {
+  return typeof image === "string" && image.startsWith("/images/") ? image : `/images/blog/${slug}.png`;
+}
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -13,6 +18,7 @@ export interface BlogPost {
   author: string;
   category: string;
   keywords: string[];
+  image: string; // portada: frontmatter "image" o /images/blog/<slug>.png
   readingTime: string;
   content: string;
 }
@@ -33,6 +39,7 @@ export function getAllPosts(): BlogPost[] {
       author: data.author ?? "Enrique Pabón",
       category: data.category ?? "",
       keywords: data.keywords ?? [],
+      image: portada(data.image, file.replace(".mdx", "")),
       readingTime: stats.text.replace("read", "lectura"),
       content,
     };
@@ -59,6 +66,7 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
     author: data.author ?? "Enrique Pabón",
     category: data.category ?? "",
     keywords: data.keywords ?? [],
+      image: portada(data.image, slug),
     readingTime: stats.text.replace("read", "lectura"),
     content,
   };

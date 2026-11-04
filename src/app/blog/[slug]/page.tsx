@@ -34,6 +34,7 @@ export function generateMetadata({
       type: "article",
       publishedTime: post.date,
       authors: [post.author],
+      images: [{ url: `https://onzaai.com${post.image}`, alt: post.title }],
     },
     alternates: {
       canonical: `https://onzaai.com/blog/${post.slug}`,
@@ -139,7 +140,7 @@ export default function BlogPostPage({
       {/* Blog hero image */}
       <div className="relative w-full h-[30vh] md:h-[45vh] overflow-hidden">
         <Image
-          src={`/images/blog/${post.slug}.png`}
+          src={post.image}
           alt={post.title}
           fill
           className="object-cover"

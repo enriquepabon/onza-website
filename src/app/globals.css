@@ -403,6 +403,13 @@
   text-decoration: underline;
 }
 
+.blog-article img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.5em 0 0.75em;
+}
+
 .blog-article blockquote {
   border-left: 3px solid #D4AF37;
   background: #F5F1E8;

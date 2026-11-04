@@ -70,9 +70,19 @@ para consultar el sitio desde Claude o ChatGPT. Código en `src/lib/mcp/`.
 - Herramientas (`src/lib/mcp/server.ts`): resumen_actividad, leads (Notion),
   propuestas_visitas y propuesta_recorrido (Supabase), trafico_web y
   busquedas_google (Google), blog_listar, blog_leer, blog_guia, blog_validar,
-  blog_crear_borrador (abre un PR, nunca publica), search y fetch (formato de
+  blog_crear_borrador (abre un PR en la rama `blog/<slug>`, nunca publica),
+  blog_actualizar_borrador, blog_agregar_imagen, search y fetch (formato de
   ChatGPT) y get_profile (`openai/profile`).
+- Imágenes de blog: van a `public/images/blog/<slug>/` en la rama del borrador.
+  La portada se escribe como `image:` en el frontmatter; sin ese campo el blog
+  usa `/images/blog/<slug>.png`. `blog_agregar_imagen` recibe el adjunto de
+  ChatGPT (`openai/fileParams`), una URL https (convierte enlaces de Drive) o
+  base64, y reconoce JPG, PNG, WebP y AVIF por sus primeros bytes.
 - Variables opcionales: `GOOGLE_SERVICE_ACCOUNT_JSON` (cuenta de servicio con
   lectura en GA4 `531795156` y Search Console), `GITHUB_TOKEN` (contenido y PR
-  sobre el repo). Sin ellas, esas herramientas responden qué falta.
+  sobre el repo; `GITHUB_API_URL` permite apuntar a un GitHub falso para
+  pruebas). Sin ellas, esas herramientas responden qué falta.
+- `vercel.json` corre `/api/cron/supabase` cada día: el plan gratuito pausa
+  `onza-web` tras 7 días sin actividad (pasó de septiembre a noviembre de 2026
+  y se perdieron esos accesos).
 - `next.config.mjs` incluye `content/blog` en la función `/api/mcp`.

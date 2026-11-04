@@ -61,7 +61,7 @@ export default function BlogPage() {
                   <div className="md:col-span-3">
                     <div className="relative aspect-[16/10] overflow-hidden bg-brand-dark">
                       <Image
-                        src={`/images/blog/${post.slug}.png`}
+                        src={post.image}
                         alt={post.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-700"
