@@ -40,6 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
+      url: "https://onzaai.com/cobrador",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: "https://onzaai.com/servicios/chatbot-ia",
       lastModified: new Date(),
       changeFrequency: "monthly",
