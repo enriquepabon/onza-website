@@ -109,6 +109,7 @@ const CLIENTES: ReadonlyArray<{ prefijo: string; cliente: string }> = [
   { prefijo: "/p/constructora-cajica", cliente: "Inversiones Milenium" },
   { prefijo: "/p/portal-sia-trade", cliente: "SIA Trade" },
   { prefijo: "/p/formacion-lacteos", cliente: "Lácteos" },
+  { prefijo: "/p/maestri-milano", cliente: "Maestri Milano" },
 ];
 
 export function clienteDeRuta(pathname: string): string {
